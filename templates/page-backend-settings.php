@@ -123,7 +123,7 @@
         <div id="tab-1" class="tab-pane active">
           <table class="form-table">
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <?php
               $cbn_enable_add_location = get_option('cbn_enable_add_location', 'on');
               $cbn_plus_button_label = get_option('cbn_plus_button_label');
@@ -169,7 +169,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row">
                 <?php echo __('Map Style', 'Compass'); ?>
               </th>
@@ -222,7 +222,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row">
                 <?php echo __('Default Marker Icon', 'Compass'); ?>
               </th>
@@ -291,7 +291,7 @@
 
               <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <?php
                   $cbn_ui_color = get_option('cbn_ui_color') ? get_option('cbn_ui_color') : $this->cbn_ui_color_default;
                   ?>
@@ -307,7 +307,7 @@
                 </tr>
 
 
-              <tr valign="top" class="cbn-gopro-tr">
+              <tr style="vertical-align: top;" class="cbn-gopro-tr">
                 <?php
                   $cbn_ui_color = $this->cbn_ui_color_default;
                 ?>
@@ -325,7 +325,7 @@
 
 
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row">
                 <?php echo __('Map size', 'Compass'); ?>
               </th>
@@ -349,7 +349,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row">
                 <?php echo __('Map size (mobile)', 'Compass'); ?>
               </th>
@@ -444,7 +444,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <?php
               $cbn_enable_cluster = get_option('cbn_enable_cluster', 'on');
               ?>
@@ -455,7 +455,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <?php
               $cbn_enable_scrollwheel_zoom_map = get_option('cbn_enable_scrollwheel_zoom_map');
               ?>
@@ -469,7 +469,7 @@
             <?php  ?>
               <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <th scope="row">
                     <?php echo __('Geosearch Provider', 'Compass'); ?>         
                   </th>
@@ -515,7 +515,7 @@
                   </td>
                 </tr>
 
-              <tr valign="top">
+              <tr style="vertical-align: top;">
                 <th scope="row">
                   <?php echo __('Geosearch Provider', 'Compass'); ?>
                   
@@ -541,7 +541,7 @@
 
 
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <?php
               $cbn_enable_fullscreen = get_option('cbn_enable_fullscreen', 'on');
               ?>
@@ -555,7 +555,7 @@
             <?php  ?>
               <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <?php
                   $cbn_enable_currentlocation = get_option('cbn_enable_currentlocation');
                   ?>
@@ -569,7 +569,7 @@
                   </td>
                 </tr>
 
-				<tr valign="top" class="cbn-gopro-tr">
+				<tr style="vertical-align: top;" class="cbn-gopro-tr">
 					<th scope="row">
 					<?php echo __('"Show me where I am" Button', 'Compass'); ?>
                   
@@ -584,7 +584,7 @@
             <?php  ?>
               <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <?php
                   $cbn_disable_cbn_attribution = get_option('cbn_disable_cbn_attribution');
                   ?>
@@ -604,7 +604,7 @@
 
           <table class="form-table">
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <?php
               $cbn_form_headline = get_option('cbn_form_headline');
               ?>
@@ -614,7 +614,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <?php
               $cbn_enable_title = get_option('cbn_enable_title', 'on');
               $cbn_title_required = get_option('cbn_title_required', 'on');
@@ -644,7 +644,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <?php
               $cbn_map_label = get_option('cbn_map_label');
               ?>
@@ -655,7 +655,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row">
                 <?php echo __('Custom fields', 'Compass'); ?>
     
@@ -750,7 +750,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <?php
               $cbn_enable_address = get_option('cbn_enable_address', 'on');
               $cbn_hide_address = get_option('cbn_hide_address');
@@ -774,7 +774,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <?php
               $cbn_enable_description = get_option('cbn_enable_description', 'on');
               $cbn_description_required = get_option('cbn_description_required');
@@ -799,7 +799,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <?php
               $cbn_enable_image = get_option('cbn_enable_image', 'on');
               $cbn_image_required = get_option('cbn_image_required');
@@ -882,7 +882,7 @@
             <?php  ?>
               <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <?php
                   $cbn_max_image_filesize = get_option('cbn_max_image_filesize') ? get_option('cbn_max_image_filesize') : 10;
                   $cbn_max_audio_filesize = get_option('cbn_max_audio_filesize') ? get_option('cbn_max_audio_filesize') : 10;
@@ -908,7 +908,7 @@
 
 
               
-              <tr valign="top" class="cbn-gopro-tr">
+              <tr style="vertical-align: top;" class="cbn-gopro-tr">
                 <th scope="row">
                   <?php echo __('Max upload size', 'Compass'); ?>
                   
@@ -934,7 +934,7 @@
             <?php  ?>
               <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <?php
                   $cbn_enable_user_notification = get_option('cbn_enable_user_notification');
                   $cbn_user_notification_label = get_option('cbn_user_notification_label');
@@ -965,7 +965,7 @@
 
 
               
-              <tr valign="top" class="cbn-gopro-tr">
+              <tr style="vertical-align: top;" class="cbn-gopro-tr">
                 <th scope="row">
                   <?php echo __('User email notification', 'Compass'); ?>
                   
@@ -990,14 +990,14 @@
             <?php
             $cbn_submit_button_label = get_option('cbn_submit_button_label');
             ?>
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row"><?php echo __('"Submit" Button text', 'Compass'); ?></th>
               <td>
                 <input class="regular-text" type="text" name="cbn_submit_button_label" id="cbn_submit_button_label" placeholder="<?php echo __('Submit location for review', 'Compass'); ?>" value="<?php echo esc_textarea($cbn_submit_button_label); ?>"></input><br>
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row"><?php echo __('Action after submit', 'Compass'); ?></th>
               <td>
                 <select name="cbn_action_after_submit" id="cbn_action_after_submit">
@@ -1043,7 +1043,7 @@
             <?php  ?>
               <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <th scope="row"><?php echo __('Searchbar', 'Compass'); ?></th>
                   <td>
                     <?php
@@ -1083,7 +1083,7 @@
 
 
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <th scope="row"><?php echo __('Searchbar', 'Compass'); ?></th>
                   <td>
                     <?php
@@ -1125,7 +1125,7 @@
 
 
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row">
                 <?php echo __('"Search for Address (Geosearch)" Button', 'Compass'); ?>
               </th>
@@ -1141,7 +1141,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row">
                 <?php echo __('"Search for location markers" Button', 'Compass'); ?>
               </th>
@@ -1164,7 +1164,7 @@
           <?php  ?>
               <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <?php
                   $cbn_enable_marker_types = get_option('cbn_enable_marker_types');
                   $cbn_enable_empty_marker_type = get_option('cbn_enable_empty_marker_type', true);
@@ -1208,7 +1208,7 @@
 
 
 
-              <tr valign="top" class="cbn-gopro-tr">
+              <tr style="vertical-align: top;" class="cbn-gopro-tr">
                 <th scope="row">
                   <?php echo __('"Marker Categories" field', 'Compass'); ?>
                   
@@ -1239,7 +1239,7 @@
                 </td>
               </tr>
 
-              <tr valign="top" class="cbn-gopro-tr">
+              <tr style="vertical-align: top;" class="cbn-gopro-tr">
                 <th scope="row">
                   <?php echo __('Filterbox', 'Compass'); ?>
                   
@@ -1261,7 +1261,7 @@
         <div id="tab-4" class="tab-pane">
           <table class="form-table">
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <?php
               $cbn_enable_regions = get_option('cbn_enable_regions');
               ?>
@@ -1278,7 +1278,7 @@
     
               </td>
             </tr>
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <?php
                 $cbn_regions_layout_style = get_option('cbn_regions_layout_style', 'layout-1');
                 $items = $this->cbn_regions_layout_styles;
@@ -1305,7 +1305,7 @@
 
           <table class="form-table">
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <?php
               $cbn_enable_location_date = get_option('cbn_enable_location_date');
               ?>
@@ -1336,7 +1336,7 @@
             <?php  ?>
               <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <?php
                   $cbn_enable_single_page = get_option('cbn_enable_single_page');
                   ?>
@@ -1354,7 +1354,7 @@
 
 
               
-              <tr valign="top" class="cbn-gopro-tr">
+              <tr style="vertical-align: top;" class="cbn-gopro-tr">
                 <th scope="row">
                   <?php echo __('Public pages for locations (Single pages)', 'Compass'); ?>
                   
@@ -1373,7 +1373,7 @@
             <?php  ?>
               <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <?php
                   $cbn_enable_user_restriction = get_option('cbn_enable_user_restriction');
                   $cbn_enable_redirect_to_registration = get_option('cbn_enable_redirect_to_registration');
@@ -1395,7 +1395,7 @@
 
 
               
-              <tr valign="top" class="cbn-gopro-tr">
+              <tr style="vertical-align: top;" class="cbn-gopro-tr">
                 <th scope="row">
                   <?php echo __('Restrict "Add location" to logged in users only', 'Compass'); ?>
                   
@@ -1414,7 +1414,7 @@
             <?php  ?>
               <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <?php
                   $cbn_enable_auto_publish = get_option('cbn_enable_auto_publish');
                   ?>
@@ -1431,7 +1431,7 @@
 
 
               
-              <tr valign="top" class="cbn-gopro-tr">
+              <tr style="vertical-align: top;" class="cbn-gopro-tr">
                 <th scope="row">
                   <?php echo __('Auto-Publish for registered users', 'Compass'); ?>
                   
@@ -1449,7 +1449,7 @@
             <?php  ?>
               <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <?php
                   $cbn_enable_auto_publish_for_everyone = get_option('cbn_enable_auto_publish_for_everyone');
                   ?>
@@ -1466,7 +1466,7 @@
 
 
               
-              <tr valign="top" class="cbn-gopro-tr">
+              <tr style="vertical-align: top;" class="cbn-gopro-tr">
                 <th scope="row">
                   <?php echo __('Auto-Publish for unregistered users', 'Compass'); ?>
                   
@@ -1484,7 +1484,7 @@
             <?php  ?>
               <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <?php
                   $cbn_enable_add_user_location = get_option('cbn_enable_add_user_location');
                   ?>
@@ -1500,7 +1500,7 @@
 
 
               
-              <tr valign="top" class="cbn-gopro-tr">
+              <tr style="vertical-align: top;" class="cbn-gopro-tr">
                 <th scope="row">
                   <?php echo __('Extend WordPress user registration form with "Add location" map', 'Compass'); ?>
                   
@@ -1517,7 +1517,7 @@
             <?php  ?>
               <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <?php
                   $cbn_enable_admin_notification = get_option('cbn_enable_admin_notification');
                   $cbn_admin_notification_email = get_option('cbn_admin_notification_email') ? get_option('cbn_admin_notification_email') : get_option('admin_email');
@@ -1547,7 +1547,7 @@
 
 
               
-              <tr valign="top" class="cbn-gopro-tr">
+              <tr style="vertical-align: top;" class="cbn-gopro-tr">
                 <th scope="row">
                   <?php echo __('Admin email notification on new location proposals', 'Compass'); ?>
                   
@@ -1575,7 +1575,7 @@
             <?php  ?>
               <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <?php
                   $cbn_enable_webhook_notification = get_option('cbn_enable_webhook_notification');
                   $cbn_webhook_notification_url = get_option('cbn_webhook_notification_url');
@@ -1596,7 +1596,7 @@
 
 
               
-              <tr valign="top" class="cbn-gopro-tr">
+              <tr style="vertical-align: top;" class="cbn-gopro-tr">
                 <th scope="row">
                   <?php echo __('Trigger Webhook on new or updated Locations', 'Compass'); ?>
                   
@@ -1613,7 +1613,7 @@
 
 
 
-            <tr valign="top" >
+            <tr style="vertical-align: top;" >
                 <?php
                 $cbn_custom_js = get_option('cbn_custom_js');
                 ?>
@@ -1639,7 +1639,7 @@
             <?php  ?>
               <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <th scope="row">
                     <?php echo __('Export all Locations', 'Compass'); ?>
                     
@@ -1659,7 +1659,7 @@
 
 
               
-              <tr valign="top" class="cbn-gopro-tr">
+              <tr style="vertical-align: top;" class="cbn-gopro-tr">
                 <th scope="row">
                   <?php echo __('Export all Locations', 'Compass'); ?>
                   
@@ -1684,7 +1684,7 @@
             <?php  ?>
               <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                   <th scope="row">
                     <?php echo __('Import all Locations', 'Compass'); ?>
                     
@@ -1712,7 +1712,7 @@
 
 
               
-              <tr valign="top" class="cbn-gopro-tr">
+              <tr style="vertical-align: top;" class="cbn-gopro-tr">
                 <th scope="row">
                   <?php echo __('Import all Locations', 'Compass'); ?>
                   
@@ -1749,7 +1749,7 @@
 
           <table class="form-table">
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row">
                 <?php echo  __( '🚀 Getting started', 'Compass' ) ;?>
               </th>
@@ -1758,7 +1758,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row">
                 <?php echo  __( 'Gutenberg Block', 'Compass' ) ;?>
               </th>
@@ -1767,7 +1767,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row">
                 <?php echo  __( 'Elementor Widget', 'Compass' ) ;?>
               </th>
@@ -1776,7 +1776,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row"><?php echo __('Place the shortcode anywhere in your content or integrate it within your theme template with PHP', 'Compass'); ?></th>
               <td class="top-padding-20">
                 <strong>Shortcode:</strong><br><br>
@@ -1829,7 +1829,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row"><?php echo __('Additional Shortcodes', 'Compass'); ?></th>
               <td class="top-padding-20">
                 <span class="cbn-pro">PRO</span> <code>[Compass-location value="Favorite color" post_id="12345"]</code> 
@@ -1867,7 +1867,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row"><?php echo __('URL parameters', 'Compass'); ?></th>
               <td class="top-padding-20">
                 <code>?markerid=123</code> <span class="hint"><?php echo __('123 can be the post_id of any public location. Add the parameter to the URL to auto-open a specific location.', 'Compass'); ?></span><br><br>
@@ -1875,7 +1875,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row"><?php echo __('Conditional Fields (experimental)', 'Compass'); ?></th>
               <td class="top-padding-20">
                 <span class="hint"><?php echo __('Show or Hide a Custom Field based on the selected value of a field.', 'Compass'); ?></span><br><br>
@@ -1897,7 +1897,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row">
                 <?php echo  __( 'Hooks', 'Compass' ) ;?>
               </th>
@@ -1933,7 +1933,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row">
                 <?php echo  __( 'Support', 'Compass' ) ;?>
               </th>
@@ -1942,7 +1942,7 @@
               </td>
             </tr>
 
-            <tr valign="top">
+            <tr style="vertical-align: top;">
               <th scope="row">
                 <?php echo  __( 'Debug Info', 'Compass' ) ;?>
               </th>

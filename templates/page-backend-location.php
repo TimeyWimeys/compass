@@ -1,7 +1,7 @@
 <table class="form-table">
     <tbody>
 
-        <tr valign="top">
+        <tr style="vertical-align: top;">
             <th scope="row">
                 <?php echo __('Marker', 'Compass'); ?>
             </th>
@@ -68,7 +68,7 @@
             </td>
         </tr>
 
-        <tr valign="top">
+        <tr style="vertical-align: top;">
             <th scope="row">
                 <?php echo __('Subtitle', 'Compass'); ?>
             </th>
@@ -77,7 +77,7 @@
             </td>
         </tr>
 
-        <tr valign="top">
+        <tr style="vertical-align: top;">
             <th scope="row">
                 <?php echo __('Image', 'Compass'); ?>
             </th>
@@ -93,7 +93,7 @@
         <?php  ?>
             <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                     <th scope="row">
                         <?php echo __('Video', 'Compass'); ?>
                     </th>
@@ -107,7 +107,7 @@
                     </td>
                 </tr>
 
-        <tr valign="top">
+        <tr style="vertical-align: top;">
             <th scope="row">
                 <?php echo __('Audio', 'Compass'); ?>
             </th>
@@ -122,7 +122,7 @@
             </td>
         </tr>
 
-        <tr valign="top">
+        <tr style="vertical-align: top;">
             <th scope="row">
                 <?php echo __('Description', 'Compass'); ?>
             </th>
@@ -150,7 +150,7 @@
                 
                 <?php if($custom_field['fieldtype'] == 'text'): ?>
 
-                    <tr valign="top" class="section-id_cf-<?php echo $index; ?>">
+                    <tr style="vertical-align: top;" class="section-id_cf-<?php echo $index; ?>">
                         <th scope="row">
                             <?php echo $label; ?>
                         </th>
@@ -165,7 +165,7 @@
 
                 <?php if($custom_field['fieldtype'] == 'link'): ?>
 
-                    <tr valign="top" class="section-id_cf-<?php echo $index; ?>">
+                    <tr style="vertical-align: top;" class="section-id_cf-<?php echo $index; ?>">
                         <th scope="row">
                             <?php echo $label; ?>
                         </th>
@@ -180,7 +180,7 @@
 
                 <?php if($custom_field['fieldtype'] == 'email'): ?>
 
-                    <tr valign="top" class="section-id_cf-<?php echo $index; ?>">
+                    <tr style="vertical-align: top;" class="section-id_cf-<?php echo $index; ?>">
                         <th scope="row">
                             <?php echo $label; ?>
                         </th>
@@ -195,7 +195,7 @@
 
                 <?php if($custom_field['fieldtype'] == 'checkbox'): ?>
 
-                    <tr valign="top" class="section-id_cf-<?php echo $index; ?>">
+                    <tr style="vertical-align: top;" class="section-id_cf-<?php echo $index; ?>">
                         <th scope="row">
                             <?php echo $label; ?>
                         </th>
@@ -222,7 +222,7 @@
 
                 <?php if($custom_field['fieldtype'] == 'radio'): ?>
 
-                    <tr valign="top" class="section-id_cf-<?php echo $index; ?>">
+                    <tr style="vertical-align: top;" class="section-id_cf-<?php echo $index; ?>">
                         <th scope="row">
                             <?php echo $label; ?>
                         </th>
@@ -249,7 +249,7 @@
 
                 <?php if($custom_field['fieldtype'] == 'select'): ?>
 
-                    <tr valign="top" class="section-id_cf-<?php echo $index; ?>">
+                    <tr style="vertical-align: top;" class="section-id_cf-<?php echo $index; ?>">
                         <th scope="row">
                             <?php echo $label; ?>
                         </th>
@@ -274,7 +274,7 @@
         <?php if (cbn_fs()->true()): ?>
             <?php if (cbn_fs()->true()): ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                     <th scope="row">
                         <?php echo __('User email notification', 'Compass'); ?>
                     </th>
