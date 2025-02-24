@@ -4,16 +4,14 @@
  * @package CompassPlugin
  */
 
+
 namespace CompassPlugin;
 
 final class Init
 {
-    /**
-     * Store all the classes inside an array
-     * @return array Full list of classes
-     */
     public static function get_services(): array
     {
+        error_log('register_services() wordt uitgevoerd');
         $classes = array(
             Pages\Settings::class,
             Base\Enqueue::class,
@@ -23,7 +21,6 @@ final class Init
             Base\TaxController::class,
         );
 
-        // only add Frontend class when not in backend
         if (!is_admin()) {
             array_unshift($classes, Pages\Frontend::class);
         }
@@ -31,10 +28,7 @@ final class Init
         return $classes;
     }
 
-    /**
-     * Loop through the classes, initialize them and call method register() if it exists
-     */
-    public static function register_services()
+    public static function register_services(): void
     {
         foreach (self::get_services() as $class) {
             $service = self::instantiate($class);
@@ -45,11 +39,6 @@ final class Init
         }
     }
 
-    /**
-     * Initialize the class
-     * @param $class class      class from the services array
-     * @return class instance   new instance of the class
-     */
     private static function instantiate($class)
     {
         return new $class();
