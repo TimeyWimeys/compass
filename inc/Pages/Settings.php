@@ -123,8 +123,8 @@ class Settings extends BaseController
         register_setting('Compass-settings-group-wizard-2', 'cbn_wizard_finish_done', array('sanitize_callback' => 'sanitize_text_field'));
 
 
-        if (cbn_fs()->true()) {
-            if (cbn_fs()->true()) {
+        if (true) {
+            if (true) {
                 // Premium settings, because wp_kses_post can not be null in free version
                 register_setting('Compass-settings-group', 'cbn_user_notification_message', array('sanitize_callback' => 'wp_kses_post'));
                 register_setting('Compass-settings-group', 'cbn_admin_notification_message', array('sanitize_callback' => 'wp_kses_post'));
