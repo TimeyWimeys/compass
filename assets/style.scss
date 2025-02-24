@@ -76,7 +76,6 @@
                 padding: 0 8px;
                 border: none;
                 box-shadow: none;
-                margin: 0;
                 outline: none;
                 font-size: 14px;
                 opacity: 0.5;
@@ -384,7 +383,6 @@
       font-size: 14px;
       line-height: 23px;
       padding-left: 50px;
-      position: relative;
       margin-top: -18px;
 
       &::before {
@@ -399,7 +397,7 @@
         transition: background-color 0.5s linear;
         z-index: 5;
         position: absolute;
-        left: 0px;
+        left: 0;
         top: 1px;
       }
 
@@ -411,7 +409,7 @@
         background-color: #fff;
         content: "";
         transition: margin 0.1s linear;
-        box-shadow: 0px 0px 5px #aaa;
+        box-shadow: 0 0 5px #aaa;
         position: absolute;
         left: 2px;
         top: 3px;
@@ -544,7 +542,7 @@
           top: 0;
           font-size: 11px;
           text-align: center;
-          padding: 0px 4px;
+          padding: 0 4px;
         }
 
         .oum-gopro-text {
@@ -565,7 +563,7 @@
         top: 0;
         font-size: 11px;
         text-align: center;
-        padding: 0px 4px;
+        padding: 0 4px;
       }
 
       &.checked,
@@ -712,7 +710,6 @@
                 padding: 0 8px;
                 border: none;
                 box-shadow: none;
-                margin: 0;
                 outline: none;
                 font-size: 14px;
                 opacity: 0.5;
@@ -1041,7 +1038,7 @@
     display: inline-block;
     background: #50aa96;
     color: white;
-    padding: 0px 4px;
+    padding: 0 4px;
     font-size: 12px;
   }
 
@@ -1208,7 +1205,7 @@
         color: white;
         right: 5px;
         bottom: 5px;
-        padding: 0px 4px;
+        padding: 0 4px;
         font-size: 11px;
         border: 1px solid;
       }
@@ -1248,11 +1245,7 @@
             border-radius: 2px;
           }
         }
-    
-        &[data-style="Stadia.StamenTonerLite"] {
-          background-image: url('images/map_style_Stamen.TonerLite.png');
-        }
-    
+
         &[data-style="Esri.WorldStreetMap"] {
           background-image: url('images/map_style_Esri.WorldStreetMap.png');
         }
@@ -1351,7 +1344,7 @@
           top: 0;
           font-size: 11px;
           text-align: center;
-          padding: 0px 4px;
+          padding: 0 4px;
         }
 
         .oum-gopro-text {
@@ -1372,7 +1365,7 @@
         top: 0;
         font-size: 11px;
         text-align: center;
-        padding: 0px 4px;
+        padding: 0 4px;
       }
 
       &.checked,
@@ -1514,7 +1507,6 @@
                 padding: 0 8px;
                 border: none;
                 box-shadow: none;
-                margin: 0;
                 outline: none;
                 font-size: 14px;
                 opacity: 0.5;
@@ -1697,7 +1689,6 @@
       font-size: 14px;
       line-height: 23px;
       padding-left: 50px;
-      position: relative;
       margin-top: -18px;
 
       &::before {
@@ -1712,7 +1703,7 @@
         transition: background-color 0.5s linear;
         z-index: 5;
         position: absolute;
-        left: 0px;
+        left: 0;
         top: 1px;
       }
 
@@ -1724,7 +1715,7 @@
         background-color: #fff;
         content: "";
         transition: margin 0.1s linear;
-        box-shadow: 0px 0px 5px #aaa;
+        box-shadow: 0 0 5px #aaa;
         position: absolute;
         left: 2px;
         top: 3px;
@@ -1746,7 +1737,6 @@
     position: relative;
 
     .oum-import-loading {
-      display: none;
       position: relative;
       margin-left: 10px;
       vertical-align: middle;
@@ -1780,7 +1770,7 @@
     color: white;
     font-size: 11px;
     text-align: center;
-    padding: 0px 4px;
+    padding: 0 4px;
   }
 
   .oum-gopro-tr td,

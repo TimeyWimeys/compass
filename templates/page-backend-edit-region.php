@@ -22,19 +22,19 @@
                         <label class="meta-label" for="cbn_lat">
                             <?php echo __('Lat', 'Compass'); ?>
                         </label>
-                        <input type="text" readonly class="widefat" id="cbn_lat" name="cbn_lat" value="<?php echo esc_attr($term_lat) ? esc_attr($term_lat) : ''; ?>"></input>
+                        <input type="text" readonly class="widefat" id="cbn_lat" name="cbn_lat" value="<?php echo esc_attr($term_lat) ? esc_attr($term_lat) : ''; ?>">
                     </div>
                     <div class="form-field lng-wrap">
                         <label class="meta-label" for="cbn_lng">
                             <?php echo __('Lng', 'Compass'); ?>
                         </label>
-                        <input type="text" readonly class="widefat" id="cbn_lng" name="cbn_lng" value="<?php echo esc_attr($term_lng) ? esc_attr($term_lng) : ''; ?>"></input>
+                        <input type="text" readonly class="widefat" id="cbn_lng" name="cbn_lng" value="<?php echo esc_attr($term_lng) ? esc_attr($term_lng) : ''; ?>">
                     </div>
                     <div class="form-field zoom-wrap">
                         <label class="meta-label" for="cbn_zoom">
                             <?php echo __('Zoom', 'Compass'); ?>
                         </label>
-                        <input type="text" readonly class="widefat" id="cbn_zoom" name="cbn_zoom" value="<?php echo esc_attr($term_zoom) ? esc_attr($term_zoom) : ''; ?>"></input>
+                        <input type="text" readonly class="widefat" id="cbn_zoom" name="cbn_zoom" value="<?php echo esc_attr($term_zoom) ? esc_attr($term_zoom) : ''; ?>">
                     </div>
                 </div>
 
@@ -52,7 +52,7 @@
             const lng = '<?php echo esc_attr($term_lng) ? esc_attr($term_lng) : '0'; ?>';
             const zoom = '<?php echo esc_attr($term_zoom) ? esc_attr($term_zoom) : '1'; ?>';
             const mapStyle = '<?php echo $map_style; ?>';
-            var cbn_tile_provider_mapbox_key = `<?php echo esc_attr($cbn_tile_provider_mapbox_key); ?>`;
+            let cbn_tile_provider_mapbox_key = `<?php echo esc_attr($cbn_tile_provider_mapbox_key); ?>`;
             let cbn_geosearch_selected_provider = ``; 
             const cbn_geosearch_provider = `<?php echo get_option('cbn_geosearch_provider') ? get_option('cbn_geosearch_provider') : 'osm'; ?>`;
             const cbn_geosearch_provider_geoapify_key = `<?php echo get_option('cbn_geosearch_provider_geoapify_key', ''); ?>`;

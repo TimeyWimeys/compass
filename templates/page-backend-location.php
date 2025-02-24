@@ -1,7 +1,7 @@
 <table class="form-table">
     <tbody>
 
-        <tr valign="top">
+        <tr style="vertical-align: top;">
             <th scope="row">
                 <?php echo __('Marker', 'Compass'); ?>
             </th>
@@ -21,13 +21,13 @@
                                         <label class="meta-label" for="cbn_location_lat">
                                             <?php echo __('Lat', 'Compass'); ?>
                                         </label>
-                                        <input type="text" class="widefat" id="cbn_location_lat" name="cbn_location_lat" value="<?php echo esc_attr($lat); ?>"></input>
+                                        <input type="text" class="widefat" id="cbn_location_lat" name="cbn_location_lat" value="<?php echo esc_attr($lat); ?>">
                                     </div>
                                     <div>
                                         <label class="meta-label" for="cbn_location_lng">
                                             <?php echo __('Lng', 'Compass'); ?>
                                         </label>
-                                        <input type="text" class="widefat" id="cbn_location_lng" name="cbn_location_lng" value="<?php echo esc_attr($lng); ?>"></input>
+                                        <input type="text" class="widefat" id="cbn_location_lng" name="cbn_location_lng" value="<?php echo esc_attr($lng); ?>">
                                     </div>
                                 </div>
                             </div>
@@ -40,8 +40,8 @@
                     const zoom = '<?php echo get_option('cbn_searchmarkers_zoom') ? get_option('cbn_searchmarkers_zoom') : $this->cbn_searchmarkers_zoom_default; ?>';
                     const mapStyle = '<?php echo esc_attr($map_style); ?>';
                     const cbn_tile_provider_mapbox_key = `<?php echo esc_attr($cbn_tile_provider_mapbox_key); ?>`;
-                    const cbn_enable_currentlocation = '<?php echo get_option('cbn_enable_currentlocation') ? true : false; ?>';
-                    const enableCurrentLocation = cbn_enable_currentlocation ? true : false;
+                    const cbn_enable_currentlocation = '<?php echo (bool)get_option('cbn_enable_currentlocation'); ?>';
+                    const enableCurrentLocation = !!cbn_enable_currentlocation;
                     let cbn_geosearch_selected_provider = ``; 
                     const cbn_geosearch_provider = `<?php echo get_option('cbn_geosearch_provider') ? get_option('cbn_geosearch_provider') : 'osm'; ?>`;
                     const cbn_geosearch_provider_geoapify_key = `<?php echo get_option('cbn_geosearch_provider_geoapify_key', ''); ?>`;
@@ -68,22 +68,22 @@
             </td>
         </tr>
 
-        <tr valign="top">
+        <tr style="vertical-align: top;">
             <th scope="row">
                 <?php echo __('Subtitle', 'Compass'); ?>
             </th>
             <td>
-                <input type="text" class="regular-text" id="cbn_location_address" name="cbn_location_address" value="<?php echo esc_attr($address); ?>"></input>
+                <input type="text" class="regular-text" id="cbn_location_address" name="cbn_location_address" value="<?php echo esc_attr($address); ?>">
             </td>
         </tr>
 
-        <tr valign="top">
+        <tr style="vertical-align: top;">
             <th scope="row">
                 <?php echo __('Image', 'Compass'); ?>
             </th>
             <td>
                 <a href="#" class="cbn_upload_image_button button button-secondary"><?php echo __('Upload Image', 'Compass'); ?></a>
-                <input type="hidden" id="cbn_location_image" name="cbn_location_image" value="<?php echo esc_attr($image); ?>"></input>
+                <input type="hidden" id="cbn_location_image" name="cbn_location_image" value="<?php echo esc_attr($image); ?>">
                 <br><br>
                 <div id="cbn_location_image_preview"></div>
                 <p class="description"><?php echo __('Maximum 5 images. Images will be shown in a gallery.', 'Compass'); ?></p>
@@ -93,12 +93,12 @@
         <?php  ?>
             <?php  ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                     <th scope="row">
                         <?php echo __('Video', 'Compass'); ?>
                     </th>
                     <td>
-                        <input type="text" class="regular-text" id="cbn_location_video" name="cbn_location_video" placeholder="YouTube or Vimeo URL" value="<?php echo esc_attr($video); ?>"></input>
+                        <input type="text" class="regular-text" id="cbn_location_video" name="cbn_location_video" placeholder="YouTube or Vimeo URL" value="<?php echo esc_attr($video); ?>">
                         <br><br>
                         <div id="cbn_location_video_preview" class="<?php echo $has_video; ?>">
                             <?php echo $video_tag; ?>
@@ -107,13 +107,13 @@
                     </td>
                 </tr>
 
-        <tr valign="top">
+        <tr style="vertical-align: top;">
             <th scope="row">
                 <?php echo __('Audio', 'Compass'); ?>
             </th>
             <td>
                 <a href="#" class="cbn_upload_audio_button button button-secondary"><?php echo __('Upload Audio', 'Compass'); ?></a>
-                <input type="hidden" id="cbn_location_audio" name="cbn_location_audio" value="<?php echo esc_attr($audio); ?>"></input>
+                <input type="hidden" id="cbn_location_audio" name="cbn_location_audio" value="<?php echo esc_attr($audio); ?>">
                 <br><br>
                 <div id="cbn_location_audio_preview" class="<?php echo $has_audio; ?>">
                     <?php echo $audio_tag; ?>
@@ -122,7 +122,7 @@
             </td>
         </tr>
 
-        <tr valign="top">
+        <tr style="vertical-align: top;">
             <th scope="row">
                 <?php echo __('Description', 'Compass'); ?>
             </th>
@@ -141,8 +141,8 @@
             <?php foreach($active_custom_fields as $index => $custom_field): ?>
 
                 <?php
-                $custom_field['fieldtype'] = isset($custom_field['fieldtype']) ? $custom_field['fieldtype'] : 'text';
-                $custom_field['description'] = isset($custom_field['description']) ? $custom_field['description'] : '';
+                $custom_field['fieldtype'] = $custom_field['fieldtype'] ?? 'text';
+                $custom_field['description'] = $custom_field['description'] ?? '';
 
                 $label = esc_attr($custom_field['label']) . ((isset($custom_field['required'])) ? '*' : '');
                 $description = ($custom_field['description']) ? '<div class="cbn_custom_field_description">' . $custom_field['description'] . '</div>' : '';
@@ -150,12 +150,12 @@
                 
                 <?php if($custom_field['fieldtype'] == 'text'): ?>
 
-                    <tr valign="top" class="section-id_cf-<?php echo $index; ?>">
+                    <tr style="vertical-align: top;" class="section-id_cf-<?php echo $index; ?>">
                         <th scope="row">
                             <?php echo $label; ?>
                         </th>
                         <td>
-                            <input type="text" class="regular-text" name="cbn_location_custom_fields[<?php echo $index; ?>]" value="<?php echo isset($meta_custom_fields[$index]) ? esc_attr($meta_custom_fields[$index]) : ''; ?>"></input>
+                            <input type="text" class="regular-text" name="cbn_location_custom_fields[<?php echo $index; ?>]" value="<?php echo isset($meta_custom_fields[$index]) ? esc_attr($meta_custom_fields[$index]) : ''; ?>">
                             <?php echo $description; ?>
                         </td>
                     </tr>
@@ -165,12 +165,12 @@
 
                 <?php if($custom_field['fieldtype'] == 'link'): ?>
 
-                    <tr valign="top" class="section-id_cf-<?php echo $index; ?>">
+                    <tr style="vertical-align: top;" class="section-id_cf-<?php echo $index; ?>">
                         <th scope="row">
                             <?php echo $label; ?>
                         </th>
                         <td>
-                            <input type="text" class="regular-text" name="cbn_location_custom_fields[<?php echo $index; ?>]" value="<?php echo isset($meta_custom_fields[$index]) ? esc_attr($meta_custom_fields[$index]) : ''; ?>"></input>
+                            <input type="text" class="regular-text" name="cbn_location_custom_fields[<?php echo $index; ?>]" value="<?php echo isset($meta_custom_fields[$index]) ? esc_attr($meta_custom_fields[$index]) : ''; ?>">
                             <?php echo $description; ?>
                         </td>
                     </tr>
@@ -180,12 +180,12 @@
 
                 <?php if($custom_field['fieldtype'] == 'email'): ?>
 
-                    <tr valign="top" class="section-id_cf-<?php echo $index; ?>">
+                    <tr style="vertical-align: top;" class="section-id_cf-<?php echo $index; ?>">
                         <th scope="row">
                             <?php echo $label; ?>
                         </th>
                         <td>
-                            <input type="email" class="regular-text" name="cbn_location_custom_fields[<?php echo $index; ?>]" value="<?php echo isset($meta_custom_fields[$index]) ? esc_attr($meta_custom_fields[$index]) : ''; ?>"></input>
+                            <input type="email" class="regular-text" name="cbn_location_custom_fields[<?php echo $index; ?>]" value="<?php echo isset($meta_custom_fields[$index]) ? esc_attr($meta_custom_fields[$index]) : ''; ?>">
                             <?php echo $description; ?>
                         </td>
                     </tr>
@@ -195,7 +195,7 @@
 
                 <?php if($custom_field['fieldtype'] == 'checkbox'): ?>
 
-                    <tr valign="top" class="section-id_cf-<?php echo $index; ?>">
+                    <tr style="vertical-align: top;" class="section-id_cf-<?php echo $index; ?>">
                         <th scope="row">
                             <?php echo $label; ?>
                         </th>
@@ -222,7 +222,7 @@
 
                 <?php if($custom_field['fieldtype'] == 'radio'): ?>
 
-                    <tr valign="top" class="section-id_cf-<?php echo $index; ?>">
+                    <tr style="vertical-align: top;" class="section-id_cf-<?php echo $index; ?>">
                         <th scope="row">
                             <?php echo $label; ?>
                         </th>
@@ -249,7 +249,7 @@
 
                 <?php if($custom_field['fieldtype'] == 'select'): ?>
 
-                    <tr valign="top" class="section-id_cf-<?php echo $index; ?>">
+                    <tr style="vertical-align: top;" class="section-id_cf-<?php echo $index; ?>">
                         <th scope="row">
                             <?php echo $label; ?>
                         </th>
@@ -271,10 +271,10 @@
             <?php endforeach; ?>
         <?php endif;?>
 
-        <?php if (cbn_fs()->true()): ?>
-            <?php if (cbn_fs()->true()): ?>
+        <?php if (true): ?>
+            <?php if (true): ?>
 
-                <tr valign="top">
+                <tr style="vertical-align: top;">
                     <th scope="row">
                         <?php echo __('User email notification', 'Compass'); ?>
                     </th>

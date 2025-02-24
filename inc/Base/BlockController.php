@@ -6,7 +6,7 @@
 
 namespace CompassPlugin\Base;
 
-use CompassPlugin\Base\BaseController;
+use Elementor_cbn_Addon\Plugin;
 
 class BlockController extends BaseController
 {
@@ -49,11 +49,11 @@ class BlockController extends BaseController
     /**
      * Setup Elementor Widgets
      */
-    public function set_elementor_widgets($widgets_manager)
+    public function set_elementor_widgets()
     {
         require_once "$this->plugin_path/elementor/includes/plugin.php";
 
         // Run the plugin
-        \Elementor_cbn_Addon\Plugin::instance();
+        Plugin::instance();
     }
 }

@@ -25,8 +25,8 @@
 		return false;
 	}
 
-	const nativeAPI = (() => {
-		const methodMap = [
+	let nativeAPI = (() => {
+		let methodMap = [
 			// Standard
 			[
 				'requestFullscreen',
@@ -47,10 +47,10 @@
 			]
 		];
 
-		const baseList = methodMap[0];
-		const ret = {};
+		let baseList = methodMap[0];
+		let ret = {};
 
-		for (const methodList of methodMap) {
+		for (let methodList of methodMap) {
 			if (methodList[1] in document) {
 				for (let i = 0; i < methodList.length; i++) {
 					ret[baseList[i]] = methodList[i];
@@ -62,22 +62,22 @@
 		return false;
 	})();
 
-	const eventNameMap = {
+	let eventNameMap = {
 		change: nativeAPI.fullscreenchange,
 		error: nativeAPI.fullscreenerror,
 	};
 
-	const fullscreenAPI = {
+	let fullscreenAPI = {
 		request(element, options) {
 			return new Promise((resolve, reject) => {
-				const onFullScreenEntered = function() {
+				let onFullScreenEntered = function() {
 					this.off('change', onFullScreenEntered);
 					resolve();
 				}.bind(this);
 
 				this.on('change', onFullScreenEntered);
 				element = element || document.documentElement;
-				const returnPromise = element[nativeAPI.requestFullscreen](options);
+				let returnPromise = element[nativeAPI.requestFullscreen](options);
 				if (returnPromise instanceof Promise) {
 					returnPromise.then(onFullScreenEntered).catch(reject);
 				}
@@ -90,26 +90,26 @@
 					return;
 				}
 
-				const onFullScreenExit = function() {
+				let onFullScreenExit = function() {
 					this.off('change', onFullScreenExit);
 					resolve();
 				}.bind(this);
 
 				this.on('change', onFullScreenExit);
-				const returnPromise = document[nativeAPI.exitFullscreen]();
+				let returnPromise = document[nativeAPI.exitFullscreen]();
 				if (returnPromise instanceof Promise) {
 					returnPromise.then(onFullScreenExit).catch(reject);
 				}
 			});
 		},
 		on(event, callback) {
-			const eventName = eventNameMap[event];
+			let eventName = eventNameMap[event];
 			if (eventName) {
 				document.addEventListener(eventName, callback, false);
 			}
 		},
 		off(event, callback) {
-			const eventName = eventNameMap[event];
+			let eventName = eventNameMap[event];
 			if (eventName) {
 				document.removeEventListener(eventName, callback, false);
 			}
@@ -214,7 +214,7 @@
 		},
 
 		toggleFullScreen() {
-			const map = this._map;
+			let map = this._map;
 			map._exitFired = false;
 			if (map._isFullscreen) {
 				if (this._screenfull.isEnabled && !this.options.forcePseudoFullscreen) {
@@ -254,7 +254,7 @@
 		},
 
 		_handleFullscreenChange(ev) {
-			const map = this._map;
+			let map = this._map;
 			if (ev.target === map.getContainer() && !this._screenfull.isFullscreen && !map._exitFired) {
 				this._screenfull.exit().then(() => map.invalidateSize());
 				map.fire('exitFullscreen');
@@ -265,9 +265,6 @@
 	});
 
 	leaflet.Map.include({
-		toggleFullscreen() {
-			this.fullscreenControl.toggleFullScreen();
-		}
 	});
 
 	leaflet.Map.addInitHook(function() {

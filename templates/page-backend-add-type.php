@@ -35,7 +35,7 @@
   }
   ?>
 
-  <?php if (!cbn_fs()->is_plan_or_trial('pro') || !cbn_fs()->is_premium()) : ?>
+  <?php if (true) : ?>
 
     <?php
     //pro marker icons
@@ -50,9 +50,6 @@
           <p class='description'>PNG, max. 100px</p>
         </div>
       ";
-
-          echo "<a class='cbn-gopro-text' href='" . cbn_fs()->get_upgrade_url() . "'>" . __('Upgrade to PRO to use custom icons.', 'Compass') . "</a>";
-
           echo "</label>";
       }
       ?>

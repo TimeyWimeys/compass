@@ -10,6 +10,8 @@ require_once plugin_dir_path(__FILE__) . '../Base/BaseController.php';
 
 
 use CompassPlugin\Base\BaseController;
+use CompassPlugin\Base\LocationController;
+use WP_Error;
 
 class Settings extends BaseController
 {
@@ -152,7 +154,7 @@ class Settings extends BaseController
         foreach ($options as $old_option => $new_option) {
             $old_setting = get_option($old_option);
 
-            // do nothing if old option doesnt exist
+            // do nothing if old option doesn't exist
             if ($old_setting === false) {
                 //error_log('Compass: Deprecated option ' . $old_option . ' does not exist. Nothing to do.');
                 continue;
@@ -183,7 +185,7 @@ class Settings extends BaseController
         foreach ($options as $old_option => $new_option) {
             $old_setting = get_option($old_option);
 
-            // do nothing if old option doesnt exist
+            // do nothing if old option doesn't exist
             if ($old_setting === false) {
                 //error_log('Compass: Deprecated option ' . $old_option . ' does not exist. Nothing to do.');
                 continue;
@@ -248,12 +250,10 @@ class Settings extends BaseController
         return $zoom_validated;
     }
 
-    public static function validate_size($input)
+    public static function validate_size($input): string
     {
         // Add px if it's missing
-        $size_validated = (is_numeric($input)) ? $input . 'px' : sanitize_text_field($input);
-
-        return $size_validated;
+        return (is_numeric($input)) ? $input . 'px' : sanitize_text_field($input);
     }
 
     public function validate_array($array)
@@ -298,7 +298,8 @@ class Settings extends BaseController
 
         // Render the notice's HTML.
         echo '<div class="notice cbn-getting-started-notice notice-success is-dismissible">';
-        echo sprintf(__('<h3>🚀 Getting started with Compass</h3><ol><li>Use the page editor or Elementor to insert the <b>"Compass"</b> block onto a page. Alternatively, you can use the shortcode <code>[Compass]</code></li><li>You can <a href="%s">manage Locations</a> under <i>Compass > All Locations</i></li><li><a href="%s">Customize</a> styles and features under <i>Compass > Settings</i></li></ol>', 'Compass'), 'edit.php?post_type=cbn-location', 'edit.php?post_type=cbn-location&page=Compass-settings');
+        echo sprintf(__('<!--suppress ALL -->
+<h3>🚀 Getting started with Compass</h3><ol><li>Use the page editor or Elementor to insert the <b>"Compass"</b> block onto a page. Alternatively, you can use the shortcode <code>[Compass]</code></li><li>You can <a href="%s">manage Locations</a> under <i>Compass > All Locations</i></li><li><a href="%s">Customize</a> styles and features under <i>Compass > Settings</i></li></ol>', 'Compass'), 'edit.php?post_type=cbn-location', 'edit.php?post_type=cbn-location&page=Compass-settings');
         echo '</div>';
     }
 
@@ -350,7 +351,7 @@ class Settings extends BaseController
         if (isset($_POST['action']) && $_POST['action'] == 'cbn_csv_export') {
 
             // Initialize error handling
-            $error = new \WP_Error();
+            $error = new WP_Error();
 
             // TODO: Exit if no nonce
 
@@ -452,7 +453,7 @@ class Settings extends BaseController
         if (isset($_POST['action']) && $_POST['action'] == 'cbn_csv_import') {
 
             // Initialize error handling
-            $error = new \WP_Error();
+            $error = new WP_Error();
 
             // Dont save without nonce
             if (!isset($_POST['cbn_location_nonce'])) {
@@ -573,7 +574,7 @@ class Settings extends BaseController
                         }
 
                         // Validate and Save
-                        \CompassPlugin\Base\LocationController::save_fields($insert_post, $fields);
+                        LocationController::save_fields($insert_post, $fields);
 
                         $cnt_imported_locations++;
                     }
@@ -590,7 +591,7 @@ class Settings extends BaseController
     /**
      * Add settings updated message
      */
-    public function add_settings_updated_message($option, $old_value, $value)
+    public function add_settings_updated_message($option)
     {
         // Only add message for our plugin settings and only if no message exists yet
         if (strpos($option, 'cbn_') === 0) {

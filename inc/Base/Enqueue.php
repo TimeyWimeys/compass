@@ -6,8 +6,6 @@
 
 namespace CompassPlugin\Base;
 
-use CompassPlugin\Base\BaseController;
-
 class Enqueue extends BaseController
 {
     public function register()

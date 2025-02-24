@@ -10,7 +10,10 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+      "ext-json": "*",
+      "ext-gd": "*"
+    },
     "autoload": {
         "psr-4": {"CompassPlugin\\": "./inc"}
     }

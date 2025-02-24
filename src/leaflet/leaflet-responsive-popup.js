@@ -109,7 +109,7 @@ L.ResponsivePopup = L.Popup.extend({
 		    canGoBottom = true,
 		    canGoLeft = true,
 		    canGoRight = true,
-		    containerPos = false;
+		    containerPos;
 		
 		if(basePoint.y + anchor.y - offsetY - containerHeight - Math.abs(paddingTL.y) < 0) {
 			canGoTop = false;

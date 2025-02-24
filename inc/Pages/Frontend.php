@@ -7,6 +7,7 @@
 namespace CompassPlugin\Pages;
 
 use CompassPlugin\Base\BaseController;
+use Elementor_cbn_Addon\Plugin;
 
 class Frontend extends BaseController
 {
@@ -34,7 +35,7 @@ class Frontend extends BaseController
         // Check if Elementor installed and activated
         if (did_action('elementor/loaded')) {
 
-            if(\Elementor_cbn_Addon\Plugin::is_elementor_backend()) {
+            if(Plugin::is_elementor_backend()) {
                 error_log('OUM: prevented shortcode rendering inside Elementor');
                 return;
             }

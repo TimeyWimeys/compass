@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace Elementor_cbn_Addon;
 
@@ -328,6 +328,10 @@ class Elementor_Compass_Widget extends \Elementor\Widget_Base
 		<?php endif; ?>
 		
 		<?php
+    }
+
+    private function start_controls_section(string $string, array $array)
+    {
     }
 
 }

@@ -14,18 +14,18 @@
 
 	L.TileLayer.Provider = L.TileLayer.extend({
 		initialize: function (arg, options) {
-			var providers = L.TileLayer.Provider.providers;
+			let providers = L.TileLayer.Provider.providers;
 
-			var parts = arg.split('.');
+			let parts = arg.split('.');
 
-			var providerName = parts[0];
-			var variantName = parts[1];
+			let providerName = parts[0];
+			let variantName = parts[1];
 
 			if (!providers[providerName]) {
 				throw 'No such provider (' + providerName + ')';
 			}
 
-			var provider = {
+			let provider = {
 				url: providers[providerName].url,
 				options: providers[providerName].options
 			};
@@ -35,8 +35,8 @@
 				if (!(variantName in providers[providerName].variants)) {
 					throw 'No such variant of ' + providerName + ' (' + variantName + ')';
 				}
-				var variant = providers[providerName].variants[variantName];
-				var variantOptions;
+				let variant = providers[providerName].variants[variantName];
+				let variantOptions;
 				if (typeof variant === 'string') {
 					variantOptions = {
 						variant: variant
@@ -52,11 +52,11 @@
 
 			// replace attribution placeholders with their values from toplevel provider attribution,
 			// recursively
-			var attributionReplacer = function (attr) {
+			let attributionReplacer = function (attr) {
 				if (attr.indexOf('{attribution.') === -1) {
 					return attr;
 				}
-				return attr.replace(/\{attribution.(\w*)\}/g,
+				return attr.replace(/\{attribution.(\w*)}/g,
 					function (match, attributionName) {
 						return attributionReplacer(providers[attributionName].options.attribution);
 					}
@@ -65,7 +65,7 @@
 			provider.options.attribution = attributionReplacer(provider.options.attribution);
 
 			// Compute final options combining provider options with any user overrides
-			var layerOpts = L.Util.extend({}, provider.options, options);
+			let layerOpts = L.Util.extend({}, provider.options, options);
 			L.TileLayer.prototype.initialize.call(this, provider.url, layerOpts);
 		}
 	});
@@ -117,7 +117,7 @@
 				BZH: {
 					url: 'https://tile.openstreetmap.bzh/br/{z}/{x}/{y}.png',
 					options: {
-						attribution: '{attribution.OpenStreetMap}, Tiles courtesy of <a href="http://www.openstreetmap.bzh/" target="_blank">Breton OpenStreetMap Team</a>',
+						attribution: '{attribution.OpenStreetMap}, Tiles courtesy of <a href="https://www.openstreetmap.bzh/" target="_blank">Breton OpenStreetMap Team</a>',
 						bounds: [[46.2, -5.5], [50, 0.7]]
 					}
 				}
@@ -127,7 +127,7 @@
 			url: 'https://maptiles.p.rapidapi.com/{variant}/{z}/{x}/{y}.png?rapidapi-key={apikey}',
 			options: {
 				attribution:
-					'&copy; <a href="http://www.maptilesapi.com/">MapTiles API</a>, {attribution.OpenStreetMap}',
+					'&copy; <a href="https://www.maptilesapi.com/">MapTiles API</a>, {attribution.OpenStreetMap}',
 				variant: 'en/map/v1',
 				// Get your own MapTiles API access token here : https://www.maptilesapi.com/
 				// NB : this is a demonstration key that comes with no guarantee and not to be used in production
@@ -155,21 +155,21 @@
 		OpenSeaMap: {
 			url: 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png',
 			options: {
-				attribution: 'Map data: &copy; <a href="http://www.openseamap.org">OpenSeaMap</a> contributors'
+				attribution: 'Map data: &copy; <a href="https://www.openseamap.org">OpenSeaMap</a> contributors'
 			}
 		},
 		OPNVKarte: {
 			url: 'https://tileserver.memomaps.de/tilegen/{z}/{x}/{y}.png',
 			options: {
 				maxZoom: 18,
-				attribution: 'Map <a href="https://memomaps.de/">memomaps.de</a> <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, map data {attribution.OpenStreetMap}'
+				attribution: 'Map <a href="https://memomaps.de/">memomaps.de</a> <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, map data {attribution.OpenStreetMap}'
 			}
 		},
 		OpenTopoMap: {
 			url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
 			options: {
 				maxZoom: 17,
-				attribution: 'Map data: {attribution.OpenStreetMap}, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+				attribution: 'Map data: {attribution.OpenStreetMap}, <a href="https://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
 			}
 		},
 		OpenRailwayMap: {
@@ -180,10 +180,10 @@
 			}
 		},
 		OpenFireMap: {
-			url: 'http://openfiremap.org/hytiles/{z}/{x}/{y}.png',
+			url: 'https://openfiremap.org/hytiles/{z}/{x}/{y}.png',
 			options: {
 				maxZoom: 19,
-				attribution: 'Map data: {attribution.OpenStreetMap} | Map style: &copy; <a href="http://www.openfiremap.org">OpenFireMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+				attribution: 'Map data: {attribution.OpenStreetMap} | Map style: &copy; <a href="https://www.openfiremap.org">OpenFireMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
 			}
 		},
 		SafeCast: {
@@ -328,7 +328,7 @@
 			url: 'https://{s}.tile.thunderforest.com/{variant}/{z}/{x}/{y}.png?apikey={apikey}',
 			options: {
 				attribution:
-					'&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, {attribution.OpenStreetMap}',
+					'&copy; <a href="https://www.thunderforest.com/">Thunderforest</a>, {attribution.OpenStreetMap}',
 				variant: 'cycle',
 				apikey: '<insert your api key here>',
 				maxZoom: 22
@@ -368,7 +368,7 @@
 			url: 'https://{s}.tile.jawg.io/{variant}/{z}/{x}/{y}{r}.png?access-token={accessToken}',
 			options: {
 				attribution:
-					'<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> ' +
+					'<a href="https://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> ' +
 					'{attribution.OpenStreetMap}',
 				minZoom: 0,
 				maxZoom: 22,
@@ -534,10 +534,10 @@
 			}
 		},
 		OpenWeatherMap: {
-			url: 'http://{s}.tile.openweathermap.org/map/{variant}/{z}/{x}/{y}.png?appid={apiKey}',
+			url: 'https://{s}.tile.openweathermap.org/map/{variant}/{z}/{x}/{y}.png?appid={apiKey}',
 			options: {
 				maxZoom: 19,
-				attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
+				attribution: 'Map data &copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
 				apiKey: '<insert your api key here>',
 				opacity: 0.5
 			},
@@ -567,7 +567,7 @@
 				'app_id={app_id}&app_code={app_code}&lg={language}',
 			options: {
 				attribution:
-					'Map &copy; 1987-' + new Date().getFullYear() + ' <a href="http://developer.here.com">HERE</a>',
+					'Map &copy; 1987-' + new Date().getFullYear() + ' <a href="https://developer.here.com">HERE</a>',
 				subdomains: '1234',
 				mapID: 'newest',
 				'app_id': '<insert your app_id here>',
@@ -690,7 +690,7 @@
 				'apiKey={apiKey}&lg={language}',
 			options: {
 				attribution:
-					'Map &copy; 1987-' + new Date().getFullYear() + ' <a href="http://developer.here.com">HERE</a>',
+					'Map &copy; 1987-' + new Date().getFullYear() + ' <a href="https://developer.here.com">HERE</a>',
 				subdomains: '1234',
 				mapID: 'newest',
 				apiKey: '<insert your apiKey here>',
@@ -790,11 +790,11 @@
 				subdomains: 'abcd',
 				bounds: [[47.204642, 15.996093], [49.830896, 22.576904]],
 				attribution:
-					'{attribution.OpenStreetMap}, visualization CC-By-SA 2.0 <a href="http://freemap.sk">Freemap.sk</a>'
+					'{attribution.OpenStreetMap}, visualization CC-By-SA 2.0 <a href="https://freemap.sk">Freemap.sk</a>'
 			}
 		},
 		MtbMap: {
-			url: 'http://tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png',
+			url: 'https://tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png',
 			options: {
 				attribution:
 					'{attribution.OpenStreetMap} &amp; USGS'
@@ -971,7 +971,7 @@
 			//  z12-18 - one inch (1:63360)
 			url: 'https://nls-{s}.tileserver.com/nls/{z}/{x}/{y}.jpg',
 			options: {
-				attribution: '<a href="http://geo.nls.uk/maps/">National Library of Scotland Historic Maps</a>',
+				attribution: '<a href="https://geo.nls.uk/maps/">National Library of Scotland Historic Maps</a>',
 				bounds: [[49.6, -12], [61.7, 3]],
 				minZoom: 1,
 				maxZoom: 18,
@@ -984,7 +984,7 @@
 			// Includes tools for data journalists, bloggers and community activists.
 			url: 'https://www.justicemap.org/tile/{size}/{variant}/{z}/{x}/{y}.png',
 			options: {
-				attribution: '<a href="http://www.justicemap.org/terms.php">Justice Map</a>',
+				attribution: '<a href="https://www.justicemap.org/terms.php">Justice Map</a>',
 				// one of 'county', 'tract', 'block'
 				size: 'county',
 				// Bounds for USA, including Alaska and Hawaii
@@ -1041,7 +1041,7 @@
 				minZoom: 11,
 				maxZoom: 18,
 				bounds: [[1.56073, 104.11475], [1.16, 103.502]],
-				attribution: '<img src="https://docs.onemap.sg/maps/images/oneMap64-01.png" style="height:20px;width:20px;"/> New OneMap | Map data &copy; contributors, <a href="http://SLA.gov.sg">Singapore Land Authority</a>'
+				attribution: '<img src="https://docs.onemap.sg/maps/images/oneMap64-01.png" style="height:20px;width:20px;" alt=""/> New OneMap | Map data &copy; contributors, <a href="https://SLA.gov.sg">Singapore Land Authority</a>'
 			},
 			variants: {
 				Default: 'Default',

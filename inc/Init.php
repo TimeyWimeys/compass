@@ -12,7 +12,7 @@ final class Init
      * Store all the classes inside an array
      * @return array Full list of classes
      */
-    public static function get_services()
+    public static function get_services(): array
     {
         $classes = array(
             Pages\Settings::class,
@@ -52,8 +52,6 @@ final class Init
      */
     private static function instantiate($class)
     {
-        $service = new $class();
-
-        return $service;
+        return new $class();
     }
 }

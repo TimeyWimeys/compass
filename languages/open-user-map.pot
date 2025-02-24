@@ -24,7 +24,7 @@ msgid "Compass"
 msgstr ""
 
 #. Plugin URI of the plugin
-msgid "https://wordpress.org/plugins/Compass/"
+msgid "https://nomty.life"
 msgstr ""
 
 #. Description of the plugin
@@ -32,11 +32,11 @@ msgid "Engage your visitors with an interactive map – let them add markers ins
 msgstr ""
 
 #. Author of the plugin
-msgid "100plugins"
+msgid "Nomty"
 msgstr ""
 
 #. Author URI of the plugin
-msgid "https://www.Compass.com/"
+msgid "https://www.nomty.life"
 msgstr ""
 
 #: elementor/includes/widgets/Compass-widget.php:42

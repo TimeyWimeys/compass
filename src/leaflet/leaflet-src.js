@@ -9,18 +9,18 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.leaflet = {}));
 })(this, (function (exports) { 'use strict';
 
-  var version = "1.9.3";
+  let version = "1.9.3";
 
   /*
    * @namespace Util
    *
-   * Various utility functions, used by Leaflet internally.
+   * letious utility functions, used by Leaflet internally.
    */
 
   // @function extend(dest: Object, src?: Object): Object
   // Merges the properties of the `src` object (or multiple objects) into `dest` object and returns the latter. Has an `L.extend` shortcut.
   function extend(dest) {
-  	var i, j, len, src;
+  	let i, j, len, src;
 
   	for (j = 1, len = arguments.length; j < len; j++) {
   		src = arguments[j];
@@ -33,7 +33,7 @@
 
   // @function create(proto: Object, properties?: Object): Object
   // Compatibility polyfill for [Object.create](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/create)
-  var create$2 = Object.create || (function () {
+  let create$2 = Object.create || (function () {
   	function F() {}
   	return function (proto) {
   		F.prototype = proto;
@@ -45,13 +45,13 @@
   // Returns a new function bound to the arguments passed, like [Function.prototype.bind](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Function/bind).
   // Has a `L.bind()` shortcut.
   function bind(fn, obj) {
-  	var slice = Array.prototype.slice;
+  	let slice = Array.prototype.slice;
 
   	if (fn.bind) {
   		return fn.bind.apply(fn, slice.call(arguments, 1));
   	}
 
-  	var args = slice.call(arguments, 2);
+  	let args = slice.call(arguments, 2);
 
   	return function () {
   		return fn.apply(obj, args.length ? args.concat(slice.call(arguments)) : arguments);
@@ -60,7 +60,7 @@
 
   // @property lastId: Number
   // Last unique ID used by [`stamp()`](#util-stamp)
-  var lastId = 0;
+  let lastId = 0;
 
   // @function stamp(obj: Object): Number
   // Returns the unique ID of an object, assigning it one if it doesn't have it.
@@ -79,7 +79,7 @@
   // function, followed by any arguments passed when invoking the bound function.
   // Has an `L.throttle` shortcut.
   function throttle(fn, time, context) {
-  	var lock, args, wrapperFn, later;
+  	let lock, args, wrapperFn, later;
 
   	later = function () {
   		// reset lock and call if queued
@@ -111,7 +111,7 @@
   // `range[0]` and `range[1]`. The returned value will be always smaller than
   // `range[1]` unless `includeMax` is set to `true`.
   function wrapNum(x, range, includeMax) {
-  	var max = range[1],
+  	let max = range[1],
   	    min = range[0],
   	    d = max - min;
   	return x === max && includeMax ? x : ((x - min) % d + d) % d + min;
@@ -127,7 +127,7 @@
   // `false` can be passed to skip any processing (can be useful to avoid round-off errors).
   function formatNum(num, precision) {
   	if (precision === false) { return num; }
-  	var pow = Math.pow(10, precision === undefined ? 6 : precision);
+  	let pow = Math.pow(10, precision === undefined ? 6 : precision);
   	return Math.round(num * pow) / pow;
   }
 
@@ -149,7 +149,7 @@
   	if (!Object.prototype.hasOwnProperty.call(obj, 'options')) {
   		obj.options = obj.options ? create$2(obj.options) : {};
   	}
-  	for (var i in options) {
+  	for (let i in options) {
   		obj.options[i] = options[i];
   	}
   	return obj.options;
@@ -161,14 +161,14 @@
   // be appended at the end. If `uppercase` is `true`, the parameter names will
   // be uppercased (e.g. `'?A=foo&B=bar'`)
   function getParamString(obj, existingUrl, uppercase) {
-  	var params = [];
-  	for (var i in obj) {
+  	let params = [];
+  	for (let i in obj) {
   		params.push(encodeURIComponent(uppercase ? i.toUpperCase() : i) + '=' + encodeURIComponent(obj[i]));
   	}
   	return ((!existingUrl || existingUrl.indexOf('?') === -1) ? '?' : '&') + params.join('&');
   }
 
-  var templateRe = /\{ *([\w_ -]+) *\}/g;
+  let templateRe = /\{ *([\w_ -]+) *}/g;
 
   // @function template(str: String, data: Object): String
   // Simple templating facility, accepts a template string of the form `'Hello {a}, {b}'`
@@ -177,10 +177,10 @@
   // data values — they will be evaluated passing `data` as an argument.
   function template(str, data) {
   	return str.replace(templateRe, function (str, key) {
-  		var value = data[key];
+  		let value = data[key];
 
   		if (value === undefined) {
-  			throw new Error('No value provided for variable ' + str);
+  			throw new Error('No value provided for letiable ' + str);
 
   		} else if (typeof value === 'function') {
   			value = value(data);
@@ -191,14 +191,14 @@
 
   // @function isArray(obj): Boolean
   // Compatibility polyfill for [Array.isArray](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray)
-  var isArray = Array.isArray || function (obj) {
+  let isArray = Array.isArray || function (obj) {
   	return (Object.prototype.toString.call(obj) === '[object Array]');
   };
 
   // @function indexOf(array: Array, el: Object): Number
   // Compatibility polyfill for [Array.prototype.indexOf](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf)
   function indexOf(array, el) {
-  	for (var i = 0; i < array.length; i++) {
+  	for (let i = 0; i < array.length; i++) {
   		if (array[i] === el) { return i; }
   	}
   	return -1;
@@ -208,7 +208,7 @@
   // Data URI string containing a base64-encoded empty GIF image.
   // Used as a hack to free memory from unused images on WebKit-powered
   // mobile devices (by setting image `src` to this string).
-  var emptyImageUrl = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+  let emptyImageUrl = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
   // inspired by https://paulirish.com/2011/requestanimationframe-for-smart-animating/
 
@@ -216,19 +216,19 @@
   	return window['webkit' + name] || window['moz' + name] || window['ms' + name];
   }
 
-  var lastTime = 0;
+  let lastTime = 0;
 
   // fallback for IE 7-8
   function timeoutDefer(fn) {
-  	var time = +new Date(),
+  	let time = +new Date(),
   	    timeToCall = Math.max(0, 16 - (time - lastTime));
 
   	lastTime = time + timeToCall;
   	return window.setTimeout(fn, timeToCall);
   }
 
-  var requestFn = window.requestAnimationFrame || getPrefixed('RequestAnimationFrame') || timeoutDefer;
-  var cancelFn = window.cancelAnimationFrame || getPrefixed('CancelAnimationFrame') ||
+  let requestFn = window.requestAnimationFrame || getPrefixed('RequestAnimationFrame') || timeoutDefer;
+  let cancelFn = window.cancelAnimationFrame || getPrefixed('CancelAnimationFrame') ||
   		getPrefixed('CancelRequestAnimationFrame') || function (id) { window.clearTimeout(id); };
 
   // @function requestAnimFrame(fn: Function, context?: Object, immediate?: Boolean): Number
@@ -253,7 +253,7 @@
   	}
   }
 
-  var Util = {
+  let Util = {
     __proto__: null,
     extend: extend,
     create: create$2,
@@ -293,7 +293,7 @@
   	// @function extend(props: Object): Function
   	// [Extends the current class](#class-inheritance) given the properties to be included.
   	// Returns a Javascript function that is a class constructor (to be called with `new`).
-  	var NewClass = function () {
+  	let NewClass = function () {
 
   		setOptions(this);
 
@@ -306,15 +306,15 @@
   		this.callInitHooks();
   	};
 
-  	var parentProto = NewClass.__super__ = this.prototype;
+  	let parentProto = NewClass.__super__ = this.prototype;
 
-  	var proto = create$2(parentProto);
+  	let proto = create$2(parentProto);
   	proto.constructor = NewClass;
 
   	NewClass.prototype = proto;
 
   	// inherit parent's statics
-  	for (var i in this) {
+  	for (let i in this) {
   		if (Object.prototype.hasOwnProperty.call(this, i) && i !== 'prototype' && i !== '__super__') {
   			NewClass[i] = this[i];
   		}
@@ -355,7 +355,7 @@
 
   		this._initHooksCalled = true;
 
-  		for (var i = 0, len = proto._initHooks.length; i < len; i++) {
+  		for (let i = 0, len = proto._initHooks.length; i < len; i++) {
   			proto._initHooks[i].call(this);
   		}
   	};
@@ -367,7 +367,7 @@
   // @function include(properties: Object): this
   // [Includes a mixin](#class-includes) into the current class.
   Class.include = function (props) {
-  	var parentOptions = this.prototype.options;
+  	let parentOptions = this.prototype.options;
   	extend(this.prototype, props);
   	if (props.options) {
   		this.prototype.options = parentOptions;
@@ -386,9 +386,9 @@
   // @function addInitHook(fn: Function): this
   // Adds a [constructor hook](#class-constructor-hooks) to the class.
   Class.addInitHook = function (fn) { // (Function) || (String, args...)
-  	var args = Array.prototype.slice.call(arguments, 1);
+  	let args = Array.prototype.slice.call(arguments, 1);
 
-  	var init = typeof fn === 'function' ? fn : function () {
+  	let init = typeof fn === 'function' ? fn : function () {
   		this[fn].apply(this, args);
   	};
 
@@ -403,7 +403,7 @@
 
   	includes = isArray(includes) ? includes : [includes];
 
-  	for (var i = 0; i < includes.length; i++) {
+  	for (let i = 0; i < includes.length; i++) {
   		if (includes[i] === L.Mixin.Events) {
   			console.warn('Deprecated include of L.Mixin.Events: ' +
   				'this property will be removed in future releases, ' +
@@ -437,7 +437,7 @@
    * ```
    */
 
-  var Events = {
+  let Events = {
   	/* @method on(type: String, fn: Function, context?: Object): this
   	 * Adds a listener function (`fn`) to a particular event type of the object. You can optionally specify the context of the listener (object the this keyword will point to). You can also pass several space-separated types (e.g. `'click dblclick'`).
   	 *
@@ -449,7 +449,7 @@
 
   		// types can be a map of types/handlers
   		if (typeof types === 'object') {
-  			for (var type in types) {
+  			for (let type in types) {
   				// we don't process space-separated events here for performance;
   				// it's a hot path since Layer uses the on(obj) syntax
   				this._on(type, types[type], fn);
@@ -459,7 +459,7 @@
   			// types can be a string of space-separated words
   			types = splitWords(types);
 
-  			for (var i = 0, len = types.length; i < len; i++) {
+  			for (let i = 0, len = types.length; i < len; i++) {
   				this._on(types[i], fn, context);
   			}
   		}
@@ -485,15 +485,16 @@
   			delete this._events;
 
   		} else if (typeof types === 'object') {
-  			for (var type in types) {
+  			for (let type in types) {
   				this._off(type, types[type], fn);
   			}
 
   		} else {
   			types = splitWords(types);
 
-  			var removeAll = arguments.length === 1;
-  			for (var i = 0, len = types.length; i < len; i++) {
+			let removeAll = arguments.length === 1;
+			let i = 0, len = types.length;
+			for (; i < len; i++) {
   				if (removeAll) {
   					this._off(types[i]);
   				} else {
@@ -522,8 +523,8 @@
   			context = undefined;
   		}
 
-  		var newListener = {fn: fn, ctx: context};
-  		if (_once) {
+		let newListener = {fn: fn, ctx: context};
+		if (_once) {
   			newListener.once = true;
   		}
 
@@ -533,11 +534,11 @@
   	},
 
   	_off: function (type, fn, context) {
-  		var listeners,
-  		    i,
-  		    len;
+		let listeners,
+			i,
+			len;
 
-  		if (!this._events) {
+		if (!this._events) {
   			return;
   		}
 
@@ -565,10 +566,10 @@
   		}
 
   		// find fn and remove it
-  		var index = this._listens(type, fn, context);
-  		if (index !== false) {
-  			var listener = listeners[index];
-  			if (this._firingCount) {
+		let index = this._listens(type, fn, context);
+		if (index !== false) {
+			let listener = listeners[index];
+			if (this._firingCount) {
   				// set the removed listener to noop so that's not called if remove happens in fire
   				listener.fn = falseFn;
 
@@ -586,20 +587,21 @@
   	fire: function (type, data, propagate) {
   		if (!this.listens(type, propagate)) { return this; }
 
-  		var event = extend({}, data, {
-  			type: type,
-  			target: this,
-  			sourceTarget: data && data.sourceTarget || this
-  		});
+		let event = extend({}, data, {
+			type: type,
+			target: this,
+			sourceTarget: data && data.sourceTarget || this
+		});
 
-  		if (this._events) {
-  			var listeners = this._events[type];
-  			if (listeners) {
+		if (this._events) {
+			let listeners = this._events[type];
+			if (listeners) {
   				this._firingCount = (this._firingCount + 1) || 1;
-  				for (var i = 0, len = listeners.length; i < len; i++) {
-  					var l = listeners[i];
-  					// off overwrites l.fn, so we need to copy fn to a var
-  					var fn = l.fn;
+				let i = 0, len = listeners.length;
+				for (; i < len; i++) {
+  					let l = listeners[i];
+  					// off overwrites l.fn, so we need to copy fn to a let
+  					let fn = l.fn;
   					if (l.once) {
   						this.off(type, fn, l.ctx);
   					}
@@ -628,14 +630,14 @@
   		}
 
   		// we don't overwrite the input `fn` value, because we need to use it for propagation
-  		var _fn = fn;
+  		let _fn = fn;
   		if (typeof fn !== 'function') {
   			propagate = !!fn;
   			_fn = undefined;
   			context = undefined;
   		}
 
-  		var listeners = this._events && this._events[type];
+  		let listeners = this._events && this._events[type];
   		if (listeners && listeners.length) {
   			if (this._listens(type, _fn, context) !== false) {
   				return true;
@@ -644,7 +646,7 @@
 
   		if (propagate) {
   			// also check parents for listeners if event propagates
-  			for (var id in this._eventParents) {
+  			for (let id in this._eventParents) {
   				if (this._eventParents[id].listens(type, fn, context, propagate)) { return true; }
   			}
   		}
@@ -657,7 +659,7 @@
   			return false;
   		}
 
-  		var listeners = this._events[type] || [];
+  		let listeners = this._events[type] || [];
   		if (!fn) {
   			return !!listeners.length;
   		}
@@ -667,7 +669,7 @@
   			context = undefined;
   		}
 
-  		for (var i = 0, len = listeners.length; i < len; i++) {
+  		for (let i = 0, len = listeners.length; i < len; i++) {
   			if (listeners[i].fn === fn && listeners[i].ctx === context) {
   				return i;
   			}
@@ -682,7 +684,7 @@
 
   		// types can be a map of types/handlers
   		if (typeof types === 'object') {
-  			for (var type in types) {
+  			for (let type in types) {
   				// we don't process space-separated events here for performance;
   				// it's a hot path since Layer uses the on(obj) syntax
   				this._on(type, types[type], fn, true);
@@ -692,7 +694,7 @@
   			// types can be a string of space-separated words
   			types = splitWords(types);
 
-  			for (var i = 0, len = types.length; i < len; i++) {
+  			for (let i = 0, len = types.length; i < len; i++) {
   				this._on(types[i], fn, context, true);
   			}
   		}
@@ -718,7 +720,7 @@
   	},
 
   	_propagateEvent: function (e) {
-  		for (var id in this._eventParents) {
+  		for (let id in this._eventParents) {
   			this._eventParents[id].fire(e.type, extend({
   				layer: e.target,
   				propagatedFrom: e.target
@@ -752,7 +754,7 @@
   // Alias to [`listens(…)`](#evented-listens)
   Events.hasEventListeners = Events.listens;
 
-  var Evented = Class.extend(Events);
+  let Evented = Class.extend(Events);
 
   /*
    * @class Point
@@ -763,7 +765,7 @@
    * @example
    *
    * ```js
-   * var point = L.point(200, 300);
+   * let point = L.point(200, 300);
    * ```
    *
    * All Leaflet methods and options that accept `Point` objects also accept them in a simple Array form (unless noted otherwise), so these lines are equivalent:
@@ -785,7 +787,7 @@
   	this.y = (round ? Math.round(y) : y);
   }
 
-  var trunc = Math.trunc || function (v) {
+  let trunc = Math.trunc || function (v) {
   	return v > 0 ? Math.floor(v) : Math.ceil(v);
   };
 
@@ -916,7 +918,7 @@
   	distanceTo: function (point) {
   		point = toPoint(point);
 
-  		var x = point.x - this.x,
+  		let x = point.x - this.x,
   		    y = point.y - this.y;
 
   		return Math.sqrt(x * x + y * y);
@@ -984,7 +986,7 @@
    * @example
    *
    * ```js
-   * var p1 = L.point(10, 10),
+   * let p1 = L.point(10, 10),
    * p2 = L.point(40, 60),
    * bounds = L.bounds(p1, p2);
    * ```
@@ -6277,12 +6279,12 @@
 
   	while (true) {
   		// if a,b is inside the clip window (trivial accept)
-  		if (!(codeA | codeB)) {
+  		if (!(codeA || codeB)) {
   			return [a, b];
   		}
 
   		// if a,b is outside the clip window (trivial reject)
-  		if (codeA & codeB) {
+  		if (codeA && codeB) {
   			return false;
   		}
 
@@ -6308,19 +6310,19 @@
   	    max = bounds.max,
   	    x, y;
 
-  	if (code & 8) { // top
+  	if (code && 8) { // top
   		x = a.x + dx * (max.y - a.y) / dy;
   		y = max.y;
 
-  	} else if (code & 4) { // bottom
+  	} else if (code && 4) { // bottom
   		x = a.x + dx * (min.y - a.y) / dy;
   		y = min.y;
 
-  	} else if (code & 2) { // right
+  	} else if (code && 2) { // right
   		x = max.x;
   		y = a.y + dy * (max.x - a.x) / dx;
 
-  	} else if (code & 1) { // left
+  	} else if (code && 1) { // left
   		x = min.x;
   		y = a.y + dy * (min.x - a.x) / dx;
   	}
@@ -6487,9 +6489,9 @@
   			b = points[j];
 
   			// if a is inside the clip window
-  			if (!(a._code & edge)) {
+  			if (!(a._code && edge)) {
   				// if b is outside the clip window (a->b goes out of screen)
-  				if (b._code & edge) {
+  				if (b._code && edge) {
   					p = _getEdgeIntersection(b, a, edge, bounds, round);
   					p._code = _getBitCode(p, bounds);
   					clippedPoints.push(p);
@@ -6497,7 +6499,7 @@
   				clippedPoints.push(a);
 
   			// else if b is inside the clip window (a->b enters the screen)
-  			} else if (!(b._code & edge)) {
+  			} else if (!(b._code && edge)) {
   				p = _getEdgeIntersection(b, a, edge, bounds, round);
   				p._code = _getBitCode(p, bounds);
   				clippedPoints.push(p);

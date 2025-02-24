@@ -1,9 +1,9 @@
-window.addEventListener('load', function(e) {
+window.addEventListener('load', function() {
 
   // Restore the extended L object (OUMLeaflet.L) to the global scope (prevents conflicts with other Leaflet instances)
   window.L = window.OUMLeaflet.L;
 
-  const map = L.map('mapGetInitial', {
+  let map = L.map('mapGetInitial', {
       scrollWheelZoom: false,
       zoomSnap: 0.5,
       zoomDelta: 0.5,
@@ -19,9 +19,9 @@ window.addEventListener('load', function(e) {
   });
 
   // Tabs
-  const tabs = document.querySelectorAll(".nav-tab-wrapper > .nav-tab");
+  let tabs = document.querySelectorAll(".nav-tab-wrapper > .nav-tab");
 
-  for(i = 0; i < tabs.length; i++) {
+  for(let i = 0; i < tabs.length; i++) {
     tabs[i].addEventListener("click", switchTab);
   }
 
@@ -43,7 +43,7 @@ window.addEventListener('load', function(e) {
 
   // Map type selector
   jQuery('.map-types input[name=cbn_map_type]').on('change', function() {
-    if(this.value == 1) {
+    if(this.value === 1) {
       jQuery('#cbn_enable_add_location').prop('checked', true);
     }else{
       jQuery('#cbn_enable_add_location').prop('checked', false);
@@ -75,7 +75,7 @@ window.addEventListener('load', function(e) {
         jQuery('.tile-provider-mapbox').show();
 
         // validate
-        if(jQuery('#cbn_tile_provider_mapbox_key').val() == '') {
+        if(jQuery('#cbn_tile_provider_mapbox_key').val() === '') {
           alert("Please enter a MapBox API Key");
           window.scrollTo({
             top: jQuery('#cbn_tile_provider_mapbox_key').offset().top - 200, 
@@ -87,13 +87,13 @@ window.addEventListener('load', function(e) {
   }
 
   // marker icon selector
-  jQuery('.marker_icons input[type=radio]').on('change', function(e) {
+  jQuery('.marker_icons input[type=radio]').on('change', function() {
     jQuery('.marker_icons label').removeClass('checked');
     jQuery(this).parent('label').addClass('checked');
   });
 
   // Set map style
-  if (mapStyle == 'Custom1') {
+  if (mapStyle === 'Custom1') {
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png').addTo(map);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
@@ -101,7 +101,7 @@ window.addEventListener('load', function(e) {
       zoomOffset: -1
     }).addTo(map);
 
-  } else if (mapStyle == 'Custom2') {
+  } else if (mapStyle === 'Custom2') {
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png').addTo(map);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
@@ -109,7 +109,7 @@ window.addEventListener('load', function(e) {
       zoomOffset: -1
     }).addTo(map);
 
-  } else if (mapStyle == 'Custom3') {
+  } else if (mapStyle === 'Custom3') {
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png').addTo(map);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
@@ -117,42 +117,42 @@ window.addEventListener('load', function(e) {
       zoomOffset: -1
     }).addTo(map);
 
-  } else if (mapStyle == 'MapBox.streets') {
+  } else if (mapStyle === 'MapBox.streets') {
 
     L.tileLayer.provider('MapBox', {
       id: 'mapbox/streets-v12',
       accessToken: cbn_tile_provider_mapbox_key
     }).addTo(map);
 
-  } else if (mapStyle == 'MapBox.outdoors') {
+  } else if (mapStyle === 'MapBox.outdoors') {
 
     L.tileLayer.provider('MapBox', {
       id: 'mapbox/outdoors-v12',
       accessToken: cbn_tile_provider_mapbox_key
     }).addTo(map);
 
-  } else if (mapStyle == 'MapBox.light') {
+  } else if (mapStyle === 'MapBox.light') {
 
     L.tileLayer.provider('MapBox', {
       id: 'mapbox/light-v11',
       accessToken: cbn_tile_provider_mapbox_key
     }).addTo(map);
 
-  } else if (mapStyle == 'MapBox.dark') {
+  } else if (mapStyle === 'MapBox.dark') {
 
     L.tileLayer.provider('MapBox', {
       id: 'mapbox/dark-v11',
       accessToken: cbn_tile_provider_mapbox_key
     }).addTo(map);
 
-  } else if (mapStyle == 'MapBox.satellite') {
+  } else if (mapStyle === 'MapBox.satellite') {
 
     L.tileLayer.provider('MapBox', {
       id: 'mapbox/satellite-v9',
       accessToken: cbn_tile_provider_mapbox_key
     }).addTo(map);
 
-  } else if (mapStyle == 'MapBox.satellite-streets') {
+  } else if (mapStyle === 'MapBox.satellite-streets') {
 
     L.tileLayer.provider('MapBox', {
       id: 'mapbox/satellite-streets-v12',
@@ -195,7 +195,7 @@ window.addEventListener('load', function(e) {
       break;
   }
 
-  const search = new GeoSearch.GeoSearchControl({
+  let search = new GeoSearch.GeoSearchControl({
       style: 'bar',
       showMarker: false,
       provider: cbn_geosearch_selected_provider,
@@ -206,7 +206,7 @@ window.addEventListener('load', function(e) {
   map.setView([lat, lng], zoom);
 
   // set Initial view by move/zoom
-  map.on('move', function(e) {
+  map.on('move', function() {
       setInitialLatLngZoom(map.getCenter(), map.getZoom());
   });
 
@@ -284,7 +284,7 @@ window.addEventListener('load', function(e) {
     }
   });
 
-  jQuery(wrapper).on('change', '.oum-custom-field-fieldtype', function(e) {
+  jQuery(wrapper).on('change', '.oum-custom-field-fieldtype', function() {
     updateCustomFieldRow(this);
   });
 
@@ -295,39 +295,39 @@ window.addEventListener('load', function(e) {
   function updateCustomFieldRow(el) {
     jQuery(el).closest('tr').find('[class*="field-type-"]').hide();
 
-    if(jQuery(el).val() == 'text') {
+    if(jQuery(el).val() === 'text') {
       jQuery(el).closest('tr').find('.field-type-text').show();
       return;
     }
 
-    if(jQuery(el).val() == 'link') {
+    if(jQuery(el).val() === 'link') {
       jQuery(el).closest('tr').find('.field-type-link').show();
       return;
     }
 
-    if(jQuery(el).val() == 'email') {
+    if(jQuery(el).val() === 'email') {
       jQuery(el).closest('tr').find('.field-type-email').show();
       return;
     }
 
-    if(jQuery(el).val() == 'checkbox') {
+    if(jQuery(el).val() === 'checkbox') {
       jQuery(el).closest('tr').find('.field-type-checkbox').show();
       return;
     }
 
-    if(jQuery(el).val() == 'radio') {
+    if(jQuery(el).val() === 'radio') {
       jQuery(el).closest('tr').find('.field-type-radio').show();
       return;
     }
 
-    if(jQuery(el).val() == 'select') {
+    if(jQuery(el).val() === 'select') {
       jQuery(el).closest('tr').find('.field-type-select').show();
       return;
     }
 
-    if(jQuery(el).val() == 'html') {
+    if(jQuery(el).val() === 'html') {
       jQuery(el).closest('tr').find('.field-type-html').show();
-      return;
+
     }
   }
 
@@ -356,15 +356,15 @@ window.addEventListener('load', function(e) {
   //Setting: Action after submit
   actionAfterSubmit(jQuery('#cbn_action_after_submit').val());
 
-  jQuery('#cbn_action_after_submit').on('change', function(e){
+  jQuery('#cbn_action_after_submit').on('change', function(){
     actionAfterSubmit(this.value);
   });
 
   function actionAfterSubmit(val) {
-    if(val == 'text') {
+    if(val === 'text') {
       jQuery('#cbn_action_after_submit_text').show();
       jQuery('#cbn_action_after_submit_redirect').hide();
-    }else if(val == 'redirect') {
+    }else if(val === 'redirect') {
       jQuery('#cbn_action_after_submit_text').hide();
       jQuery('#cbn_action_after_submit_redirect').show();
     }else{
@@ -378,7 +378,7 @@ window.addEventListener('load', function(e) {
     
     redirectToRegistration(jQuery('#cbn_enable_user_restriction').is(':checked'));
 
-    jQuery('#cbn_enable_user_restriction').on('click', function(e){
+    jQuery('#cbn_enable_user_restriction').on('click', function(){
       redirectToRegistration(this.checked);
     });
 
@@ -396,7 +396,7 @@ window.addEventListener('load', function(e) {
     
     toggleMarkerCategoriesSettings(jQuery('#cbn_enable_marker_types').is(':checked'));
 
-    jQuery('#cbn_enable_marker_types').on('click', function(e){
+    jQuery('#cbn_enable_marker_types').on('click', function(){
       toggleMarkerCategoriesSettings(this.checked);
     });
 
@@ -423,15 +423,15 @@ window.addEventListener('load', function(e) {
     function toggleApiKeySettings(val) {
       jQuery('.wrap-geosearch-provider-settings > div').hide();
 
-      if(val == 'geoapify') {
+      if(val === 'geoapify') {
         // show
         jQuery('.geosearch-provider-geoapify').show();
       }
-      if(val == 'here') {
+      if(val === 'here') {
         // show
         jQuery('.geosearch-provider-here').show();
       }
-      if(val == 'mapbox') {
+      if(val === 'mapbox') {
         // show
         jQuery('.geosearch-provider-mapbox').show();
       }
@@ -443,7 +443,7 @@ window.addEventListener('load', function(e) {
     
     toggleSearchbarSettings(jQuery('#cbn_enable_searchbar').is(':checked'));
 
-    jQuery('#cbn_enable_searchbar').on('click', function(e){
+    jQuery('#cbn_enable_searchbar').on('click', function(){
       toggleSearchbarSettings(this.checked);
     });
 

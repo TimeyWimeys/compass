@@ -6,8 +6,6 @@
 
 namespace CompassPlugin\Base;
 
-use CompassPlugin\Base\BaseController;
-
 class SettingsLinks extends BaseController
 {
     public function register()
@@ -17,8 +15,9 @@ class SettingsLinks extends BaseController
 
     public function settings_link($links)
     {
+        /** @noinspection HtmlUnknownTarget */
         $settings_link = '<a href="edit.php?post_type=cbn-location&page=Compass-settings">Settings</a>';
-        array_push($links, $settings_link);
+        $links[] = $settings_link;
 
         return $links;
     }

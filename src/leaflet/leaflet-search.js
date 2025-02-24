@@ -100,11 +100,11 @@ options: {
 },
 
 _getPath: function(obj, prop) {
-  var parts = prop.split('.'),
-    last = parts.pop(),
-    len = parts.length,
-    cur = parts[0],
-    i = 1;
+  let parts = prop.split('.'),
+      last = parts.pop(),
+      len = parts.length,
+      cur = parts[0],
+      i = 1;
 
   if(len > 0)
     while((obj = obj[cur]) && i < len)
@@ -205,7 +205,7 @@ setLayer: function(layer) {	//set search layer at runtime
 },
 
 showAlert: function(text) {
-  var self = this;
+  let self = this;
   text = text || this.options.textErr;
   this._alert.style.display = 'block';
   this._alert.innerHTML = text;
@@ -265,7 +265,7 @@ collapse: function() {
 },
 
 collapseDelayed: function() {	//collapse after delay, used on_input blur
-  var self = this;
+  let self = this;
   if (!this.options.autoCollapse) return this;
   clearTimeout(this.timerCollapse);
   this.timerCollapse = setTimeout(function() {
@@ -281,7 +281,7 @@ collapseDelayedStop: function() {
 
 ////start DOM creations
 _createAlert: function(className) {
-  var alert = L.DomUtil.create('div', className, this._container);
+  let alert = L.DomUtil.create('div', className, this._container);
   alert.style.display = 'none';
 
   L.DomEvent
@@ -292,9 +292,9 @@ _createAlert: function(className) {
 },
 
 _createInput: function (text, className) {
-  var self = this;
-  var label = L.DomUtil.create('label', className, this._container);
-  var input = L.DomUtil.create('input', className, this._container);
+  let self = this;
+  let label = L.DomUtil.create('label', className, this._container);
+  let input = L.DomUtil.create('input', className, this._container);
   input.type = 'text';
   input.size = this._inputMinSize;
   input.value = '';
@@ -325,7 +325,7 @@ _createInput: function (text, className) {
 },
 
 _createCancel: function (title, className) {
-  var cancel = L.DomUtil.create('a', className, this._container);
+  let cancel = L.DomUtil.create('a', className, this._container);
   cancel.href = '#';
   cancel.title = title;
   cancel.style.display = 'none';
@@ -339,7 +339,7 @@ _createCancel: function (title, className) {
 },
 
 _createButton: function (title, className) {
-  var button = L.DomUtil.create('a', className, this._container);
+  let button = L.DomUtil.create('a', className, this._container);
   button.href = '#';
   button.title = title;
 
@@ -353,8 +353,8 @@ _createButton: function (title, className) {
 },
 
 _createTooltip: function(className) {
-  var self = this;		
-  var tool = L.DomUtil.create('ul', className, this._container);
+  let self = this;
+  let tool = L.DomUtil.create('ul', className, this._container);
   tool.style.display = 'none';
   L.DomEvent
     .disableClickPropagation(tool)
@@ -370,14 +370,14 @@ _createTooltip: function(className) {
 },
 
 _createTip: function(text, val) {//val is object in recordCache, usually is Latlng
-  var tip;
-  
+  let tip;
+
   if(this.options.buildTip)
   {
     tip = this.options.buildTip.call(this, text, val); //custom tip node or html string
     if(typeof tip === 'string')
     {
-      var tmpNode = L.DomUtil.create('div');
+      let tmpNode = L.DomUtil.create('div');
       tmpNode.innerHTML = tip;
       tip = tmpNode.firstChild;
     }
@@ -414,7 +414,7 @@ _getUrl: function(text) {
 
 _defaultFilterData: function(text, records) {
 
-  var init, icase, regSearch, frecords = {};
+  let init, icase, regSearch, frecords = {};
 
   text = text.replace(/[.*+?^${}()|[\]\\]/g, '');
   //sanitize remove all special characters
@@ -483,10 +483,10 @@ _hideTooltip: function() {
 },
 
 _defaultFormatData: function(json) {	//default callback for format data to indexed data
-  var self = this,
-    propName = this.options.propertyName,
-    propLoc = this.options.propertyLoc,
-    jsonret = {};
+  let self = this,
+      propName = this.options.propertyName,
+      propLoc = this.options.propertyLoc,
+      jsonret = {};
 
   if( L.Util.isArray(propLoc) ) {
     for (let i in json) {
@@ -504,8 +504,8 @@ _defaultFormatData: function(json) {	//default callback for format data to index
 
 _recordsFromJsonp: function(text, callAfter) {  //extract searched records from remote jsonp service
   L.Control.Search.callJsonp = callAfter;
-  var script = L.DomUtil.create('script','leaflet-search-jsonp', document.getElementsByTagName('body')[0] ),			
-    url = L.Util.template(this._getUrl(text)+'&'+this.options.jsonpParam+'=L.Control.Search.callJsonp', {s: text}); //parsing url
+  let script = L.DomUtil.create('script', 'leaflet-search-jsonp', document.getElementsByTagName('body')[0]),
+      url = L.Util.template(this._getUrl(text) + '&' + this.options.jsonpParam + '=L.Control.Search.callJsonp', {s: text}); //parsing url
     //rnd = '&_='+Math.floor(Math.random()*10000);
     //TODO add rnd param or randomize callback name! in recordsFromJsonp
   script.type = 'text/javascript';
@@ -523,9 +523,9 @@ _recordsFromAjax: function(text, callAfter) {	//Ajax request
       }
     };
   }
-  var IE8or9 = ( L.Browser.ie && !window.atob && document.querySelector ),
-    request = IE8or9 ? new XDomainRequest() : new XMLHttpRequest(),
-    url = L.Util.template(this._getUrl(text), {s: text});
+  let IE8or9 = (L.Browser.ie && !window.atob && document.querySelector),
+      request = IE8or9 ? new XDomainRequest() : new XMLHttpRequest(),
+      url = L.Util.template(this._getUrl(text), {s: text});
 
   //rnd = '&_='+Math.floor(Math.random()*10000);
   //TODO add rnd param or randomize callback name! in recordsFromAjax			
@@ -547,7 +547,7 @@ _recordsFromAjax: function(text, callAfter) {	//Ajax request
 },
 
 _searchInLayer: function(layer, retRecords, propName) {
-  var self = this, loc;
+  let self = this, loc;
 
   if(layer instanceof L.Control.Search.Marker) return;
 
@@ -619,10 +619,10 @@ _searchInLayer: function(layer, retRecords, propName) {
 },
 
 _recordsFromLayer: function() {	//return table: key,value from layer
-  var self = this,
-    retRecords = {},
-    propName = this.options.propertyName;
-  
+  let self = this,
+      retRecords = {},
+      propName = this.options.propertyName;
+
   this._layer.eachLayer(function (layer) {
     self._searchInLayer(layer, retRecords, propName);
   });
@@ -633,17 +633,17 @@ _recordsFromLayer: function() {	//return table: key,value from layer
 _autoType: function() {
   
   //TODO implements autype without selection(useful for mobile device)
-  
-  var start = this._input.value.length,
-    firstRecord = this._tooltip.firstChild ? this._tooltip.firstChild._text : '',
-    end = firstRecord.length;
+
+  let start = this._input.value.length,
+      firstRecord = this._tooltip.firstChild ? this._tooltip.firstChild._text : '',
+      end = firstRecord.length;
 
   if (firstRecord.indexOf(this._input.value) === 0) { // If prefix match
     this._input.value = firstRecord;
     this._handleAutoresize();
 
     if (this._input.createTextRange) {
-      var selRange = this._input.createTextRange();
+      let selRange = this._input.createTextRange();
       selRange.collapse(true);
       selRange.moveStart('character', start);
       selRange.moveEnd('character', end);
@@ -661,14 +661,14 @@ _autoType: function() {
 
 _hideAutoType: function() {	// deselect text:
 
-  var sel;
+  let sel;
   if ((sel = this._input.selection) && sel.empty) {
     sel.empty();
   }
   else if (this._input.createTextRange) {
     sel = this._input.createTextRange();
     sel.collapse(true);
-    var end = this._input.value.length;
+    let end = this._input.value.length;
     sel.moveStart('character', end);
     sel.moveEnd('character', end);
     sel.select();
@@ -682,7 +682,7 @@ _hideAutoType: function() {	// deselect text:
 },
 
 _handleKeypress: function (e) {	//run _input keyup event
-  var self = this;
+  let self = this;
 
   switch(e.keyCode)
   {
@@ -690,8 +690,8 @@ _handleKeypress: function (e) {	//run _input keyup event
       this.collapse();
     break;
     case 13://Enter
-      if(this._countertips == 1 || (this.options.firstTipSubmit && this._countertips > 0)) {
-              if(this._tooltip.currentSelection == -1) {
+      if(this._countertips === 1 || (this.options.firstTipSubmit && this._countertips > 0)) {
+              if(this._tooltip.currentSelection === -1) {
           this._handleArrowSelect(1);
               }
       }
@@ -738,7 +738,7 @@ _handleKeypress: function (e) {	//run _input keyup event
 },
 
 searchText: function(text) {
-  var code = text.charCodeAt(text.length);
+  let code = text.charCodeAt(text.length);
 
   this._input.value = text;
 
@@ -752,8 +752,8 @@ searchText: function(text) {
 
 _fillRecordsCache: function() {
 
-  var self = this,
-    inputText = this._input.value, records;
+  let self = this,
+      inputText = this._input.value, records;
 
   if(this._curReq && this._curReq.abort)
     this._curReq.abort();
@@ -798,7 +798,7 @@ _fillRecordsCache: function() {
 },
 
 _handleAutoresize: function() {
-    var maxWidth;
+  let maxWidth;
 
   if (this._input.style.maxWidth !== this._map._container.offsetWidth) {
     maxWidth = this._map._container.clientWidth;
@@ -816,19 +816,19 @@ _handleAutoresize: function() {
 
 _handleArrowSelect: function(velocity) {
 
-  var searchTips = this._tooltip.hasChildNodes() ? this._tooltip.childNodes : [];
-    
+  let searchTips = this._tooltip.hasChildNodes() ? this._tooltip.childNodes : [];
+
   for (let i=0; i<searchTips.length; i++) {
     L.DomUtil.removeClass(searchTips[i], 'search-tip-select');
   }
   
-  if ((velocity == 1 ) && (this._tooltip.currentSelection >= (searchTips.length - 1))) {// If at end of list.
+  if ((velocity === 1 ) && (this._tooltip.currentSelection >= (searchTips.length - 1))) {// If at end of list.
     L.DomUtil.addClass(searchTips[this._tooltip.currentSelection], 'search-tip-select');
   }
-  else if ((velocity == -1 ) && (this._tooltip.currentSelection <= 0)) { // Going back up to the search box.
+  else if ((velocity === -1 ) && (this._tooltip.currentSelection <= 0)) { // Going back up to the search box.
     this._tooltip.currentSelection = -1;
   }
-  else if (this._tooltip.style.display != 'none') {
+  else if (this._tooltip.style.display !== 'none') {
     this._tooltip.currentSelection += velocity;
     
     L.DomUtil.addClass(searchTips[this._tooltip.currentSelection], 'search-tip-select');
@@ -836,8 +836,8 @@ _handleArrowSelect: function(velocity) {
     this._input.value = searchTips[this._tooltip.currentSelection]._text;
 
     // scroll:
-    var tipOffsetTop = searchTips[this._tooltip.currentSelection].offsetTop;
-    
+    let tipOffsetTop = searchTips[this._tooltip.currentSelection].offsetTop;
+
     if (tipOffsetTop + searchTips[this._tooltip.currentSelection].clientHeight >= this._tooltip.scrollTop + this._tooltip.clientHeight) {
       this._tooltip.scrollTop = tipOffsetTop - this._tooltip.clientHeight + searchTips[this._tooltip.currentSelection].clientHeight;
     }
@@ -854,7 +854,7 @@ _handleSubmit: function() {	//button and tooltip click and enter submit
   this.hideAlert();
   this._hideTooltip();
 
-  if(this._input.style.display == 'none')	//on first click show _input only
+  if(this._input.style.display === 'none')	//on first click show _input only
     this.expand();
   else
   {
@@ -862,8 +862,8 @@ _handleSubmit: function() {	//button and tooltip click and enter submit
       this.collapse();
     else
     {
-      var loc = this._getLocation(this._input.value);
-      
+      let loc = this._getLocation(this._input.value);
+
       if(!loc) {
         this.showAlert();
       }
@@ -896,7 +896,7 @@ _defaultMoveToLocation: function(latlng, title, map) {
 },
 
 showLocation: function(latlng, title) {	//set location on map from _recordsCache
-  var self = this;
+  let self = this;
 
   self._map.once('moveend zoomend', function(e) {
 
@@ -979,13 +979,13 @@ animate: function() {
 //TODO refact animate() more smooth! like this: http://goo.gl/DDlRs
   if(this._circleLoc)
   {
-    var circle = this._circleLoc,
-      tInt = 200,	//time interval
-      ss = 5,	//frames
-      mr = parseInt(circle._radius/ss),
-      oldrad = this.options.circle.radius,
-      newrad = circle._radius * 2,
-      acc = 0;
+    let circle = this._circleLoc,
+        tInt = 200,	//time interval
+        ss = 5,	//frames
+        mr = parseInt(circle._radius / ss),
+        oldrad = this.options.circle.radius,
+        newrad = circle._radius * 2,
+        acc = 0;
 
     circle._timerAnimLoc = setInterval(function() {
       acc += 0.5;

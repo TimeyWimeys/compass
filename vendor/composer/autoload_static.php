@@ -21,16 +21,6 @@ class ComposerStaticInit1fa78db5c1a4bd7dc8a6ba4bdd373e39
     );
 
     public static $classMap = array (
-        'CompassPlugin\\Base\\Activate' => __DIR__ . '/../..' . '/inc/Base/Activate.php',
-        'CompassPlugin\\Base\\BaseController' => __DIR__ . '/../..' . '/inc/Base/BaseController.php',
-        'CompassPlugin\\Base\\BlockController' => __DIR__ . '/../..' . '/inc/Base/BlockController.php',
-        'CompassPlugin\\Base\\Enqueue' => __DIR__ . '/../..' . '/inc/Base/Enqueue.php',
-        'CompassPlugin\\Base\\LocationController' => __DIR__ . '/../..' . '/inc/Base/LocationController.php',
-        'CompassPlugin\\Base\\SettingsLinks' => __DIR__ . '/../..' . '/inc/Base/SettingsLinks.php',
-        'CompassPlugin\\Base\\TaxController' => __DIR__ . '/../..' . '/inc/Base/TaxController.php',
-        'CompassPlugin\\Init' => __DIR__ . '/../..' . '/inc/Init.php',
-        'CompassPlugin\\Pages\\Frontend' => __DIR__ . '/../..' . '/inc/Pages/Frontend.php',
-        'CompassPlugin\\Pages\\Settings' => __DIR__ . '/../..' . '/inc/Pages/Settings.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 

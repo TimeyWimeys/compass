@@ -6,8 +6,6 @@
 
 namespace CompassPlugin\Base;
 
-use CompassPlugin\Base\BaseController;
-
 class LocationController extends BaseController
 {
     public $settings;
@@ -76,7 +74,7 @@ class LocationController extends BaseController
             $args['supports'] = array('title', 'author', 'editor', 'comments', 'thumbnail', 'excerpt', 'revisions', 'trash');
             $args['has_archive'] = true;
             $args['show_in_rest'] = true;
-        };
+        }
 
         register_post_type('cbn-location', $args);
     }
@@ -153,11 +151,11 @@ class LocationController extends BaseController
         //error_log(print_r($data, true));
 
 
-        $address = isset($data['address']) ? $data['address'] : '';
-        $lat = isset($data['lat']) ? $data['lat'] : '';
-        $lng = isset($data['lng']) ? $data['lng'] : '';
-        $text = isset($data['text']) ? $data['text'] : '';
-        $video = isset($data['video']) ? $data['video'] : '';
+        $address = $data['address'] ?? '';
+        $lat = $data['lat'] ?? '';
+        $lng = $data['lng'] ?? '';
+        $text = $data['text'] ?? '';
+        $video = $data['video'] ?? '';
         $has_video = (isset($video) && $video != '') ? 'has-video' : '';
         $video_tag = ($has_video) ? apply_filters('the_content', esc_attr($video)) : '';
 
@@ -169,9 +167,9 @@ class LocationController extends BaseController
         $has_audio = (isset($audio) && $audio != '') ? 'has-audio' : '';
         $audio_tag = ($has_audio) ? '<audio controls="controls" style="width:100%"><source type="audio/mp4" src="'.esc_attr($audio).'"><source type="audio/mpeg" src="'.esc_attr($audio).'"><source type="audio/wav" src="'.esc_attr($audio).'"></audio>' : '';
 
-        $notification = isset($data['notification']) ? $data['notification'] : '';
-        $author_name = isset($data['author_name']) ? $data['author_name'] : '';
-        $author_email = isset($data['author_email']) ? $data['author_email'] : '';
+        $notification = $data['notification'] ?? '';
+        $author_name = $data['author_name'] ?? '';
+        $author_email = $data['author_email'] ?? '';
         $text_notify_me_on_publish_label = get_option('cbn_user_notification_label') ? get_option('cbn_user_notification_label') : $this->cbn_user_notification_label_default;
         $text_notify_me_on_publish_name = __('Your name', 'Compass');
         $text_notify_me_on_publish_email = __('Your email', 'Compass');
@@ -186,7 +184,7 @@ class LocationController extends BaseController
         $marker_icon = get_option('cbn_marker_icon') ? get_option('cbn_marker_icon') : 'default';
         $marker_user_icon = get_option('cbn_marker_user_icon');
 
-        $meta_custom_fields = isset($data['custom_fields']) ? $data['custom_fields'] : false;
+        $meta_custom_fields = $data['custom_fields'] ?? false;
         $active_custom_fields = get_option('cbn_custom_fields');
 
         // render view
@@ -252,7 +250,7 @@ class LocationController extends BaseController
             $has_general_permission = current_user_can('edit_cbn-locations');
             $is_author = (get_current_user_id() == get_post_field('post_author', $post_id));
             $can_edit_specific_post = current_user_can('edit_post', $post_id);
-            $allow_edit = ($has_general_permission && ($is_author || $can_edit_specific_post)) ? true : false;
+            $allow_edit = $has_general_permission && ($is_author || $can_edit_specific_post);
             if (!$allow_edit) {
                 return $post_id;
             }
@@ -307,7 +305,7 @@ class LocationController extends BaseController
         $has_general_permission = current_user_can('edit_cbn-locations');
         $is_author = (get_current_user_id() == get_post_field('post_author', $post_id));
         $can_edit_specific_post = current_user_can('edit_post', $post_id);
-        $allow_edit = ($has_general_permission && ($is_author || $can_edit_specific_post)) ? true : false;
+        $allow_edit = $has_general_permission && ($is_author || $can_edit_specific_post);
         if (!$allow_edit) {
             return $post_id;
         }
@@ -371,17 +369,18 @@ class LocationController extends BaseController
                 wp_update_post($post);
             }
         }
+        return $post_id;
     }
 
-    public function set_custom_location_columns($columns)
+    public function set_custom_location_columns($columns): array
     {
         // Get all default columns we want to preserve
-        $cb = isset($columns['cb']) ? $columns['cb'] : '';
-        $title = isset($columns['title']) ? $columns['title'] : '';
-        $author = isset($columns['author']) ? $columns['author'] : '';
-        $categories = isset($columns['taxonomy-cbn-type']) ? $columns['taxonomy-cbn-type'] : '';
-        $comments = isset($columns['comments']) ? $columns['comments'] : '';
-        $date = isset($columns['date']) ? $columns['date'] : '';
+        $cb = $columns['cb'] ?? '';
+        $title = $columns['title'] ?? '';
+        $author = $columns['author'] ?? '';
+        $categories = $columns['taxonomy-cbn-type'] ?? '';
+        $comments = $columns['comments'] ?? '';
+        $date = $columns['date'] ?? '';
 
         // Remove all columns
         $columns = array();
@@ -416,10 +415,10 @@ class LocationController extends BaseController
     {
         $data = get_post_meta($post_id, '_cbn_location_key', true);
 
-        $text = isset($data['text']) ? $data['text'] : '';
-        $address = isset($data['address']) ? $data['address'] : '';
-        $lat = isset($data['lat']) ? $data['lat'] : '';
-        $lng = isset($data['lng']) ? $data['lng'] : '';
+        $text = $data['text'] ?? '';
+        $address = $data['address'] ?? '';
+        $lat = $data['lat'] ?? '';
+        $lng = $data['lng'] ?? '';
 
         switch ($column) {
             case 'post_id':
@@ -458,28 +457,28 @@ class LocationController extends BaseController
                 global $wpdb;
 
                 // Join wp_users for author search
-                if (strpos($join, "{$wpdb->users}") === false) {
-                    $join .= " LEFT JOIN {$wpdb->users} AS u ON {$wpdb->posts}.post_author = u.ID ";
+                if (strpos($join, "$wpdb->users") === false) {
+                    $join .= " LEFT JOIN $wpdb->users AS u ON $wpdb->posts.post_author = u.ID ";
                 }
 
                 // Join wp_postmeta for meta field search
-                if (strpos($join, "{$wpdb->postmeta}") === false) {
-                    $join .= " LEFT JOIN {$wpdb->postmeta} ON {$wpdb->posts}.ID = {$wpdb->postmeta}.post_id ";
+                if (strpos($join, "$wpdb->postmeta") === false) {
+                    $join .= " LEFT JOIN $wpdb->postmeta ON $wpdb->posts.ID = $wpdb->postmeta.post_id ";
                 }
 
                 return $join;
             });
 
             // Modify the search query to include user_login, user_email, post_title, and post_content search
-            add_filter('posts_search', function ($search, $query) use ($search_term) {
+            add_filter('posts_search', function ($search) use ($search_term) {
                 global $wpdb;
 
                 if ($search_term) {
                     $escaped_term = '%' . $wpdb->esc_like($search_term) . '%';
 
                     // Combine search conditions for post title, content, and author fields
-                    $search .= " AND ({$wpdb->posts}.post_title LIKE '$escaped_term' 
-                                    OR {$wpdb->posts}.post_content LIKE '$escaped_term' 
+                    $search .= " AND ($wpdb->posts.post_title LIKE '$escaped_term' 
+                                    OR $wpdb->posts.post_content LIKE '$escaped_term' 
                                     OR u.user_login LIKE '$escaped_term' 
                                     OR u.user_email LIKE '$escaped_term') ";
                 }
@@ -493,7 +492,7 @@ class LocationController extends BaseController
 
                 // Search in the _cbn_location_key meta field
                 $escaped_meta_value = '%' . $wpdb->esc_like($search_term) . '%';
-                $where .= $wpdb->prepare(" OR ({$wpdb->postmeta}.meta_key = '_cbn_location_key' AND {$wpdb->postmeta}.meta_value LIKE %s)", $escaped_meta_value);
+                $where .= $wpdb->prepare(" OR ($wpdb->postmeta.meta_key = '_cbn_location_key' AND $wpdb->postmeta.meta_value LIKE %s)", $escaped_meta_value);
 
                 return $where;
             });
@@ -502,7 +501,7 @@ class LocationController extends BaseController
             add_filter('posts_groupby', function ($groupby) {
                 global $wpdb;
                 if (!$groupby) {
-                    $groupby = "{$wpdb->posts}.ID";  // Group by post ID to ensure unique results
+                    $groupby = "$wpdb->posts.ID";  // Group by post ID to ensure unique results
                 }
                 return $groupby;
             });
@@ -539,7 +538,7 @@ class LocationController extends BaseController
     {
         $location = get_post_meta($post_id, '_cbn_location_key', true);
         $custom_field_ids = get_option('cbn_custom_fields', array()); // get all available custom fields
-        $types = get_terms(array(
+        get_terms(array(
             'taxonomy' => 'cbn-type',
             'hide_empty' => false
         )); // get all available types
@@ -561,8 +560,8 @@ class LocationController extends BaseController
 
                 if (count($images) > 1 && !$raw) {
                     // Enqueue carousel script and styles
-                    wp_enqueue_style('cbn_frontend_css', plugin_dir_url(dirname(dirname(__FILE__))) . 'assets/frontend.css', array(), $this->plugin_version);
-                    wp_enqueue_script('cbn_frontend_carousel_js', plugin_dir_url(dirname(dirname(__FILE__))) . 'src/js/frontend-carousel.js', array(), $this->plugin_version);
+                    wp_enqueue_style('cbn_frontend_css', plugin_dir_url(dirname(__FILE__, 2)) . 'assets/frontend.css', array(), $this->plugin_version);
+                    wp_enqueue_script('cbn_frontend_carousel_js', plugin_dir_url(dirname(__FILE__, 2)) . 'src/js/frontend-carousel.js', array(), $this->plugin_version);
 
                     // Multiple images - use carousel
                     $value = '<div class="cbn-carousel">';
@@ -633,7 +632,7 @@ class LocationController extends BaseController
         } elseif ($attr == 'map') {
 
             // GET MAP
-            $plugin_url = plugin_dir_url(dirname(dirname(__FILE__)));
+            $plugin_url = plugin_dir_url(dirname(__FILE__, 2));
             $map_style = get_option('cbn_map_style') ? get_option('cbn_map_style') : 'Esri.WorldStreetMap';
             $cbn_tile_provider_mapbox_key = get_option('cbn_tile_provider_mapbox_key', '');
             $lat = $location['lat'];
@@ -651,7 +650,7 @@ class LocationController extends BaseController
             // GET GOOGLE ROUTE LINK
             $lat = esc_attr($location['lat']);
             $lng = esc_attr($location['lng']);
-            $text = $location['address'] ? $location['address'] : __('Route on Google Maps', 'Compass');
+            $text = $location['address'] ?: __('Route on Google Maps', 'Compass');
             $value = '<a title="' . __('go to Google Maps', 'Compass') . '" href="https://www.google.com/maps/search/?api=1&amp;query=' . $lat . '%2C' . $lng . '" target="_blank">' . $text . '</a>';
 
         } elseif ($attr == 'wp_author_id') {
@@ -689,7 +688,7 @@ class LocationController extends BaseController
     }
 
     // Add a custom header to the location single page
-    public function default_location_header($featured_image_html, $post_id, $post_thumbnail_id, $size, $attr)
+    public function default_location_header($featured_image_html, $post_id)
     {
         if (is_singular('cbn-location') && in_the_loop() && is_main_query()) {
 
@@ -706,14 +705,14 @@ class LocationController extends BaseController
     }
 
     // Add custom content to the location single page
-    public function default_location_content($content)
+    public function default_location_content($content): string
     {
         // Check if we're inside the main loop in a single Post of type 'custom_post_type'.
         if (is_singular('cbn-location') && in_the_loop() && is_main_query()) {
             // Check if the content is empty
             if (empty(trim($content))) {
                 // Custom content to display if the original content is empty
-                $custom_content = '
+                return '
                 <!-- wp:group {"className":"Compass-single-default-template","layout":{"type":"default"}} -->
                 <div class="wp-block-group Compass-single-default-template">
                 
@@ -757,7 +756,6 @@ class LocationController extends BaseController
                 </div>
                 <!-- /wp:group -->
                 ';
-                return $custom_content;
             }
         }
 

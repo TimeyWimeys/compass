@@ -24,13 +24,13 @@ if(isset($block_attributes['types']) && $block_attributes['types'] != '') {
         'terms'    => $selected_types_slugs,      // provide the term slugs
       ),
     );
-};
+}
 
 // Custom Attribute: Filter for ids
 if(isset($block_attributes['ids']) && $block_attributes['ids'] != '') {
     $selected_ids = explode('|', $block_attributes['ids']);
     $query['post__in'] = $selected_ids;
-};
+}
 
 // Init WP_Query
 $locations_query = new WP_Query($query);
@@ -44,9 +44,9 @@ if ($locations_query->have_posts()) :
         $location_meta = get_post_meta($post_id, '_cbn_location_key', true);
 
         $name = str_replace("'", "\'", strip_tags(get_the_title($post_id)));
-        $address = isset($location_meta['address']) ? str_replace("'", "\'", (preg_replace('/\r|\n/', '', $location_meta['address']))) : '';
+        $address = isset($location_meta['address']) ? str_replace("'", "\'", (preg_replace('/[\r\n]/', '', $location_meta['address']))) : '';
         $text = isset($location_meta["text"]) ? str_replace("'", "\'", str_replace(array("\r\n", "\r", "\n"), "<br>", $location_meta["text"])) : '';
-        $video = isset($location_meta["video"]) ? $location_meta["video"] : '';
+        $video = $location_meta["video"] ?? '';
 
         $image = get_post_meta($post_id, '_cbn_location_image', true);
         $image_thumb = null;
@@ -81,7 +81,7 @@ if ($locations_query->have_posts()) :
 
         // custom fields
         $custom_fields = [];
-        $meta_custom_fields = isset($location_meta['custom_fields']) ? $location_meta['custom_fields'] : false;
+        $meta_custom_fields = $location_meta['custom_fields'] ?? false;
         $active_custom_fields = get_option('cbn_custom_fields');
         if (is_array($meta_custom_fields) && is_array($active_custom_fields)) {
 
@@ -93,11 +93,11 @@ if ($locations_query->have_posts()) :
                 }
 
                 if(isset($meta_custom_fields[$index])) {
-                    array_push($custom_fields, array(
-                      'label' => $active_custom_field['label'],
-                      'val' => $meta_custom_fields[$index],
-                      'fieldtype' => $active_custom_field['fieldtype']
-                    ));
+                    $custom_fields[] = array(
+                        'label' => $active_custom_field['label'],
+                        'val' => $meta_custom_fields[$index],
+                        'fieldtype' => $active_custom_field['fieldtype']
+                    );
                 }
             }
 
@@ -211,7 +211,7 @@ endif;
                 $media_tag .= '</div>';
             } else {
                 // Single image - use regular image display
-                $media_tag = '<div class="cbn_location_image"><img class="skip-lazy" src="'. esc_url_raw($location['image']) .'"></div>';
+                $media_tag = '<div class="cbn_location_image"><img class="skip-lazy" src="'. esc_url_raw($location['image']) .'" alt=""></div>';
             }
         }
 
@@ -346,7 +346,7 @@ endif;
           'lng' => esc_attr($location["lng"]),
           'content' => $content,
           'icon' => esc_attr($location["icon"]),
-          'types' => (isset($location["types"]) ? $location["types"] : []),
+          'types' => ($location["types"] ?? []),
           'post_id' => esc_attr($location["post_id"])
         ];
 

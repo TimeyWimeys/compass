@@ -22,10 +22,10 @@ let sharedMapBounds = null;
 /**
  * Utility Module - Contains helper functions used across other modules
  */
-const OUMUtils = (function () {
+let OUMUtils = (function () {
   function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    const regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    name = name.replace(/\[/, "\\[").replace(/\]/, "\\]");
+    let regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         results = regex.exec(location.search);
     return results === null
       ? ""
@@ -83,24 +83,24 @@ const OUMUtils = (function () {
     }
 
     // Calculate the visible area based on zoom level and Mercator projection
-    const EARTH_RADIUS = 6378137; // Earth's radius in meters
-    const scale = Math.pow(2, zoom);
+    let EARTH_RADIUS = 6378137; // Earth's radius in meters
+    let scale = Math.pow(2, zoom);
 
     // Convert pixel dimensions to meters at this zoom level
-    const metersPerPixel = (2 * Math.PI * EARTH_RADIUS) / (256 * scale);
-    const widthMeters = width * metersPerPixel;
-    const heightMeters = height * metersPerPixel;
+    let metersPerPixel = (2 * Math.PI * EARTH_RADIUS) / (256 * scale);
+    let widthMeters = width * metersPerPixel;
+    let heightMeters = height * metersPerPixel;
 
     // Calculate the latitude bounds, accounting for Mercator projection
-    const latRad = (lat * Math.PI) / 180;
-    const latDelta = heightMeters / 2 / EARTH_RADIUS;
-    const latitudeNorth = ((latRad + latDelta) * 180) / Math.PI;
-    const latitudeSouth = ((latRad - latDelta) * 180) / Math.PI;
+    let latRad = (lat * Math.PI) / 180;
+    let latDelta = heightMeters / 2 / EARTH_RADIUS;
+    let latitudeNorth = ((latRad + latDelta) * 180) / Math.PI;
+    let latitudeSouth = ((latRad - latDelta) * 180) / Math.PI;
 
     // Calculate the longitude bounds (simpler as it's linear in Mercator)
-    const lngDelta = widthMeters / 2 / (EARTH_RADIUS * Math.cos(latRad));
-    const longitudeEast = lng + (lngDelta * 180) / Math.PI;
-    const longitudeWest = lng - (lngDelta * 180) / Math.PI;
+    let lngDelta = widthMeters / 2 / (EARTH_RADIUS * Math.cos(latRad));
+    let longitudeEast = lng + (lngDelta * 180) / Math.PI;
+    let longitudeWest = lng - (lngDelta * 180) / Math.PI;
 
     return [
       [latitudeSouth, longitudeWest],
@@ -112,7 +112,7 @@ const OUMUtils = (function () {
     return (
       '<div><img src="' +
       val.layer.options.icon.options.iconUrl +
-      '" />' +
+      '"  alt=""/>' +
       val.layer.options.title +
       "</div>"
     );
@@ -159,8 +159,8 @@ const OUMUtils = (function () {
    * @returns {boolean}
    */
   function validateCoordinates(lat, lng) {
-    const parsedLat = parseFloat(lat);
-    const parsedLng = parseFloat(lng);
+    let parsedLat = parseFloat(lat);
+    let parsedLng = parseFloat(lng);
     return (
       !isNaN(parsedLat) &&
       !isNaN(parsedLng) &&
@@ -194,7 +194,7 @@ const OUMUtils = (function () {
   function debounce(func, wait = 250) {
     let timeout;
     return function executedFunction(...args) {
-      const later = () => {
+      let later = () => {
         clearTimeout(timeout);
         func(...args);
       };
@@ -218,12 +218,12 @@ const OUMUtils = (function () {
 /**
  * Error Handler Module - Centralizes error management
  */
-const OUMErrorHandler = (function () {
+let OUMErrorHandler = (function () {
   function showError(message, type = "error") {
     console.error(`OUM Error: ${message}`);
 
     // Show error in UI if error container exists
-    const errorContainer = document.getElementById("cbn_add_location_error");
+    let errorContainer = document.getElementById("cbn_add_location_error");
     if (errorContainer) {
       errorContainer.innerHTML = `${message}<br>`;
       errorContainer.style.display = "block";
@@ -235,8 +235,8 @@ const OUMErrorHandler = (function () {
   }
 
   function validateCoordinates(lat, lng) {
-    const parsedLat = parseFloat(lat);
-    const parsedLng = parseFloat(lng);
+    let parsedLat = parseFloat(lat);
+    let parsedLng = parseFloat(lng);
 
     if (isNaN(parsedLat) || isNaN(parsedLng)) {
       showError("Invalid coordinates provided");
@@ -266,9 +266,9 @@ const OUMErrorHandler = (function () {
 /**
  * Configuration Module - Centralizes all configuration settings
  */
-const OUMConfig = (function () {
+let OUMConfig = (function () {
   // Private variables
-  const defaults = {
+  let defaults = {
     map: {
       lat: 28,
       lng: 0,
@@ -339,7 +339,7 @@ const OUMConfig = (function () {
 /**
  * Map Core Module - Handles the main map initialization and configuration
  */
-const OUMMap = (function () {
+let OUMMap = (function () {
   // Private variables
   let map = null;
   let world_bounds = null;
@@ -382,7 +382,7 @@ const OUMMap = (function () {
     // Set bounds if fixed map bounds is enabled
     if (cbn_enable_fixed_map_bounds) {
       // Calculate bounds based on initial position
-      const boundsArray = OUMUtils.latLngToBounds(
+      let boundsArray = OUMUtils.latLngToBounds(
         startPosition.lat,
         startPosition.lng,
         startPosition.zoom,
@@ -405,7 +405,7 @@ const OUMMap = (function () {
     }
 
     // Set the minimum zoom level to prevent zooming out too far
-    const maxVisibleBounds = map.getBoundsZoom(world_bounds);
+    let maxVisibleBounds = map.getBoundsZoom(world_bounds);
     map.setMinZoom(maxVisibleBounds);
 
     // Set max bounds without padding
@@ -418,21 +418,21 @@ const OUMMap = (function () {
       if (isAdjusting) return;
       isAdjusting = true;
 
-      const zoom = map.getZoom();
+      let zoom = map.getZoom();
 
       // Only enforce bounds if we're zoomed in beyond the minimum zoom
       if (zoom > maxVisibleBounds) {
-        const currentBounds = map.getBounds();
-        const currentCenter = map.getCenter();
+        let currentBounds = map.getBounds();
+        let currentCenter = map.getCenter();
 
         let needsAdjustment = false;
         let newLat = currentCenter.lat;
         let newLng = currentCenter.lng;
 
         // Calculate current viewport dimensions
-        const viewportHeight =
+        let viewportHeight =
           currentBounds.getNorth() - currentBounds.getSouth();
-        const viewportWidth =
+        let viewportWidth =
           currentBounds.getEast() - currentBounds.getWest();
 
         // Check and adjust latitude (north/south)
@@ -465,7 +465,7 @@ const OUMMap = (function () {
   function setupTileLayer(mapStyle) {
     let tileLayer;
 
-    if (mapStyle == "Custom1") {
+    if (mapStyle === "Custom1") {
       tileLayer = L.tileLayer(
         "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png"
       ).addTo(map);
@@ -476,7 +476,7 @@ const OUMMap = (function () {
           zoomOffset: -1,
         }
       ).addTo(map);
-    } else if (mapStyle == "Custom2") {
+    } else if (mapStyle === "Custom2") {
       tileLayer = L.tileLayer(
         "https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png"
       ).addTo(map);
@@ -487,7 +487,7 @@ const OUMMap = (function () {
           zoomOffset: -1,
         }
       ).addTo(map);
-    } else if (mapStyle == "Custom3") {
+    } else if (mapStyle === "Custom3") {
       tileLayer = L.tileLayer(
         "https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png"
       ).addTo(map);
@@ -498,42 +498,42 @@ const OUMMap = (function () {
           zoomOffset: -1,
         }
       ).addTo(map);
-    } else if (mapStyle == "MapBox.streets") {
+    } else if (mapStyle === "MapBox.streets") {
       tileLayer = L.tileLayer
         .provider("MapBox", {
           id: "mapbox/streets-v12",
           accessToken: OUMConfig.getTileProviderKey(),
         })
         .addTo(map);
-    } else if (mapStyle == "MapBox.outdoors") {
+    } else if (mapStyle === "MapBox.outdoors") {
       tileLayer = L.tileLayer
         .provider("MapBox", {
           id: "mapbox/outdoors-v12",
           accessToken: OUMConfig.getTileProviderKey(),
         })
         .addTo(map);
-    } else if (mapStyle == "MapBox.light") {
+    } else if (mapStyle === "MapBox.light") {
       tileLayer = L.tileLayer
         .provider("MapBox", {
           id: "mapbox/light-v11",
           accessToken: OUMConfig.getTileProviderKey(),
         })
         .addTo(map);
-    } else if (mapStyle == "MapBox.dark") {
+    } else if (mapStyle === "MapBox.dark") {
       tileLayer = L.tileLayer
         .provider("MapBox", {
           id: "mapbox/dark-v11",
           accessToken: OUMConfig.getTileProviderKey(),
         })
         .addTo(map);
-    } else if (mapStyle == "MapBox.satellite") {
+    } else if (mapStyle === "MapBox.satellite") {
       tileLayer = L.tileLayer
         .provider("MapBox", {
           id: "mapbox/satellite-v9",
           accessToken: OUMConfig.getTileProviderKey(),
         })
         .addTo(map);
-    } else if (mapStyle == "MapBox.satellite-streets") {
+    } else if (mapStyle === "MapBox.satellite-streets") {
       tileLayer = L.tileLayer
         .provider("MapBox", {
           id: "mapbox/satellite-streets-v12",
@@ -585,7 +585,7 @@ const OUMMap = (function () {
 
     // Add searchbar for address search
     if (cbn_enable_searchbar && cbn_searchbar_type === "address") {
-      const searchBar = new GeoSearch.GeoSearchControl({
+      let searchBar = new GeoSearch.GeoSearchControl({
         style: "bar",
         showMarker: false,
         provider: OUMUtils.initGeosearchProvider(),
@@ -597,7 +597,7 @@ const OUMMap = (function () {
 
     // Add button for address search
     if (cbn_enable_searchaddress_button) {
-      const searchButton = new GeoSearch.GeoSearchControl({
+      let searchButton = new GeoSearch.GeoSearchControl({
         style: "button",
         showMarker: false,
         provider: OUMUtils.initGeosearchProvider(),
@@ -627,9 +627,9 @@ const OUMMap = (function () {
     });
 
     // Event: Enter/Exit Fullscreen
-    const addLocationPopup = document.querySelector("#add-location-overlay");
-    const originalContainer = addLocationPopup?.parentElement;
-    const fullscreenContainer = document.querySelector(
+    let addLocationPopup = document.querySelector("#add-location-overlay");
+    let originalContainer = addLocationPopup?.parentElement;
+    let fullscreenContainer = document.querySelector(
       ".Compass .map-wrap"
     );
 
@@ -647,10 +647,10 @@ const OUMMap = (function () {
     map.on("geosearch/showlocation", function(e) {
       let coords = e.marker._latlng;
       let isInBounds = map.getBounds().contains(coords);
-      
+
       if (!isInBounds && cbn_enable_fixed_map_bounds === 'on') {
         console.log("This search result is out of reach.");
-        const searchBar = document.querySelector(`#${map_el} .leaflet-geosearch-bar form`);
+        let searchBar = document.querySelector(`#${map_el} .leaflet-geosearch-bar form`);
         if (searchBar) {
           searchBar.style.boxShadow = "0 0 10px rgb(255, 111, 105)";
           setTimeout(function () {
@@ -705,8 +705,8 @@ const OUMMap = (function () {
         };
 
         // Event: Change Region on ?region=Europe
-        const REGION_ID = OUMUtils.getParameterByName("region");
-        if (btn.textContent == REGION_ID) {
+        let REGION_ID = OUMUtils.getParameterByName("region");
+        if (btn.textContent === REGION_ID) {
           btn.click();
         }
       });
@@ -720,7 +720,7 @@ const OUMMap = (function () {
 
         // Initialize map
         map = L.map(mapEl, {
-          gestureHandling: cbn_enable_scrollwheel_zoom_map ? false : true,
+          gestureHandling: !cbn_enable_scrollwheel_zoom_map,
           minZoom: 1, // Set default minimum zoom
           attributionControl: true,
           fullscreenControl: cbn_enable_fullscreen,
@@ -738,7 +738,7 @@ const OUMMap = (function () {
         setupTileLayer(OUMConfig.getMapStyle());
 
         // Calculate initial bounds based on settings map dimensions
-        const boundsArray = OUMUtils.latLngToBounds(
+        let boundsArray = OUMUtils.latLngToBounds(
           startPosition.lat,
           startPosition.lng,
           startPosition.zoom,
@@ -747,13 +747,13 @@ const OUMMap = (function () {
         );
 
         // Convert to Leaflet bounds
-        const initialBounds = L.latLngBounds(
+        let initialBounds = L.latLngBounds(
           L.latLng(boundsArray[0][0], boundsArray[0][1]),
           L.latLng(boundsArray[1][0], boundsArray[1][1])
         );
 
         // Set view to match settings map exactly, with zoom offset
-        const zoomOffset = 0.7; // Zoom in a bit more to match settings map
+        let zoomOffset = 0.7; // Zoom in a bit more to match settings map
         map.fitBounds(initialBounds, {
           animate: false,
           padding: [0, 0], // No padding to match exactly
@@ -801,7 +801,7 @@ const OUMMap = (function () {
 /**
  * Markers Module - Handles all marker-related functionality
  */
-const OUMMarkers = (function () {
+let OUMMarkers = (function () {
   // Private variables
   let markersLayer = null;
   let allMarkers = [];
@@ -820,7 +820,7 @@ const OUMMarkers = (function () {
   }
 
   function createMarker(location) {
-    const contentText = (
+    let contentText = (
       location.title +
       " | " +
       location.content.replace(/(<([^>]+)>)/gi, " ").replace(/\s\s+/g, " ")
@@ -851,7 +851,7 @@ const OUMMarkers = (function () {
   function setupMarkerEvents() {
     // Event: Open Location Bubble
     map.on("popupopen", function (locationBubble) {
-      const el = document.querySelector(
+      let el = document.querySelector(
         ".Compass #location-fullscreen-container"
       );
       el.querySelector(".location-content-wrap").innerHTML =
@@ -862,7 +862,7 @@ const OUMMarkers = (function () {
 
     // Event: Close Location Bubble
     map.on("popupclose", function () {
-      const el = document.querySelector(
+      let el = document.querySelector(
         ".Compass #location-fullscreen-container"
       );
       el.classList.remove("visible");
@@ -872,14 +872,14 @@ const OUMMarkers = (function () {
 
   function filterMarkers() {
     // Get filter values
-    const markerFilterInput = document.getElementById("cbn_filter_markers");
-    const filter = markerFilterInput
+    let markerFilterInput = document.getElementById("cbn_filter_markers");
+    let filter = markerFilterInput
       ? markerFilterInput.value.toLowerCase()
       : "";
-    const categoryInputs = document.querySelectorAll(
+    let categoryInputs = document.querySelectorAll(
       '.Compass .oum-filter-controls [name="type"]'
     );
-    const checkedCategories = Array.from(categoryInputs)
+    let checkedCategories = Array.from(categoryInputs)
       .filter((input) => input.checked)
       .map((input) => input.value);
 
@@ -888,11 +888,11 @@ const OUMMarkers = (function () {
 
     // Filter and re-add markers
     allMarkers.forEach((marker) => {
-      const contentText = marker.options.content.toLowerCase();
-      const markerTypes = marker.options.types || [];
+      let contentText = marker.options.content.toLowerCase();
+      let markerTypes = marker.options.types || [];
 
-      const matchesTextFilter = !filter || contentText.includes(filter);
-      const matchesCategoryFilter =
+      let matchesTextFilter = !filter || contentText.includes(filter);
+      let matchesCategoryFilter =
         markerTypes.length === 0 ||
         (checkedCategories.length === 0 && markerTypes.length === 0) ||
         markerTypes.some((type) => checkedCategories.includes(type));
@@ -904,21 +904,21 @@ const OUMMarkers = (function () {
   }
 
   function setupFilterListEvents() {
-    const filterControls = document.querySelector(
+    let filterControls = document.querySelector(
       ".Compass .oum-filter-controls"
     );
     if (!filterControls) return;
-  
+
     // Function to show the filter list
     function showFilterList() {
       filterControls.classList.add("active");
     }
-  
+
     // Function to hide the filter list
     function hideFilterList() {
       filterControls.classList.remove("active");
     }
-  
+
     // Event: Open Filter List (mouseover for collapsed design)
     if (filterControls.classList.contains("use-collapse")) {
       filterControls
@@ -928,12 +928,12 @@ const OUMMarkers = (function () {
         .querySelector(".oum-filter-list")
         ?.addEventListener("mouseleave", hideFilterList);
     }
-  
+
     // Event: Open Filter List (click)
     filterControls
       .querySelector(".oum-filter-toggle")
         ?.addEventListener("click", showFilterList);
-  
+
     // Event: Close Filter List (click on close button)
     filterControls
       .querySelector(".oum-filter-list .close-filter-list")
@@ -941,7 +941,7 @@ const OUMMarkers = (function () {
   }
 
   function handleAutoOpenMarker(markerId) {
-    const targetMarker = allMarkers.find((m) => m.options.post_id === markerId);
+    let targetMarker = allMarkers.find((m) => m.options.post_id === markerId);
     if (targetMarker) {
       if (cbn_enable_cluster) {
         // For clustered markers:
@@ -988,13 +988,13 @@ const OUMMarkers = (function () {
     },
     addMarkers: function (locations) {
       locations.forEach((location) => {
-        const marker = createMarker(location);
+        let marker = createMarker(location);
         allMarkers.push(marker);
         markersLayer.addLayer(marker);
       });
 
       // After adding all markers, check if we need to auto-open one
-      const POPUP_MARKER_ID = OUMUtils.getParameterByName("markerid");
+      let POPUP_MARKER_ID = OUMUtils.getParameterByName("markerid");
       if (POPUP_MARKER_ID) {
         handleAutoOpenMarker(POPUP_MARKER_ID);
       }
@@ -1012,7 +1012,7 @@ const OUMMarkers = (function () {
 /**
  * Form Map Module - Handles all map-related functionality for the form
  */
-const OUMFormMap = (function () {
+let OUMFormMap = (function () {
   // Private variables
   let formMap = null;
   let locationMarker = null;
@@ -1047,15 +1047,15 @@ const OUMFormMap = (function () {
     setupMapEvents();
 
     // Always apply bounds to prevent showing repeated maps
-    const boundsToUse = cbn_enable_fixed_map_bounds 
-      ? sharedMapBounds 
+    let boundsToUse = cbn_enable_fixed_map_bounds
+      ? sharedMapBounds
       : OUMConfig.defaults.map.bounds;
 
     // Set the bounds
     formMap.setMaxBounds(boundsToUse);
 
     // Set minimum zoom level based on bounds
-    const maxVisibleBounds = formMap.getBoundsZoom(boundsToUse);
+    let maxVisibleBounds = formMap.getBoundsZoom(boundsToUse);
     formMap.setMinZoom(maxVisibleBounds);
 
     // Add moveend event to enforce bounds
@@ -1063,20 +1063,20 @@ const OUMFormMap = (function () {
       if (isAdjusting) return;
       isAdjusting = true;
 
-      const zoom = formMap.getZoom();
+      let zoom = formMap.getZoom();
 
       // Only enforce bounds if we're zoomed in beyond the minimum zoom
       if (zoom > maxVisibleBounds) {
-        const currentBounds = formMap.getBounds();
-        const currentCenter = formMap.getCenter();
+        let currentBounds = formMap.getBounds();
+        let currentCenter = formMap.getCenter();
 
         let needsAdjustment = false;
         let newLat = currentCenter.lat;
         let newLng = currentCenter.lng;
 
         // Calculate current viewport dimensions
-        const viewportHeight = currentBounds.getNorth() - currentBounds.getSouth();
-        const viewportWidth = currentBounds.getEast() - currentBounds.getWest();
+        let viewportHeight = currentBounds.getNorth() - currentBounds.getSouth();
+        let viewportWidth = currentBounds.getEast() - currentBounds.getWest();
 
         // Check and adjust latitude (north/south)
         if (currentBounds.getNorth() > boundsToUse.getNorth()) {
@@ -1109,7 +1109,7 @@ const OUMFormMap = (function () {
 
   function setupTileLayer() {
     // Default to OpenStreetMap if mapStyle is undefined
-    const mapStyle = window.mapStyle || 'OpenStreetMap.Mapnik';
+    let mapStyle = window.mapStyle || 'OpenStreetMap.Mapnik';
 
     if (mapStyle === "Custom1") {
       L.tileLayer("https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png").addTo(formMap);
@@ -1142,7 +1142,7 @@ const OUMFormMap = (function () {
 
   function setupControls() {
     // Add searchbar: address
-    const search = new GeoSearch.GeoSearchControl({
+    let search = new GeoSearch.GeoSearchControl({
       style: "bar",
       showMarker: false,
       provider: OUMUtils.initGeosearchProvider(),
@@ -1210,7 +1210,7 @@ const OUMFormMap = (function () {
     let coords = e.marker._latlng;
     let label = e.location.label;
     let isInBounds = formMap.getBounds().contains(coords);
-    const searchBar = document.querySelector(`#mapGetLocation .leaflet-geosearch-bar form`);
+    let searchBar = document.querySelector(`#mapGetLocation .leaflet-geosearch-bar form`);
 
     if (!isInBounds && cbn_enable_fixed_map_bounds) {
       console.log("This search result is out of reach.");
@@ -1294,7 +1294,7 @@ const OUMFormMap = (function () {
 /**
  * Form Controller Module - Handles all form-related functionality
  */
-const OUMFormController = (function () {
+let OUMFormController = (function () {
   // Private variables
   let isEditMode = false;
   let currentLocationId = null;
@@ -1302,52 +1302,52 @@ const OUMFormController = (function () {
 
   // Private functions
   function showFormMessage(type, headline, message, buttonText = null, buttonCallback = null) {
-    const form = document.getElementById('cbn_add_location');
-    const errorDiv = document.getElementById('cbn_add_location_error');
-    const thankyouDiv = document.getElementById('cbn_add_location_thankyou');
-    
+    let form = document.getElementById('cbn_add_location');
+    let errorDiv = document.getElementById('cbn_add_location_error');
+    let thankyouDiv = document.getElementById('cbn_add_location_thankyou');
+
     if (!form || !errorDiv || !thankyouDiv) {
       console.error('Required form elements not found');
       return;
     }
-    
+
     // Hide form and error
     form.style.display = 'none';
     errorDiv.style.display = 'none';
-    
+
     // Update thank you message
-    const headlineEl = thankyouDiv.querySelector('h3');
-    const messageEl = thankyouDiv.querySelector('.oum-add-location-thankyou-text');
-    const buttonEl = thankyouDiv.querySelector('button');
+    let headlineEl = thankyouDiv.querySelector('h3');
+    let messageEl = thankyouDiv.querySelector('.oum-add-location-thankyou-text');
+    let buttonEl = thankyouDiv.querySelector('button');
 
     if (!headlineEl || !messageEl || !buttonEl) {
       // Create elements if they don't exist
       if (!headlineEl) {
-        const newHeadline = document.createElement('h3');
+        let newHeadline = document.createElement('h3');
         thankyouDiv.appendChild(newHeadline);
       }
       if (!messageEl) {
-        const newMessage = document.createElement('p');
+        let newMessage = document.createElement('p');
         newMessage.className = 'oum-add-location-thankyou-text';
         thankyouDiv.appendChild(newMessage);
       }
       if (!buttonEl) {
-        const newButton = document.createElement('button');
+        let newButton = document.createElement('button');
         thankyouDiv.appendChild(newButton);
       }
     }
 
     // Get elements again (they should exist now)
-    const finalHeadlineEl = thankyouDiv.querySelector('h3');
-    const finalMessageEl = thankyouDiv.querySelector('.oum-add-location-thankyou-text');
-    const finalButtonEl = thankyouDiv.querySelector('button');
-    
+    let finalHeadlineEl = thankyouDiv.querySelector('h3');
+    let finalMessageEl = thankyouDiv.querySelector('.oum-add-location-thankyou-text');
+    let finalButtonEl = thankyouDiv.querySelector('button');
+
     // Add specific class for delete confirmation
     thankyouDiv.className = type === 'confirm-delete' ? 'oum-delete-confirmation' : '';
-    
+
     if (finalHeadlineEl) finalHeadlineEl.textContent = headline || '';
     if (finalMessageEl) finalMessageEl.textContent = message || '';
-    
+
     // Handle button
     if (finalButtonEl) {
       if (buttonText && buttonCallback) {
@@ -1358,16 +1358,16 @@ const OUMFormController = (function () {
         finalButtonEl.style.display = 'none';
       }
     }
-    
+
     thankyouDiv.style.display = 'block';
   }
 
   function setupDeleteButton() {
-    const deleteBtn = document.getElementById('cbn_delete_location_btn');
+    let deleteBtn = document.getElementById('cbn_delete_location_btn');
     if (deleteBtn) {
       deleteBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        
+
         // Show confirmation using the message system
         showFormMessage(
           'confirm-delete',
@@ -1377,10 +1377,10 @@ const OUMFormController = (function () {
           function() {
             // Set delete flag
             document.getElementById('cbn_delete_location').value = 'true';
-            
+
             // Get the form
-            const form = document.getElementById('cbn_add_location');
-            const formData = new FormData(form);
+            let form = document.getElementById('cbn_add_location');
+            let formData = new FormData(form);
             formData.append('action', 'cbn_add_location_from_frontend');
 
             // Submit via AJAX
@@ -1419,7 +1419,7 @@ const OUMFormController = (function () {
 
   function setupFormEvents() {
     // Event: click on "+ Add Location" button
-    const addLocationBtn = document.getElementById("open-add-location-overlay");
+    let addLocationBtn = document.getElementById("open-add-location-overlay");
     if (addLocationBtn) {
       addLocationBtn.addEventListener("click", handleAddLocationClick);
     }
@@ -1428,9 +1428,9 @@ const OUMFormController = (function () {
     document.addEventListener('click', function(e) {
       if (e.target && e.target.classList.contains('edit-location-button')) {
         e.preventDefault();
-        const locationId = e.target.getAttribute('data-post-id');
-        const location = window.cbn_all_locations.find(loc => loc.post_id === locationId);
-        
+        let locationId = e.target.getAttribute('data-post-id');
+        let location = window.cbn_all_locations.find(loc => loc.post_id === locationId);
+
         if (location) {
           resetForm();
           openForm(location);
@@ -1448,7 +1448,7 @@ const OUMFormController = (function () {
     resetForm();
     openForm();
   }
-  
+
   function openForm(location = null) {
     document.querySelector(".add-location").classList.add("active");
     document.body.classList.add("oum-add-location-opened");
@@ -1461,11 +1461,11 @@ const OUMFormController = (function () {
         populateForm(location);
       } else {
         // Set view to match main map
-        const mainMapEl = document.querySelector(`#${map_el}`);
+        let mainMapEl = document.querySelector(`#${map_el}`);
         if (mainMapEl) {
-          const mainMap = window.oumMap;
-          const mainCenter = mainMap.getCenter();
-          const mainZoom = mainMap.getZoom();
+          let mainMap = window.oumMap;
+          let mainCenter = mainMap.getCenter();
+          let mainZoom = mainMap.getZoom();
           OUMFormMap.setView(mainCenter.lat, mainCenter.lng, mainZoom);
         }
       }
@@ -1478,7 +1478,7 @@ const OUMFormController = (function () {
   }
 
   function setupCloseEvents() {
-    const closeBtn = document.getElementById("close-add-location-overlay");
+    let closeBtn = document.getElementById("close-add-location-overlay");
     if (!closeBtn) return;
 
     // Close button click
@@ -1501,7 +1501,7 @@ const OUMFormController = (function () {
   }
 
   function closeForm() {
-    const addLocationOverlay = document.getElementById("add-location-overlay");
+    let addLocationOverlay = document.getElementById("add-location-overlay");
     if (addLocationOverlay) {
       addLocationOverlay.classList.remove("active");
     }
@@ -1520,12 +1520,12 @@ const OUMFormController = (function () {
   }
 
   function setupNotificationEvents() {
-    const notificationCheckbox = document.getElementById("cbn_location_notification");
+    let notificationCheckbox = document.getElementById("cbn_location_notification");
     if (notificationCheckbox) {
       notificationCheckbox.addEventListener("change", function() {
-        const authorFields = document.getElementById("cbn_author");
-        const nameField = document.getElementById("cbn_location_author_name");
-        const emailField = document.getElementById("cbn_location_author_email");
+        let authorFields = document.getElementById("cbn_author");
+        let nameField = document.getElementById("cbn_location_author_name");
+        let emailField = document.getElementById("cbn_location_author_email");
 
         if (this.checked) {
           authorFields.classList.add("active");
@@ -1542,14 +1542,14 @@ const OUMFormController = (function () {
 
   function setupMediaEvents() {
     // Image upload
-    const imageInput = document.getElementById("cbn_location_images");
+    let imageInput = document.getElementById("cbn_location_images");
     if (imageInput) {
       // Let OUMMedia handle the image upload
       OUMMedia.initializeImageUpload(imageInput);
     }
 
     // Remove image button
-    const removeImageBtn = document.getElementById("cbn_remove_image");
+    let removeImageBtn = document.getElementById("cbn_remove_image");
     if (removeImageBtn) {
       removeImageBtn.addEventListener("click", function() {
         document.getElementById("cbn_location_images_preview").innerHTML = "";
@@ -1558,24 +1558,24 @@ const OUMFormController = (function () {
     }
 
     // Remove audio button
-    const removeAudioBtn = document.getElementById("cbn_remove_audio");
+    let removeAudioBtn = document.getElementById("cbn_remove_audio");
     if (removeAudioBtn) {
       removeAudioBtn.addEventListener("click", function() {
-        const audioInput = document.getElementById("cbn_location_audio");
-        const previewContainer = audioInput.nextElementSibling;
-        const previewDiv = previewContainer.querySelector('.audio-preview');
-        
+        let audioInput = document.getElementById("cbn_location_audio");
+        let previewContainer = audioInput.nextElementSibling;
+        let previewDiv = previewContainer.querySelector('.audio-preview');
+
         // Clear the file input
         audioInput.value = "";
-        
+
         // Clear the preview
         if (previewDiv) {
           previewDiv.innerHTML = '';
         }
-        
+
         // Remove active state
         previewContainer.classList.remove("active");
-        
+
         // Set remove flag
         document.getElementById("cbn_remove_existing_audio").value = "1";
       });
@@ -1591,33 +1591,33 @@ const OUMFormController = (function () {
     currentLocationId = location.post_id;
 
     // Add edit-location class
-    const addLocationEl = document.querySelector(".add-location");
+    let addLocationEl = document.querySelector(".add-location");
     if (addLocationEl) {
         addLocationEl.classList.add("edit-location");
     }
 
     // Set post_id
-    const postIdField = document.getElementById("cbn_post_id");
+    let postIdField = document.getElementById("cbn_post_id");
     if (postIdField) {
       postIdField.value = location.post_id;
     }
 
     // Basic fields
-    const titleField = document.getElementById("cbn_location_title");
-    const latField = document.getElementById("cbn_location_lat");
-    const lngField = document.getElementById("cbn_location_lng");
-    const addressField = document.getElementById("cbn_location_address");
+    let titleField = document.getElementById("cbn_location_title");
+    let latField = document.getElementById("cbn_location_lat");
+    let lngField = document.getElementById("cbn_location_lng");
+    let addressField = document.getElementById("cbn_location_address");
 
     if (titleField) titleField.value = location.title || "";
     if (latField) latField.value = location.lat || "";
     if (lngField) lngField.value = location.lng || "";
     if (addressField) addressField.value = location.address || "";
-    
+
     // Marker types/categories
     if (location.types && Array.isArray(location.types)) {
-        if (typeof cbn_enable_multiple_marker_types !== 'undefined' && cbn_enable_multiple_marker_types == 'true') {
+        if (typeof cbn_enable_multiple_marker_types !== 'undefined' && cbn_enable_multiple_marker_types === 'true') {
             // Handle multiple marker types (checkboxes)
-            const checkboxes = document.querySelectorAll('input[name="cbn_marker_icon[]"]');
+            let checkboxes = document.querySelectorAll('input[name="cbn_marker_icon[]"]');
             if (checkboxes.length > 0) {
                 checkboxes.forEach(checkbox => {
                     checkbox.checked = location.types.includes(checkbox.value);
@@ -1625,7 +1625,7 @@ const OUMFormController = (function () {
             }
         } else {
             // Handle single marker type (select)
-            const markerSelect = document.querySelector('select#cbn_marker_icon');
+            let markerSelect = document.querySelector('select#cbn_marker_icon');
             if (markerSelect) {
                 markerSelect.value = location.types[0] || '';
             }
@@ -1633,13 +1633,13 @@ const OUMFormController = (function () {
     }
 
     // Description
-    const descriptionField = document.getElementById("cbn_location_text");
+    let descriptionField = document.getElementById("cbn_location_text");
     if (descriptionField) {
         descriptionField.value = location.text || "";
     }
 
     // Video field
-    const videoField = document.getElementById("cbn_location_video");
+    let videoField = document.getElementById("cbn_location_video");
     if (videoField && location.video) {
         videoField.value = location.video;
     }
@@ -1650,25 +1650,25 @@ const OUMFormController = (function () {
             if (!field || typeof field.index === 'undefined') return;
 
             if (field.fieldtype === 'checkbox') {
-                const fieldValues = Array.isArray(field.val) ? field.val : [field.val];
-                const checkboxes = document.querySelectorAll(
+                let fieldValues = Array.isArray(field.val) ? field.val : [field.val];
+                let checkboxes = document.querySelectorAll(
                     `input[type="checkbox"][name="cbn_location_custom_fields[${field.index}][]"]`
                 );
-                
+
                 if (checkboxes.length > 0) {
                     checkboxes.forEach(checkbox => {
                         if (checkbox) {
-                            const checkboxValue = checkbox.value.trim();
-                            const normalizedValues = fieldValues.map(val => (val || '').toString().trim());
+                            let checkboxValue = checkbox.value.trim();
+                            let normalizedValues = fieldValues.map(val => (val || '').toString().trim());
                             checkbox.checked = normalizedValues.includes(checkboxValue);
                         }
                     });
                 }
             } else if (field.fieldtype === 'radio') {
-                const radioInputs = document.querySelectorAll(
+                let radioInputs = document.querySelectorAll(
                     `input[type="radio"][name="cbn_location_custom_fields[${field.index}]"]`
                 );
-                
+
                 if (radioInputs.length > 0) {
                     radioInputs.forEach(radio => {
                         if (radio) {
@@ -1677,7 +1677,7 @@ const OUMFormController = (function () {
                     });
                 }
             } else {
-                const input = document.querySelector(`[name="cbn_location_custom_fields[${field.index}]"]`);
+                let input = document.querySelector(`[name="cbn_location_custom_fields[${field.index}]"]`);
                 if (input) {
                     input.value = field.val || '';
                 }
@@ -1687,35 +1687,35 @@ const OUMFormController = (function () {
 
     // Handle images
     if (location.image) {
-      const imageUrls = location.image.split('|').filter(url => url);
-      const previewContainer = document.getElementById('cbn_location_images_preview');
-      
+      let imageUrls = location.image.split('|').filter(url => url);
+      let previewContainer = document.getElementById('cbn_location_images_preview');
+
       if (previewContainer) {
         previewContainer.innerHTML = '';
-        
+
         imageUrls.forEach(url => {
           if (!url) return;
-          
-          const previewItem = document.createElement('div');
+
+          let previewItem = document.createElement('div');
           previewItem.className = 'image-preview-item existing-image';
           previewItem.dataset.url = url;
-          
+
           previewItem.innerHTML = `
             <img src="${url}" alt="Preview">
             <div class="remove-image" title="Remove image">&times;</div>
             <div class="drag-handle" title="Drag to reorder">⋮⋮</div>
             <input type="hidden" name="existing_images[]" value="${url}">
           `;
-          
+
           // Add event listener for remove button
-          const removeButton = previewItem.querySelector('.remove-image');
+          let removeButton = previewItem.querySelector('.remove-image');
           if (removeButton) {
             removeButton.addEventListener('click', OUMMedia.handleRemoveImage);
           }
-          
+
           // Set up drag and drop for existing images
           OUMMedia.setupDragAndDrop(previewItem);
-          
+
           previewItem.style.opacity = "0";
           previewItem.style.transform = "scale(0.9)";
           previewItem.style.transition = "all 0.3s ease";
@@ -1744,17 +1744,17 @@ const OUMFormController = (function () {
     currentLocationId = null;
     selectedFiles = [];
     window.oumSelectedFiles = [];
-    
-    const addLocationEl = document.querySelector(".add-location");
+
+    let addLocationEl = document.querySelector(".add-location");
     if (addLocationEl) {
       addLocationEl.classList.remove("edit-location");
     }
-    
+
     // Reset form and message system
-    const form = document.getElementById("cbn_add_location");
-    const errorDiv = document.getElementById("cbn_add_location_error");
-    const thankyouDiv = document.getElementById("cbn_add_location_thankyou");
-    
+    let form = document.getElementById("cbn_add_location");
+    let errorDiv = document.getElementById("cbn_add_location_error");
+    let thankyouDiv = document.getElementById("cbn_add_location_thankyou");
+
     // Reset form if it exists
     if (form) {
       form.reset();
@@ -1762,7 +1762,7 @@ const OUMFormController = (function () {
     }
 
     // Reset custom fields
-    const customFields = document.querySelectorAll('[name^="cbn_location_custom_fields"]');
+    let customFields = document.querySelectorAll('[name^="cbn_location_custom_fields"]');
     if (customFields) {
       customFields.forEach(field => {
         if (field.type === 'checkbox' || field.type === 'radio') {
@@ -1776,13 +1776,13 @@ const OUMFormController = (function () {
     }
 
     // Reset post_id field
-    const postIdField = document.getElementById("cbn_post_id");
+    let postIdField = document.getElementById("cbn_post_id");
     if (postIdField) {
       postIdField.value = "";
     }
 
     // Reset cbn_delete_location field
-    const deleteLocationField = document.getElementById("cbn_delete_location");
+    let deleteLocationField = document.getElementById("cbn_delete_location");
     if (deleteLocationField) {
         deleteLocationField.value = "";
     }
@@ -1799,49 +1799,49 @@ const OUMFormController = (function () {
     }
 
     // Reset image preview
-    const previewContainer = document.getElementById("cbn_location_images_preview");
+    let previewContainer = document.getElementById("cbn_location_images_preview");
     if (previewContainer) {
       previewContainer.innerHTML = "";
     }
 
     // Reset audio preview
-    const audioInput = document.getElementById("cbn_location_audio");
+    let audioInput = document.getElementById("cbn_location_audio");
     if (audioInput) {
-      const previewContainer = audioInput.nextElementSibling;
-      const previewDiv = previewContainer.querySelector('.audio-preview');
-      
+      let previewContainer = audioInput.nextElementSibling;
+      let previewDiv = previewContainer.querySelector('.audio-preview');
+
       // Clear the file input
       audioInput.value = "";
-      
+
       // Clear the preview
       if (previewDiv) {
         previewDiv.innerHTML = '';
       }
-      
+
       // Remove active state
       previewContainer.classList.remove("active");
     }
 
     // Reset hidden fields
-    const removeExistingImage = document.getElementById("cbn_remove_existing_image");
+    let removeExistingImage = document.getElementById("cbn_remove_existing_image");
     if (removeExistingImage) {
       removeExistingImage.value = "0";
     }
 
-    const removeExistingAudio = document.getElementById("cbn_remove_existing_audio");
+    let removeExistingAudio = document.getElementById("cbn_remove_existing_audio");
     if (removeExistingAudio) {
       removeExistingAudio.value = "0";
     }
 
     // Reset author section
-    const authorSection = document.getElementById("cbn_author");
+    let authorSection = document.getElementById("cbn_author");
     if (authorSection) {
       authorSection.classList.remove("active");
     }
 
     // Reset name and email fields
-    const nameField = document.getElementById("cbn_location_author_name");
-    const emailField = document.getElementById("cbn_location_author_email");
+    let nameField = document.getElementById("cbn_location_author_name");
+    let emailField = document.getElementById("cbn_location_author_email");
     if (nameField && emailField) {
       nameField.required = false;
       emailField.required = false;
@@ -1871,18 +1871,18 @@ const OUMFormController = (function () {
 /**
  * Media Module - Handles image upload and preview functionality
  */
-const OUMMedia = (function () {
+let OUMMedia = (function () {
   // Private variables
   let selectedFiles = [];
   let startX, startY, originalPosition, placeholder;
   let isDragging = false;
-  
+
   // Private functions
   function initializeImageUpload(imageInput) {
     if (!imageInput) return;
 
     // Add click handler for upload icon label
-    const uploadLabel = imageInput.parentElement.querySelector(
+    let uploadLabel = imageInput.parentElement.querySelector(
       'label[for="cbn_location_images"]'
     );
     if (uploadLabel) {
@@ -1904,11 +1904,11 @@ const OUMMedia = (function () {
   }
 
   function initializeAudioUpload() {
-    const audioInput = document.getElementById('cbn_location_audio');
+    let audioInput = document.getElementById('cbn_location_audio');
     if (!audioInput) return;
 
     // Add click handler for upload icon label
-    const uploadLabel = audioInput.parentElement.querySelector(
+    let uploadLabel = audioInput.parentElement.querySelector(
       'label[for="cbn_location_audio"]'
     );
     if (uploadLabel) {
@@ -1923,26 +1923,26 @@ const OUMMedia = (function () {
   }
 
   function handleAudioInputChange(e) {
-    const audioInput = e.target;
-    const previewContainer = audioInput.nextElementSibling;
-    const previewDiv = previewContainer.querySelector('.audio-preview');
-    
+    let audioInput = e.target;
+    let previewContainer = audioInput.nextElementSibling;
+    let previewDiv = previewContainer.querySelector('.audio-preview');
+
     if (audioInput.files && audioInput.files[0]) {
-      const file = audioInput.files[0];
-      
+      let file = audioInput.files[0];
+
       previewContainer.classList.add('active');
 
       // Create audio preview element
-      const audio = document.createElement('audio');
+      let audio = document.createElement('audio');
       audio.controls = true;
       audio.style.width = '100%';
-      
-      const source = document.createElement('source');
+
+      let source = document.createElement('source');
       source.src = URL.createObjectURL(file);
       source.type = file.type;
-      
+
       audio.appendChild(source);
-      
+
       // Replace existing audio preview if any
       previewDiv.innerHTML = '';
       previewDiv.appendChild(audio);
@@ -1952,43 +1952,43 @@ const OUMMedia = (function () {
   function setExistingAudio(audioUrl) {
     if (!audioUrl) return;
 
-    const audioInput = document.getElementById('cbn_location_audio');
+    let audioInput = document.getElementById('cbn_location_audio');
     if (!audioInput) return;
 
-    const previewContainer = audioInput.nextElementSibling;
-    const previewDiv = previewContainer.querySelector('.audio-preview');
-    
+    let previewContainer = audioInput.nextElementSibling;
+    let previewDiv = previewContainer.querySelector('.audio-preview');
+
     previewContainer.classList.add('active');
 
     // Create audio preview element
-    const audio = document.createElement('audio');
+    let audio = document.createElement('audio');
     audio.controls = true;
     audio.style.width = '100%';
-    
-    const source = document.createElement('source');
+
+    let source = document.createElement('source');
     source.src = audioUrl;
     source.type = 'audio/' + audioUrl.split('.').pop();
-    
+
     audio.appendChild(source);
-    
+
     // Replace existing audio preview if any
     previewDiv.innerHTML = '';
     previewDiv.appendChild(audio);
   }
 
   function handleImageInputChange(e) {
-    const imageInput = e.target;
-    const previewContainer = document.getElementById(
+    let imageInput = e.target;
+    let previewContainer = document.getElementById(
       "cbn_location_images_preview"
     );
-    const maxFiles = parseInt(imageInput.dataset.maxFiles) || 5;
-    const maxFileSize = OUMConfig.defaults.media.maxImageSize; // in bytes
-    
+    let maxFiles = parseInt(imageInput.dataset.maxFiles) || 5;
+    let maxFileSize = OUMConfig.defaults.media.maxImageSize; // in bytes
+
     // Convert FileList to Array and store in a variable
-    const files = Array.prototype.slice.call(e.target.files);
-    const existingCount = selectedFiles.length;
-    const totalFiles = existingCount + files.length;
-    
+    let files = Array.prototype.slice.call(e.target.files);
+    let existingCount = selectedFiles.length;
+    let totalFiles = existingCount + files.length;
+
     if (totalFiles > maxFiles) {
       alert(
         wp.i18n.sprintf(
@@ -1999,15 +1999,15 @@ const OUMMedia = (function () {
         )
       );
     }
-    
+
     // Process only up to remaining slots
-    const remainingSlots = maxFiles - existingCount;
-    const filesToProcess = files.slice(0, remainingSlots);
-    
+    let remainingSlots = maxFiles - existingCount;
+    let filesToProcess = files.slice(0, remainingSlots);
+
     // Validate file sizes and collect valid files
-    const validFiles = [];
-    const invalidFiles = [];
-    
+    let validFiles = [];
+    let invalidFiles = [];
+
     filesToProcess.forEach(file => {
       if (file.size > maxFileSize) {
         invalidFiles.push(file.name);
@@ -2015,10 +2015,10 @@ const OUMMedia = (function () {
         validFiles.push(file);
       }
     });
-    
+
     // Show error message for invalid files
     if (invalidFiles.length > 0) {
-      const maxSizeMB = Math.round(maxFileSize / (1024 * 1024));
+      let maxSizeMB = Math.round(maxFileSize / (1024 * 1024));
       alert(
         wp.i18n.sprintf(
           /* translators: %1$d: maximum file size in MB, %2$s: list of files */
@@ -2028,10 +2028,10 @@ const OUMMedia = (function () {
         )
       );
     }
-    
+
     // Update selected files with only valid ones
     selectedFiles = [...selectedFiles, ...validFiles];
-    
+
     // Create previews for valid files only
     createImagePreviews(validFiles, previewContainer);
 
@@ -2041,10 +2041,10 @@ const OUMMedia = (function () {
 
   function createImagePreviews(files, container) {
     files.forEach((file) => {
-      const reader = new FileReader();
-      
+      let reader = new FileReader();
+
       reader.onload = function (e) {
-        const previewItem = createPreviewItem(e.target.result, file.name);
+        let previewItem = createPreviewItem(e.target.result, file.name);
 
         // Add the item with a fade-in animation
         previewItem.style.opacity = "0";
@@ -2064,22 +2064,22 @@ const OUMMedia = (function () {
   }
 
   function createPreviewItem(imgSrc, fileName) {
-    const previewItem = document.createElement("div");
+    let previewItem = document.createElement("div");
     previewItem.className = "image-preview-item";
     previewItem.dataset.fileName = fileName;
-    
+
     previewItem.innerHTML = `
       <img src="${imgSrc}" alt="Preview">
       <div class="remove-image" title="Remove image">&times;</div>
       <div class="drag-handle" title="Drag to reorder">⋮⋮</div>
     `;
-    
+
     // Add event listener for remove button
-    const removeButton = previewItem.querySelector('.remove-image');
+    let removeButton = previewItem.querySelector('.remove-image');
     if (removeButton) {
       removeButton.addEventListener('click', handleRemoveImage);
     }
-    
+
     // Set up drag and drop for existing images
     setupDragAndDrop(previewItem);
 
@@ -2088,18 +2088,18 @@ const OUMMedia = (function () {
 
   function handleRemoveImage(e) {
     e.preventDefault();
-    const previewItem = this.closest(".image-preview-item");
-    
+    let previewItem = this.closest(".image-preview-item");
+
     // If it's an existing image, handle removal differently
     if (previewItem.classList.contains("existing-image")) {
-      const imgUrl = previewItem.querySelector("[name='existing_images[]']").value;
-      const removedImagesInput = document.getElementById("cbn_remove_existing_image");
-      const currentValue = removedImagesInput.value === "0" ? [] : removedImagesInput.value.split('|');
+      let imgUrl = previewItem.querySelector("[name='existing_images[]']").value;
+      let removedImagesInput = document.getElementById("cbn_remove_existing_image");
+      let currentValue = removedImagesInput.value === "0" ? [] : removedImagesInput.value.split('|');
       currentValue.push(imgUrl);
       removedImagesInput.value = currentValue.join('|');
     } else {
       // Remove from selectedFiles array if it's a new image
-      const fileName = previewItem.dataset.fileName;
+      let fileName = previewItem.dataset.fileName;
       selectedFiles = selectedFiles.filter(file => file.name !== fileName);
       window.oumSelectedFiles = selectedFiles;
     }
@@ -2108,7 +2108,7 @@ const OUMMedia = (function () {
     previewItem.style.transition = "all 0.3s ease";
     previewItem.style.transform = "scale(0.8)";
     previewItem.style.opacity = "0";
-    
+
     setTimeout(() => {
       previewItem.remove();
     }, 300);
@@ -2116,7 +2116,7 @@ const OUMMedia = (function () {
 
   function setupDragAndDrop(previewItem) {
     previewItem.setAttribute('draggable', 'true');
-    
+
     previewItem.addEventListener('mousedown', function(e) {
       if (e.target.classList.contains('remove-image')) return;
 
@@ -2124,7 +2124,7 @@ const OUMMedia = (function () {
       this.classList.add('dragging');
 
       // Get element dimensions once at start
-      const rect = this.getBoundingClientRect();
+      let rect = this.getBoundingClientRect();
       this.style.width = rect.width + 'px';
       this.style.height = rect.height + 'px';
 
@@ -2133,7 +2133,7 @@ const OUMMedia = (function () {
 
       // Create placeholder immediately
       createPlaceholder(this);
-      
+
       // Set up dragged element
       this.style.position = 'fixed';
       this.style.zIndex = '1000';
@@ -2147,7 +2147,7 @@ const OUMMedia = (function () {
 
       document.body.style.cursor = 'grabbing';
     });
-    
+
     previewItem.addEventListener('touchstart', handleTouchStart);
   }
 
@@ -2164,30 +2164,30 @@ const OUMMedia = (function () {
   }
 
   function moveDraggedElement(draggable, e) {
-    const rect = draggable.getBoundingClientRect();
-    const centerOffsetX = rect.width / 2;
-    const centerOffsetY = rect.height / 2;
-    
+    let rect = draggable.getBoundingClientRect();
+    let centerOffsetX = rect.width / 2;
+    let centerOffsetY = rect.height / 2;
+
     // Position element directly at cursor with center offset
     draggable.style.left = (e.clientX - centerOffsetX) + 'px';
     draggable.style.top = (e.clientY - centerOffsetY) + 'px';
   }
 
   function updatePlaceholderPosition(e) {
-    const previewContainer = document.getElementById("cbn_location_images_preview");
+    let previewContainer = document.getElementById("cbn_location_images_preview");
     if (!previewContainer) return;
 
-    const draggable = document.querySelector('.dragging');
+    let draggable = document.querySelector('.dragging');
     if (!draggable) return;
 
-    const siblings = [...previewContainer.querySelectorAll(".image-preview-item:not(.dragging)")];
-    
+    let siblings = [...previewContainer.querySelectorAll(".image-preview-item:not(.dragging)")];
+
     // Find the closest sibling based on mouse position
-    const closestSibling = siblings.reduce((closest, child) => {
-      const rect = child.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const offset = e.clientX - centerX;
-      
+    let closestSibling = siblings.reduce((closest, child) => {
+      let rect = child.getBoundingClientRect();
+      let centerX = rect.left + rect.width / 2;
+      let offset = e.clientX - centerX;
+
       if (offset < 0 && (!closest.element || offset > closest.offset)) {
         return { offset: offset, element: child };
       }
@@ -2204,20 +2204,20 @@ const OUMMedia = (function () {
   function handleDragMove(e) {
     if (!isDragging) return;
 
-    const draggable = document.querySelector(".dragging");
+    let draggable = document.querySelector(".dragging");
     if (!draggable) return;
 
     // Update dragged element position
     moveDraggedElement(draggable, e);
-    
+
     // Check if cursor is still within any grid container
-    const gridContainer = document.getElementById("cbn_location_images_preview");
+    let gridContainer = document.getElementById("cbn_location_images_preview");
     if (!gridContainer) return;
 
-    const gridRect = gridContainer.getBoundingClientRect();
-    const isWithinGrid = e.clientX >= gridRect.left - 50 && 
-                        e.clientX <= gridRect.right + 50 && 
-                        e.clientY >= gridRect.top - 50 && 
+    let gridRect = gridContainer.getBoundingClientRect();
+    let isWithinGrid = e.clientX >= gridRect.left - 50 &&
+                        e.clientX <= gridRect.right + 50 &&
+                        e.clientY >= gridRect.top - 50 &&
                         e.clientY <= gridRect.bottom + 50;
 
     // If cursor is outside grid boundaries, hide placeholder
@@ -2230,14 +2230,14 @@ const OUMMedia = (function () {
   }
 
   function handleDragEnd() {
-    const draggable = document.querySelector(".dragging");
+    let draggable = document.querySelector(".dragging");
     if (!draggable) return;
 
     // Reset cursor
     document.body.style.cursor = "";
 
     // Check if we're still within the grid
-    const gridContainer = document.getElementById("cbn_location_images_preview");
+    let gridContainer = document.getElementById("cbn_location_images_preview");
     if (!gridContainer) {
       // If no grid found, return item to its initial position
       if (draggable.initialContainer) {
@@ -2275,8 +2275,8 @@ const OUMMedia = (function () {
   }
 
   function handleTouchStart(e) {
-    const touch = e.touches[0];
-    const mouseEvent = new MouseEvent("mousedown", {
+    let touch = e.touches[0];
+    let mouseEvent = new MouseEvent("mousedown", {
       clientX: touch.clientX,
       clientY: touch.clientY
     });
@@ -2287,10 +2287,10 @@ const OUMMedia = (function () {
     e.preventDefault();
     e.stopPropagation();
 
-    const draggable = document.querySelector(".dragging");
+    let draggable = document.querySelector(".dragging");
     if (!draggable) return;
 
-    const afterElement = getDragAfterElement(this, e.clientX);
+    let afterElement = getDragAfterElement(this, e.clientX);
     if (afterElement == null) {
       this.appendChild(placeholder);
     } else {
@@ -2326,10 +2326,10 @@ window.addEventListener("load", function () {
   window.L = window.OUMLeaflet.L;
 
   // Initialize map and get instance
-  const mapInstance = OUMMap.init(map_el);
+  let mapInstance = OUMMap.init(map_el);
 
   // Initialize markers
-  const markersModule = OUMMarkers.init(mapInstance);
+  let markersModule = OUMMarkers.init(mapInstance);
 
   // Add markers from the global cbn_all_locations
   if (
@@ -2349,12 +2349,12 @@ window.addEventListener("load", function () {
   OUMMedia.init();
 
   // Setup filter events
-  const markerFilterInput = document.getElementById("cbn_filter_markers");
+  let markerFilterInput = document.getElementById("cbn_filter_markers");
   if (markerFilterInput) {
     markerFilterInput.addEventListener("input", OUMMarkers.filterMarkers);
   }
 
-  const categoryInputs = document.querySelectorAll(
+  let categoryInputs = document.querySelectorAll(
     '.Compass .oum-filter-controls [name="type"]'
   );
   if (categoryInputs.length > 0) {
@@ -2367,13 +2367,13 @@ window.addEventListener("load", function () {
   if (typeof custom_js !== "undefined" && custom_js.snippet) {
     try {
       // Wrap custom JS execution in a try-catch with proper element existence checks
-      const wrappedJS = `
+      let wrappedJS = `
         try {
           if (typeof document !== 'undefined') {
             // Defer map2-related code execution
             if (${custom_js.snippet.includes("oumMap2")}) {
               // Create a MutationObserver to watch for the form map initialization
-              const observer = new MutationObserver((mutations) => {
+              let observer = new MutationObserver((mutations) => {
                 if (window.oumMap2) {
                   // Execute the custom JS only when oumMap2 is available
                   try {

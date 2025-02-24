@@ -3,22 +3,22 @@ document.addEventListener('DOMContentLoaded', function(e) {
   // Event: "Add location" Button click
   if(document.getElementById('mapGetLocation') != null) {
     //init map
-    const map = L.map('mapGetLocation', {
+    let map = L.map('mapGetLocation', {
       attributionControl: true,
       gestureHandling: true,
     });
 
     map.attributionControl.setPrefix(false);
 
-    const enableCurrentLocation = cbn_enable_currentlocation ? true : false;
+    let enableCurrentLocation = !!cbn_enable_currentlocation;
 
     // Activate Map inside overlay
     (function (){
 
-      let markerIsVisible = false;
+      let markerIsVisible = false, cbn_geosearch_selected_provider;
     
       // Set map style
-      if (mapStyle == 'Custom1') {
+      if (mapStyle === 'Custom1') {
 
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png').addTo(map);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
           zoomOffset: -1
         }).addTo(map);
 
-      } else if (mapStyle == 'Custom2') {
+      } else if (mapStyle === 'Custom2') {
 
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png').addTo(map);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
           zoomOffset: -1
         }).addTo(map);
 
-      } else if (mapStyle == 'Custom3') {
+      } else if (mapStyle === 'Custom3') {
 
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png').addTo(map);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
@@ -42,42 +42,42 @@ document.addEventListener('DOMContentLoaded', function(e) {
           zoomOffset: -1
         }).addTo(map);
 
-      } else if (mapStyle == 'MapBox.streets') {
+      } else if (mapStyle === 'MapBox.streets') {
 
         L.tileLayer.provider('MapBox', {
           id: 'mapbox/streets-v12',
           accessToken: cbn_tile_provider_mapbox_key
         }).addTo(map);
 
-      } else if (mapStyle == 'MapBox.outdoors') {
+      } else if (mapStyle === 'MapBox.outdoors') {
 
         L.tileLayer.provider('MapBox', {
           id: 'mapbox/outdoors-v12',
           accessToken: cbn_tile_provider_mapbox_key
         }).addTo(map);
 
-      } else if (mapStyle == 'MapBox.light') {
+      } else if (mapStyle === 'MapBox.light') {
 
         L.tileLayer.provider('MapBox', {
           id: 'mapbox/light-v11',
           accessToken: cbn_tile_provider_mapbox_key
         }).addTo(map);
 
-      } else if (mapStyle == 'MapBox.dark') {
+      } else if (mapStyle === 'MapBox.dark') {
 
         L.tileLayer.provider('MapBox', {
           id: 'mapbox/dark-v11',
           accessToken: cbn_tile_provider_mapbox_key
         }).addTo(map);
 
-      } else if (mapStyle == 'MapBox.satellite') {
+      } else if (mapStyle === 'MapBox.satellite') {
 
         L.tileLayer.provider('MapBox', {
           id: 'mapbox/satellite-v9',
           accessToken: cbn_tile_provider_mapbox_key
         }).addTo(map);
 
-      } else if (mapStyle == 'MapBox.satellite-streets') {
+      } else if (mapStyle === 'MapBox.satellite-streets') {
 
         L.tileLayer.provider('MapBox', {
           id: 'mapbox/satellite-streets-v12',
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
           break;
       }
     
-      const search = new GeoSearch.GeoSearchControl({
+      let search = new GeoSearch.GeoSearchControl({
           style: 'bar',
           showMarker: false,
           provider: cbn_geosearch_selected_provider,

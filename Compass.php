@@ -20,7 +20,7 @@ defined('ABSPATH') or die('Direct access is not allowed.');
 if (class_exists('CompassPlugin\\Init')) {
     try {
         CompassPlugin\Init::register_services();
-    } catch (\Error $e) {
+    } catch (Error $e) {
         error_log('Compass Plugin Error: ' . $e->getMessage() . ' (' . $e->getFile() . ' Line: ' . $e->getLine() . ')');
         return 'An error has occurred. Please check Compass > Help > Debug Info.';
     }
@@ -48,7 +48,7 @@ function cbn_get_location_value($attr, $post_id, $raw = false)
 /**
  * Allow overriding templates in the theme directory
  */
-function cbn_get_template($template_name)
+function cbn_get_template($template_name): string
 {
     $theme_template = get_stylesheet_directory() . '/Compass/' . $template_name;
     $plugin_template = plugin_dir_path(__FILE__) . 'templates/' . $template_name;

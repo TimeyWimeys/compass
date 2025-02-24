@@ -132,45 +132,6 @@ $search_input_width: 300px;
   position: relative;
   z-index: 1;
 
-  /* resets */
-  img {
-    display: inherit;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    border-radius: 0;
-    max-width: inherit;
-  }
-
-  input[type="radio"], 
-  input[type="checkbox"] {
-    margin: inherit;
-    padding: inherit;
-  }
-
-  input[type=text] {
-    background-color: #fff;
-    color: #333;
-    border-radius: 0;
-    font-size: 16px;
-  }
-
-  h1, h2, h3, h4 {
-    margin: 0;
-    padding: 0;
-    display: inherit;
-  }
-
-  button {
-    margin: 0;
-    padding: 0;
-  }
-
-  .elementor-widget-Compass_widget {
-    width: 100%;
-  }
-  /* end resets */
-
   $marker_size: 22px;
   $info_width: 320px;
 
@@ -192,7 +153,6 @@ $search_input_width: 300px;
       font-size: 1rem;
       line-height: 22px;
       padding-left: 50px;
-      position: relative;
       margin-left: 4px !important;
       margin-top: -16px;
 
@@ -208,7 +168,7 @@ $search_input_width: 300px;
         transition: background-color 0.5s linear;
         z-index: 5;
         position: absolute;
-        left: 0px;
+        left: 0;
         top: 1px;
       }
 
@@ -220,7 +180,7 @@ $search_input_width: 300px;
         background-color: #fff;
         content: "";
         transition: margin 0.1s linear;
-        box-shadow: 0px 0px 5px #aaa;
+        box-shadow: 0 0 5px #aaa;
         position: absolute;
         left: 2px;
         top: 3px;
@@ -455,7 +415,6 @@ $search_input_width: 300px;
   
                 a[href*=facebook] {
                   display: inline-block;
-                  margin: 6px 1px;
                   top: -2px;
                   position: relative;
                   width: 20px;
@@ -468,7 +427,6 @@ $search_input_width: 300px;
   
                 a[href*=instagram] {
                   display: inline-block;
-                  margin: 6px 1px;
                   top: -2px;
                   position: relative;
                   width: 20px;
@@ -481,7 +439,6 @@ $search_input_width: 300px;
   
                 a[href*=linkedin] {
                   display: inline-block;
-                  margin: 6px 1px;
                   top: -2px;
                   position: relative;
                   width: 20px;
@@ -494,7 +451,6 @@ $search_input_width: 300px;
   
                 a[href*=twitter] {
                   display: inline-block;
-                  margin: 6px 1px;
                   top: -2px;
                   position: relative;
                   width: 20px;
@@ -507,7 +463,6 @@ $search_input_width: 300px;
   
                 a[href*=youtube] {
                   display: inline-block;
-                  margin: 6px 1px;
                   top: -2px;
                   position: relative;
                   width: 20px;
@@ -520,7 +475,6 @@ $search_input_width: 300px;
   
                 a[href*=soundcloud] {
                   display: inline-block;
-                  margin: 6px 1px;
                   top: -2px;
                   position: relative;
                   width: 20px;
@@ -753,7 +707,6 @@ $search_input_width: 300px;
                 padding: 0 8px;
                 border: none;
                 box-shadow: none;
-                margin: 0;
                 outline: none;
                 font-size: 14px;
                 opacity: 0.5;
@@ -832,7 +785,6 @@ $search_input_width: 300px;
                 padding: 0 8px;
                 border: none;
                 box-shadow: none;
-                margin: 0;
                 outline: none;
                 font-size: 14px;
                 opacity: 0.5;
@@ -1019,14 +971,13 @@ $search_input_width: 300px;
           display: none;
           background: rgba(255, 255, 255, 0.95);
           color: #333;
-          padding: 6px;
           border: 1px solid rgba(0, 0, 0, 0.2);
           border-radius: 5px;
           position: relative;
           z-index: 2;
           flex-direction: column;
           gap: 5px;
-          padding-right: 30px;
+          padding: 6px 30px 6px 6px;
 
           label {
             display: flex;
@@ -1043,7 +994,6 @@ $search_input_width: 300px;
               top: 2px;
               appearance: auto;
               accent-color: map-get($colors, "primary");
-              position: relative;
               width: 16px;
               height: 16px;
               flex-shrink: 0;
@@ -1102,7 +1052,7 @@ $search_input_width: 300px;
         padding: 3px 6px;
         margin: 0;
         line-height: 1;
-        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
 
@@ -1428,7 +1378,6 @@ $search_input_width: 300px;
                     padding: 0 8px;
                     border: none;
                     box-shadow: none;
-                    margin: 0;
                     outline: none;
                     font-size: 14px;
                     opacity: 0.5;
@@ -1816,7 +1765,6 @@ $search_input_width: 300px;
             background-image: url(images/loading.gif);
             background-repeat: no-repeat;
             background-position: center center;
-            background-size: 30px;
             background-size: 40px;
             width: 100px;
             opacity: 0.6;
@@ -1863,7 +1811,6 @@ $search_input_width: 300px;
         }
 
         button {
-          margin: 30px 0 0;
           cursor: pointer;
           font-size: 19px;
           margin: 40px 0 10px;
@@ -1991,7 +1938,6 @@ $search_input_width: 300px;
                 padding: 0 8px;
                 border: none;
                 box-shadow: none;
-                margin: 0;
                 outline: none;
                 font-size: 14px;
                 opacity: 0.5;
@@ -2144,7 +2090,6 @@ $search_input_width: 300px;
     
             a[href*=facebook] {
               display: inline-block;
-              margin: 6px 1px;
               top: -2px;
               position: relative;
               width: 20px;
@@ -2157,7 +2102,6 @@ $search_input_width: 300px;
     
             a[href*=instagram] {
               display: inline-block;
-              margin: 6px 1px;
               top: -2px;
               position: relative;
               width: 20px;
@@ -2170,7 +2114,6 @@ $search_input_width: 300px;
     
             a[href*=linkedin] {
               display: inline-block;
-              margin: 6px 1px;
               top: -2px;
               position: relative;
               width: 20px;
@@ -2183,7 +2126,6 @@ $search_input_width: 300px;
     
             a[href*=twitter] {
               display: inline-block;
-              margin: 6px 1px;
               top: -2px;
               position: relative;
               width: 20px;
@@ -2196,7 +2138,6 @@ $search_input_width: 300px;
     
             a[href*=youtube] {
               display: inline-block;
-              margin: 6px 1px;
               top: -2px;
               position: relative;
               width: 20px;
@@ -2209,7 +2150,6 @@ $search_input_width: 300px;
     
             a[href*=soundcloud] {
               display: inline-block;
-              margin: 6px 1px;
               top: -2px;
               position: relative;
               width: 20px;
@@ -2574,12 +2514,10 @@ $search_input_width: 300px;
           background: url(images/ico_facebook_50x50.png) no-repeat center center transparent;
           background-size: contain;
           text-indent: -9999px;
-          margin: 6px 0;
         }
 
         a[href*=instagram] {
           display: inline-block;
-          margin: 6px 1px;
           top: -2px;
           position: relative;
           width: 20px;
@@ -2592,7 +2530,6 @@ $search_input_width: 300px;
 
         a[href*=linkedin] {
           display: inline-block;
-          margin: 6px 1px;
           top: -2px;
           position: relative;
           width: 20px;
@@ -2605,7 +2542,6 @@ $search_input_width: 300px;
 
         a[href*=twitter] {
           display: inline-block;
-          margin: 6px 1px;
           top: -2px;
           position: relative;
           width: 20px;
@@ -2618,7 +2554,6 @@ $search_input_width: 300px;
 
         a[href*=youtube] {
           display: inline-block;
-          margin: 6px 1px;
           top: -2px;
           position: relative;
           width: 20px;
@@ -2631,7 +2566,6 @@ $search_input_width: 300px;
 
         a[href*=soundcloud] {
           display: inline-block;
-          margin: 6px 1px;
           top: -2px;
           position: relative;
           width: 20px;

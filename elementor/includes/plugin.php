@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace Elementor_cbn_Addon;
 

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function(e) {
+document.addEventListener('DOMContentLoaded', function() {
   // Event: "Add Location"-Form send
   jQuery('#cbn_add_location').submit(function(event) {
     jQuery('#cbn_submit_btn').addClass('oum-loading');
@@ -7,21 +7,21 @@ document.addEventListener('DOMContentLoaded', function(e) {
     let formData = new FormData(this);
 
     // Get all images (both existing and new) in their current order
-    const previewContainer = document.getElementById('cbn_location_images_preview');
-    const previewItems = previewContainer.querySelectorAll('.image-preview-item');
-    const imageOrder = [];
+    let previewContainer = document.getElementById('cbn_location_images_preview');
+    let previewItems = previewContainer.querySelectorAll('.image-preview-item');
+    let imageOrder = [];
 
     // Add existing and new images to formData in their current order
     previewItems.forEach((item, index) => {
       if (item.classList.contains('existing-image')) {
         // For existing images, get the URL from the hidden input
-        const imgUrl = item.querySelector('[name="existing_images[]"]').value;
+        let imgUrl = item.querySelector('[name="existing_images[]"]').value;
         formData.append('existing_images[]', imgUrl);
         imageOrder.push('existing:' + imgUrl);
       } else {
         // For new images, get the file from selectedFiles using the filename
-        const fileName = item.dataset.fileName;
-        const file = window.oumSelectedFiles.find(f => f.name === fileName);
+        let fileName = item.dataset.fileName;
+        let file = window.oumSelectedFiles.find(f => f.name === fileName);
         if (file) {
           formData.append('cbn_location_images[]', file);
           imageOrder.push('new:' + fileName);
@@ -44,10 +44,10 @@ document.addEventListener('DOMContentLoaded', function(e) {
       success: function (response, textStatus, XMLHttpRequest) {
         jQuery('#cbn_submit_btn').removeClass('oum-loading');
 
-        if(response.success == false) {
+        if(response.success === false) {
           oumShowError(response.data);
         }
-        if(response.success == true) {
+        if(response.success === true) {
           jQuery('#cbn_add_location').trigger('reset');
           
           // Determine message type based on action
@@ -82,9 +82,9 @@ document.addEventListener('DOMContentLoaded', function(e) {
                       window.location.href = thankyou_redirect;
                   } else {
                       // Show thank you message with refresh button (default)
-                      const thankyouDiv = document.getElementById('cbn_add_location_thankyou');
-                      const thankyouHeadline = thankyouDiv?.querySelector('h3')?.textContent || wp.i18n.__('Thank you!', 'Compass');
-                      const thankyouText = thankyouDiv?.querySelector('.oum-add-location-thankyou-text')?.textContent || wp.i18n.__('We will check your location suggestion and release it as soon as possible.', 'Compass');
+                      let thankyouDiv = document.getElementById('cbn_add_location_thankyou');
+                      let thankyouHeadline = thankyouDiv?.querySelector('h3')?.textContent || wp.i18n.__('Thank you!', 'Compass');
+                      let thankyouText = thankyouDiv?.querySelector('.oum-add-location-thankyou-text')?.textContent || wp.i18n.__('We will check your location suggestion and release it as soon as possible.', 'Compass');
                       
                       OUMFormController.showFormMessage(
                           'success',
@@ -98,9 +98,9 @@ document.addEventListener('DOMContentLoaded', function(e) {
                   }
               } else {
                   // Fallback to thank you message with refresh button
-                  const thankyouDiv = document.getElementById('cbn_add_location_thankyou');
-                  const thankyouHeadline = thankyouDiv?.querySelector('h3')?.textContent || wp.i18n.__('Thank you!', 'Compass');
-                  const thankyouText = thankyouDiv?.querySelector('.oum-add-location-thankyou-text')?.textContent || wp.i18n.__('We will check your location suggestion and release it as soon as possible.', 'Compass');
+                  let thankyouDiv = document.getElementById('cbn_add_location_thankyou');
+                  let thankyouHeadline = thankyouDiv?.querySelector('h3')?.textContent || wp.i18n.__('Thank you!', 'Compass');
+                  let thankyouText = thankyouDiv?.querySelector('.oum-add-location-thankyou-text')?.textContent || wp.i18n.__('We will check your location suggestion and release it as soon as possible.', 'Compass');
                   
                   OUMFormController.showFormMessage(
                       'success',
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
   });
 
   function oumShowError(errors) {
-    const errorWrapEl = jQuery('#cbn_add_location_error');
+    let errorWrapEl = jQuery('#cbn_add_location_error');
     errorWrapEl.html('');
     errors.forEach(error => {
       errorWrapEl.append(error.message + '<br>');

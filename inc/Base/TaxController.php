@@ -6,8 +6,6 @@
 
 namespace CompassPlugin\Base;
 
-use CompassPlugin\Base\BaseController;
-
 class TaxController extends BaseController
 {
     public $settings;
@@ -15,8 +13,10 @@ class TaxController extends BaseController
     public function register()
     {
 
-        if (cbn_fs()->true()):
-            if (cbn_fs()->true()):
+        if (true):
+
+            if (true):
+
 
                 //PRO Feature: use types
                 if (get_option('cbn_enable_marker_types')) {
@@ -85,7 +85,7 @@ class TaxController extends BaseController
         register_taxonomy('cbn-type', 'cbn-location', $args);
     }
 
-    public function type_tax_add_custom_fields($term)
+    public function type_tax_add_custom_fields()
     {
         wp_nonce_field('cbn_location', 'cbn_location_nonce');
 
@@ -95,7 +95,7 @@ class TaxController extends BaseController
         wp_enqueue_script('cbn_backend_type_js', $this->plugin_url . 'src/js/backend-type.js', array('wp-polyfill'), $this->plugin_version);
     }
 
-    public function type_tax_edit_custom_fields($tag, $taxonomy)
+    public function type_tax_edit_custom_fields()
     {
         wp_nonce_field('cbn_location', 'cbn_location_nonce');
 
@@ -149,6 +149,7 @@ class TaxController extends BaseController
                 update_term_meta($term_id, 'cbn_marker_user_icon', $cbn_marker_user_icon_validated);
             }
         }
+        return $term_id;
     }
 
 
@@ -192,7 +193,7 @@ class TaxController extends BaseController
         register_taxonomy('cbn-region', 'cbn-location', $args);
     }
 
-    public function region_tax_add_custom_fields($term)
+    public function region_tax_add_custom_fields()
     {
         wp_nonce_field('cbn_location', 'cbn_location_nonce');
 
@@ -202,7 +203,7 @@ class TaxController extends BaseController
 
     }
 
-    public function region_tax_edit_custom_fields($tag, $taxonomy)
+    public function region_tax_edit_custom_fields()
     {
         wp_nonce_field('cbn_location', 'cbn_location_nonce');
 
@@ -265,6 +266,7 @@ class TaxController extends BaseController
                 update_term_meta($term_id, 'cbn_zoom', $cbn_zoom_validated);
             }
         }
+        return $term_id;
     }
 
     public static function set_custom_region_columns($columns)
@@ -280,13 +282,13 @@ class TaxController extends BaseController
         return $columns;
     }
 
-    public static function set_custom_region_columns_data($content, $column, $term_id)
+    public static function set_custom_region_columns_data($column, $term_id)
     {
         $data = get_term_meta($term_id);
 
-        $lat = isset($data['cbn_lat'][0]) ? $data['cbn_lat'][0] : '';
-        $lng = isset($data['cbn_lng'][0]) ? $data['cbn_lng'][0] : '';
-        $zoom = isset($data['cbn_zoom'][0]) ? $data['cbn_zoom'][0] : '';
+        $lat = $data['cbn_lat'][0] ?? '';
+        $lng = $data['cbn_lng'][0] ?? '';
+        $zoom = $data['cbn_zoom'][0] ?? '';
 
         switch ($column) {
             case 'geocoordinates':

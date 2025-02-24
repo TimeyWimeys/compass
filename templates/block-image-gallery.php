@@ -1,7 +1,7 @@
 <?php
 
 // Get pagination parameters
-$count = isset($block_attributes['number']) && !empty($block_attributes['number']) ? intval($block_attributes['number']) : 12;
+$count = !empty($block_attributes['number']) ? intval($block_attributes['number']) : 12;
 $paged = get_query_var('paged') ? get_query_var('paged') : 1;
 
 $image_list = array();
@@ -47,7 +47,7 @@ $paginated_images = array_slice($image_list, $offset, $count);
   <?php foreach($paginated_images as $image): ?>
     <div class="cbn-gallery-item">
       <a href="<?php echo add_query_arg('markerid', $image['post_id'], $target_url); ?>">
-        <img src="<?php echo $image['image_url']; ?>">
+        <img src="<?php echo $image['image_url']; ?>" alt="">
       </a>
     </div>
   <?php endforeach; ?>

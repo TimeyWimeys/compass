@@ -17,19 +17,19 @@
                     <label class="meta-label" for="cbn_lat">
                         <?php echo __('Lat', 'Compass'); ?>
                     </label>
-                    <input type="text" readonly class="widefat" id="cbn_lat" name="cbn_lat" value="<?php echo esc_attr($start_lat); ?>"></input>
+                    <input type="text" readonly class="widefat" id="cbn_lat" name="cbn_lat" value="<?php echo esc_attr($start_lat); ?>">
                 </div>
                 <div class="form-field lng-wrap">
                     <label class="meta-label" for="cbn_lng">
                         <?php echo __('Lng', 'Compass'); ?>
                     </label>
-                    <input type="text" readonly class="widefat" id="cbn_lng" name="cbn_lng" value="<?php echo esc_attr($start_lng); ?>"></input>
+                    <input type="text" readonly class="widefat" id="cbn_lng" name="cbn_lng" value="<?php echo esc_attr($start_lng); ?>">
                 </div>
                 <div class="form-field zoom-wrap">
                     <label class="meta-label" for="cbn_zoom">
                         <?php echo __('Zoom', 'Compass'); ?>
                     </label>
-                    <input type="text" readonly class="widefat" id="cbn_zoom" name="cbn_zoom" value="<?php echo esc_attr($start_zoom); ?>"></input>
+                    <input type="text" readonly class="widefat" id="cbn_zoom" name="cbn_zoom" value="<?php echo esc_attr($start_zoom); ?>">
                 </div>
             </div>
 

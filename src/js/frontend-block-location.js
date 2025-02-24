@@ -4,17 +4,17 @@ document.addEventListener('DOMContentLoaded', function(e) {
     // Restore the extended L object (OUMLeaflet.L) to the global scope (prevents conflicts with other Leaflet instances)
     window.L = window.OUMLeaflet.L;
 
-    const $el = jQuery('#mapRenderLocation');
-    const lat = $el.data('lat');
-    const lng = $el.data('lng');
-    const zoom = $el.data('zoom');
-    const mapStyle = $el.data('mapstyle');
-    const cbn_tile_provider_mapbox_key = $el.data('tile_provider_mapbox_key');
-    const marker_icon_url = $el.data('marker_icon_url');
-    const marker_shadow_url = $el.data('marker_shadow_url');
+    let $el = jQuery('#mapRenderLocation');
+    let lat = $el.data('lat');
+    let lng = $el.data('lng');
+    let zoom = $el.data('zoom');
+    let mapStyle = $el.data('mapstyle');
+    let cbn_tile_provider_mapbox_key = $el.data('tile_provider_mapbox_key');
+    let marker_icon_url = $el.data('marker_icon_url');
+    let marker_shadow_url = $el.data('marker_shadow_url');
 
 
-    const map = L.map('mapRenderLocation', {
+    let map = L.map('mapRenderLocation', {
         scrollWheelZoom: false,
         attributionControl: true,
     });
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
     map.attributionControl.setPrefix(false);
 
     // Set map style
-    if (mapStyle == 'Custom1') {
+    if (mapStyle === 'Custom1') {
 
       L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png').addTo(map);
       L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
         zoomOffset: -1
       }).addTo(map);
 
-    } else if (mapStyle == 'Custom2') {
+    } else if (mapStyle === 'Custom2') {
 
       L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png').addTo(map);
       L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
         zoomOffset: -1
       }).addTo(map);
 
-    } else if (mapStyle == 'Custom3') {
+    } else if (mapStyle === 'Custom3') {
 
       L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png').addTo(map);
       L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
@@ -46,42 +46,42 @@ document.addEventListener('DOMContentLoaded', function(e) {
         zoomOffset: -1
       }).addTo(map);
 
-    } else if (mapStyle == 'MapBox.streets') {
+    } else if (mapStyle === 'MapBox.streets') {
 
       L.tileLayer.provider('MapBox', {
         id: 'mapbox/streets-v12',
         accessToken: cbn_tile_provider_mapbox_key
       }).addTo(map);
 
-    } else if (mapStyle == 'MapBox.outdoors') {
+    } else if (mapStyle === 'MapBox.outdoors') {
 
       L.tileLayer.provider('MapBox', {
         id: 'mapbox/outdoors-v12',
         accessToken: cbn_tile_provider_mapbox_key
       }).addTo(map);
 
-    } else if (mapStyle == 'MapBox.light') {
+    } else if (mapStyle === 'MapBox.light') {
 
       L.tileLayer.provider('MapBox', {
         id: 'mapbox/light-v11',
         accessToken: cbn_tile_provider_mapbox_key
       }).addTo(map);
 
-    } else if (mapStyle == 'MapBox.dark') {
+    } else if (mapStyle === 'MapBox.dark') {
 
       L.tileLayer.provider('MapBox', {
         id: 'mapbox/dark-v11',
         accessToken: cbn_tile_provider_mapbox_key
       }).addTo(map);
 
-    } else if (mapStyle == 'MapBox.satellite') {
+    } else if (mapStyle === 'MapBox.satellite') {
 
       L.tileLayer.provider('MapBox', {
         id: 'mapbox/satellite-v9',
         accessToken: cbn_tile_provider_mapbox_key
       }).addTo(map);
 
-    } else if (mapStyle == 'MapBox.satellite-streets') {
+    } else if (mapStyle === 'MapBox.satellite-streets') {
 
       L.tileLayer.provider('MapBox', {
         id: 'mapbox/satellite-streets-v12',
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
     let locationMarker = L.marker([lat, lng], {icon: markerIcon}, {
         'draggable': false
     });
-    
+
     if(lat && lng) {
         //location has coordinates
         map.setView([lat, lng], zoom);
