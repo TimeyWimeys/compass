@@ -872,7 +872,7 @@
       }
   
       .hero {
-        background: url(images/block-bg.jpg) no-repeat center #26aee7;
+        background: url(images/block-bg.webp) no-repeat center #26aee7;
         background-size: cover;
         color: white;
         width: 100%;
@@ -966,11 +966,11 @@
                 aspect-ratio: 2;
         
                 &[data-type="interactive"] {
-                  background-image: url(images/map_type_interactive.jpg);
+                  background-image: url(images/map_type_interactive.webp);
                 }
       
                 &[data-type="simple"] {
-                  background-image: url(images/map_type_simple.jpg);
+                  background-image: url(images/map_type_simple.webp);
                 }
               }
       
@@ -1123,11 +1123,11 @@
           aspect-ratio: 2;
   
           &[data-type="interactive"] {
-            background-image: url(images/map_type_interactive.jpg);
+            background-image: url(images/map_type_interactive.webp);
           }
 
           &[data-type="simple"] {
-            background-image: url(images/map_type_simple.jpg);
+            background-image: url(images/map_type_simple.webp);
           }
         }
 
@@ -1799,7 +1799,7 @@
 .wp-block.wp-block-Compass-map,
 .elementor-editor-active .elementor-widget-Compass_widget .elementor-widget-container,
 .elementor-editor-preview .elementor-widget-Compass_widget .elementor-widget-container{
-  background: url(images/block-bg.jpg) top center no-repeat;
+  background: url(images/block-bg.webp) top center no-repeat;
   background-size: cover;
 
   .hint {

@@ -419,7 +419,7 @@ $search_input_width: 300px;
                   position: relative;
                   width: 20px;
                   height: 20px;
-                  background: url(images/ico_facebook_50x50.png) no-repeat center center transparent;
+                  background: url(images/ico_facebook_50x50.webp) no-repeat center center transparent;
                   background-size: contain;
                   text-indent: -9999px;
                   margin: 6px 0;
@@ -431,7 +431,7 @@ $search_input_width: 300px;
                   position: relative;
                   width: 20px;
                   height: 20px;
-                  background: url(images/ico_instagram_50x50.png) no-repeat center center transparent;
+                  background: url(images/ico_instagram_50x50.webp) no-repeat center center transparent;
                   background-size: contain;
                   text-indent: -9999px;
                   margin: 6px 0;
@@ -443,7 +443,7 @@ $search_input_width: 300px;
                   position: relative;
                   width: 20px;
                   height: 20px;
-                  background: url(images/ico_linkedin_50x50.png) no-repeat center center transparent;
+                  background: url(images/ico_linkedin_50x50.webp) no-repeat center center transparent;
                   background-size: contain;
                   text-indent: -9999px;
                   margin: 6px 0;
@@ -455,7 +455,7 @@ $search_input_width: 300px;
                   position: relative;
                   width: 20px;
                   height: 20px;
-                  background: url(images/ico_twitter_50x50.png) no-repeat center center transparent;
+                  background: url(images/ico_twitter_50x50.webp) no-repeat center center transparent;
                   background-size: contain;
                   text-indent: -9999px;
                   margin: 6px 0;
@@ -467,7 +467,7 @@ $search_input_width: 300px;
                   position: relative;
                   width: 20px;
                   height: 20px;
-                  background: url(images/ico_youtube_50x50.png) no-repeat center center transparent;
+                  background: url(images/ico_youtube_50x50.webp) no-repeat center center transparent;
                   background-size: contain;
                   text-indent: -9999px;
                   margin: 6px 0;
@@ -479,7 +479,7 @@ $search_input_width: 300px;
                   position: relative;
                   width: 20px;
                   height: 20px;
-                  background: url(images/ico_soundcloud_50x50.png) no-repeat center center transparent;
+                  background: url(images/ico_soundcloud_50x50.webp) no-repeat center center transparent;
                   background-size: contain;
                   text-indent: -9999px;
                   margin: 6px 0;
@@ -548,7 +548,7 @@ $search_input_width: 300px;
         }
 
         .edit-location-button {
-          background: url(images/ico_pen.png) no-repeat 62% 29% #fff;
+          background: url(images/ico_pen.webp) no-repeat 62% 29% #fff;
           background-size: 66%;
           border-radius: 99px;
           height: 24px;
@@ -638,7 +638,7 @@ $search_input_width: 300px;
           }
   
           .search-button {
-            background: url(images/ico_search_marker.png) 0 0 no-repeat #fff;
+            background: url(images/ico_search_marker.webp) 0 0 no-repeat #fff;
             background-size: contain;
           }
   
@@ -734,7 +734,7 @@ $search_input_width: 300px;
               flex: 0 0 30px;
               width: 30px;
               mask-image: none;
-              background-image: url(images/ico_search_address_2.png);
+              background-image: url(images/ico_search_address_2.webp);
               background-color: #fff;
               background-size: contain;
               background-position: center center;
@@ -750,7 +750,7 @@ $search_input_width: 300px;
   
           &.leaflet-geosearch-bar {
             form {
-              background-image: url(images/ico_search_address_2.png);
+              background-image: url(images/ico_search_address_2.webp);
               background-position: right 1px;
               background-repeat: no-repeat;
               background-size: 30px;
@@ -893,7 +893,7 @@ $search_input_width: 300px;
           }
   
           .search-button {
-            background: url(images/ico_search_marker.png) 0 0 no-repeat #fff;
+            background: url(images/ico_search_marker.webp) 0 0 no-repeat #fff;
             background-size: contain;
           }
   
@@ -936,7 +936,7 @@ $search_input_width: 300px;
         font-size: 12px;
         line-height: 1;
         padding: 0.4rem 1rem;
-        background-image: url(images/ico_search_marker.png);
+        background-image: url(images/ico_search_marker.webp);
         background-position: right 1px;
         background-repeat: no-repeat;
         background-size: 30px;
@@ -952,7 +952,7 @@ $search_input_width: 300px;
         .oum-filter-toggle {
           display: block;
           background-color: rgba(255, 255, 255, 0.9);
-          background-image: url('images/ico_marker_categories.png');
+          background-image: url('images/ico_marker_categories.webp');
           background-position: center center;
           background-repeat: no-repeat;
           background-size: 60%;
@@ -1348,7 +1348,7 @@ $search_input_width: 300px;
             .leaflet-control-geosearch {
               &.leaflet-geosearch-bar {
                 form {
-                  background-image: url(images/ico_search_address_2.png);
+                  background-image: url(images/ico_search_address_2.webp);
                   background-position: right 1px;
                   background-repeat: no-repeat;
                   background-size: 30px;
@@ -1762,7 +1762,7 @@ $search_input_width: 300px;
 
           &.oum-loading {
             text-indent: -9999px;
-            background-image: url(images/loading.gif);
+            background-image: url(images/loading.webp);
             background-repeat: no-repeat;
             background-position: center center;
             background-size: 40px;
@@ -1908,7 +1908,7 @@ $search_input_width: 300px;
             margin: 10px 10px 0 auto;
 
             form {
-              background-image: url(images/ico_search_address_2.png);
+              background-image: url(images/ico_search_address_2.webp);
               background-position: right 1px;
               background-repeat: no-repeat;
               background-size: 30px;
@@ -2094,7 +2094,7 @@ $search_input_width: 300px;
               position: relative;
               width: 20px;
               height: 20px;
-              background: url(images/ico_facebook_50x50.png) no-repeat center center transparent;
+              background: url(images/ico_facebook_50x50.webp) no-repeat center center transparent;
               background-size: contain;
               text-indent: -9999px;
               margin: 6px 0;
@@ -2106,7 +2106,7 @@ $search_input_width: 300px;
               position: relative;
               width: 20px;
               height: 20px;
-              background: url(images/ico_instagram_50x50.png) no-repeat center center transparent;
+              background: url(images/ico_instagram_50x50.webp) no-repeat center center transparent;
               background-size: contain;
               text-indent: -9999px;
               margin: 6px 0;
@@ -2118,7 +2118,7 @@ $search_input_width: 300px;
               position: relative;
               width: 20px;
               height: 20px;
-              background: url(images/ico_linkedin_50x50.png) no-repeat center center transparent;
+              background: url(images/ico_linkedin_50x50.webp) no-repeat center center transparent;
               background-size: contain;
               text-indent: -9999px;
               margin: 6px 0;
@@ -2130,7 +2130,7 @@ $search_input_width: 300px;
               position: relative;
               width: 20px;
               height: 20px;
-              background: url(images/ico_twitter_50x50.png) no-repeat center center transparent;
+              background: url(images/ico_twitter_50x50.webp) no-repeat center center transparent;
               background-size: contain;
               text-indent: -9999px;
               margin: 6px 0;
@@ -2142,7 +2142,7 @@ $search_input_width: 300px;
               position: relative;
               width: 20px;
               height: 20px;
-              background: url(images/ico_youtube_50x50.png) no-repeat center center transparent;
+              background: url(images/ico_youtube_50x50.webp) no-repeat center center transparent;
               background-size: contain;
               text-indent: -9999px;
               margin: 6px 0;
@@ -2154,7 +2154,7 @@ $search_input_width: 300px;
               position: relative;
               width: 20px;
               height: 20px;
-              background: url(images/ico_soundcloud_50x50.png) no-repeat center center transparent;
+              background: url(images/ico_soundcloud_50x50.webp) no-repeat center center transparent;
               background-size: contain;
               text-indent: -9999px;
               margin: 6px 0;
@@ -2186,7 +2186,7 @@ $search_input_width: 300px;
       }
 
       .edit-location-button {
-        background: url(images/ico_pen.png) no-repeat 62% 29% #fff;
+        background: url(images/ico_pen.webp) no-repeat 62% 29% #fff;
         background-size: 66%;
         border-radius: 99px;
         height: 24px;
@@ -2511,7 +2511,7 @@ $search_input_width: 300px;
           position: relative;
           width: 20px;
           height: 20px;
-          background: url(images/ico_facebook_50x50.png) no-repeat center center transparent;
+          background: url(images/ico_facebook_50x50.webp) no-repeat center center transparent;
           background-size: contain;
           text-indent: -9999px;
         }
@@ -2522,7 +2522,7 @@ $search_input_width: 300px;
           position: relative;
           width: 20px;
           height: 20px;
-          background: url(images/ico_instagram_50x50.png) no-repeat center center transparent;
+          background: url(images/ico_instagram_50x50.webp) no-repeat center center transparent;
           background-size: contain;
           text-indent: -9999px;
           margin: 6px 0;
@@ -2534,7 +2534,7 @@ $search_input_width: 300px;
           position: relative;
           width: 20px;
           height: 20px;
-          background: url(images/ico_linkedin_50x50.png) no-repeat center center transparent;
+          background: url(images/ico_linkedin_50x50.webp) no-repeat center center transparent;
           background-size: contain;
           text-indent: -9999px;
           margin: 6px 0;
@@ -2546,7 +2546,7 @@ $search_input_width: 300px;
           position: relative;
           width: 20px;
           height: 20px;
-          background: url(images/ico_twitter_50x50.png) no-repeat center center transparent;
+          background: url(images/ico_twitter_50x50.webp) no-repeat center center transparent;
           background-size: contain;
           text-indent: -9999px;
           margin: 6px 0;
@@ -2558,7 +2558,7 @@ $search_input_width: 300px;
           position: relative;
           width: 20px;
           height: 20px;
-          background: url(images/ico_youtube_50x50.png) no-repeat center center transparent;
+          background: url(images/ico_youtube_50x50.webp) no-repeat center center transparent;
           background-size: contain;
           text-indent: -9999px;
           margin: 6px 0;
@@ -2570,7 +2570,7 @@ $search_input_width: 300px;
           position: relative;
           width: 20px;
           height: 20px;
-          background: url(images/ico_soundcloud_50x50.png) no-repeat center center transparent;
+          background: url(images/ico_soundcloud_50x50.webp) no-repeat center center transparent;
           background-size: contain;
           text-indent: -9999px;
           margin: 6px 0;

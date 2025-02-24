@@ -16,17 +16,9 @@ Text Domain: nomty
 
 defined('ABSPATH') or die('Direct access is not allowed.');
 
-// Load plugin files
-if (class_exists('CompassPlugin\\Init')) {
-    try {
-        CompassPlugin\Init::register_services();
-    } catch (Error $e) {
-        error_log('Compass Plugin Error: ' . $e->getMessage() . ' (' . $e->getFile() . ' Line: ' . $e->getLine() . ')');
-        return 'An error has occurred. Please check Compass > Help > Debug Info.';
-    }
-}
+require_once plugin_dir_path(__FILE__) . 'inc/Pages/Settings.php';
+require_once plugin_dir_path(__FILE__) . 'inc/Init.php';
 
-// Function to load settings
 function cbn_load_settings()
 {
     if (class_exists('CompassPlugin\Pages\Settings')) {
@@ -36,18 +28,24 @@ function cbn_load_settings()
 }
 add_action('plugins_loaded', 'cbn_load_settings');
 
-/**
- * Get a value from a location
- */
-function cbn_get_location_value($attr, $post_id, $raw = false)
-{
-    $location_controller = new CompassPlugin\Base\LocationController();
-    return $location_controller->get_location_value($attr, $post_id, $raw);
+if (class_exists('CompassPlugin\\Init')) {
+    try {
+        CompassPlugin\Init::register_services();
+    } catch (Error $e) {
+        error_log('Compass Plugin Error: ' . $e->getMessage() . ' (' . $e->getFile() . ' Line: ' . $e->getLine() . ')');
+        return 'An error has occurred. Please check Compass > Help > Debug Info.';
+    }
 }
 
-/**
- * Allow overriding templates in the theme directory
- */
+function cbn_get_location_value($attr, $post_id, $raw = false)
+{
+    if (class_exists('CompassPlugin\Base\LocationController')) {
+        $location_controller = new CompassPlugin\Base\LocationController();
+        return $location_controller->get_location_value($attr, $post_id, $raw);
+    }
+    return null;
+}
+
 function cbn_get_template($template_name): string
 {
     $theme_template = get_stylesheet_directory() . '/Compass/' . $template_name;
@@ -55,4 +53,3 @@ function cbn_get_template($template_name): string
 
     return file_exists($theme_template) ? $theme_template : $plugin_template;
 }
-require_once plugin_dir_path(__FILE__) . 'inc/Pages/Settings.php';

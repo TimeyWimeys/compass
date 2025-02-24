@@ -42,7 +42,7 @@
 }
 .post-php.post-type-oum-location .geo-coordinates-wrap .map-wrap #mapGetLocation .leaflet-control-geosearch.leaflet-geosearch-bar form,
 .post-new-php.post-type-oum-location .geo-coordinates-wrap .map-wrap #mapGetLocation .leaflet-control-geosearch.leaflet-geosearch-bar form {
-  background-image: url(images/ico_search_address_2.png);
+  background-image: url(images/ico_search_address_2.webp);
   background-position: right 1px;
   background-repeat: no-repeat;
   background-size: 30px;
@@ -435,51 +435,51 @@
 }
 .post-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=default],
 .post-new-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=default] {
-  background-image: url("../src/leaflet/images/marker-icon_default-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_default-2x.webp");
 }
 .post-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom1],
 .post-new-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom1] {
-  background-image: url("../src/leaflet/images/marker-icon_custom1-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom1-2x.webp");
 }
 .post-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom2],
 .post-new-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom2] {
-  background-image: url("../src/leaflet/images/marker-icon_custom2-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom2-2x.webp");
 }
 .post-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom3],
 .post-new-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom3] {
-  background-image: url("../src/leaflet/images/marker-icon_custom3-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom3-2x.webp");
 }
 .post-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom4],
 .post-new-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom4] {
-  background-image: url("../src/leaflet/images/marker-icon_custom4-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom4-2x.webp");
 }
 .post-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom5],
 .post-new-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom5] {
-  background-image: url("../src/leaflet/images/marker-icon_custom5-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom5-2x.webp");
 }
 .post-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom6],
 .post-new-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom6] {
-  background-image: url("../src/leaflet/images/marker-icon_custom6-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom6-2x.webp");
 }
 .post-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom7],
 .post-new-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom7] {
-  background-image: url("../src/leaflet/images/marker-icon_custom7-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom7-2x.webp");
 }
 .post-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom8],
 .post-new-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom8] {
-  background-image: url("../src/leaflet/images/marker-icon_custom8-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom8-2x.webp");
 }
 .post-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom9],
 .post-new-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom9] {
-  background-image: url("../src/leaflet/images/marker-icon_custom9-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom9-2x.webp");
 }
 .post-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom10],
 .post-new-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=custom10] {
-  background-image: url("../src/leaflet/images/marker-icon_custom10-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom10-2x.webp");
 }
 .post-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=user1],
 .post-new-php.post-type-oum-location .marker_icons label .marker_icon_preview[data-style=user1] {
-  background-image: url("../src/leaflet/images/marker-icon_user1-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_user1-2x.webp");
 }
 .post-php.post-type-oum-location .marker_icons label .name,
 .post-new-php.post-type-oum-location .marker_icons label .name {
@@ -547,40 +547,40 @@
   background-repeat: no-repeat;
 }
 .taxonomy-oum-type .marker_icons label .marker_icon_preview[data-style=default] {
-  background-image: url("../src/leaflet/images/marker-icon_default-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_default-2x.webp");
 }
 .taxonomy-oum-type .marker_icons label .marker_icon_preview[data-style=custom1] {
-  background-image: url("../src/leaflet/images/marker-icon_custom1-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom1-2x.webp");
 }
 .taxonomy-oum-type .marker_icons label .marker_icon_preview[data-style=custom2] {
-  background-image: url("../src/leaflet/images/marker-icon_custom2-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom2-2x.webp");
 }
 .taxonomy-oum-type .marker_icons label .marker_icon_preview[data-style=custom3] {
-  background-image: url("../src/leaflet/images/marker-icon_custom3-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom3-2x.webp");
 }
 .taxonomy-oum-type .marker_icons label .marker_icon_preview[data-style=custom4] {
-  background-image: url("../src/leaflet/images/marker-icon_custom4-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom4-2x.webp");
 }
 .taxonomy-oum-type .marker_icons label .marker_icon_preview[data-style=custom5] {
-  background-image: url("../src/leaflet/images/marker-icon_custom5-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom5-2x.webp");
 }
 .taxonomy-oum-type .marker_icons label .marker_icon_preview[data-style=custom6] {
-  background-image: url("../src/leaflet/images/marker-icon_custom6-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom6-2x.webp");
 }
 .taxonomy-oum-type .marker_icons label .marker_icon_preview[data-style=custom7] {
-  background-image: url("../src/leaflet/images/marker-icon_custom7-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom7-2x.webp");
 }
 .taxonomy-oum-type .marker_icons label .marker_icon_preview[data-style=custom8] {
-  background-image: url("../src/leaflet/images/marker-icon_custom8-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom8-2x.webp");
 }
 .taxonomy-oum-type .marker_icons label .marker_icon_preview[data-style=custom9] {
-  background-image: url("../src/leaflet/images/marker-icon_custom9-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom9-2x.webp");
 }
 .taxonomy-oum-type .marker_icons label .marker_icon_preview[data-style=custom10] {
-  background-image: url("../src/leaflet/images/marker-icon_custom10-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom10-2x.webp");
 }
 .taxonomy-oum-type .marker_icons label .marker_icon_preview[data-style=user1] {
-  background-image: url("../src/leaflet/images/marker-icon_user1-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_user1-2x.webp");
 }
 .taxonomy-oum-type .marker_icons label.label_marker_user_icon {
   width: 170px;
@@ -622,7 +622,7 @@
   left: 0;
 }
 .taxonomy-oum-region .geo-coordinates-wrap .map-wrap #mapGetRegion .leaflet-control-geosearch.leaflet-geosearch-bar form {
-  background-image: url(images/ico_search_address_2.png);
+  background-image: url(images/ico_search_address_2.webp);
   background-position: right 1px;
   background-repeat: no-repeat;
   background-size: 30px;
@@ -773,14 +773,14 @@
 }
 .oum-location_page_Compass-settings.oum-settings-wizard .oum-wizard .hero,
 .toplevel_page_Compass.oum-settings-wizard .oum-wizard .hero {
-  background: url(images/block-bg.jpg) no-repeat center #26aee7;
+  background: url(images/block-bg.webp) no-repeat center #26aee7;
   background-size: cover;
   color: white;
   width: 100%;
 }
 .oum-location_page_Compass-settings.oum-settings-wizard .oum-wizard .hero .logo,
 .toplevel_page_Compass.oum-settings-wizard .oum-wizard .hero .logo {
-  background: url(images/icon-256x256.png) no-repeat top left transparent;
+  background: url(images/icon-256x256.webp) no-repeat top left transparent;
   background-size: 50px;
   width: 330px;
   height: 50px;
@@ -872,11 +872,11 @@
 }
 .oum-location_page_Compass-settings.oum-settings-wizard .oum-wizard .step-content .map-types .option label .map-type-preview[data-type=interactive],
 .toplevel_page_Compass.oum-settings-wizard .oum-wizard .step-content .map-types .option label .map-type-preview[data-type=interactive] {
-  background-image: url(images/map_type_interactive.jpg);
+  background-image: url(images/map_type_interactive.webp);
 }
 .oum-location_page_Compass-settings.oum-settings-wizard .oum-wizard .step-content .map-types .option label .map-type-preview[data-type=simple],
 .toplevel_page_Compass.oum-settings-wizard .oum-wizard .step-content .map-types .option label .map-type-preview[data-type=simple] {
-  background-image: url(images/map_type_simple.jpg);
+  background-image: url(images/map_type_simple.webp);
 }
 .oum-location_page_Compass-settings.oum-settings-wizard .oum-wizard .step-content .map-types .option label .label-text,
 .toplevel_page_Compass.oum-settings-wizard .oum-wizard .step-content .map-types .option label .label-text {
@@ -1017,11 +1017,11 @@
 }
 .oum-location_page_Compass-settings .map-types .option label .map-type-preview[data-type=interactive],
 .toplevel_page_Compass .map-types .option label .map-type-preview[data-type=interactive] {
-  background-image: url(images/map_type_interactive.jpg);
+  background-image: url(images/map_type_interactive.webp);
 }
 .oum-location_page_Compass-settings .map-types .option label .map-type-preview[data-type=simple],
 .toplevel_page_Compass .map-types .option label .map-type-preview[data-type=simple] {
-  background-image: url(images/map_type_simple.jpg);
+  background-image: url(images/map_type_simple.webp);
 }
 .oum-location_page_Compass-settings .map-types .option label .label-text,
 .toplevel_page_Compass .map-types .option label .label-text {
@@ -1137,67 +1137,67 @@
 }
 .oum-location_page_Compass-settings .map_styles label .map_style_preview[data-style="Stadia.StamenTonerLite"],
 .toplevel_page_Compass .map_styles label .map_style_preview[data-style="Stadia.StamenTonerLite"] {
-  background-image: url("images/map_style_Stamen.TonerLite.png");
+  background-image: url("images/map_style_Stamen.TonerLite.webp");
 }
 .oum-location_page_Compass-settings .map_styles label .map_style_preview[data-style="Esri.WorldStreetMap"],
 .toplevel_page_Compass .map_styles label .map_style_preview[data-style="Esri.WorldStreetMap"] {
-  background-image: url("images/map_style_Esri.WorldStreetMap.png");
+  background-image: url("images/map_style_Esri.WorldStreetMap.webp");
 }
 .oum-location_page_Compass-settings .map_styles label .map_style_preview[data-style="OpenStreetMap.Mapnik"],
 .toplevel_page_Compass .map_styles label .map_style_preview[data-style="OpenStreetMap.Mapnik"] {
-  background-image: url("images/map_style_OpenStreetMap.Mapnik.png");
+  background-image: url("images/map_style_OpenStreetMap.Mapnik.webp");
 }
 .oum-location_page_Compass-settings .map_styles label .map_style_preview[data-style="OpenStreetMap.DE"],
 .toplevel_page_Compass .map_styles label .map_style_preview[data-style="OpenStreetMap.DE"] {
-  background-image: url("images/map_style_OpenStreetMap.DE.png");
+  background-image: url("images/map_style_OpenStreetMap.DE.webp");
 }
 .oum-location_page_Compass-settings .map_styles label .map_style_preview[data-style="CartoDB.Positron"],
 .toplevel_page_Compass .map_styles label .map_style_preview[data-style="CartoDB.Positron"] {
-  background-image: url("images/map_style_CartoDB.Positron.png");
+  background-image: url("images/map_style_CartoDB.Positron.webp");
 }
 .oum-location_page_Compass-settings .map_styles label .map_style_preview[data-style="CartoDB.DarkMatter"],
 .toplevel_page_Compass .map_styles label .map_style_preview[data-style="CartoDB.DarkMatter"] {
-  background-image: url("images/map_style_CartoDB.DarkMatter.png");
+  background-image: url("images/map_style_CartoDB.DarkMatter.webp");
 }
 .oum-location_page_Compass-settings .map_styles label .map_style_preview[data-style="Esri.WorldImagery"],
 .toplevel_page_Compass .map_styles label .map_style_preview[data-style="Esri.WorldImagery"] {
-  background-image: url("images/map_style_Esri.WorldImagery.png");
+  background-image: url("images/map_style_Esri.WorldImagery.webp");
 }
 .oum-location_page_Compass-settings .map_styles label .map_style_preview[data-style=Custom1],
 .toplevel_page_Compass .map_styles label .map_style_preview[data-style=Custom1] {
-  background-image: url("images/map_style_Custom1.png");
+  background-image: url("images/map_style_Custom1.webp");
 }
 .oum-location_page_Compass-settings .map_styles label .map_style_preview[data-style=Custom2],
 .toplevel_page_Compass .map_styles label .map_style_preview[data-style=Custom2] {
-  background-image: url("images/map_style_Custom2.png");
+  background-image: url("images/map_style_Custom2.webp");
 }
 .oum-location_page_Compass-settings .map_styles label .map_style_preview[data-style=Custom3],
 .toplevel_page_Compass .map_styles label .map_style_preview[data-style=Custom3] {
-  background-image: url("images/map_style_Custom3.png");
+  background-image: url("images/map_style_Custom3.webp");
 }
 .oum-location_page_Compass-settings .map_styles label .map_style_preview[data-style="MapBox.streets"],
 .toplevel_page_Compass .map_styles label .map_style_preview[data-style="MapBox.streets"] {
-  background-image: url("images/map_style_MapBox.streets.png");
+  background-image: url("images/map_style_MapBox.streets.webp");
 }
 .oum-location_page_Compass-settings .map_styles label .map_style_preview[data-style="MapBox.outdoors"],
 .toplevel_page_Compass .map_styles label .map_style_preview[data-style="MapBox.outdoors"] {
-  background-image: url("images/map_style_MapBox.outdoors.png");
+  background-image: url("images/map_style_MapBox.outdoors.webp");
 }
 .oum-location_page_Compass-settings .map_styles label .map_style_preview[data-style="MapBox.light"],
 .toplevel_page_Compass .map_styles label .map_style_preview[data-style="MapBox.light"] {
-  background-image: url("images/map_style_MapBox.light.png");
+  background-image: url("images/map_style_MapBox.light.webp");
 }
 .oum-location_page_Compass-settings .map_styles label .map_style_preview[data-style="MapBox.dark"],
 .toplevel_page_Compass .map_styles label .map_style_preview[data-style="MapBox.dark"] {
-  background-image: url("images/map_style_MapBox.dark.png");
+  background-image: url("images/map_style_MapBox.dark.webp");
 }
 .oum-location_page_Compass-settings .map_styles label .map_style_preview[data-style="MapBox.satellite"],
 .toplevel_page_Compass .map_styles label .map_style_preview[data-style="MapBox.satellite"] {
-  background-image: url("images/map_style_MapBox.satellite.png");
+  background-image: url("images/map_style_MapBox.satellite.webp");
 }
 .oum-location_page_Compass-settings .map_styles label .map_style_preview[data-style="MapBox.satellite-streets"],
 .toplevel_page_Compass .map_styles label .map_style_preview[data-style="MapBox.satellite-streets"] {
-  background-image: url("images/map_style_MapBox.satellite-streets.png");
+  background-image: url("images/map_style_MapBox.satellite-streets.webp");
 }
 .oum-location_page_Compass-settings .wrap-tile-provider-settings,
 .toplevel_page_Compass .wrap-tile-provider-settings {
@@ -1275,51 +1275,51 @@
 }
 .oum-location_page_Compass-settings .marker_icons label .marker_icon_preview[data-style=default],
 .toplevel_page_Compass .marker_icons label .marker_icon_preview[data-style=default] {
-  background-image: url("../src/leaflet/images/marker-icon_default-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_default-2x.webp");
 }
 .oum-location_page_Compass-settings .marker_icons label .marker_icon_preview[data-style=custom1],
 .toplevel_page_Compass .marker_icons label .marker_icon_preview[data-style=custom1] {
-  background-image: url("../src/leaflet/images/marker-icon_custom1-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom1-2x.webp");
 }
 .oum-location_page_Compass-settings .marker_icons label .marker_icon_preview[data-style=custom2],
 .toplevel_page_Compass .marker_icons label .marker_icon_preview[data-style=custom2] {
-  background-image: url("../src/leaflet/images/marker-icon_custom2-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom2-2x.webp");
 }
 .oum-location_page_Compass-settings .marker_icons label .marker_icon_preview[data-style=custom3],
 .toplevel_page_Compass .marker_icons label .marker_icon_preview[data-style=custom3] {
-  background-image: url("../src/leaflet/images/marker-icon_custom3-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom3-2x.webp");
 }
 .oum-location_page_Compass-settings .marker_icons label .marker_icon_preview[data-style=custom4],
 .toplevel_page_Compass .marker_icons label .marker_icon_preview[data-style=custom4] {
-  background-image: url("../src/leaflet/images/marker-icon_custom4-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom4-2x.webp");
 }
 .oum-location_page_Compass-settings .marker_icons label .marker_icon_preview[data-style=custom5],
 .toplevel_page_Compass .marker_icons label .marker_icon_preview[data-style=custom5] {
-  background-image: url("../src/leaflet/images/marker-icon_custom5-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom5-2x.webp");
 }
 .oum-location_page_Compass-settings .marker_icons label .marker_icon_preview[data-style=custom6],
 .toplevel_page_Compass .marker_icons label .marker_icon_preview[data-style=custom6] {
-  background-image: url("../src/leaflet/images/marker-icon_custom6-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom6-2x.webp");
 }
 .oum-location_page_Compass-settings .marker_icons label .marker_icon_preview[data-style=custom7],
 .toplevel_page_Compass .marker_icons label .marker_icon_preview[data-style=custom7] {
-  background-image: url("../src/leaflet/images/marker-icon_custom7-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom7-2x.webp");
 }
 .oum-location_page_Compass-settings .marker_icons label .marker_icon_preview[data-style=custom8],
 .toplevel_page_Compass .marker_icons label .marker_icon_preview[data-style=custom8] {
-  background-image: url("../src/leaflet/images/marker-icon_custom8-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom8-2x.webp");
 }
 .oum-location_page_Compass-settings .marker_icons label .marker_icon_preview[data-style=custom9],
 .toplevel_page_Compass .marker_icons label .marker_icon_preview[data-style=custom9] {
-  background-image: url("../src/leaflet/images/marker-icon_custom9-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom9-2x.webp");
 }
 .oum-location_page_Compass-settings .marker_icons label .marker_icon_preview[data-style=custom10],
 .toplevel_page_Compass .marker_icons label .marker_icon_preview[data-style=custom10] {
-  background-image: url("../src/leaflet/images/marker-icon_custom10-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_custom10-2x.webp");
 }
 .oum-location_page_Compass-settings .marker_icons label .marker_icon_preview[data-style=user1],
 .toplevel_page_Compass .marker_icons label .marker_icon_preview[data-style=user1] {
-  background-image: url("../src/leaflet/images/marker-icon_user1-2x.png");
+  background-image: url("../src/leaflet/images/marker-icon_user1-2x.webp");
 }
 .oum-location_page_Compass-settings .marker_icons label.label_marker_user_icon,
 .toplevel_page_Compass .marker_icons label.label_marker_user_icon {
@@ -1369,7 +1369,7 @@
 }
 .oum-location_page_Compass-settings .geo-coordinates-wrap .map-wrap #mapGetInitial .leaflet-control-geosearch.leaflet-geosearch-bar form,
 .toplevel_page_Compass .geo-coordinates-wrap .map-wrap #mapGetInitial .leaflet-control-geosearch.leaflet-geosearch-bar form {
-  background-image: url(images/ico_search_address_2.png);
+  background-image: url(images/ico_search_address_2.webp);
   background-position: right 1px;
   background-repeat: no-repeat;
   background-size: 30px;
@@ -1666,7 +1666,7 @@
 .wp-block.wp-block-Compass-map,
 .elementor-editor-active .elementor-widget-Compass_widget .elementor-widget-container,
 .elementor-editor-preview .elementor-widget-Compass_widget .elementor-widget-container {
-  background: url(images/block-bg.jpg) top center no-repeat;
+  background: url(images/block-bg.webp) top center no-repeat;
   background-size: cover;
 }
 .wp-block.wp-block-Compass-map .hint,
@@ -1697,7 +1697,7 @@
   display: block;
   width: 80px;
   height: 80px;
-  background: url(images/icon-256x256.png) center center no-repeat;
+  background: url(images/icon-256x256.webp) center center no-repeat;
   background-size: cover;
   border: 5px solid #fff;
   opacity: 0.8;

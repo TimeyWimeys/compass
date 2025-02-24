@@ -1527,7 +1527,7 @@
 }
 .Compass .add-location .location-overlay-content #cbn_add_location input[type=submit].oum-loading {
   text-indent: -9999px;
-  background-image: url(images/loading.gif);
+  background-image: url(images/loading.webp);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 30px;
