@@ -1,0 +1,2955 @@
+.Compass {
+    position: relative;
+    z-index: 1;
+}
+
+.Compass input.cbn-switch[type="checkbox"] {
+    position: relative;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    appearance: none;
+    visibility: hidden;
+}
+
+.Compass input.cbn-switch[type="checkbox"] + label {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 1rem;
+    line-height: 22px;
+    padding-left: 50px;
+    margin-left: 4px !important;
+    margin-top: -16px;
+}
+
+.Compass input.cbn-switch[type="checkbox"] + label::before {
+    box-sizing: border-box;
+    width: 40px;
+    height: 20px;
+    border-radius: 30px;
+    border: 2px solid #ddd;
+    background-color: #eee;
+    content: "";
+    margin-right: 15px;
+    transition: background-color 0.5s linear;
+    z-index: 5;
+    position: absolute;
+    left: 0;
+    top: 1px;
+}
+
+.Compass input.cbn-switch[type="checkbox"] + label::after {
+    box-sizing: border-box;
+    width: 16px;
+    height: 16px;
+    border-radius: 30px;
+    background-color: #fff;
+    content: "";
+    transition: margin 0.1s linear;
+    box-shadow: 0 0 5px #aaa;
+    position: absolute;
+    left: 2px;
+    top: 3px;
+    z-index: 10;
+}
+
+.Compass input.cbn-switch[type="checkbox"]:checked + label::before {
+    background-color: #e02aaf;
+}
+
+.Compass input.cbn-switch[type="checkbox"]:checked + label::after {
+    margin: 0 0 0 20px;
+}
+
+.Compass .box-wrap .tab-wrap .cbn-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.Compass .box-wrap .tab-wrap .cbn-tabs .nav-item {
+    font-size: 1.2rem;
+    padding: 3px 15px;
+    border-bottom: 3px solid transparent;
+    color: inherit;
+    cursor: pointer;
+}
+
+.Compass .box-wrap .tab-wrap .cbn-tabs .nav-item.active {
+    font-weight: bold;
+    border-color: black;
+    color: black;
+}
+
+.Compass .box-wrap .tab-wrap .cbn-tabs .nav-item:hover {
+    border-color: black;
+}
+
+.Compass .box-wrap .map-wrap {
+    position: relative;
+    aspect-ratio: 1.53;
+}
+
+.Compass .box-wrap .map-wrap .cbn-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease-out;
+}
+
+.Compass .box-wrap .map-wrap .cbn-loading-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.Compass .box-wrap .map-wrap .cbn-loading-overlay .cbn-loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #e02aaf;
+    border-radius: 50%;
+    animation: cbn-spin 1s linear infinite;
+}
+
+@keyframes cbn-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.Compass .box-wrap .map-wrap .cbn-filter-controls, .Compass .box-wrap .map-wrap .open-add-location-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+.Compass .box-wrap .map-wrap .cbn-filter-controls.visible, .Compass .box-wrap .map-wrap .open-add-location-overlay.visible {
+    opacity: 1;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map a {
+    text-decoration: none !important;
+    padding: 0;
+    margin: 0;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-tile-pane img.leaflet-tile {
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: unset;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-marker-icon:not(.marker-cluster) {
+    height: 40px !important;
+    width: 40px !important;
+    margin-top: -40px !important;
+    margin-left: -20px !important;
+    object-fit: contain;
+    object-position: center bottom;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-marker-icon:not(.marker-cluster):hover {
+    width: 44px !important;
+    height: 44px !important;
+    margin-top: -44px !important;
+    margin-left: -22px !important;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup {
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.2);
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper {
+    position: relative;
+    z-index: 1;
+    box-shadow: none;
+    border-radius: 2px;
+    overflow: hidden;
+    padding: 0;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content {
+    margin: 0;
+    width: 250px;
+    max-height: 400px;
+    overflow: auto;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_image {
+    background-color: #eee;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_image img {
+    width: 100%;
+    aspect-ratio: 1.77;
+    object-fit: cover;
+    object-position: top center;
+    margin: 0 auto;
+    pointer-events: none;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_video {
+    background-color: #eee;
+    aspect-ratio: 1.3333333333;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_video > * {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_video > * > p {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_video iframe {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text {
+    padding: 15px;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text * {
+    color: #000;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text a {
+    color: #e02aaf;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text .cbn_location_date {
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 11px;
+    margin-bottom: 5px;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text .cbn_location_address {
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text .cbn_location_name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text .cbn_location_custom_fields {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text .cbn_location_custom_fields .cbn_custom_field {
+    margin-bottom: 10px;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text .cbn_location_custom_fields a {
+    display: inline-block;
+    hyphens: auto;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text .cbn_location_custom_fields a[href*=facebook] {
+    display: inline-block;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_facebook_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+    margin: 6px 0;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text .cbn_location_custom_fields a[href*=instagram] {
+    display: inline-block;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_instagram_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+    margin: 6px 0;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text .cbn_location_custom_fields a[href*=linkedin] {
+    display: inline-block;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_linkedin_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+    margin: 6px 0;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text .cbn_location_custom_fields a[href*=twitter] {
+    display: inline-block;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_twitter_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+    margin: 6px 0;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text .cbn_location_custom_fields a[href*=youtube] {
+    display: inline-block;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_youtube_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+    margin: 6px 0;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text .cbn_location_custom_fields a[href*=soundcloud] {
+    display: inline-block;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_soundcloud_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+    margin: 6px 0;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text .cbn_location_custom_fields .cbn_custom_field span {
+    background: rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    padding: 3px 5px;
+    border-radius: 5px;
+    margin-right: 5px;
+    font-size: 13px;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text .cbn_location_description {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text audio {
+    margin-top: 15px;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn_location_text .cbn_read_more {
+    margin-top: 10px;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    aspect-ratio: 1.3333333333;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel:hover .cbn-carousel-prev, .Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel:hover .cbn-carousel-next {
+    opacity: 1;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-inner {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-inner .cbn-carousel-item {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: none;
+    background-color: #eee;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-inner .cbn-carousel-item.active {
+    display: block;
+    animation: carouselFadeIn 0.3s ease-in-out;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-inner .cbn-carousel-item img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    max-width: 100%;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-prev, .Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    box-shadow: none;
+    border-radius: 50%;
+    color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    opacity: 0;
+    z-index: 1;
+    font-size: 0;
+    text-indent: -9999px;
+}
+
+@media (max-width: 768px) {
+    .Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-prev, .Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-next {
+        opacity: 1;
+    }
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-prev::before, .Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-next::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-style: solid;
+    border-width: 2px 2px 0 0;
+    border-color: #fff;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-prev:hover, .Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-prev:focus, .Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-next:focus {
+    outline: none;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-prev {
+    left: 10px;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-prev::before {
+    transform: rotate(-135deg);
+    margin-left: 4px;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-next {
+    right: 10px;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-next::before {
+    transform: rotate(45deg);
+    margin-right: 4px;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-content-wrapper .leaflet-popup-content .cbn-carousel .cbn-carousel-counter {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    z-index: 1;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map.map-style_Custom1 .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
+    filter: saturate(3);
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map.map-style_Custom2 .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
+    filter: sepia(1) invert(0) saturate(28) hue-rotate(-53deg);
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map.map-style_Custom2 .leaflet-tile-pane .leaflet-layer:nth-child(2) .leaflet-tile {
+    filter: sepia(0) contrast(1) invert(1) brightness(2);
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map.map-style_Custom3 .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
+    filter: sepia(1) invert(1) saturate(100) brightness(1) hue-rotate(-300deg);
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map.map-style_Custom3 .leaflet-tile-pane .leaflet-layer:nth-child(2) .leaflet-tile {
+    filter: sepia(0) contrast(1) invert(1) brightness(2);
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .edit-location-button {
+    background: url(../images/ico_pen.webp) no-repeat 62% 29% #fff;
+    background-size: 66%;
+    border-radius: 99px;
+    height: 24px;
+    width: 24px;
+    text-align: center;
+    top: 5px;
+    right: 34px;
+    z-index: 2;
+    position: absolute;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.12s ease-in;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .edit-location-button:hover {
+    opacity: 1;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-close-button {
+    background: #fff;
+    border-radius: 99px;
+    font-size: 20px;
+    width: 24px;
+    height: 24px;
+    line-height: 1;
+    text-align: center;
+    top: 5px;
+    right: 5px;
+    z-index: 2;
+    opacity: 0.8;
+    transition: opacity 0.12s ease-in;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-close-button span {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-popup-close-button:hover {
+    opacity: 1;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-zoom a {
+    background-color: #fff;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-zoom a:hover {
+    background-color: #f4f4f4;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-layers-overlays label img {
+    height: 30px;
+    margin-right: 6px;
+    margin-left: 3px;
+    vertical-align: middle;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-search {
+    height: 34px;
+    box-sizing: border-box;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-search.search-exp {
+    width: 320px;
+    max-width: 70vw;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-search .search-input {
+    box-sizing: border-box;
+    width: calc(100% - 34px);
+    min-width: unset;
+    min-height: unset;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    font-size: 14px;
+}
+
+@media screen and (max-width: 768px) {
+    .Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-search .search-input {
+        font-size: 16px;
+    }
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-search .search-button {
+    background: url(../images/ico_search_marker.webp) 0 0 no-repeat #fff;
+    background-size: contain;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-search .search-tooltip {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-search .search-tooltip .search-tip {
+    font-size: 12px;
+    line-height: 24px;
+    border-radius: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    display: flex;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-search .search-tooltip .search-tip img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    object-fit: contain;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-button {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-button.active {
+    width: 320px;
+    max-width: 70vw;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-button form {
+    position: relative;
+    left: 0;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    width: calc(100% - 30px);
+    max-width: 100%;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-button form input[type=text] {
+    width: calc(100% - 20px);
+    margin: 0 20px 0 0 !important;
+    min-width: unset;
+    min-height: unset;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    font-size: 14px;
+}
+
+@media screen and (max-width: 768px) {
+    .Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-button form input[type=text] {
+        font-size: 16px;
+    }
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-button form button.reset {
+    background-color: #fff;
+    color: black;
+    margin: 0;
+    padding: 0 8px;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-button form button.reset:hover {
+    opacity: 1;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-button form .results {
+    color: #333;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-button form .results.active {
+    width: calc(100% + 30px);
+    color: #333;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-button form .results.active::after {
+    display: none;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-button a.leaflet-bar-part {
+    flex: 0 0 30px;
+    width: 30px;
+    mask-image: none;
+    background-image: url(../images/ico_search_address_2.webp);
+    background-color: #fff;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-radius: 0;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-button a.leaflet-bar-part::before, .Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-button a.leaflet-bar-part::after {
+    display: none;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-bar form {
+    background-image: url(../images/ico_search_address_2.webp);
+    background-position: right 1px;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-color: #fff;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-bar form .results {
+    color: #333;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-bar form input[type=text] {
+    width: calc(100% - 35px);
+    padding: 9px 13px 9px 0;
+    min-width: unset;
+    min-height: unset;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    outline: none !important;
+    font-size: 14px;
+}
+
+@media screen and (max-width: 768px) {
+    .Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-bar form input[type=text] {
+        padding: 0;
+        font-size: 16px;
+    }
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-bar form button.reset {
+    right: 25px;
+    background-color: #fff;
+    color: black;
+    margin: 0;
+    padding: 0 8px;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-bar form button.reset:hover {
+    opacity: 1;
+}
+
+.Compass .box-wrap .map-wrap .leaflet-map .leaflet-control-attribution {
+    font-size: 10px;
+}
+
+.Compass .box-wrap .map-wrap .open-add-location-overlay {
+    box-sizing: border-box;
+    position: absolute;
+    top: 8px;
+    right: 13px;
+    z-index: 9999;
+    background: #e02aaf;
+    color: white;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 50px;
+    text-align: center;
+    text-decoration: none;
+    height: 50px;
+    cursor: pointer;
+    padding: 0;
+    width: 50px;
+    overflow: hidden;
+    transition: width 0.1s ease-in;
+}
+
+.Compass .box-wrap .map-wrap .open-add-location-overlay span.btn_icon {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    top: calc(50% - 15px);
+    left: 10px;
+    height: 30px;
+    width: 30px;
+    font-family: sans-serif;
+    font-size: 35px;
+    line-height: 25px;
+}
+
+.Compass .box-wrap .map-wrap .open-add-location-overlay span.btn_text {
+    font-size: 16px;
+    line-height: 1;
+    padding-left: 45px;
+    width: 140px;
+    text-align: left;
+    word-break: keep-all;
+    opacity: 0;
+}
+
+.Compass .box-wrap .map-wrap .open-add-location-overlay:hover, .Compass .box-wrap .map-wrap .open-add-location-overlay:active {
+    background: #bc1b91;
+    width: 158px;
+}
+
+.Compass .box-wrap .map-wrap .open-add-location-overlay:hover span.btn_text, .Compass .box-wrap .map-wrap .open-add-location-overlay:active span.btn_text {
+    opacity: 1;
+    transition: opacity 0.1s ease-in;
+    transition-delay: 0.05s;
+}
+
+.Compass .box-wrap .map-wrap #cbn_search_marker {
+    z-index: 400;
+    position: absolute !important;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.Compass .box-wrap .map-wrap #cbn_search_marker .leaflet-control-search {
+    box-sizing: border-box;
+    height: 34px;
+}
+
+.Compass .box-wrap .map-wrap #cbn_search_marker .leaflet-control-search.search-exp {
+    width: 320px;
+    max-width: 50vw;
+}
+
+.Compass .box-wrap .map-wrap #cbn_search_marker .leaflet-control-search .search-input {
+    box-sizing: border-box;
+    width: calc(100% - 34px);
+    min-width: unset;
+    min-height: unset;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    font-size: 14px;
+}
+
+@media screen and (max-width: 768px) {
+    .Compass .box-wrap .map-wrap #cbn_search_marker .leaflet-control-search .search-input {
+        font-size: 16px;
+    }
+}
+
+.Compass .box-wrap .map-wrap #cbn_search_marker .leaflet-control-search .search-button {
+    background: url(../images/ico_search_marker.webp) 0 0 no-repeat #fff;
+    background-size: contain;
+}
+
+.Compass .box-wrap .map-wrap #cbn_search_marker .leaflet-control-search .search-tooltip {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.Compass .box-wrap .map-wrap #cbn_search_marker .leaflet-control-search .search-tooltip .search-tip {
+    font-size: 12px;
+    line-height: 24px;
+    border-radius: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    display: flex;
+}
+
+.Compass .box-wrap .map-wrap #cbn_search_marker .leaflet-control-search .search-tooltip .search-tip img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    object-fit: contain;
+}
+
+.Compass .box-wrap .map-wrap #cbn_filter_markers {
+    width: 320px;
+    max-width: calc(100% - 120px);
+    height: auto;
+    z-index: 400;
+    position: absolute !important;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 1;
+    padding: 0.4rem 1rem;
+    background-image: url(../images/ico_search_marker.webp);
+    background-position: right 1px;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-color: #fff;
+}
+
+.Compass .box-wrap .map-wrap .cbn-filter-controls {
+    position: absolute;
+    z-index: 9999;
+    right: 10px;
+    bottom: 20px;
+}
+
+.Compass .box-wrap .map-wrap .cbn-filter-controls .cbn-filter-toggle {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.9);
+    background-image: url('../images/ico_marker_categories.webp');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 60%;
+    width: 44px;
+    height: 44px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.Compass .box-wrap .map-wrap .cbn-filter-controls .cbn-filter-list {
+    display: none;
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    position: relative;
+    z-index: 2;
+    flex-direction: column;
+    gap: 5px;
+    padding: 6px 30px 6px 6px;
+}
+
+.Compass .box-wrap .map-wrap .cbn-filter-controls .cbn-filter-list label {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.Compass .box-wrap .map-wrap .cbn-filter-controls .cbn-filter-list label input[type="checkbox"] {
+    margin: 0;
+    position: relative;
+    top: 2px;
+    appearance: auto;
+    accent-color: #e02aaf;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.Compass .box-wrap .map-wrap .cbn-filter-controls .cbn-filter-list label img {
+    height: 26px;
+    width: 26px;
+    object-fit: contain;
+    object-position: top;
+    transform: translateY(-10%);
+    flex-shrink: 0;
+}
+
+.Compass .box-wrap .map-wrap .cbn-filter-controls .cbn-filter-list label span {
+    font-size: 12px;
+    line-height: 1.2;
+    margin-top: 2px;
+    margin-bottom: 5px;
+}
+
+.Compass .box-wrap .map-wrap .cbn-filter-controls .cbn-filter-list .close-filter-list {
+    position: absolute;
+    top: 4px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.Compass .box-wrap .map-wrap .cbn-filter-controls .cbn-filter-list .close-filter-list:hover {
+    color: #e02aaf;
+}
+
+.Compass .box-wrap .map-wrap .cbn-filter-controls.active .cbn-filter-list {
+    display: flex;
+}
+
+.Compass .box-wrap .map-wrap .cbn-filter-controls.active .cbn-filter-toggle {
+    display: none;
+}
+
+.Compass .box-wrap .map-wrap .cbn-attribution {
+    position: absolute;
+    bottom: -17px;
+    right: 13px;
+    z-index: 999;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 11px;
+    color: #999;
+    display: inline-block;
+    padding: 3px 6px;
+    margin: 0;
+    line-height: 1;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.Compass .box-wrap .map-wrap .cbn-attribution a {
+    color: #e02aaf;
+    text-decoration: none;
+    display: inline;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+}
+
+.Compass .box-wrap.map-size-fullwidth {
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.Compass .box-wrap.cbn-regions-layout-2 {
+    display: flex;
+    flex-direction: row;
+}
+
+.Compass .box-wrap.cbn-regions-layout-2 > .tab-wrap {
+    width: 170px;
+}
+
+.Compass .box-wrap.cbn-regions-layout-2 > .tab-wrap .cbn-tabs {
+    flex-direction: column;
+    border-bottom: none;
+    border-right: 1px solid rgba(0, 0, 0, 0.5);
+    height: 100%;
+    justify-content: unset;
+}
+
+.Compass .box-wrap.cbn-regions-layout-2 > .tab-wrap .cbn-tabs .nav-item {
+    padding: 10px 10px 10px 20px;
+    line-height: 1.1;
+    border-bottom: none;
+    border-right: 3px solid transparent;
+    color: inherit;
+    hyphens: auto;
+}
+
+.Compass .box-wrap.cbn-regions-layout-2 > .tab-wrap .cbn-tabs .nav-item.active {
+    font-weight: bold;
+    border-color: black;
+    color: black;
+}
+
+.Compass .box-wrap.cbn-regions-layout-2 > .tab-wrap .cbn-tabs .nav-item:hover {
+    border-color: black;
+}
+
+.Compass .box-wrap.cbn-regions-layout-2 > .map-wrap {
+    width: calc(100% - 150px);
+}
+
+@media screen and (max-width: 768px) {
+    .Compass .box-wrap .map-wrap {
+        aspect-ratio: unset;
+        height: 400px;
+    }
+}
+
+.Compass .add-location {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    background: radial-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 50px;
+    overflow: auto;
+}
+
+.Compass .add-location * {
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 768px) {
+    .Compass .add-location {
+        padding-top: 0;
+    }
+}
+
+.Compass .add-location .location-overlay-content {
+    position: relative;
+    width: 768px;
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    color: #333;
+    padding: 33px 43px;
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 768px) {
+    .Compass .add-location .location-overlay-content {
+        max-width: 100%;
+        padding: 15px;
+    }
+}
+
+.Compass .add-location .location-overlay-content #close-add-location-overlay {
+    position: absolute;
+    top: 23px;
+    right: 30px;
+    font-size: 30px;
+    line-height: 1;
+    display: inline-block;
+    color: #333;
+    cursor: pointer;
+}
+
+.Compass .add-location .location-overlay-content #close-add-location-overlay:hover {
+    color: #e02aaf;
+}
+
+@media screen and (max-width: 768px) {
+    .Compass .add-location .location-overlay-content #close-add-location-overlay {
+        top: 16px;
+        right: 16px;
+    }
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location h2 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 16px;
+    color: #333;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location h2.cbn-add-location-headline {
+    display: block;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location h2.cbn-edit-location-headline {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .Compass .add-location .location-overlay-content #cbn_add_location h2 {
+        text-align: left;
+    }
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location label {
+    font-size: 16px;
+    color: #333;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location label.cbn-label {
+    display: block;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    line-height: 1.5;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location input[type=text], .Compass .add-location .location-overlay-content #cbn_add_location input[type=email], .Compass .add-location .location-overlay-content #cbn_add_location input[type=url], .Compass .add-location .location-overlay-content #cbn_add_location textarea, .Compass .add-location .location-overlay-content #cbn_add_location select {
+    font-family: inherit;
+    margin: 0 0 25px;
+    font-size: 16px;
+    border: 1px solid #888;
+    border-radius: 2px;
+    color: #333;
+    background-color: #fff;
+    outline: none;
+    line-height: 1;
+    padding: 14px;
+    width: 100%;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location select {
+    appearance: none;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+);
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    line-height: 1.1;
+    height: auto;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location fieldset {
+    display: flex;
+    flex-wrap: wrap;
+    border: none;
+    padding: 0;
+    margin: 0 0 15px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    width: 100%;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location fieldset legend {
+    padding: 0;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location fieldset > div {
+    margin: 0 10px 10px 0;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location fieldset > div label {
+    display: flex;
+    align-items: center;
+    margin-left: 6px;
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .Compass .add-location .location-overlay-content #cbn_add_location fieldset > div label {
+        display: block;
+        margin-left: 0;
+    }
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location fieldset input[type=checkbox] {
+    appearance: auto;
+    accent-color: #e02aaf;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin: 0 10px 0 0;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location fieldset input[type=checkbox]::before, .Compass .add-location .location-overlay-content #cbn_add_location fieldset input[type=checkbox]::after {
+    display: none;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location fieldset input[type=radio] {
+    appearance: auto;
+    accent-color: #e02aaf;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin: 0 10px 0 0;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location fieldset input[type=radio]::before, .Compass .add-location .location-overlay-content #cbn_add_location fieldset input[type=radio]::after {
+    display: none;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location #cbn_location_title {
+    width: 100%;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .map-wrap {
+    position: relative;
+    aspect-ratio: 1.53;
+    margin: 0 2px 25px;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .map-wrap #mapGetLocation {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 1px solid #888;
+    border-radius: 2px;
+}
+
+@media screen and (max-width: 768px) {
+    .Compass .add-location .location-overlay-content #cbn_add_location .map-wrap #mapGetLocation .leaflet-geosearch-bar {
+        max-width: calc(100% - 67px);
+        margin: 10px 10px 0 auto;
+    }
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .map-wrap #mapGetLocation a {
+    text-decoration: none !important;
+    padding: 0;
+    margin: 0;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .map-wrap #mapGetLocation .leaflet-tile-pane img.leaflet-tile {
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: unset;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .map-wrap #mapGetLocation .leaflet-control-geosearch.leaflet-geosearch-bar form {
+    background-image: url(../images/ico_search_address_2.webp);
+    background-position: right 1px;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-color: #fff;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .map-wrap #mapGetLocation .leaflet-control-geosearch.leaflet-geosearch-bar form input[type=text] {
+    width: calc(100% - 35px);
+    padding: 9px 13px 9px 0;
+    min-width: unset;
+    min-height: unset;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    outline: none !important;
+    font-size: 14px;
+}
+
+@media screen and (max-width: 768px) {
+    .Compass .add-location .location-overlay-content #cbn_add_location .map-wrap #mapGetLocation .leaflet-control-geosearch.leaflet-geosearch-bar form input[type=text] {
+        font-size: 16px;
+    }
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .map-wrap #mapGetLocation .leaflet-control-geosearch.leaflet-geosearch-bar form button.reset {
+    right: 25px;
+    background-color: #fff;
+    color: black;
+    margin: 0;
+    padding: 0 8px;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .map-wrap #mapGetLocation .leaflet-control-geosearch.leaflet-geosearch-bar form button.reset:hover {
+    opacity: 1;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .map-wrap #mapGetLocation.map-style_Custom1 .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
+    filter: saturate(3);
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .map-wrap #mapGetLocation.map-style_Custom2 .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
+    filter: sepia(1) invert(0) saturate(28) hue-rotate(-53deg);
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .map-wrap #mapGetLocation.map-style_Custom2 .leaflet-tile-pane .leaflet-layer:nth-child(2) .leaflet-tile {
+    filter: sepia(0) contrast(1) invert(1) brightness(2);
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .map-wrap #mapGetLocation.map-style_Custom3 .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
+    filter: sepia(1) invert(1) saturate(100) brightness(1) hue-rotate(-300deg);
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .map-wrap #mapGetLocation.map-style_Custom3 .leaflet-tile-pane .leaflet-layer:nth-child(2) .leaflet-tile {
+    filter: sepia(0) contrast(1) invert(1) brightness(2);
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location #cbn_location_address {
+    width: 100%;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location #cbn_location_text {
+    width: 100%;
+    height: 100px;
+    resize: none;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_custom_field_description {
+    font-size: 14px;
+    font-style: italic;
+    opacity: 0.8;
+    margin-top: -9px;
+    padding: 0 9px 20px;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location #cbn_location_image {
+    color: #e02aaf;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media {
+    display: flex;
+    margin-bottom: 35px;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .media-upload {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .media-upload label {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    color: #e02aaf;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: transform 0.1s ease;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .media-upload label:hover {
+    transform: scale(1.05);
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .media-upload label .dashicons {
+    width: 32px;
+    height: 32px;
+    font-size: 32px;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .media-upload input[type=file] {
+    position: absolute;
+    z-index: -1;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .media-upload .preview {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    position: relative;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .media-upload .preview .remove-upload {
+    display: none;
+    opacity: 0.8;
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+    cursor: pointer;
+    line-height: 18px;
+    text-align: center;
+    background: indianred;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 17px;
+    position: absolute;
+    right: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .media-upload .preview .remove-upload:hover {
+    opacity: 1;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .media-upload .preview.active .remove-upload {
+    display: block;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-image-upload .media-upload-top {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-image-upload .media-upload-top label .multi-upload-indicator {
+    position: absolute;
+    top: -3px;
+    right: -8px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: math;
+    color: #fff;
+    background: #e02aaf;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-image-upload .media-upload-top .cbn-image-upload-description {
+    font-family: sans-serif;
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.3;
+    color: #333;
+    opacity: 1;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-video-upload input[type=text] {
+    margin: 0;
+    flex: 1;
+    height: 35px;
+    transition: border-color 0.2s ease;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-video-upload input[type=text]:hover {
+    border-color: #e02aaf;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-video-upload input[type=text]:focus {
+    border-color: #e02aaf;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(224, 42, 175, 0.1);
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-audio-upload input[type=file] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-audio-upload .preview {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-audio-upload .preview .audio-preview {
+    width: 70%;
+    margin-top: 2px;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-audio-upload .preview .audio-preview audio {
+    width: 100%;
+    height: 40px;
+    margin: 0;
+    vertical-align: middle;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-audio-upload .preview .remove-upload {
+    position: static;
+    transform: none;
+    margin-top: 2px;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-audio-upload .preview.active .remove-upload {
+    display: block;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-image-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin: 10px 0;
+    width: 100%;
+    min-height: 50px;
+    padding: 10px;
+    border: 2px dashed #ddd;
+    border-radius: 4px;
+    position: relative;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-image-preview-grid.dragover {
+    background: #f5f5f5;
+    border-color: #999;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-image-preview-grid:empty {
+    display: none;
+    margin: 0;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-image-preview-grid .image-preview-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: grab;
+    border: 2px solid #ddd;
+    background: #fff;
+    will-change: transform;
+    user-select: none;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-image-preview-grid .image-preview-item.dragging {
+    cursor: grabbing;
+    background: #fff;
+    border-color: #e02aaf;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-image-preview-grid .image-preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-image-preview-grid .image-preview-item .remove-image {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    color: #666;
+    transition: all 0.2s ease;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-image-preview-grid .image-preview-item .remove-image:hover {
+    background: #fff;
+    color: #000;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .cbn-image-preview-grid .image-preview-item .drag-handle {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    font-size: 14px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location .cbn_media .image-preview-placeholder {
+    border: 2px dashed #e02aaf;
+    border-radius: 4px;
+    background: rgba(224, 42, 175, 0.05);
+    transition: all 0.15s ease-in-out;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location #cbn_author {
+    display: none;
+    justify-content: space-between;
+    padding-top: 15px;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location #cbn_author.active {
+    display: flex;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location #cbn_author input {
+    width: 49%;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location input[type=submit] {
+    cursor: pointer;
+    font-size: 19px;
+    margin: 40px 0 10px;
+    background: #e02aaf;
+    padding: 15px 30px;
+    line-height: 1;
+    border: none;
+    color: white;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location input[type=submit].cbn-loading {
+    text-indent: -9999px;
+    background-image: url(../images/loading.webp);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 40px;
+    width: 100px;
+    opacity: 0.6;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location input[type=submit]:hover, .Compass .add-location .location-overlay-content #cbn_add_location input[type=submit]:active {
+    color: white;
+    background-color: #bc1b91;
+}
+
+@media screen and (max-width: 768px) {
+    .Compass .add-location .location-overlay-content #cbn_add_location input[type=submit] {
+        width: 100%;
+    }
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location #cbn_delete_location_btn {
+    display: none;
+    text-align: center;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location #cbn_delete_location_btn span {
+    cursor: pointer;
+    color: #e02aaf;
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    line-height: 1.2;
+    border-bottom: 1px solid;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location_error {
+    color: red;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location_thankyou {
+    text-align: center;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location_thankyou h3 {
+    color: #e02aaf;
+    margin-bottom: 20px;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location_thankyou button {
+    cursor: pointer;
+    font-size: 19px;
+    margin: 40px 0 10px;
+    background: #e02aaf;
+    padding: 15px 30px;
+    line-height: 1;
+    border: none;
+    color: white;
+    position: relative;
+}
+
+.Compass .add-location .location-overlay-content #cbn_add_location_thankyou button:hover, .Compass .add-location .location-overlay-content #cbn_add_location_thankyou button:active {
+    color: white;
+    background: #bc1b91;
+}
+
+.Compass .add-location.active {
+    display: flex;
+}
+
+.Compass .add-location.edit-location .location-overlay-content #cbn_add_location h2.cbn-add-location-headline {
+    display: none;
+}
+
+.Compass .add-location.edit-location .location-overlay-content #cbn_add_location h2.cbn-edit-location-headline {
+    display: block;
+}
+
+.Compass .add-location.edit-location .location-overlay-content #cbn_add_location #cbn_delete_location_btn {
+    display: block;
+}
+
+.Compass .add-user-location .map-wrap {
+    position: relative;
+    padding-top: 100%;
+    margin: 15px 0;
+}
+
+@media screen and (max-width: 768px) {
+    .Compass .add-user-location .map-wrap {
+        padding-top: 100%;
+    }
+}
+
+.Compass .add-user-location .map-wrap #mapGetLocation {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 1px solid #888;
+    border-radius: 2px;
+}
+
+@media screen and (max-width: 768px) {
+    .Compass .add-user-location .map-wrap #mapGetLocation .leaflet-geosearch-bar {
+        max-width: calc(100% - 67px);
+        margin: 10px 10px 0 auto;
+    }
+}
+
+.Compass .add-user-location .map-wrap #mapGetLocation a {
+    text-decoration: none !important;
+    padding: 0;
+    margin: 0;
+}
+
+.Compass .add-user-location .map-wrap #mapGetLocation .leaflet-tile-pane img.leaflet-tile {
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: unset;
+}
+
+.Compass .add-user-location .map-wrap #mapGetLocation .leaflet-control-geosearch.leaflet-geosearch-bar {
+    max-width: calc(100% - 67px);
+    margin: 10px 10px 0 auto;
+}
+
+.Compass .add-user-location .map-wrap #mapGetLocation .leaflet-control-geosearch.leaflet-geosearch-bar form {
+    background-image: url(../images/ico_search_address_2.webp);
+    background-position: right 1px;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-color: #fff;
+}
+
+.Compass .add-user-location .map-wrap #mapGetLocation .leaflet-control-geosearch.leaflet-geosearch-bar form input[type=text] {
+    width: calc(100% - 35px);
+    padding: 9px 13px 9px 0;
+    min-width: unset;
+    min-height: unset;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    outline: none !important;
+    font-size: 14px;
+}
+
+@media screen and (max-width: 768px) {
+    .Compass .add-user-location .map-wrap #mapGetLocation .leaflet-control-geosearch.leaflet-geosearch-bar form input[type=text] {
+        font-size: 16px;
+    }
+}
+
+.Compass .add-user-location .map-wrap #mapGetLocation .leaflet-control-geosearch.leaflet-geosearch-bar form button.reset {
+    right: 25px;
+    background-color: #fff;
+    color: black;
+    margin: 0;
+    padding: 0 8px;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+.Compass .add-user-location .map-wrap #mapGetLocation .leaflet-control-geosearch.leaflet-geosearch-bar form button.reset:hover {
+    opacity: 1;
+}
+
+.Compass .add-user-location .map-wrap #mapGetLocation.map-style_Custom1 .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
+    filter: saturate(3);
+}
+
+.Compass .add-user-location .map-wrap #mapGetLocation.map-style_Custom2 .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
+    filter: sepia(1) invert(0) saturate(28) hue-rotate(-53deg);
+}
+
+.Compass .add-user-location .map-wrap #mapGetLocation.map-style_Custom2 .leaflet-tile-pane .leaflet-layer:nth-child(2) .leaflet-tile {
+    filter: sepia(0) contrast(1) invert(1) brightness(2);
+}
+
+.Compass .add-user-location .map-wrap #mapGetLocation.map-style_Custom3 .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
+    filter: sepia(1) invert(1) saturate(100) brightness(1) hue-rotate(-300deg);
+}
+
+.Compass .add-user-location .map-wrap #mapGetLocation.map-style_Custom3 .leaflet-tile-pane .leaflet-layer:nth-child(2) .leaflet-tile {
+    filter: sepia(0) contrast(1) invert(1) brightness(2);
+}
+
+.Compass.cbn-container-for-fullscreen {
+    z-index: 99999999;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap {
+    background-color: #fff;
+    color: #333;
+    height: 100%;
+    overflow: auto;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    aspect-ratio: 1.3333333333;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel:hover .cbn-carousel-prev, .Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel:hover .cbn-carousel-next {
+    opacity: 1;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-inner {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-inner .cbn-carousel-item {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: none;
+    background-color: #eee;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-inner .cbn-carousel-item.active {
+    display: block;
+    animation: carouselFadeIn 0.3s ease-in-out;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-inner .cbn-carousel-item img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    max-width: 100%;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-prev, .Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    box-shadow: none;
+    border-radius: 50%;
+    color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    opacity: 0;
+    z-index: 1;
+    font-size: 0;
+    text-indent: -9999px;
+}
+
+@media (max-width: 768px) {
+    .Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-prev, .Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-next {
+        opacity: 1;
+    }
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-prev::before, .Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-next::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-style: solid;
+    border-width: 2px 2px 0 0;
+    border-color: #fff;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-prev:hover, .Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-prev:focus, .Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-next:focus {
+    outline: none;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-prev {
+    left: 10px;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-prev::before {
+    transform: rotate(-135deg);
+    margin-left: 4px;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-next {
+    right: 10px;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-next::before {
+    transform: rotate(45deg);
+    margin-right: 4px;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn-carousel .cbn-carousel-counter {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    z-index: 1;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_image {
+    background-color: #eee;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_image img {
+    max-height: 70vw;
+    max-width: 100%;
+    margin: 0 auto;
+    pointer-events: none;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_video {
+    background-color: #eee;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_video > * {
+    margin: 0;
+    aspect-ratio: 1.3333333333;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_video > * > p {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_video > * iframe {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text {
+    padding: 35px 20px;
+    line-height: 1.5;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text * {
+    color: #000;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text a {
+    color: #e02aaf;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text .cbn_location_date {
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 11px;
+    margin-bottom: 5px;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text .cbn_location_address {
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text .cbn_location_name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text .cbn_location_custom_fields {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text .cbn_location_custom_fields .cbn_custom_field {
+    margin-bottom: 10px;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text .cbn_location_custom_fields a {
+    display: inline-block;
+    hyphens: auto;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text .cbn_location_custom_fields a[href*=facebook] {
+    display: inline-block;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_facebook_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+    margin: 6px 0;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text .cbn_location_custom_fields a[href*=instagram] {
+    display: inline-block;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_instagram_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+    margin: 6px 0;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text .cbn_location_custom_fields a[href*=linkedin] {
+    display: inline-block;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_linkedin_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+    margin: 6px 0;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text .cbn_location_custom_fields a[href*=twitter] {
+    display: inline-block;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_twitter_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+    margin: 6px 0;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text .cbn_location_custom_fields a[href*=youtube] {
+    display: inline-block;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_youtube_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+    margin: 6px 0;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text .cbn_location_custom_fields a[href*=soundcloud] {
+    display: inline-block;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_soundcloud_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+    margin: 6px 0;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text .cbn_location_custom_fields .cbn_custom_field span {
+    background: rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    padding: 3px 5px;
+    border-radius: 5px;
+    margin-right: 5px;
+    font-size: 13px;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text .cbn_location_description {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text audio {
+    margin-top: 15px;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .location-content-wrap .cbn_location_text .cbn_read_more {
+    margin-top: 10px;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container .edit-location-button {
+    background: url(../images/ico_pen.webp) no-repeat 62% 29% #fff;
+    background-size: 66%;
+    border-radius: 99px;
+    height: 24px;
+    width: 24px;
+    text-align: center;
+    top: 16px;
+    right: 47px;
+    z-index: 2;
+    position: absolute;
+    cursor: pointer;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container #close-location-fullscreen {
+    position: absolute;
+    z-index: 1;
+    top: 16px;
+    right: 16px;
+    font-size: 18px;
+    line-height: 24px;
+    display: inline-block;
+    color: #333;
+    background: #fff;
+    border-radius: 99px;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.Compass.cbn-container-for-fullscreen #location-fullscreen-container #close-location-fullscreen:hover {
+    color: #e02aaf;
+}
+
+@media (max-width: 768px) {
+    .Compass.cbn-container-for-fullscreen #location-fullscreen-container.visible {
+        display: block;
+    }
+}
+
+.Compass-image-gallery {
+    /* resets */
+    position: relative;
+    opacity: 0;
+    margin-bottom: 40px;
+}
+
+.Compass-image-gallery img {
+    display: inherit;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    max-width: inherit;
+    /* end resets */
+}
+
+.Compass-image-gallery .cbn-gallery-item {
+    width: calc(25% - 15px);
+    margin-bottom: 20px;
+    break-inside: avoid;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.Compass-image-gallery .cbn-gallery-item:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.Compass-image-gallery .cbn-gallery-item:hover img {
+    transform: scale(1.02);
+}
+
+.Compass-image-gallery .cbn-gallery-item a {
+    display: block;
+    width: 100%;
+}
+
+.Compass-image-gallery .cbn-gallery-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.2s ease-in-out;
+}
+
+.Compass-image-gallery .cbn-gallery-pagination {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    gap: 5px;
+    clear: both;
+    border-top: 1px solid #eee;
+}
+
+.Compass-image-gallery .cbn-gallery-pagination .page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 12px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.Compass-image-gallery .cbn-gallery-pagination .page-numbers:hover {
+    background: #f5f5f5;
+    border-color: #ccc;
+}
+
+.Compass-image-gallery .cbn-gallery-pagination .page-numbers.current {
+    background: #e02aaf;
+    border-color: #e02aaf;
+    color: #fff;
+}
+
+.Compass-image-gallery .cbn-gallery-pagination .page-numbers.prev, .Compass-image-gallery .cbn-gallery-pagination .page-numbers.next {
+    font-size: 13px;
+}
+
+.Compass-image-gallery .cbn-gallery-pagination .page-numbers.dots {
+    border: none;
+    padding: 0 8px;
+}
+
+.Compass-image-gallery .cbn-gallery-pagination .page-numbers.dots:hover {
+    background: transparent;
+}
+
+@media (max-width: 1200px) {
+    .Compass-image-gallery .cbn-gallery-item {
+        width: calc(33.333% - 14px);
+    }
+}
+
+@media (max-width: 768px) {
+    .Compass-image-gallery .cbn-gallery-item {
+        width: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 480px) {
+    .Compass-image-gallery .cbn-gallery-item {
+        width: 100%;
+    }
+}
+
+.Compass-location-map {
+    aspect-ratio: 1.5;
+}
+
+.Compass-location-map .leaflet-marker-icon:not(.marker-cluster) {
+    height: 40px !important;
+    width: 40px !important;
+    margin-top: -40px !important;
+    margin-left: -20px !important;
+    object-fit: contain;
+    object-position: center bottom;
+}
+
+.Compass-location-map .leaflet-marker-icon:not(.marker-cluster):hover {
+    width: 44px !important;
+    height: 44px !important;
+    margin-top: -44px !important;
+    margin-left: -22px !important;
+}
+
+.Compass-locations-list {
+    /* resets */
+}
+
+.Compass-locations-list img {
+    display: inherit;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    max-width: inherit;
+}
+
+.Compass-locations-list input[type="radio"], .Compass-locations-list input[type="checkbox"] {
+    margin: inherit;
+    padding: inherit;
+}
+
+.Compass-locations-list input[type=text] {
+    background-color: #fff;
+    color: #333;
+    border-radius: 0;
+    font-size: 16px;
+}
+
+.Compass-locations-list h1, .Compass-locations-list h2, .Compass-locations-list h3, .Compass-locations-list h4 {
+    margin: 0;
+    padding: 0;
+    display: inherit;
+}
+
+.Compass-locations-list button {
+    margin: 0;
+    padding: 0;
+}
+
+.Compass-locations-list .elementor-widget-Compass_widget {
+    width: 100%;
+    /* end resets */
+}
+
+.Compass-locations-list .cbn-locations-list-item {
+    display: grid;
+    grid-template-columns: minmax(0, 290px) 1fr;
+    margin-bottom: 30px;
+    background: #fff;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    aspect-ratio: 1.3333333333;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn-carousel:hover .cbn-carousel-prev, .Compass-locations-list .cbn-locations-list-item .cbn-carousel:hover .cbn-carousel-next {
+    opacity: 1;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-inner {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-inner .cbn-carousel-item {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: none;
+    background-color: #eee;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-inner .cbn-carousel-item.active {
+    display: block;
+    animation: carouselFadeIn 0.3s ease-in-out;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-inner .cbn-carousel-item img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    max-width: 100%;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-prev, .Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    box-shadow: none;
+    border-radius: 50%;
+    color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    opacity: 0;
+    z-index: 1;
+    font-size: 0;
+    text-indent: -9999px;
+}
+
+@media (max-width: 768px) {
+    .Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-prev, .Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-next {
+        opacity: 1;
+    }
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-prev::before, .Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-next::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-style: solid;
+    border-width: 2px 2px 0 0;
+    border-color: #fff;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-prev:hover, .Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-prev:focus, .Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-next:focus {
+    outline: none;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-prev {
+    left: 10px;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-prev::before {
+    transform: rotate(-135deg);
+    margin-left: 4px;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-next {
+    right: 10px;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-next::before {
+    transform: rotate(45deg);
+    margin-right: 4px;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn-carousel .cbn-carousel-counter {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    z-index: 1;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_media {
+    padding: 15px;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_image img {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_video > div {
+    aspect-ratio: 1.3333333333;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_video > div > p {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_video iframe {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text {
+    padding: 15px;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text * {
+    color: #000;
+    hyphens: auto;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text a {
+    color: #e02aaf;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text .cbn_location_date {
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 11px;
+    margin-bottom: 5px;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text .cbn_location_address {
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text .cbn_location_name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text .cbn_location_custom_fields {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text .cbn_location_custom_fields .cbn_custom_field {
+    margin-bottom: 10px;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text .cbn_location_custom_fields a {
+    display: inline-block;
+    hyphens: auto;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text .cbn_location_custom_fields a[href*=facebook] {
+    display: inline-block;
+    margin: 6px 1px;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_facebook_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text .cbn_location_custom_fields a[href*=instagram] {
+    display: inline-block;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_instagram_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+    margin: 6px 0;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text .cbn_location_custom_fields a[href*=linkedin] {
+    display: inline-block;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_linkedin_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+    margin: 6px 0;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text .cbn_location_custom_fields a[href*=twitter] {
+    display: inline-block;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_twitter_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+    margin: 6px 0;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text .cbn_location_custom_fields a[href*=youtube] {
+    display: inline-block;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_youtube_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+    margin: 6px 0;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text .cbn_location_custom_fields a[href*=soundcloud] {
+    display: inline-block;
+    top: -2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(../images/ico_soundcloud_50x50.webp) no-repeat center center transparent;
+    background-size: contain;
+    text-indent: -9999px;
+    margin: 6px 0;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text .cbn_location_custom_fields .cbn_custom_field span {
+    background: rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    padding: 3px 5px;
+    border-radius: 5px;
+    margin-right: 5px;
+    font-size: 13px;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text .cbn_location_description {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text audio {
+    margin-top: 15px;
+}
+
+.Compass-locations-list .cbn-locations-list-item .cbn_location_text .cbn_read_more {
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .Compass-locations-list .cbn-locations-list-item {
+        grid-template-columns: 1fr;
+    }
+}
+
+.Compass-locations-list .cbn-locations-list-pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    gap: 10px;
+    justify-content: center;
+}
+
+.Compass-single-default-template-media.has-video {
+    aspect-ratio: 1.7777777778;
+}
+
+.Compass-single-default-template-media.has-video p {
+    width: 100%;
+    height: 100%;
+}
+
+.Compass-single-default-template-media.has-video iframe {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.cbn-location-value {
+    margin-bottom: 1rem;
+}
+
+.cbn-location-value .cbn-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    aspect-ratio: 1.3333333333;
+}
+
+.cbn-location-value .cbn-carousel:hover .cbn-carousel-prev, .cbn-location-value .cbn-carousel:hover .cbn-carousel-next {
+    opacity: 1;
+}
+
+.cbn-location-value .cbn-carousel .cbn-carousel-inner {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.cbn-location-value .cbn-carousel .cbn-carousel-inner .cbn-carousel-item {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: none;
+    background-color: #eee;
+}
+
+.cbn-location-value .cbn-carousel .cbn-carousel-inner .cbn-carousel-item.active {
+    display: block;
+    animation: carouselFadeIn 0.3s ease-in-out;
+}
+
+.cbn-location-value .cbn-carousel .cbn-carousel-inner .cbn-carousel-item img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    max-width: 100%;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.cbn-location-value .cbn-carousel .cbn-carousel-prev, .cbn-location-value .cbn-carousel .cbn-carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    box-shadow: none;
+    border-radius: 50%;
+    color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    opacity: 0;
+    z-index: 1;
+    font-size: 0;
+    text-indent: -9999px;
+}
+
+@media (max-width: 768px) {
+    .cbn-location-value .cbn-carousel .cbn-carousel-prev, .cbn-location-value .cbn-carousel .cbn-carousel-next {
+        opacity: 1;
+    }
+}
+
+.cbn-location-value .cbn-carousel .cbn-carousel-prev::before, .cbn-location-value .cbn-carousel .cbn-carousel-next::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-style: solid;
+    border-width: 2px 2px 0 0;
+    border-color: #fff;
+}
+
+.cbn-location-value .cbn-carousel .cbn-carousel-prev:hover, .cbn-location-value .cbn-carousel .cbn-carousel-next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.cbn-location-value .cbn-carousel .cbn-carousel-prev:focus, .cbn-location-value .cbn-carousel .cbn-carousel-next:focus {
+    outline: none;
+}
+
+.cbn-location-value .cbn-carousel .cbn-carousel-prev {
+    left: 10px;
+}
+
+.cbn-location-value .cbn-carousel .cbn-carousel-prev::before {
+    transform: rotate(-135deg);
+    margin-left: 4px;
+}
+
+.cbn-location-value .cbn-carousel .cbn-carousel-next {
+    right: 10px;
+}
+
+.cbn-location-value .cbn-carousel .cbn-carousel-next::before {
+    transform: rotate(45deg);
+    margin-right: 4px;
+}
+
+.cbn-location-value .cbn-carousel .cbn-carousel-counter {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    z-index: 1;
+}
+
+.cbn-location-value[data-value=type] {
+    display: inline-block;
+    border-radius: 99px;
+    padding: 0 0.8rem;
+    border: 1px solid;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+    body.cbn-location-opened {
+        overflow: hidden;
+    }
+}
+
+body.cbn-add-location-opened {
+    overflow: hidden;
+}
+
+@keyframes carouselFadeIn {
+    from {
+        opacity: 0.7;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.cbn-delete-confirmation {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.cbn-delete-confirmation h3 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.cbn-delete-confirmation p {
+    margin-bottom: 30px;
+}
+
+.cbn-delete-confirmation button {
+    display: inline-block !important;
+    margin: 0 auto !important;
+    padding: 12px 24px !important;
+    background-color: #e02aaf !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    font-size: 16px !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.cbn-delete-confirmation button:hover {
+    background-color: #bc1b91 !important;
+}
+
+.Compass-single-default-template .wp-block-post-featured-image {
+    aspect-ratio: auto !important;
+}
+
+.Compass-single-default-template .wp-block-columns {
+    gap: var(--wp--style--block-gap, 2em);
+}
+
+.Compass-single-default-template .wp-block-shortcode {
+    margin-bottom: 1.5em;
+}
+
+.Compass-single-default-template .wp-block-shortcode:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 781px) {
+    .Compass-single-default-template .wp-block-columns {
+        gap: 1.5em;
+    }
+}

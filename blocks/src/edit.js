@@ -27,12 +27,12 @@ export default function Edit(props) {
 	return(
         <>
             <InspectorControls>
-                <PanelBody title={ __('Custom Map Position', 'open-user-map') } initialOpen={ false }>
+                <PanelBody title={ __('Custom Map Position', 'compass') } initialOpen={ false }>
                     <PanelRow>
-                        <p>{ __('Feel free to customize initial map position (Latitude, Longitude, Zoom OR Region).', 'open-user-map')  }</p>
+                        <p>{ __('Feel free to customize initial map position (Latitude, Longitude, Zoom OR Region).', 'compass')  }</p>
                     </PanelRow>
                     <PanelRow>
-                        <p>{ __('This will override the general configuration from the', 'open-user-map') } <a href="edit.php?post_type=oum-location&page=open-user-map-settings">{ __('settings', 'open-user-map') }</a>.</p>
+                        <p>{ __('This will override the general configuration from the', 'compass') } <a href="edit.php?post_type=oum-location&page=compass-settings">{ __('settings', 'compass') }</a>.</p>
                     </PanelRow>
                     <PanelRow>
                         <TextControl 
@@ -62,7 +62,7 @@ export default function Edit(props) {
                         />
                     </PanelRow>
                     <PanelRow>
-                        <p><strong>{ __('OR', 'open-user-map') }</strong></p>
+                        <p><strong>{ __('OR', 'compass') }</strong></p>
                     </PanelRow>
                     <PanelRow>
                         <TextControl 
@@ -74,9 +74,9 @@ export default function Edit(props) {
                         />
                     </PanelRow>
                 </PanelBody>
-                <PanelBody title={ __('Custom Style', 'open-user-map') } initialOpen={ false }>
+                <PanelBody title={ __('Custom Style', 'compass') } initialOpen={ false }>
                     <PanelRow>
-                        <p>{ __('This will override the general configuration from the', 'open-user-map') } <a href="edit.php?post_type=oum-location&page=open-user-map-settings">{ __('settings', 'open-user-map') }</a>.</p>
+                        <p>{ __('This will override the general configuration from the', 'compass') } <a href="edit.php?post_type=oum-location&page=compass-settings">{ __('settings', 'compass') }</a>.</p>
                     </PanelRow>
                     <PanelRow>
                         <SelectControl 
@@ -98,7 +98,7 @@ export default function Edit(props) {
                             onChange={(val) =>
                                 setAttributes({ height: val })}
                             placeholder="e.g. 400px"
-                            help={ __('Don\'t forget to add a unit like px.', 'open-user-map') }
+                            help={ __('Don\'t forget to add a unit like px.', 'compass') }
                         />
                     </PanelRow>
                     <PanelRow>
@@ -108,13 +108,13 @@ export default function Edit(props) {
                             onChange={(val) =>
                                 setAttributes({ height_mobile: val })}
                             placeholder="e.g. 400px"
-                            help={ __('Don\'t forget to add a unit like px.', 'open-user-map') }
+                            help={ __('Don\'t forget to add a unit like px.', 'compass') }
                         />
                     </PanelRow>
                 </PanelBody>
-                <PanelBody title={ __('Filter ', 'open-user-map') } initialOpen={ false }>
+                <PanelBody title={ __('Filter ', 'compass') } initialOpen={ false }>
                     <PanelRow>
-                        <p>{ __('Show only specific markers by filtering for categories or Post IDs. You can separate multiple Categories or IDs with a | symbol.', 'open-user-map') }</p>
+                        <p>{ __('Show only specific markers by filtering for categories or Post IDs. You can separate multiple Categories or IDs with a | symbol.', 'compass') }</p>
                     </PanelRow>
                     <PanelRow>
                         <TextControl 
@@ -139,23 +139,23 @@ export default function Edit(props) {
 
             <div { ...blockProps }>
                 <div class="hint">
-                    <h5>{ __('Open User Map', 'open-user-map') }</h5>
+                    <h5>{ __('Open User Map', 'compass') }</h5>
                     <p>
-                        { __('This block will show your location markers on a map in the front end.', 'open-user-map') } 
+                        { __('This block will show your location markers on a map in the front end.', 'compass') }
                     </p>
                     <Button
                         icon="location-alt"
                         variant="primary"
                         onClick={() => window.location.href = 'edit.php?post_type=oum-location'}
                     >
-                        { __('Manage Locations', 'open-user-map') }
+                        { __('Manage Locations', 'compass') }
                     </Button>
                     <Button
                         icon="admin-settings"
                         variant="secondary"
-                        onClick={() => window.location.href = 'edit.php?post_type=oum-location&page=open-user-map-settings'}
+                        onClick={() => window.location.href = 'edit.php?post_type=oum-location&page=compass-settings'}
                     >
-                        { __('Map Settings', 'open-user-map') }
+                        { __('Map Settings', 'compass') }
                     </Button>
                 </div>
             </div>

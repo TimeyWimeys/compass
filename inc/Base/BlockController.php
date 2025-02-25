@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * @package CompassPlugin
@@ -8,28 +9,34 @@ namespace CompassPlugin\Base;
 
 use Elementor_cbn_Addon\Plugin;
 
+/**
+ *
+ */
 class BlockController extends BaseController
 {
-    public function register()
+    /**
+     * @return void
+     */
+    public function register(): void
     {
         // Gutenberg Blocks
-        add_action('init', array($this, 'set_gutenberg_blocks'));
+        add_action('init', [$this, 'set_gutenberg_blocks']);
 
         // Elementor Widgets
-        add_action('plugins_loaded', array($this, 'set_elementor_widgets'));
+        add_action('plugins_loaded', [$this, 'set_elementor_widgets']);
     }
 
     /**
      * Setup Gutenberg Blocks
      */
-    public function set_gutenberg_blocks()
+    public function set_gutenberg_blocks(): void
     {
         // Register Block
         register_block_type(
             $this->plugin_path . 'blocks',
-            array(
-                'render_callback' => is_admin() ? null : array($this, 'render_block_map')
-            )
+            [
+                'render_callback' => is_admin() ? null : [$this, 'render_block_map']
+            ]
         );
 
         // add JS translation for Gutenberg Blocks script
@@ -49,7 +56,7 @@ class BlockController extends BaseController
     /**
      * Setup Elementor Widgets
      */
-    public function set_elementor_widgets()
+    public function set_elementor_widgets(): void
     {
         require_once "$this->plugin_path/elementor/includes/plugin.php";
 

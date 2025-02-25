@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * @package CompassPlugin
@@ -9,33 +10,37 @@ namespace CompassPlugin\Pages;
 use CompassPlugin\Base\BaseController;
 use Elementor_cbn_Addon\Plugin;
 
+/**
+ *
+ */
 class Frontend extends BaseController
 {
-    public function register()
+    /**
+     * @return void
+     */
+    public function register(): void
     {
         // Shortcodes
-        add_action('init', array($this, 'set_shortcodes'));
-
-
+        add_action('init', [$this, 'set_shortcodes']);
 
 
         //Add user location within registration
-        if(get_option('cbn_enable_add_user_location')):
-            add_action('register_form', array($this, 'render_block_add_user_location'));
-            add_action('user_register', array($this, 'add_user_location'));
+        if (get_option('cbn_enable_add_user_location')):
+            add_action('register_form', [$this, 'render_block_add_user_location']);
+            add_action('user_register', [$this, 'add_user_location']);
         endif;
     }
 
     /**
      * Setup Shortcodes
      */
-    public function set_shortcodes()
+    public function set_shortcodes(): void
     {
         // EXIT if inside Elementor Backend
         // Check if Elementor installed and activated
         if (did_action('elementor/loaded')) {
 
-            if(Plugin::is_elementor_backend()) {
+            if (Plugin::is_elementor_backend()) {
                 error_log('OUM: prevented shortcode rendering inside Elementor');
                 return;
             }
@@ -43,16 +48,16 @@ class Frontend extends BaseController
         }
 
         // Render Map
-        add_shortcode('Compass', array($this, 'render_block_map'));
+        add_shortcode('Compass', [$this, 'render_block_map']);
 
         //Render Image Gallery (Shortcode)
-        add_shortcode('Compass-gallery', array($this, 'render_block_gallery'));
+        add_shortcode('Compass-gallery', [$this, 'render_block_gallery']);
 
         //Render Location Value (Shortcode)
-        add_shortcode('Compass-location', array($this, 'render_block_location'));
+        add_shortcode('Compass-location', [$this, 'render_block_location']);
 
         //Render Locations List  (Shortcode)
-        add_shortcode('Compass-list', array($this, 'render_block_list'));
+        add_shortcode('Compass-list', [$this, 'render_block_list']);
 
         // Whitelisting OUM scripts for Complianz plugin
         add_filter('script_loader_tag', function ($tag, $handle, $source) {

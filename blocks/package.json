@@ -1,5 +1,5 @@
 {
-  "name": "open-user-map-block",
+  "name": "compass-block",
   "version": "1.0.0",
   "description": "",
   "main": "build/index.js",
@@ -7,7 +7,7 @@
     "start": "wp-scripts start",
     "build": "wp-scripts build"
   },
-  "author": "100plugins",
+  "author": "Nomty",
   "license": "ISC",
   "devDependencies": {
     "@wordpress/scripts": "16.1.2"

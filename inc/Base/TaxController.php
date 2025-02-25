@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * @package CompassPlugin
@@ -6,11 +7,17 @@
 
 namespace CompassPlugin\Base;
 
+/**
+ *
+ */
 class TaxController extends BaseController
 {
     public $settings;
 
-    public function register()
+    /**
+     * @return void
+     */
+    public function register(): void
     {
 
         if (true):
@@ -22,11 +29,11 @@ class TaxController extends BaseController
                 if (get_option('cbn_enable_marker_types')) {
 
                     // Taxonomy: type
-                    add_action('init', array($this, 'type_tax'));
-                    add_action('cbn-type_add_form_fields', array($this, 'type_tax_add_custom_fields'));
-                    add_action('cbn-type_edit_form_fields', array($this, 'type_tax_edit_custom_fields'), 10, 2);
-                    add_action('edited_cbn-type', array($this, 'type_tax_save'));
-                    add_action('create_cbn-type', array($this, 'type_tax_save'));
+                    add_action('init', [$this, 'type_tax']);
+                    add_action('cbn-type_add_form_fields', [$this, 'type_tax_add_custom_fields']);
+                    add_action('cbn-type_edit_form_fields', [$this, 'type_tax_edit_custom_fields'], 10, 2);
+                    add_action('edited_cbn-type', [$this, 'type_tax_save']);
+                    add_action('create_cbn-type', [$this, 'type_tax_save']);
                 }
 
             endif;
@@ -35,13 +42,13 @@ class TaxController extends BaseController
         if (get_option('cbn_enable_regions')) {
 
             // Taxonomy: region
-            add_action('init', array($this, 'region_tax'));
-            add_action('cbn-region_add_form_fields', array($this, 'region_tax_add_custom_fields'));
-            add_action('cbn-region_edit_form_fields', array($this, 'region_tax_edit_custom_fields'), 10, 2);
-            add_action('edited_cbn-region', array($this, 'region_tax_save'));
-            add_action('create_cbn-region', array($this, 'region_tax_save'));
-            add_action('manage_edit-cbn-region_columns', array($this, 'set_custom_region_columns'));
-            add_action('manage_cbn-region_custom_column', array($this, 'set_custom_region_columns_data'), 10, 3); // this method has 3 attributes
+            add_action('init', [$this, 'region_tax']);
+            add_action('cbn-region_add_form_fields', [$this, 'region_tax_add_custom_fields']);
+            add_action('cbn-region_edit_form_fields', [$this, 'region_tax_edit_custom_fields'], 10, 2);
+            add_action('edited_cbn-region', [$this, 'region_tax_save']);
+            add_action('create_cbn-region', [$this, 'region_tax_save']);
+            add_action('manage_edit-cbn-region_columns', [$this, 'set_custom_region_columns']);
+            add_action('manage_cbn-region_custom_column', [$this, 'set_custom_region_columns_data'], 10, 3); // this method has 3 attributes
 
         }
     }
@@ -50,9 +57,9 @@ class TaxController extends BaseController
      * Taxonomy: cbn-type
      */
 
-    public static function type_tax()
+    public static function type_tax(): void
     {
-        $labels = array(
+        $labels = [
             'name' => __('Marker Categories', 'Compass'),
             'singular_name' => __('Marker Category', 'Compass'),
             'menu_name' => __('Marker Categories', 'Compass'),
@@ -68,9 +75,9 @@ class TaxController extends BaseController
             'add_or_remove_items' => __('Add or remove Marker Categories', 'Compass'),
             'separate_items_with_commas' => __('Separate Marker Categories with commas', 'Compass'),
             'back_to_items' => __('Back to Marker Categories', 'Compass'),
-        );
+        ];
 
-        $args = array(
+        $args = [
             'labels' => $labels,
             'public' => false,
             'show_ui' => true,
@@ -80,33 +87,43 @@ class TaxController extends BaseController
             'show_in_quick_edit' => true,
             'hierarchical' => false,
             'show_in_rest' => true,
-        );
+        ];
 
         register_taxonomy('cbn-type', 'cbn-location', $args);
     }
 
-    public function type_tax_add_custom_fields()
+    /**
+     * @return void
+     */
+    public function type_tax_add_custom_fields(): void
     {
         wp_nonce_field('cbn_location', 'cbn_location_nonce');
 
         // render view
         require_once cbn_get_template('page-backend-add-type.php');
 
-        wp_enqueue_script('cbn_backend_type_js', $this->plugin_url . 'src/js/backend-type.js', array('wp-polyfill'), $this->plugin_version);
+        wp_enqueue_script('cbn_backend_type_js', $this->plugin_url . 'src/js/backend-type.js', ['wp-polyfill'], $this->plugin_version);
     }
 
-    public function type_tax_edit_custom_fields()
+    /**
+     * @return void
+     */
+    public function type_tax_edit_custom_fields(): void
     {
         wp_nonce_field('cbn_location', 'cbn_location_nonce');
 
         // render view
         require_once cbn_get_template('page-backend-edit-type.php');
 
-        wp_enqueue_script('cbn_backend_type_js', $this->plugin_url . 'src/js/backend-type.js', array('wp-polyfill'), $this->plugin_version);
+        wp_enqueue_script('cbn_backend_type_js', $this->plugin_url . 'src/js/backend-type.js', ['wp-polyfill'], $this->plugin_version);
 
     }
 
-    public function type_tax_save($term_id)
+    /**
+     * @param $term_id
+     * @return mixed
+     */
+    public function type_tax_save($term_id): mixed
     {
         // Dont save without nonce
         if (!isset($_POST['cbn_location_nonce'])) {
@@ -157,9 +174,9 @@ class TaxController extends BaseController
      * Taxonomy: cbn-region
      */
 
-    public static function region_tax()
+    public static function region_tax(): void
     {
-        $labels = array(
+        $labels = [
             'name' => __('Regions', 'Compass'),
             'singular_name' => __('Region', 'Compass'),
             'menu_name' => __('Regions', 'Compass'),
@@ -175,9 +192,9 @@ class TaxController extends BaseController
             'add_or_remove_items' => __('Add or remove Regions', 'Compass'),
             'separate_items_with_commas' => __('Separate Regions with commas', 'Compass'),
             'back_to_items' => __('Back to Regions', 'Compass'),
-        );
+        ];
 
-        $args = array(
+        $args = [
             'labels' => $labels,
             'public' => false,
             'show_ui' => true,
@@ -188,12 +205,15 @@ class TaxController extends BaseController
             'meta_box_cb' => false,
             'hierarchical' => false,
             'show_in_rest' => false,
-        );
+        ];
 
         register_taxonomy('cbn-region', 'cbn-location', $args);
     }
 
-    public function region_tax_add_custom_fields()
+    /**
+     * @return void
+     */
+    public function region_tax_add_custom_fields(): void
     {
         wp_nonce_field('cbn_location', 'cbn_location_nonce');
 
@@ -203,7 +223,10 @@ class TaxController extends BaseController
 
     }
 
-    public function region_tax_edit_custom_fields()
+    /**
+     * @return void
+     */
+    public function region_tax_edit_custom_fields(): void
     {
         wp_nonce_field('cbn_location', 'cbn_location_nonce');
 
@@ -213,7 +236,11 @@ class TaxController extends BaseController
 
     }
 
-    public function region_tax_save($term_id)
+    /**
+     * @param $term_id
+     * @return mixed
+     */
+    public function region_tax_save($term_id): mixed
     {
         // Dont save without nonce
         if (!isset($_POST['cbn_location_nonce'])) {
@@ -234,7 +261,7 @@ class TaxController extends BaseController
         if (isset($_POST['cbn_lat'])) {
             // Validation
             $cbn_lat_validated = floatval(str_replace(',', '.', sanitize_text_field($_POST['cbn_lat'])));
-            if(!$cbn_lat_validated) {
+            if (!$cbn_lat_validated) {
                 $cbn_lat_validated = '';
             }
 
@@ -246,7 +273,7 @@ class TaxController extends BaseController
         if (isset($_POST['cbn_lng'])) {
             // Validation
             $cbn_lng_validated = floatval(str_replace(',', '.', sanitize_text_field($_POST['cbn_lng'])));
-            if(!$cbn_lng_validated) {
+            if (!$cbn_lng_validated) {
                 $cbn_lng_validated = '';
             }
 
@@ -258,7 +285,7 @@ class TaxController extends BaseController
         if (isset($_POST['cbn_zoom'])) {
             // Validation
             $cbn_zoom_validated = floatval(str_replace(',', '.', sanitize_text_field($_POST['cbn_zoom'])));
-            if(!$cbn_zoom_validated) {
+            if (!$cbn_zoom_validated) {
                 $cbn_zoom_validated = '';
             }
 
@@ -269,7 +296,11 @@ class TaxController extends BaseController
         return $term_id;
     }
 
-    public static function set_custom_region_columns($columns)
+    /**
+     * @param $columns
+     * @return mixed
+     */
+    public static function set_custom_region_columns($columns): mixed
     {
         // preserve default columns
         $name = $columns['name'];
@@ -282,7 +313,12 @@ class TaxController extends BaseController
         return $columns;
     }
 
-    public static function set_custom_region_columns_data($column, $term_id)
+    /**
+     * @param $column
+     * @param $term_id
+     * @return void
+     */
+    public static function set_custom_region_columns_data($column, $term_id): void
     {
         $data = get_term_meta($term_id);
 

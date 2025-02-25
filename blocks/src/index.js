@@ -4,7 +4,7 @@ import Edit from './edit';
 import Save from './save';
 
 registerBlockType( 
-	'open-user-map/map',
+	'compass/map',
 	{
 		edit: Edit,
 		save: Save

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * @package CompassPlugin
@@ -6,14 +7,24 @@
 
 namespace CompassPlugin\Base;
 
+/**
+ *
+ */
 class SettingsLinks extends BaseController
 {
-    public function register()
+    /**
+     * @return void
+     */
+    public function register(): void
     {
-        add_filter('plugin_action_links_' . $this->plugin, array($this, 'settings_link'));
+        add_filter('plugin_action_links_' . $this->plugin, [$this, 'settings_link']);
     }
 
-    public function settings_link($links)
+    /**
+     * @param $links
+     * @return mixed
+     */
+    public function settings_link($links): mixed
     {
         /** @noinspection HtmlUnknownTarget */
         $settings_link = '<a href="edit.php?post_type=cbn-location&page=Compass-settings">Settings</a>';

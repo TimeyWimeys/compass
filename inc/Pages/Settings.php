@@ -46,53 +46,76 @@ class Settings extends BaseController
             'Compass',
             'manage_options',
             'cbn-dashboard',
-            array($this, 'dashboard_page'),
+            [$this, 'dashboard_page'],
             'dashicons-location-alt',
             25
         );
         // Submenu's
-        add_submenu_page('cbn-dashboard', 'Dashboard', 'Dashboard', 'manage_options', 'cbn-dashboard', array($this, 'dashboard_page'));
-        add_submenu_page('cbn-dashboard', 'Instellingen', 'Instellingen', 'manage_options', 'cbn-settings', array($this, 'settings_page'));
-        add_submenu_page('cbn-dashboard', 'Locaties', 'Locaties', 'manage_options', 'cbn-location', array($this, 'location_page'));
-        add_submenu_page('cbn-dashboard', 'Regio Toevoegen', 'Regio Toevoegen', 'manage_options', 'cbn-add-region', array($this, 'add_region_page'));
-        add_submenu_page('cbn-dashboard', 'Regio Bewerken', 'Regio Bewerken', 'manage_options', 'cbn-edit-region', array($this, 'edit_region_page'));
-        add_submenu_page('cbn-dashboard', 'Type Toevoegen', 'Type Toevoegen', 'manage_options', 'cbn-add-type', array($this, 'add_type_page'));
-        add_submenu_page('cbn-dashboard', 'Type Bewerken', 'Type Bewerken', 'manage_options', 'cbn-edit-type', array($this, 'edit_type_page'));
+        add_submenu_page('cbn-dashboard', 'Dashboard', 'Dashboard', 'manage_options', 'cbn-dashboard', [$this, 'dashboard_page']);
+        add_submenu_page('cbn-dashboard', 'Instellingen', 'Instellingen', 'manage_options', 'cbn-settings', [$this, 'settings_page']);
+        add_submenu_page('cbn-dashboard', 'Locaties', 'Locaties', 'manage_options', 'cbn-location', [$this, 'location_page']);
+        add_submenu_page('cbn-dashboard', 'Regio Toevoegen', 'Regio Toevoegen', 'manage_options', 'cbn-add-region', [$this, 'add_region_page']);
+        add_submenu_page('cbn-dashboard', 'Regio Bewerken', 'Regio Bewerken', 'manage_options', 'cbn-edit-region', [$this, 'edit_region_page']);
+        add_submenu_page('cbn-dashboard', 'Type Toevoegen', 'Type Toevoegen', 'manage_options', 'cbn-add-type', [$this, 'add_type_page']);
+        add_submenu_page('cbn-dashboard', 'Type Bewerken', 'Type Bewerken', 'manage_options', 'cbn-edit-type', [$this, 'edit_type_page']);
 
 
     }
+
     // Dashboard pagina
-    public function dashboard_page()
+
+    /**
+     * @return void
+     */
+    public function dashboard_page(): void
     {
         include plugin_dir_path(__FILE__) . '../../templates/page-backend-settings.php';
     }
 
-    public function settings_page()
+    /**
+     * @return void
+     */
+    public function settings_page(): void
     {
         include plugin_dir_path(__FILE__) . '../../templates/page-backend-settings.php';
     }
 
-    public function location_page()
+    /**
+     * @return void
+     */
+    public function location_page(): void
     {
         include plugin_dir_path(__FILE__) . '../../templates/page-backend-location.php';
     }
 
-    public function add_region_page()
+    /**
+     * @return void
+     */
+    public function add_region_page(): void
     {
         include plugin_dir_path(__FILE__) . '../../templates/page-backend-add-region.php';
     }
 
-    public function add_type_page()
+    /**
+     * @return void
+     */
+    public function add_type_page(): void
     {
         include plugin_dir_path(__FILE__) . '../../templates/page-backend-add-type.php';
     }
 
-    public function edit_region_page()
+    /**
+     * @return void
+     */
+    public function edit_region_page(): void
     {
         include plugin_dir_path(__FILE__) . '../../templates/page-backend-edit-region.php';
     }
 
-    public function edit_type_page()
+    /**
+     * @return void
+     */
+    public function edit_type_page(): void
     {
         include plugin_dir_path(__FILE__) . '../../templates/page-backend-edit-type.php';
     }

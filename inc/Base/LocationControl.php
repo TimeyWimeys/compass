@@ -426,7 +426,7 @@ class LocationControl extends BaseController
      * @param $post_id
      * @return void
      */
-    public function set_custom_location_columns_data($column, $post_id)
+    public function set_custom_location_columns_data($column, $post_id): void
     {
         $data = get_post_meta($post_id, '_cbn_location_key', true);
 
@@ -456,7 +456,7 @@ class LocationControl extends BaseController
     /**
      * Custom search (backend) for locations (inlcuding meta and author)
      */
-    public function custom_search_cbn_location($query)
+    public function custom_search_cbn_location($query): void
     {
         // Ensure we're in the WordPress admin, it's a search query, and the right post type
         if ($query->is_search() && is_admin() && $query->is_main_query() && isset($_GET['post_type']) && $_GET['post_type'] === 'cbn-location') {
@@ -472,12 +472,12 @@ class LocationControl extends BaseController
                 global $wpdb;
 
                 // Join wp_users for author search
-                if (strpos($join, "$wpdb->users") === false) {
+                if (!str_contains($join, "$wpdb->users")) {
                     $join .= " LEFT JOIN $wpdb->users AS u ON $wpdb->posts.post_author = u.ID ";
                 }
 
                 // Join wp_postmeta for meta field search
-                if (strpos($join, "$wpdb->postmeta") === false) {
+                if (!str_contains($join, "$wpdb->postmeta")) {
                     $join .= " LEFT JOIN $wpdb->postmeta ON $wpdb->posts.ID = $wpdb->postmeta.post_id ";
                 }
 
@@ -527,7 +527,7 @@ class LocationControl extends BaseController
     /**
      * @return void
      */
-    public function add_pending_counter_to_menu()
+    public function add_pending_counter_to_menu(): void
     {
         global $menu;
         $count = count(get_posts([
@@ -712,7 +712,7 @@ class LocationControl extends BaseController
      * @param $post_id
      * @return mixed|string
      */
-    public function default_location_header($featured_image_html, $post_id)
+    public function default_location_header($featured_image_html, $post_id): mixed
     {
         if (is_singular('cbn-location') && in_the_loop() && is_main_query()) {
 

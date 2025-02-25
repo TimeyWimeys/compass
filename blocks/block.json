@@ -1,9 +1,9 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "open-user-map/map",
-	"title": "Open User Map",
-    "textdomain": "open-user-map",
+	"name": "compass/map",
+	"title": "Compass",
+    "textdomain": "compass",
 	"description": "Insert a custom map featuring your own locations or an interactive map where anyone can add location pins without registering.",
 	"category": "widgets",
     "icon": "location-alt",

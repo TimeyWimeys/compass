@@ -33,7 +33,7 @@ class Enqueue extends BaseController
     public function enqueue_admin(): void
     {
         // Admin styles
-        wp_enqueue_style('cbn_admin_style', $this->plugin_url . 'src/css/style.css', [], $this->plugin_version);
+        wp_enqueue_style('cbn_admin_style', $this->plugin_url . 'assets/css/style.css', [], $this->plugin_version);
         wp_enqueue_style('wp-color-picker');
 
         // Admin scripts
@@ -63,7 +63,7 @@ class Enqueue extends BaseController
     public function enqueue_frontend(): void
     {
         // Frontend styles
-        wp_enqueue_style('cbn_frontend_style', $this->plugin_url . 'src/css/frontend.css', [], $this->plugin_version);
+        wp_enqueue_style('cbn_frontend_style', $this->plugin_url . 'assets/css/frontend.css', [], $this->plugin_version);
     }
 
     /**
