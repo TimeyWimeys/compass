@@ -8,23 +8,23 @@ namespace CompassPlugin\Base;
 
 class BaseController
 {
-    public $plugin_path;
-    public $plugin_url;
-    public $plugin_version;
-    public $plugin;
-    public $post_status;
-    public $cbn_title_label_default;
-    public $cbn_map_label_default;
-    public $cbn_address_label_default;
-    public $cbn_description_label_default;
-    public $cbn_upload_media_label_default;
-    public $cbn_marker_types_label_default;
-    public $cbn_searchmarkers_label_default;
-    public $cbn_searchmarkers_zoom_default;
-    public $cbn_searchaddress_label_default;
-    public $cbn_user_notification_label_default;
+    public string $plugin_path;
+    public string $plugin_url;
+    public string $plugin_version;
+    public string $plugin;
+    public ?string $post_status;
+    public ?string $cbn_title_label_default;
+    public ?string $cbn_map_label_default;
+    public ?string $cbn_address_label_default;
+    public ?string $cbn_description_label_default;
+    public ?string $cbn_upload_media_label_default;
+    public ?string $cbn_marker_types_label_default;
+    public ?string $cbn_searchmarkers_label_default;
+    public int $cbn_searchmarkers_zoom_default;
+    public ?string $cbn_searchaddress_label_default;
+    public ?string $cbn_user_notification_label_default;
 
-    public $cbn_incompatible_3rd_party_scripts = array(
+    public array $cbn_incompatible_3rd_party_scripts = array(
         //"gsap", //Bug: Avada scrolltrigger overwrites L
         //"mappress-leaflet" //Bug: globally serves old leaflet.js library (overwrites L)
     );
@@ -52,7 +52,7 @@ class BaseController
     /**
      * Render all necessary base scripts for the map
      */
-    public function include_map_scripts()
+    public function include_map_scripts(): void
     {
         // Unregister incompatible 3rd party scripts
         $this->remove_incompatible_3rd_party_scripts();
@@ -94,7 +94,7 @@ class BaseController
     /**
      * Unregister incompatible 3rd party scripts
      */
-    public function remove_incompatible_3rd_party_scripts()
+    public function remove_incompatible_3rd_party_scripts(): void
     {
         foreach($this->cbn_incompatible_3rd_party_scripts as $item) {
             wp_deregister_script($item);
@@ -104,7 +104,7 @@ class BaseController
     /**
      * Render the map
      */
-    public function render_block_map()
+    public function render_block_map(): false|string
     {
         wp_enqueue_style('cbn_frontend_css', $this->plugin_url . 'assets/frontend.css', array(), $this->plugin_version);
 
@@ -133,9 +133,9 @@ class BaseController
 
 
     /**
-     * PRO: Add user location within registration
+     * Add user location within registration
      */
-    public function render_block_add_user_location__premium_only()
+    public function render_block_add_user_location(): void
     {
         wp_enqueue_style('cbn_frontend_css', $this->plugin_url . 'assets/frontend.css', array(), $this->plugin_version);
 
@@ -147,7 +147,7 @@ class BaseController
         wp_enqueue_script('cbn_frontend_block_map_js', $this->plugin_url . 'src/js/frontend-block-add-user-location.js', array('cbn_leaflet_providers_js', 'cbn_leaflet_markercluster_js', 'cbn_leaflet_subgroups_js', 'cbn_leaflet_geosearch_js', 'cbn_leaflet_locate_js', 'cbn_leaflet_fullscreen_js', 'cbn_leaflet_search_js', 'cbn_leaflet_gesture_js', 'wp-i18n', 'cbn_global_leaflet_js'), $this->plugin_version, true);
     }
 
-    public function add_user_location__premium_only($userid)
+    public function add_user_location($userid): void
     {
         if ($userid && !empty($_POST['cbn_location_lat']) && !empty($_POST['cbn_location_lng'])) {
             $data['cbn_location_lat'] = sanitize_text_field(wp_strip_all_tags($_POST['cbn_location_lat']));
@@ -193,9 +193,9 @@ class BaseController
     }
 
     /**
-     * PRO: Render Image Gallery
+     * Render Image Gallery
      */
-    public function render_block_gallery__premium_only()
+    public function render_block_gallery(): false|string
     {
         wp_enqueue_style('cbn_frontend_css', $this->plugin_url . 'assets/frontend.css', array(), $this->plugin_version);
 
@@ -213,9 +213,9 @@ class BaseController
     }
 
     /**
-     * PRO: Render Location Value
+     * Render Location Value
      */
-    public function render_block_location__premium_only($block_attributes)
+    public function render_block_location($block_attributes): false|string
     {
         wp_enqueue_style('cbn_frontend_css', $this->plugin_url . 'assets/frontend.css', array(), $this->plugin_version);
 
@@ -233,9 +233,9 @@ class BaseController
     }
 
     /**
-     * PRO: Render Locations List
+     * Render Locations List
      */
-    public function render_block_list__premium_only()
+    public function render_block_list(): false|string
     {
         wp_enqueue_style('cbn_frontend_css', $this->plugin_url . 'assets/frontend.css', array(), $this->plugin_version);
 

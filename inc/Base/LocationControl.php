@@ -1,4 +1,6 @@
 <?php
+/** @noinspection PhpMethodNamingConventionInspection */
+declare(strict_types=1);
 
 /**
  * @package CompassPlugin
@@ -6,33 +8,39 @@
 
 namespace CompassPlugin\Base;
 
-class LocationController extends BaseController
+/**
+ *
+ */
+class LocationControl extends BaseController
 {
     public $settings;
 
-    public function register()
+    /**
+     * @return void
+     */
+    public function register(): void
     {
         // CPT: Location
-        add_action('init', array($this, 'location_cpt'));
-        add_action('admin_init', array($this, 'cbn_capabilities'));
-        add_action('add_meta_boxes', array($this, 'add_meta_box'));
-        add_action('save_post', array($this, 'save_fields'));
-        add_action('manage_cbn-location_posts_columns', array($this, 'set_custom_location_columns'));
-        add_action('manage_cbn-location_posts_custom_column', array($this, 'set_custom_location_columns_data'), 10, 2); // this method has 2 attributes
-        add_action('pre_get_posts', array($this, 'custom_search_cbn_location'));
-        add_action('admin_menu', array($this, 'add_pending_counter_to_menu'));
+        add_action('init', [$this, 'locationcpt']);
+        add_action('admin_init', [$this, 'cbncapabilities']);
+        add_action('add_meta_boxes', [$this, 'add_meta_box']);
+        add_action('save_post', [$this, 'save_fields']);
+        add_action('manage_cbn-location_posts_columns', [$this, 'set_custom_location_columns']);
+        add_action('manage_cbn-location_posts_custom_column', [$this, 'set_custom_location_columns_data'], 10, 2);
+        add_action('pre_get_posts', [$this, 'custom_search_cbn_location']);
+        add_action('admin_menu', [$this, 'add_pending_counter_to_menu']);
 
-        add_filter('post_thumbnail_html', array($this, 'default_location_header'), 10, 5);
-        add_filter('the_content', array($this, 'default_location_content'));
+        add_filter('post_thumbnail_html', [$this, 'default_location_header'], 10, 5);
+        add_filter('the_content', [$this, 'default_location_content']);
     }
 
     /**
      * CPT: Location
      */
 
-    public static function location_cpt()
+    public static function locationcpt(): void
     {
-        $labels = array(
+        $labels = [
             'name' => __('Locations', 'Compass'),
             'singular_name' => __('Location', 'Compass'),
             'add_new' => __('Add new Location', 'Compass'),
@@ -46,8 +54,8 @@ class LocationController extends BaseController
             'not_found_in_trash' => __('No Location in trash', 'Compass'),
             'parent_item_colon' => '',
             'menu_name' => __('Compass', 'Compass'),
-        );
-        $args = array(
+        ];
+        $arges = [
             'labels' => $labels,
             'capability_type' => 'cbn-location',
             'map_meta_cap' => true,
@@ -60,89 +68,94 @@ class LocationController extends BaseController
             'has_archive' => false,
             'menu_position' => 20,
             'menu_icon' => 'dashicons-location-alt',
-            'supports' => array('title', 'author', 'thumbnail', 'excerpt', 'revisions', 'trash'),
-        );
-
-
+            'supports' => ['title', 'author', 'thumbnail', 'excerpt', 'revisions', 'trash'],
+        ];
 
 
         //enable single pages
         if (get_option('cbn_enable_single_page')) {
-            $args['public'] = true;
-            $args['publicly_queryable'] = true;
-            $args['show_in_nav_menus'] = true; //needs to be true to show up in Elementor template builder
-            $args['supports'] = array('title', 'author', 'editor', 'comments', 'thumbnail', 'excerpt', 'revisions', 'trash');
-            $args['has_archive'] = true;
-            $args['show_in_rest'] = true;
+            $arges['public'] = true;
+            $arges['publicly_queryable'] = true;
+            $arges['show_in_nav_menus'] = true;
+            $arges['supports'] = ['title', 'author', 'editor', 'comments', 'thumbnail', 'excerpt', 'revisions', 'trash'];
+            $arges['has_archive'] = true;
+            $arges['show_in_rest'] = true;
         }
 
-        register_post_type('cbn-location', $args);
+        register_post_type('cbn-location', $arges);
     }
 
     /**
      * Assign default capabilities to default user roles (same as 'post')
      */
-    public function cbn_capabilities()
+    public function cbncapabilities(): void
     {
         // Administrator, Editor
-        $roles = array('editor','administrator');
-        foreach ($roles as $the_role) {
-            $role = get_role($the_role);
+        $roless = ['editor', 'administrator'];
+        foreach ($roless as $the_role) {
+            $roles = get_role($the_role);
 
-            if (!is_null($role)) {
-                $role->add_cap('read_cbn-location');
-                $role->add_cap('read_private_cbn-locations');
-                $role->add_cap('edit_cbn-location');
-                $role->add_cap('edit_cbn-locations');
-                $role->add_cap('edit_others_cbn-locations');
-                $role->add_cap('edit_published_cbn-locations');
-                $role->add_cap('edit_private_cbn-locations');
-                $role->add_cap('publish_cbn-locations');
-                $role->add_cap('delete_cbn-locations');
-                $role->add_cap('delete_others_cbn-locations');
-                $role->add_cap('delete_private_cbn-locations');
-                $role->add_cap('delete_published_cbn-locations');
+            if (!is_null($roles)) {
+                $roles->add_cap('read_cbn-location');
+                $roles->add_cap('read_private_cbn-locations');
+                $roles->add_cap('edit_cbn-location');
+                $roles->add_cap('edit_cbn-locations');
+                $roles->add_cap('edit_others_cbn-locations');
+                $roles->add_cap('edit_published_cbn-locations');
+                $roles->add_cap('edit_private_cbn-locations');
+                $roles->add_cap('publish_cbn-locations');
+                $roles->add_cap('delete_cbn-locations');
+                $roles->add_cap('delete_others_cbn-locations');
+                $roles->add_cap('delete_private_cbn-locations');
+                $roles->add_cap('delete_published_cbn-locations');
             }
         }
 
         // Author
-        $role = get_role('author');
-        if (!is_null($role)) {
-            $role->add_cap('edit_cbn-locations');
-            $role->add_cap('edit_published_cbn-locations');
-            $role->add_cap('publish_cbn-locations');
-            $role->add_cap('delete_cbn-locations');
-            $role->add_cap('delete_published_cbn-locations');
+        $roles = get_role('author');
+        if (!is_null($roles)) {
+            $roles->add_cap('edit_cbn-locations');
+            $roles->add_cap('edit_published_cbn-locations');
+            $roles->add_cap('publish_cbn-locations');
+            $roles->add_cap('delete_cbn-locations');
+            $roles->add_cap('delete_published_cbn-locations');
         }
 
         // Contributor
-        $role = get_role('contributor');
-        if (!is_null($role)) {
-            $role->add_cap('edit_cbn-locations');
-            $role->add_cap('delete_cbn-locations');
+        $roles = get_role('contributor');
+        if (!is_null($roles)) {
+            $roles->add_cap('edit_cbn-locations');
+            $roles->add_cap('delete_cbn-locations');
         }
 
         // Subscriber
-        $role = get_role('subscriber');
-        if (!is_null($role)) {
-            $role->add_cap('edit_cbn-locations');
-            $role->add_cap('delete_cbn-locations');
+        $roles = get_role('subscriber');
+        if (!is_null($roles)) {
+            $roles->add_cap('edit_cbn-locations');
+            $roles->add_cap('delete_cbn-locations');
         }
     }
 
-    public function add_meta_box()
+    /**
+     * @return void
+     */
+    public function add_meta_box(): void
     {
         add_meta_box(
             'location_customfields',
             __('Compass Location Settings', 'Compass'),
-            array($this, 'render_customfields_box'),
+            [$this, 'rendercfbox'],
             'cbn-location',
             'normal',
             'high'
         );
     }
 
-    public function render_customfields_box($post)
+    /**
+     * @param $post
+     * @return void
+     */
+    public function rendercfbox($post): void
     {
         wp_nonce_field('cbn_location', 'cbn_location_nonce');
 
@@ -161,11 +174,11 @@ class LocationController extends BaseController
 
         $image = get_post_meta($post->ID, '_cbn_location_image', true);
         $has_image = (isset($image) && $image != '') ? 'has-image' : '';
-        $image_tag = ($has_image) ? '<img src="'.esc_attr($image).'" style="width: 100%;">' : '';
+        $image_tag = ($has_image) ? '<img src="' . esc_attr($image) . '" style="width: 100%;">' : '';
 
         $audio = get_post_meta($post->ID, '_cbn_location_audio', true);
         $has_audio = (isset($audio) && $audio != '') ? 'has-audio' : '';
-        $audio_tag = ($has_audio) ? '<audio controls="controls" style="width:100%"><source type="audio/mp4" src="'.esc_attr($audio).'"><source type="audio/mpeg" src="'.esc_attr($audio).'"><source type="audio/wav" src="'.esc_attr($audio).'"></audio>' : '';
+        $audio_tag = ($has_audio) ? '<audio controls="controls" style="width:100%"><source type="audio/mp4" src="' . esc_attr($audio) . '"><source type="audio/mpeg" src="' . esc_attr($audio) . '"><source type="audio/wav" src="' . esc_attr($audio) . '"></audio>' : '';
 
         $notification = $data['notification'] ?? '';
         $author_name = $data['author_name'] ?? '';
@@ -174,18 +187,11 @@ class LocationController extends BaseController
         $text_notify_me_on_publish_name = __('Your name', 'Compass');
         $text_notify_me_on_publish_email = __('Your email', 'Compass');
         $notified = get_post_meta($post->ID, '_cbn_location_notified', true);
-        $notified_tag = (isset($notified) && $notified != '') ? '<p>User has been notified on ' . date("Y-m-d H:i:s", $notified) . '</p>' : '';
+        $notified_tag = (isset($notified) && $notified != '') ? '<p>User has been notified on ' . date('Y-m-d H:i:s', $notified) . '</p>' : '';
 
 
         // Set map style
-        $map_style = get_option('cbn_map_style') ? get_option('cbn_map_style') : 'Esri.WorldStreetMap';
-        $cbn_tile_provider_mapbox_key = get_option('cbn_tile_provider_mapbox_key', '');
-
-        $marker_icon = get_option('cbn_marker_icon') ? get_option('cbn_marker_icon') : 'default';
-        $marker_user_icon = get_option('cbn_marker_user_icon');
-
-        $meta_custom_fields = $data['custom_fields'] ?? false;
-        $active_custom_fields = get_option('cbn_custom_fields');
+        $this->setMapStyle1($data['custom_fields']);
 
         // render view
         require_once cbn_get_template('page-backend-location.php');
@@ -194,7 +200,7 @@ class LocationController extends BaseController
     /**
      * Save Location Fields (Backend)
      */
-    public static function save_fields($post_id, $fields = array())
+    public static function save_fields($post_id, $fields = [])
     {
         $location_data = $_REQUEST;
 
@@ -214,9 +220,9 @@ class LocationController extends BaseController
             $images = explode('|', $location_data['cbn_location_image']);
 
             // Validate image URLs
-            $valid_images = array();
+            $valid_images = [];
             foreach ($images as $image_url) {
-                if (!empty($image_url) && strpos($image_url, '|') === false) {
+                if (!empty($image_url) && !str_contains($image_url, '|')) {
                     $valid_images[] = esc_url_raw($image_url);
                 }
             }
@@ -239,7 +245,7 @@ class LocationController extends BaseController
         }
 
         // Set post thumbnail and excerpt when saving inline (Quick Edit) and exit
-        if (isset($location_data['action']) && in_array($location_data['action'], array('edit', 'inline-save'))) {
+        if (isset($location_data['action']) && in_array($location_data['action'], ['edit', 'inline-save'])) {
 
             // Dont save if wordpress just auto-saves
             if (defined('DOING AUTOSAVE') && DOING_AUTOSAVE) {
@@ -274,10 +280,10 @@ class LocationController extends BaseController
                         $text .= '...';
                     }
 
-                    $post = array(
+                    $post = [
                         'ID' => $post_id,
                         'post_excerpt' => sanitize_text_field($text)
-                    );
+                    ];
                     wp_update_post($post);
                 }
             }
@@ -316,7 +322,7 @@ class LocationController extends BaseController
         $lng_validated = isset($location_data['cbn_location_lng']) ? floatval(str_replace(',', '.', sanitize_text_field($location_data['cbn_location_lng']))) : '';
 
 
-        $data = array(
+        $data = [
             'address' => isset($location_data['cbn_location_address']) ? sanitize_text_field($location_data['cbn_location_address']) : '',
             'lat' => $lat_validated,
             'lng' => $lng_validated,
@@ -324,7 +330,7 @@ class LocationController extends BaseController
             'author_name' => isset($location_data['cbn_location_author_name']) ? sanitize_text_field($location_data['cbn_location_author_name']) : '',
             'author_email' => isset($location_data['cbn_location_author_email']) ? sanitize_text_field($location_data['cbn_location_author_email']) : '',
             'video' => isset($location_data['cbn_location_video']) ? sanitize_text_field($location_data['cbn_location_video']) : '',
-        );
+        ];
 
         if (isset($location_data['cbn_location_notification'])) {
             $data['notification'] = sanitize_text_field($location_data['cbn_location_notification']);
@@ -362,16 +368,20 @@ class LocationController extends BaseController
                     $text .= '...';
                 }
 
-                $post = array(
+                $post = [
                     'ID' => $post_id,
                     'post_excerpt' => sanitize_text_field($text)
-                );
+                ];
                 wp_update_post($post);
             }
         }
         return $post_id;
     }
 
+    /**
+     * @param $columns
+     * @return array
+     */
     public function set_custom_location_columns($columns): array
     {
         // Get all default columns we want to preserve
@@ -383,7 +393,7 @@ class LocationController extends BaseController
         $date = $columns['date'] ?? '';
 
         // Remove all columns
-        $columns = array();
+        $columns = [];
 
         // Add columns in desired order
         if ($cb) {
@@ -411,6 +421,11 @@ class LocationController extends BaseController
         return $columns;
     }
 
+    /**
+     * @param $column
+     * @param $post_id
+     * @return void
+     */
     public function set_custom_location_columns_data($column, $post_id)
     {
         $data = get_post_meta($post_id, '_cbn_location_key', true);
@@ -509,24 +524,27 @@ class LocationController extends BaseController
     }
 
 
+    /**
+     * @return void
+     */
     public function add_pending_counter_to_menu()
     {
         global $menu;
-        $count = count(get_posts(array(
+        $count = count(get_posts([
             'post_type' => 'cbn-location',
             'post_status' => 'pending',
             'posts_per_page' => -1,
             'fields' => 'ids'
-        )));
+        ]));
 
         $menu_item = wp_list_filter(
             $menu,
-            array( 2 => 'edit.php?post_type=cbn-location' ) // 2 is the position of an array item which contains URL, it will always be 2!
+            [2 => 'edit.php?post_type=cbn-location'] // 2 is the position of an array item which contains URL, it will always be 2!
         );
 
-        if (! empty($menu_item)  && $count >= 1) {
+        if (!empty($menu_item) && $count >= 1) {
             $menu_item_position = key($menu_item); // get the array key (position) of the element
-            $menu[ $menu_item_position ][0] .= ' <span class="awaiting-mod">' . $count . '</span>';
+            $menu[$menu_item_position][0] .= ' <span class="awaiting-mod">' . $count . '</span>';
         }
     }
 
@@ -537,11 +555,11 @@ class LocationController extends BaseController
     public function get_location_value($attr, $post_id, $raw = false)
     {
         $location = get_post_meta($post_id, '_cbn_location_key', true);
-        $custom_field_ids = get_option('cbn_custom_fields', array()); // get all available custom fields
-        get_terms(array(
+        $custom_field_ids = get_option('cbn_custom_fields', []); // get all available custom fields
+        get_terms([
             'taxonomy' => 'cbn-type',
             'hide_empty' => false
-        )); // get all available types
+        ]); // get all available types
         $value = '';
 
         if ($attr == 'title') {
@@ -560,8 +578,8 @@ class LocationController extends BaseController
 
                 if (count($images) > 1 && !$raw) {
                     // Enqueue carousel script and styles
-                    wp_enqueue_style('cbn_frontend_css', plugin_dir_url(dirname(__FILE__, 2)) . 'assets/frontend.css', array(), $this->plugin_version);
-                    wp_enqueue_script('cbn_frontend_carousel_js', plugin_dir_url(dirname(__FILE__, 2)) . 'src/js/frontend-carousel.js', array(), $this->plugin_version);
+                    wp_enqueue_style('cbn_frontend_css', plugin_dir_url(dirname(__FILE__, 2)) . 'assets/frontend.css', [], $this->plugin_version);
+                    wp_enqueue_script('cbn_frontend_carousel_js', plugin_dir_url(dirname(__FILE__, 2)) . 'src/js/frontend-carousel.js', [], $this->plugin_version);
 
                     // Multiple images - use carousel
                     $value = '<div class="cbn-carousel">';
@@ -597,7 +615,7 @@ class LocationController extends BaseController
             $has_audio = (isset($audio) && $audio != '') ? 'has-audio' : '';
 
             if (!$raw) {
-                $value = ($has_audio) ? '<audio controls="controls" style="width:100%"><source type="audio/mp4" src="'.esc_attr($audio).'"><source type="audio/mpeg" src="'.esc_attr($audio).'"><source type="audio/wav" src="'.esc_attr($audio).'"></audio>' : '';
+                $value = ($has_audio) ? '<audio controls="controls" style="width:100%"><source type="audio/mp4" src="' . esc_attr($audio) . '"><source type="audio/mpeg" src="' . esc_attr($audio) . '"><source type="audio/wav" src="' . esc_attr($audio) . '"></audio>' : '';
             } else {
                 $value = ($has_audio) ? esc_attr($audio) : '';
             }
@@ -640,7 +658,7 @@ class LocationController extends BaseController
             $zoom = '13';
             $marker_icon = get_option('cbn_marker_icon') ? get_option('cbn_marker_icon') : 'default';
             $marker_user_icon = get_option('cbn_marker_user_icon');
-            $marker_icon_url = ($marker_icon == 'user1' && $marker_user_icon) ? esc_url($marker_user_icon) : esc_url($plugin_url).'src/leaflet/images/marker-icon_'.esc_attr($marker_icon).'-2x.png';
+            $marker_icon_url = ($marker_icon == 'user1' && $marker_user_icon) ? esc_url($marker_user_icon) : esc_url($plugin_url) . 'src/leaflet/images/marker-icon_' . esc_attr($marker_icon) . '-2x.png';
             $marker_shadow_url = esc_url($plugin_url) . 'src/leaflet/images/marker-shadow.png';
 
             $value = '<div id="mapRenderLocation" data-lat="' . $lat . '" data-lng="' . $lng . '" data-zoom="' . $zoom . '" data-mapstyle="' . $map_style . '" data-tile_provider_mapbox_key="' . $cbn_tile_provider_mapbox_key . '" data-marker_icon_url="' . $marker_icon_url . '" data-marker_shadow_url="' . $marker_shadow_url . '" class="Compass-location-map leaflet-map map-style_' . $map_style . '"></div>';
@@ -688,6 +706,12 @@ class LocationController extends BaseController
     }
 
     // Add a custom header to the location single page
+
+    /**
+     * @param $featured_image_html
+     * @param $post_id
+     * @return mixed|string
+     */
     public function default_location_header($featured_image_html, $post_id)
     {
         if (is_singular('cbn-location') && in_the_loop() && is_main_query()) {
@@ -705,6 +729,11 @@ class LocationController extends BaseController
     }
 
     // Add custom content to the location single page
+
+    /**
+     * @param $content
+     * @return string
+     */
     public function default_location_content($content): string
     {
         // Check if we're inside the main loop in a single Post of type 'custom_post_type'.
@@ -761,5 +790,29 @@ class LocationController extends BaseController
 
         // Return the original content if it's not empty or if the conditions are not met
         return $content;
+    }
+
+    /**
+     * @return void
+     */
+    public function setMapStyle(): void
+    {
+        $map_style = get_option('cbn_map_style') ? get_option('cbn_map_style') : 'Esri.WorldStreetMap';
+        $cbn_tile_provider_mapbox_key = get_option('cbn_tile_provider_mapbox_key', '');
+
+        $marker_icon = get_option('cbn_marker_icon') ? get_option('cbn_marker_icon') : 'default';
+        $marker_user_icon = get_option('cbn_marker_user_icon');
+    }
+
+    /**
+     * @param $custom_fields
+     * @return void
+     */
+    public function setMapStyle1($custom_fields): void
+    {
+        $this->setMapStyle();
+
+        $meta_custom_fields = $custom_fields ?? false;
+        $active_custom_fields = get_option('cbn_custom_fields');
     }
 }

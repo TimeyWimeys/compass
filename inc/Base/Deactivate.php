@@ -1,14 +1,9 @@
 <?php
 
-/**
- * @package CompassPlugin
- */
-
 namespace CompassPlugin\Base;
 
-class Activate
-{
-    public static function activate()
+class Deactivate {
+    public static function deactivate(): void
     {
         flush_rewrite_rules();
     }

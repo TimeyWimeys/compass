@@ -4,7 +4,6 @@
  * @package CompassPlugin
  */
 
-
 namespace CompassPlugin;
 
 final class Init
@@ -16,10 +15,11 @@ final class Init
             Pages\Settings::class,
             Base\Enqueue::class,
             Base\SettingsLinks::class,
-            Base\LocationController::class,
+            Base\LocationControl::class,
             Base\BlockController::class,
             Base\TaxController::class,
         );
+        error_log("Services geregistreerd...");
 
         if (!is_admin()) {
             array_unshift($classes, Pages\Frontend::class);

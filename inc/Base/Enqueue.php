@@ -8,7 +8,7 @@ namespace CompassPlugin\Base;
 
 class Enqueue extends BaseController
 {
-    public function register()
+    public function register(): void
     {
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin'));
 
@@ -16,7 +16,7 @@ class Enqueue extends BaseController
         add_action('wp_enqueue_scripts', array($this, 'load_dashicons_front_end'));
     }
 
-    public function enqueue_admin()
+    public function enqueue_admin(): void
     {
         // enqueue admin styles
         wp_enqueue_style('cbn_style', $this->plugin_url . 'assets/style.css', array(), $this->plugin_version);
@@ -48,7 +48,7 @@ class Enqueue extends BaseController
         );
     }
 
-    public function load_dashicons_front_end()
+    public function load_dashicons_front_end(): void
     {
         wp_enqueue_style('dashicons');
     }

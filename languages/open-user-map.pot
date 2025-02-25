@@ -17,7 +17,7 @@ msgstr ""
 #. Plugin Name of the plugin
 #: elementor/includes/widgets/Compass-widget.php:10
 #: elementor/includes/widgets/Compass-widget.php:227
-#: inc/Base/LocationController.php:49
+#: inc/Base/LocationControl.php:49
 #: blocks/build/index.js:1
 #: blocks/src/edit.js:142
 msgid "Compass"
@@ -185,7 +185,7 @@ msgid "Upload media"
 msgstr ""
 
 #: inc/Base/BaseController.php:123
-#: inc/Base/LocationController.php:395
+#: inc/Base/LocationControl.php:395
 #: templates/page-backend-location.php:73
 msgid "Subtitle"
 msgstr ""
@@ -210,77 +210,77 @@ msgstr ""
 msgid "Image \"%s\" is too large. Maximum file size is %d MB."
 msgstr ""
 
-#: inc/Base/LocationController.php:37
+#: inc/Base/LocationControl.php:37
 msgid "Locations"
 msgstr ""
 
-#: inc/Base/LocationController.php:38
-#: inc/Base/LocationController.php:55
+#: inc/Base/LocationControl.php:38
+#: inc/Base/LocationControl.php:55
 msgid "Location"
 msgstr ""
 
-#: inc/Base/LocationController.php:39
-#: inc/Base/LocationController.php:40
+#: inc/Base/LocationControl.php:39
+#: inc/Base/LocationControl.php:40
 msgid "Add new Location"
 msgstr ""
 
-#: inc/Base/LocationController.php:41
+#: inc/Base/LocationControl.php:41
 #: templates/partial-map-add-location.php:7
 msgid "Edit Location"
 msgstr ""
 
-#: inc/Base/LocationController.php:42
+#: inc/Base/LocationControl.php:42
 msgid "New Location"
 msgstr ""
 
-#: inc/Base/LocationController.php:43
+#: inc/Base/LocationControl.php:43
 msgid "All Locations"
 msgstr ""
 
-#: inc/Base/LocationController.php:44
+#: inc/Base/LocationControl.php:44
 msgid "View Location"
 msgstr ""
 
-#: inc/Base/LocationController.php:45
+#: inc/Base/LocationControl.php:45
 msgid "Search Locations"
 msgstr ""
 
-#: inc/Base/LocationController.php:46
+#: inc/Base/LocationControl.php:46
 msgid "No Locations found"
 msgstr ""
 
-#: inc/Base/LocationController.php:47
+#: inc/Base/LocationControl.php:47
 msgid "No Location in trash"
 msgstr ""
 
-#: inc/Base/LocationController.php:141
+#: inc/Base/LocationControl.php:141
 msgid "Compass Location Settings"
 msgstr ""
 
-#: inc/Base/LocationController.php:178
+#: inc/Base/LocationControl.php:178
 #: templates/partial-map-init.php:25
 msgid "Your name"
 msgstr ""
 
-#: inc/Base/LocationController.php:179
+#: inc/Base/LocationControl.php:179
 #: templates/partial-map-init.php:26
 msgid "Your email"
 msgstr ""
 
-#: inc/Base/LocationController.php:397
+#: inc/Base/LocationControl.php:397
 msgid "Text"
 msgstr ""
 
-#: inc/Base/LocationController.php:398
+#: inc/Base/LocationControl.php:398
 #: inc/Base/TaxController.php:276
 msgid "Coordinates"
 msgstr ""
 
-#: inc/Base/LocationController.php:645
+#: inc/Base/LocationControl.php:645
 msgid "Route on Google Maps"
 msgstr ""
 
-#: inc/Base/LocationController.php:646
+#: inc/Base/LocationControl.php:646
 #: templates/block-locations-list.php:242
 #: templates/partial-map-render.php:53
 msgid "go to Google Maps"

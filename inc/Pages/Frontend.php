@@ -19,10 +19,10 @@ class Frontend extends BaseController
 
 
 
-        //PRO: Add user location within registration
+        //Add user location within registration
         if(get_option('cbn_enable_add_user_location')):
-            add_action('register_form', array($this, 'render_block_add_user_location__premium_only'));
-            add_action('user_register', array($this, 'add_user_location__premium_only'));
+            add_action('register_form', array($this, 'render_block_add_user_location'));
+            add_action('user_register', array($this, 'add_user_location'));
         endif;
     }
 
@@ -45,14 +45,14 @@ class Frontend extends BaseController
         // Render Map
         add_shortcode('Compass', array($this, 'render_block_map'));
 
-        //PRO: Render Image Gallery (Shortcode)
-        add_shortcode('Compass-gallery', array($this, 'render_block_gallery__premium_only'));
+        //Render Image Gallery (Shortcode)
+        add_shortcode('Compass-gallery', array($this, 'render_block_gallery'));
 
-        //PRO: Render Location Value (Shortcode)
-        add_shortcode('Compass-location', array($this, 'render_block_location__premium_only'));
+        //Render Location Value (Shortcode)
+        add_shortcode('Compass-location', array($this, 'render_block_location'));
 
-        //PRO: Render Locations List  (Shortcode)
-        add_shortcode('Compass-list', array($this, 'render_block_list__premium_only'));
+        //Render Locations List  (Shortcode)
+        add_shortcode('Compass-list', array($this, 'render_block_list'));
 
         // Whitelisting OUM scripts for Complianz plugin
         add_filter('script_loader_tag', function ($tag, $handle, $source) {
