@@ -3,7 +3,7 @@
  */
 
 // Listen for map initialization complete
-document.addEventListener('oum:map_initialized', (event) => {
+document.addEventListener('cbn:map_initialized', (event) => {
   const { mapId } = event.detail;
   
   // Show map controls once initialization is complete
@@ -19,8 +19,8 @@ const showMapControls = (mapId) => {
   const mapWrap = document.getElementById(mapId).closest('.map-wrap');
   if (!mapWrap) return;
 
-  const loadingOverlay = mapWrap.querySelector('.oum-loading-overlay');
-  const filterControls = mapWrap.querySelector('.oum-filter-controls');
+  const loadingOverlay = mapWrap.querySelector('.cbn-loading-overlay');
+  const filterControls = mapWrap.querySelector('.cbn-filter-controls');
   const addLocationBtn = mapWrap.querySelector('.open-add-location-overlay');
   const filterMarkersInput = mapWrap.querySelector('#cbn_filter_markers');
 
@@ -31,21 +31,21 @@ const showMapControls = (mapId) => {
 
   // Show controls with a slight delay for smooth transition
   setTimeout(() => {
-    // Remove the oum-hidden class and add visible class for filter controls
+    // Remove the cbn-hidden class and add visible class for filter controls
     if (filterControls) {
-      filterControls.classList.remove('oum-hidden');
+      filterControls.classList.remove('cbn-hidden');
       filterControls.classList.add('visible');
     }
 
-    // Remove the oum-hidden class and add visible class for add location button
+    // Remove the cbn-hidden class and add visible class for add location button
     if (addLocationBtn) {
-      addLocationBtn.classList.remove('oum-hidden');
+      addLocationBtn.classList.remove('cbn-hidden');
       addLocationBtn.classList.add('visible');
     }
 
     // Handle filter markers input visibility
     if (filterMarkersInput) {
-      filterMarkersInput.classList.remove('oum-hidden');
+      filterMarkersInput.classList.remove('cbn-hidden');
       filterMarkersInput.classList.add('visible');
     }
   }, 300);
@@ -54,7 +54,7 @@ const showMapControls = (mapId) => {
 /**
  * Map Loading State Handler
  */
-const OUMLoader = (function() {
+const CBNLoader = (function() {
   let loadingStates = {};
 
   function initLoader(mapId) {

@@ -22,7 +22,7 @@ let sharedMapBounds = null;
 /**
  * Utility Module - Contains helper functions used across other modules
  */
-let OUMUtils = (function () {
+let CBNUtils = (function () {
   function getParameterByName(name) {
     name = name.replace(/\[/, "\\[").replace(/\]/, "\\]");
     let regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -62,8 +62,8 @@ let OUMUtils = (function () {
     if (!validateCoordinates(lat, lng)) {
       console.warn("Invalid coordinates for latLngToBounds, using defaults");
       return [
-        [OUMConfig.defaults.map.lat, OUMConfig.defaults.map.lng],
-        [OUMConfig.defaults.map.lat, OUMConfig.defaults.map.lng],
+        [CBNConfig.defaults.map.lat, CBNConfig.defaults.map.lng],
+        [CBNConfig.defaults.map.lat, CBNConfig.defaults.map.lng],
       ];
     }
 
@@ -76,7 +76,7 @@ let OUMUtils = (function () {
 
     // Validate and adjust zoom
     if (isNaN(zoom)) {
-      zoom = OUMConfig.defaults.map.zoom;
+      zoom = CBNConfig.defaults.map.zoom;
     } else {
       // Ensure zoom is between 2 and 20
       zoom = Math.max(2, Math.min(20, zoom));
@@ -218,9 +218,9 @@ let OUMUtils = (function () {
 /**
  * Error Handler Module - Centralizes error management
  */
-let OUMErrorHandler = (function () {
+let CBNErrorHandler = (function () {
   function showError(message, type = "error") {
-    console.error(`OUM Error: ${message}`);
+    console.error(`CBN Error: ${message}`);
 
     // Show error in UI if error container exists
     let errorContainer = document.getElementById("cbn_add_location_error");
@@ -266,7 +266,7 @@ let OUMErrorHandler = (function () {
 /**
  * Configuration Module - Centralizes all configuration settings
  */
-let OUMConfig = (function () {
+let CBNConfig = (function () {
   // Private variables
   let defaults = {
     map: {
@@ -339,7 +339,7 @@ let OUMConfig = (function () {
 /**
  * Map Core Module - Handles the main map initialization and configuration
  */
-let OUMMap = (function () {
+let CBNMap = (function () {
   // Private variables
   let map = null;
   let world_bounds = null;
@@ -347,24 +347,24 @@ let OUMMap = (function () {
     lat:
       typeof start_lat !== "undefined"
         ? Number(start_lat)
-        : OUMConfig.defaults.map.lat,
+        : CBNConfig.defaults.map.lat,
     lng:
       typeof start_lng !== "undefined"
         ? Number(start_lng)
-        : OUMConfig.defaults.map.lng,
+        : CBNConfig.defaults.map.lng,
     zoom:
       typeof start_zoom !== "undefined"
         ? Number(start_zoom)
-        : OUMConfig.defaults.map.zoom,
+        : CBNConfig.defaults.map.zoom,
   };
 
   // Private functions
   function initializeStartPosition() {
     // Validate coordinates
-    if (!OUMUtils.validateCoordinates(startPosition.lat, startPosition.lng)) {
+    if (!CBNUtils.validateCoordinates(startPosition.lat, startPosition.lng)) {
       console.warn("Invalid coordinates, using defaults");
-      startPosition.lat = OUMConfig.defaults.map.lat;
-      startPosition.lng = OUMConfig.defaults.map.lng;
+      startPosition.lat = CBNConfig.defaults.map.lat;
+      startPosition.lng = CBNConfig.defaults.map.lng;
     }
 
     // Validate zoom level (between 1 and 20)
@@ -374,7 +374,7 @@ let OUMMap = (function () {
       startPosition.zoom > 20
     ) {
       console.warn("Invalid zoom level, using default");
-      startPosition.zoom = OUMConfig.defaults.map.zoom;
+      startPosition.zoom = CBNConfig.defaults.map.zoom;
     }
   }
 
@@ -382,7 +382,7 @@ let OUMMap = (function () {
     // Set bounds if fixed map bounds is enabled
     if (cbn_enable_fixed_map_bounds) {
       // Calculate bounds based on initial position
-      let boundsArray = OUMUtils.latLngToBounds(
+      let boundsArray = CBNUtils.latLngToBounds(
         startPosition.lat,
         startPosition.lng,
         startPosition.zoom,
@@ -400,7 +400,7 @@ let OUMMap = (function () {
       sharedMapBounds = world_bounds;
     } else {
       // Use default world bounds when fixed map bounds is disabled
-      world_bounds = OUMConfig.defaults.map.bounds;
+      world_bounds = CBNConfig.defaults.map.bounds;
       sharedMapBounds = world_bounds;
     }
 
@@ -502,42 +502,42 @@ let OUMMap = (function () {
       tileLayer = L.tileLayer
         .provider("MapBox", {
           id: "mapbox/streets-v12",
-          accessToken: OUMConfig.getTileProviderKey(),
+          accessToken: CBNConfig.getTileProviderKey(),
         })
         .addTo(map);
     } else if (mapStyle === "MapBox.outdoors") {
       tileLayer = L.tileLayer
         .provider("MapBox", {
           id: "mapbox/outdoors-v12",
-          accessToken: OUMConfig.getTileProviderKey(),
+          accessToken: CBNConfig.getTileProviderKey(),
         })
         .addTo(map);
     } else if (mapStyle === "MapBox.light") {
       tileLayer = L.tileLayer
         .provider("MapBox", {
           id: "mapbox/light-v11",
-          accessToken: OUMConfig.getTileProviderKey(),
+          accessToken: CBNConfig.getTileProviderKey(),
         })
         .addTo(map);
     } else if (mapStyle === "MapBox.dark") {
       tileLayer = L.tileLayer
         .provider("MapBox", {
           id: "mapbox/dark-v11",
-          accessToken: OUMConfig.getTileProviderKey(),
+          accessToken: CBNConfig.getTileProviderKey(),
         })
         .addTo(map);
     } else if (mapStyle === "MapBox.satellite") {
       tileLayer = L.tileLayer
         .provider("MapBox", {
           id: "mapbox/satellite-v9",
-          accessToken: OUMConfig.getTileProviderKey(),
+          accessToken: CBNConfig.getTileProviderKey(),
         })
         .addTo(map);
     } else if (mapStyle === "MapBox.satellite-streets") {
       tileLayer = L.tileLayer
         .provider("MapBox", {
           id: "mapbox/satellite-streets-v12",
-          accessToken: OUMConfig.getTileProviderKey(),
+          accessToken: CBNConfig.getTileProviderKey(),
         })
         .addTo(map);
     } else {
@@ -554,10 +554,10 @@ let OUMMap = (function () {
       L.control
         .search({
           textPlaceholder: cbn_searchmarkers_label,
-          layer: window.oumMarkersLayer,
+          layer: window.cbnMarkersLayer,
           propertyName: "content",
           initial: false,
-          buildTip: OUMUtils.customAutoSuggestText,
+          buildTip: CBNUtils.customAutoSuggestText,
           firstTipSubmit: true,
           autoCollapse: true,
           zoom: cbn_searchmarkers_zoom,
@@ -570,10 +570,10 @@ let OUMMap = (function () {
       L.control
         .search({
           textPlaceholder: cbn_searchmarkers_label,
-          layer: window.oumMarkersLayer,
+          layer: window.cbnMarkersLayer,
           propertyName: "content",
           initial: false,
-          buildTip: OUMUtils.customAutoSuggestText,
+          buildTip: CBNUtils.customAutoSuggestText,
           firstTipSubmit: true,
           autoCollapse: false,
           collapsed: false,
@@ -588,7 +588,7 @@ let OUMMap = (function () {
       let searchBar = new GeoSearch.GeoSearchControl({
         style: "bar",
         showMarker: false,
-        provider: OUMUtils.initGeosearchProvider(),
+        provider: CBNUtils.initGeosearchProvider(),
         searchLabel: cbn_searchaddress_label,
         updateMap: false,
       });
@@ -600,7 +600,7 @@ let OUMMap = (function () {
       let searchButton = new GeoSearch.GeoSearchControl({
         style: "button",
         showMarker: false,
-        provider: OUMUtils.initGeosearchProvider(),
+        provider: CBNUtils.initGeosearchProvider(),
         searchLabel: cbn_searchaddress_label,
         updateMap: false,
       });
@@ -683,7 +683,7 @@ let OUMMap = (function () {
           let region_lng = el.getAttribute("data-lng");
           let region_zoom = el.getAttribute("data-zoom");
 
-          let region_bounds = OUMUtils.latLngToBounds(
+          let region_bounds = CBNUtils.latLngToBounds(
             parseFloat(region_lat),
             parseFloat(region_lng),
             parseFloat(region_zoom),
@@ -705,7 +705,7 @@ let OUMMap = (function () {
         };
 
         // Event: Change Region on ?region=Europe
-        let REGION_ID = OUMUtils.getParameterByName("region");
+        let REGION_ID = CBNUtils.getParameterByName("region");
         if (btn.textContent === REGION_ID) {
           btn.click();
         }
@@ -735,10 +735,10 @@ let OUMMap = (function () {
         map.attributionControl.setPrefix(false);
 
         // First set up the tile layer
-        setupTileLayer(OUMConfig.getMapStyle());
+        setupTileLayer(CBNConfig.getMapStyle());
 
         // Calculate initial bounds based on settings map dimensions
-        let boundsArray = OUMUtils.latLngToBounds(
+        let boundsArray = CBNUtils.latLngToBounds(
           startPosition.lat,
           startPosition.lng,
           startPosition.zoom,
@@ -765,10 +765,10 @@ let OUMMap = (function () {
         setupMapEvents();
         setupRegionEvents();
 
-        window.oumMap = map;
+        window.cbnMap = map;
 
         // Listen for markers initialized event
-        document.addEventListener('oum:markers_initialized', function(e) {
+        document.addEventListener('cbn:markers_initialized', function(e) {
           if (e.detail.mapId === mapEl) {
             // Set up controls after markers are ready
             setupControls();
@@ -776,16 +776,16 @@ let OUMMap = (function () {
         }, { once: true });  // Use once: true to ensure it only runs once
 
         // Dispatch map initialized event when everything is ready
-        document.dispatchEvent(new CustomEvent('oum:map_initialized', {
+        document.dispatchEvent(new CustomEvent('cbn:map_initialized', {
           detail: {
             mapId: mapEl,
-            map: oumMap
+            map: cbnMap
           }
         }));
 
         return map;
       } catch (error) {
-        OUMErrorHandler.showError("Error initializing map: " + error.message);
+        CBNErrorHandler.showError("Error initializing map: " + error.message);
         throw error;
       }
     },
@@ -801,7 +801,7 @@ let OUMMap = (function () {
 /**
  * Markers Module - Handles all marker-related functionality
  */
-let OUMMarkers = (function () {
+let CBNMarkers = (function () {
   // Private variables
   let markersLayer = null;
   let allMarkers = [];
@@ -857,7 +857,7 @@ let OUMMarkers = (function () {
       el.querySelector(".location-content-wrap").innerHTML =
         locationBubble.popup.getContent();
       el.classList.add("visible");
-      document.querySelector("body").classList.add("oum-location-opened");
+      document.querySelector("body").classList.add("cbn-location-opened");
     });
 
     // Event: Close Location Bubble
@@ -866,7 +866,7 @@ let OUMMarkers = (function () {
         ".Compass #location-fullscreen-container"
       );
       el.classList.remove("visible");
-      document.querySelector("body").classList.remove("oum-location-opened");
+      document.querySelector("body").classList.remove("cbn-location-opened");
     });
   }
 
@@ -877,7 +877,7 @@ let OUMMarkers = (function () {
       ? markerFilterInput.value.toLowerCase()
       : "";
     let categoryInputs = document.querySelectorAll(
-      '.Compass .oum-filter-controls [name="type"]'
+      '.Compass .cbn-filter-controls [name="type"]'
     );
     let checkedCategories = Array.from(categoryInputs)
       .filter((input) => input.checked)
@@ -905,7 +905,7 @@ let OUMMarkers = (function () {
 
   function setupFilterListEvents() {
     let filterControls = document.querySelector(
-      ".Compass .oum-filter-controls"
+      ".Compass .cbn-filter-controls"
     );
     if (!filterControls) return;
 
@@ -922,21 +922,21 @@ let OUMMarkers = (function () {
     // Event: Open Filter List (mouseover for collapsed design)
     if (filterControls.classList.contains("use-collapse")) {
       filterControls
-        .querySelector(".oum-filter-toggle")
+        .querySelector(".cbn-filter-toggle")
         ?.addEventListener("mouseover", showFilterList);
       filterControls
-        .querySelector(".oum-filter-list")
+        .querySelector(".cbn-filter-list")
         ?.addEventListener("mouseleave", hideFilterList);
     }
 
     // Event: Open Filter List (click)
     filterControls
-      .querySelector(".oum-filter-toggle")
+      .querySelector(".cbn-filter-toggle")
         ?.addEventListener("click", showFilterList);
 
     // Event: Close Filter List (click on close button)
     filterControls
-      .querySelector(".oum-filter-list .close-filter-list")
+      .querySelector(".cbn-filter-list .close-filter-list")
         ?.addEventListener("click", hideFilterList);
   }
 
@@ -973,11 +973,11 @@ let OUMMarkers = (function () {
       setupFilterListEvents();
 
       // Make layer globally available (for backward compatibility)
-      window.oumMarkersLayer = markersLayer;
-      window.oumAllMarkers = allMarkers;
+      window.cbnMarkersLayer = markersLayer;
+      window.cbnAllMarkers = allMarkers;
 
       // Dispatch markers initialized event
-      document.dispatchEvent(new CustomEvent('oum:markers_initialized', {
+      document.dispatchEvent(new CustomEvent('cbn:markers_initialized', {
         detail: {
           mapId: map._container.id,
           markersLayer: markersLayer
@@ -994,7 +994,7 @@ let OUMMarkers = (function () {
       });
 
       // After adding all markers, check if we need to auto-open one
-      let POPUP_MARKER_ID = OUMUtils.getParameterByName("markerid");
+      let POPUP_MARKER_ID = CBNUtils.getParameterByName("markerid");
       if (POPUP_MARKER_ID) {
         handleAutoOpenMarker(POPUP_MARKER_ID);
       }
@@ -1012,7 +1012,7 @@ let OUMMarkers = (function () {
 /**
  * Form Map Module - Handles all map-related functionality for the form
  */
-let OUMFormMap = (function () {
+let CBNFormMap = (function () {
   // Private variables
   let formMap = null;
   let locationMarker = null;
@@ -1039,7 +1039,7 @@ let OUMFormMap = (function () {
     });
 
     // Make form map globally available (for backward compatibility)
-    window.oumMap2 = formMap;
+    window.cbnMap2 = formMap;
 
     setupTileLayer();
     setupControls();
@@ -1049,7 +1049,7 @@ let OUMFormMap = (function () {
     // Always apply bounds to prevent showing repeated maps
     let boundsToUse = cbn_enable_fixed_map_bounds
       ? sharedMapBounds
-      : OUMConfig.defaults.map.bounds;
+      : CBNConfig.defaults.map.bounds;
 
     // Set the bounds
     formMap.setMaxBounds(boundsToUse);
@@ -1132,7 +1132,7 @@ let OUMFormMap = (function () {
     } else if (mapStyle.startsWith("MapBox.")) {
       L.tileLayer.provider("MapBox", {
         id: mapStyle.replace("MapBox.", "mapbox/") + (mapStyle.includes("-v") ? "" : "-v12"),
-        accessToken: OUMConfig.getTileProviderKey(),
+        accessToken: CBNConfig.getTileProviderKey(),
       }).addTo(formMap);
     } else {
       // Default
@@ -1145,7 +1145,7 @@ let OUMFormMap = (function () {
     let search = new GeoSearch.GeoSearchControl({
       style: "bar",
       showMarker: false,
-      provider: OUMUtils.initGeosearchProvider(),
+      provider: CBNUtils.initGeosearchProvider(),
       searchLabel: cbn_searchaddress_label,
       updateMap: false,
     });
@@ -1294,7 +1294,7 @@ let OUMFormMap = (function () {
 /**
  * Form Controller Module - Handles all form-related functionality
  */
-let OUMFormController = (function () {
+let CBNFormController = (function () {
   // Private variables
   let isEditMode = false;
   let currentLocationId = null;
@@ -1317,7 +1317,7 @@ let OUMFormController = (function () {
 
     // Update thank you message
     let headlineEl = thankyouDiv.querySelector('h3');
-    let messageEl = thankyouDiv.querySelector('.oum-add-location-thankyou-text');
+    let messageEl = thankyouDiv.querySelector('.cbn-add-location-thankyou-text');
     let buttonEl = thankyouDiv.querySelector('button');
 
     if (!headlineEl || !messageEl || !buttonEl) {
@@ -1328,7 +1328,7 @@ let OUMFormController = (function () {
       }
       if (!messageEl) {
         let newMessage = document.createElement('p');
-        newMessage.className = 'oum-add-location-thankyou-text';
+        newMessage.className = 'cbn-add-location-thankyou-text';
         thankyouDiv.appendChild(newMessage);
       }
       if (!buttonEl) {
@@ -1339,11 +1339,11 @@ let OUMFormController = (function () {
 
     // Get elements again (they should exist now)
     let finalHeadlineEl = thankyouDiv.querySelector('h3');
-    let finalMessageEl = thankyouDiv.querySelector('.oum-add-location-thankyou-text');
+    let finalMessageEl = thankyouDiv.querySelector('.cbn-add-location-thankyou-text');
     let finalButtonEl = thankyouDiv.querySelector('button');
 
     // Add specific class for delete confirmation
-    thankyouDiv.className = type === 'confirm-delete' ? 'oum-delete-confirmation' : '';
+    thankyouDiv.className = type === 'confirm-delete' ? 'cbn-delete-confirmation' : '';
 
     if (finalHeadlineEl) finalHeadlineEl.textContent = headline || '';
     if (finalMessageEl) finalMessageEl.textContent = message || '';
@@ -1403,12 +1403,12 @@ let OUMFormController = (function () {
                     }
                   );
                 } else {
-                  oumShowError(response.data);
+                  cbnShowError(response.data);
                 }
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {
                 console.log(errorThrown);
-                oumShowError([{message: wp.i18n.__('An error occurred while deleting the location. Please try again.', 'Compass')}]);
+                cbnShowError([{message: wp.i18n.__('An error occurred while deleting the location. Please try again.', 'Compass')}]);
               }
             });
           }
@@ -1451,11 +1451,11 @@ let OUMFormController = (function () {
 
   function openForm(location = null) {
     document.querySelector(".add-location").classList.add("active");
-    document.body.classList.add("oum-add-location-opened");
+    document.body.classList.add("cbn-add-location-opened");
 
     setTimeout(function () {
       // Initialize map if needed
-      OUMFormMap.init();
+      CBNFormMap.init();
 
       if (location) {
         populateForm(location);
@@ -1463,16 +1463,16 @@ let OUMFormController = (function () {
         // Set view to match main map
         let mainMapEl = document.querySelector(`#${map_el}`);
         if (mainMapEl) {
-          let mainMap = window.oumMap;
+          let mainMap = window.cbnMap;
           let mainCenter = mainMap.getCenter();
           let mainZoom = mainMap.getZoom();
-          OUMFormMap.setView(mainCenter.lat, mainCenter.lng, mainZoom);
+          CBNFormMap.setView(mainCenter.lat, mainCenter.lng, mainZoom);
         }
       }
 
       // Add a separate timeout for invalidateSize
       setTimeout(() => {
-        OUMFormMap.invalidateSize();
+        CBNFormMap.invalidateSize();
       }, 200);
     }, 150);
   }
@@ -1512,11 +1512,11 @@ let OUMFormController = (function () {
     }
 
     // Allow body scrolling
-    document.querySelector("body").classList.remove("oum-add-location-opened");
+    document.querySelector("body").classList.remove("cbn-add-location-opened");
 
     // Reset form and clear marker
     resetForm();
-    OUMFormMap.clearMarker();
+    CBNFormMap.clearMarker();
   }
 
   function setupNotificationEvents() {
@@ -1544,8 +1544,8 @@ let OUMFormController = (function () {
     // Image upload
     let imageInput = document.getElementById("cbn_location_images");
     if (imageInput) {
-      // Let OUMMedia handle the image upload
-      OUMMedia.initializeImageUpload(imageInput);
+      // Let CBNMedia handle the image upload
+      CBNMedia.initializeImageUpload(imageInput);
     }
 
     // Remove image button
@@ -1710,11 +1710,11 @@ let OUMFormController = (function () {
           // Add event listener for remove button
           let removeButton = previewItem.querySelector('.remove-image');
           if (removeButton) {
-            removeButton.addEventListener('click', OUMMedia.handleRemoveImage);
+            removeButton.addEventListener('click', CBNMedia.handleRemoveImage);
           }
 
           // Set up drag and drop for existing images
-          OUMMedia.setupDragAndDrop(previewItem);
+          CBNMedia.setupDragAndDrop(previewItem);
 
           previewItem.style.opacity = "0";
           previewItem.style.transform = "scale(0.9)";
@@ -1728,14 +1728,14 @@ let OUMFormController = (function () {
 
     // Handle audio
     if (location.audio) {
-      OUMMedia.setExistingAudio(location.audio);
+      CBNMedia.setExistingAudio(location.audio);
       document.getElementById("cbn_remove_existing_audio").value = "0";
     }
 
     // Set map view to location
     if (location.lat && location.lng) {
-      OUMFormMap.setView(location.lat, location.lng, 16);
-      OUMFormMap.setLocation(location.lat, location.lng);
+      CBNFormMap.setView(location.lat, location.lng, 16);
+      CBNFormMap.setLocation(location.lat, location.lng);
     }
   }
 
@@ -1743,7 +1743,7 @@ let OUMFormController = (function () {
     isEditMode = false;
     currentLocationId = null;
     selectedFiles = [];
-    window.oumSelectedFiles = [];
+    window.cbnSelectedFiles = [];
 
     let addLocationEl = document.querySelector(".add-location");
     if (addLocationEl) {
@@ -1795,7 +1795,7 @@ let OUMFormController = (function () {
     // Reset thank you message if it exists
     if (thankyouDiv) {
       thankyouDiv.style.display = 'none';
-      thankyouDiv.classList.remove('oum-delete-confirmation');
+      thankyouDiv.classList.remove('cbn-delete-confirmation');
     }
 
     // Reset image preview
@@ -1871,7 +1871,7 @@ let OUMFormController = (function () {
 /**
  * Media Module - Handles image upload and preview functionality
  */
-let OUMMedia = (function () {
+let CBNMedia = (function () {
   // Private variables
   let selectedFiles = [];
   let startX, startY, originalPosition, placeholder;
@@ -1982,7 +1982,7 @@ let OUMMedia = (function () {
       "cbn_location_images_preview"
     );
     let maxFiles = parseInt(imageInput.dataset.maxFiles) || 5;
-    let maxFileSize = OUMConfig.defaults.media.maxImageSize; // in bytes
+    let maxFileSize = CBNConfig.defaults.media.maxImageSize; // in bytes
 
     // Convert FileList to Array and store in a variable
     let files = Array.prototype.slice.call(e.target.files);
@@ -2036,7 +2036,7 @@ let OUMMedia = (function () {
     createImagePreviews(validFiles, previewContainer);
 
     // Make selectedFiles available globally for the form submission
-    window.oumSelectedFiles = selectedFiles;
+    window.cbnSelectedFiles = selectedFiles;
   }
 
   function createImagePreviews(files, container) {
@@ -2101,7 +2101,7 @@ let OUMMedia = (function () {
       // Remove from selectedFiles array if it's a new image
       let fileName = previewItem.dataset.fileName;
       selectedFiles = selectedFiles.filter(file => file.name !== fileName);
-      window.oumSelectedFiles = selectedFiles;
+      window.cbnSelectedFiles = selectedFiles;
     }
 
     // Animate and remove the preview item
@@ -2129,7 +2129,7 @@ let OUMMedia = (function () {
       this.style.height = rect.height + 'px';
 
       // Store initial grid container for safety check
-      this.initialContainer = this.closest('.oum-image-preview-grid');
+      this.initialContainer = this.closest('.cbn-image-preview-grid');
 
       // Create placeholder immediately
       createPlaceholder(this);
@@ -2323,13 +2323,13 @@ window.addEventListener("load", function () {
   }
 
   // Restore the extended L object
-  window.L = window.OUMLeaflet.L;
+  window.L = window.CBNLeaflet.L;
 
   // Initialize map and get instance
-  let mapInstance = OUMMap.init(map_el);
+  let mapInstance = CBNMap.init(map_el);
 
   // Initialize markers
-  let markersModule = OUMMarkers.init(mapInstance);
+  let markersModule = CBNMarkers.init(mapInstance);
 
   // Add markers from the global cbn_all_locations
   if (
@@ -2340,26 +2340,26 @@ window.addEventListener("load", function () {
   }
 
   // Initialize location form
-  OUMFormMap.init(mapInstance);
+  CBNFormMap.init(mapInstance);
 
   // Initialize form controller
-  OUMFormController.init();
+  CBNFormController.init();
 
   // Initialize media handling
-  OUMMedia.init();
+  CBNMedia.init();
 
   // Setup filter events
   let markerFilterInput = document.getElementById("cbn_filter_markers");
   if (markerFilterInput) {
-    markerFilterInput.addEventListener("input", OUMMarkers.filterMarkers);
+    markerFilterInput.addEventListener("input", cbnMarkers.filterMarkers);
   }
 
   let categoryInputs = document.querySelectorAll(
-    '.Compass .oum-filter-controls [name="type"]'
+    '.Compass .cbn-filter-controls [name="type"]'
   );
   if (categoryInputs.length > 0) {
     categoryInputs.forEach((input) => {
-      input.addEventListener("change", OUMMarkers.filterMarkers);
+      input.addEventListener("change", CBNMarkers.filterMarkers);
     });
   }
 
@@ -2371,11 +2371,11 @@ window.addEventListener("load", function () {
         try {
           if (typeof document !== 'undefined') {
             // Defer map2-related code execution
-            if (${custom_js.snippet.includes("oumMap2")}) {
+            if (${custom_js.snippet.includes("cbnMap2")}) {
               // Create a MutationObserver to watch for the form map initialization
               let observer = new MutationObserver((mutations) => {
-                if (window.oumMap2) {
-                  // Execute the custom JS only when oumMap2 is available
+                if (window.cbnMap2) {
+                  // Execute the custom JS only when cbnMap2 is available
                   try {
                     ${custom_js.snippet}
                   } catch (e) {

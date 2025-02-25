@@ -1,5 +1,5 @@
 //Dismiss
-jQuery(document).on('click', '.oum-getting-started-notice .notice-dismiss', function() {
+jQuery(document).on('click', '.cbn-getting-started-notice .notice-dismiss', function() {
     jQuery.ajax({
         url: ajaxurl,
         data: {
@@ -30,7 +30,7 @@ jQuery(function($){
         let url = attachment.url;
         $('#cbn_location_audio').val(url);
         $('#cbn_location_audio_preview').addClass('has-audio');
-        $('#cbn_location_audio_preview').html(url + '<div onclick="oumRemoveAudioUpload()" class="remove-upload">&times;</div>');
+        $('#cbn_location_audio_preview').html(url + '<div onclick="cbnRemoveAudioUpload()" class="remove-upload">&times;</div>');
     });
 
     audio_uploader.open();
@@ -85,7 +85,7 @@ jQuery(function($){
             // EXIT, if no locations
             if($locations_list.length === 0) {
                 alert('Something went wrong. Please see errors in console.');
-                console.error('OUM: No public locations available to export.');
+                console.error('CBN: No public locations available to export.');
                 return;
             } 
 
@@ -94,7 +94,7 @@ jQuery(function($){
               let url = window.URL.createObjectURL(blob)
               let a = document.createElement('a')
               a.setAttribute('href', url)
-              a.setAttribute('download', 'oum-locations_' + datetime + '.csv');
+              a.setAttribute('download', 'cbn-locations_' + datetime + '.csv');
               a.click()
             }
 
@@ -147,10 +147,10 @@ jQuery(function($){
               let attachment = csv_uploader.state().get('selection').first().toJSON();
 
               // Show loading spinner
-              if (!$('.oum-import-loading').length) {
-                  button.after('<div class="oum-import-loading"><div class="oum-spinner"></div></div>');
+              if (!$('.cbn-import-loading').length) {
+                  button.after('<div class="cbn-import-loading"><div class="cbn-spinner"></div></div>');
               }
-              $('.oum-import-loading').show();
+              $('.cbn-import-loading').show();
               button.prop('disabled', true);
 
               // Import CSV with PHP
@@ -168,7 +168,7 @@ jQuery(function($){
                   },
                   success: function (response) {
                       // Hide loading spinner
-                      $('.oum-import-loading').hide();
+                      $('.cbn-import-loading').hide();
                       button.prop('disabled', false);
 
                       if (response.success) {
@@ -182,7 +182,7 @@ jQuery(function($){
                   },
                   error: function () {
                       // Hide loading spinner
-                      $('.oum-import-loading').hide();
+                      $('.cbn-import-loading').hide();
                       button.prop('disabled', false);
                       alert('Something went wrong. Please try again.');
                   }
@@ -191,7 +191,7 @@ jQuery(function($){
               .open();
   });
 });
-function oumRemoveAudioUpload() {
+function cbnRemoveAudioUpload() {
     document.getElementById('cbn_location_audio').value = '';
     document.getElementById('cbn_location_audio_preview').classList.remove('has-audio');
     document.getElementById('cbn_location_audio_preview').textContent = '';

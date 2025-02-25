@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     galleries.forEach(function(gallery) {
         // Get all items except pagination
         const container = document.createElement('div');
-        container.className = 'oum-gallery-items-container';
-        const items = gallery.querySelectorAll('.oum-gallery-item');
-        const pagination = gallery.querySelector('.oum-gallery-pagination');
+        container.className = 'cbn-gallery-items-container';
+        const items = gallery.querySelectorAll('.cbn-gallery-item');
+        const pagination = gallery.querySelector('.cbn-gallery-pagination');
 
         // Move items to container
         items.forEach(item => container.appendChild(item));
@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Initialize Masonry with options
         const masonry = new Masonry(container, {
-            itemSelector: '.oum-gallery-item',
-            columnWidth: '.oum-gallery-item',
+            itemSelector: '.cbn-gallery-item',
+            columnWidth: '.cbn-gallery-item',
             percentPosition: true,
             gutter: 20,
             transitionDuration: 0

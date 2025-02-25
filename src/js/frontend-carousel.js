@@ -1,7 +1,7 @@
 /**
  * Carousel Module - Handles carousel functionality for location images
  */
-const OUMCarousel = (function () {
+const CBNCarousel = (function () {
   function initializeCarousel() {
     // Initialize carousels in map popups and mobile fullscreen container
     const observer = new MutationObserver((mutations) => {
@@ -10,7 +10,7 @@ const OUMCarousel = (function () {
           mutation.addedNodes.forEach((node) => {
             // Handle regular popup carousels
             if (node.classList && node.classList.contains("leaflet-popup")) {
-              const carousel = node.querySelector(".oum-carousel");
+              const carousel = node.querySelector(".cbn-carousel");
               if (carousel) {
                 setupCarousel(carousel);
               }
@@ -18,7 +18,7 @@ const OUMCarousel = (function () {
             
             // Handle mobile fullscreen container carousels
             if (node.classList && node.classList.contains("location-content-wrap")) {
-              const carousel = node.querySelector(".oum-carousel");
+              const carousel = node.querySelector(".cbn-carousel");
               if (carousel) {
                 setupCarousel(carousel);
               }
@@ -28,7 +28,7 @@ const OUMCarousel = (function () {
 
         // Also check for changes in content of location-content-wrap
         if (mutation.target.classList && mutation.target.classList.contains("location-content-wrap")) {
-          const carousel = mutation.target.querySelector(".oum-carousel");
+          const carousel = mutation.target.querySelector(".cbn-carousel");
           if (carousel) {
             setupCarousel(carousel);
           }
@@ -44,12 +44,12 @@ const OUMCarousel = (function () {
     });
 
     // Initialize carousels in list view
-    document.querySelectorAll('.Compass-locations-list .oum-carousel').forEach(carousel => {
+    document.querySelectorAll('.Compass-locations-list .cbn-carousel').forEach(carousel => {
       setupCarousel(carousel);
     });
 
     // Initialize carousels in location value
-    document.querySelectorAll('.oum-location-value .oum-carousel').forEach(carousel => {
+    document.querySelectorAll('.cbn-location-value .cbn-carousel').forEach(carousel => {
       setupCarousel(carousel);
     });
   }
@@ -57,7 +57,7 @@ const OUMCarousel = (function () {
   function setupCarousel(carouselEl) {
     if (!carouselEl) return;
 
-    const items = carouselEl.querySelectorAll(".oum-carousel-item");
+    const items = carouselEl.querySelectorAll(".cbn-carousel-item");
     if (items.length <= 1) return;
 
     let currentIndex = 0;
@@ -83,15 +83,15 @@ const OUMCarousel = (function () {
 
   function createCarouselControls() {
     const prevBtn = document.createElement("button");
-    prevBtn.className = "oum-carousel-prev";
+    prevBtn.className = "cbn-carousel-prev";
     prevBtn.setAttribute("aria-label", "Previous image");
 
     const nextBtn = document.createElement("button");
-    nextBtn.className = "oum-carousel-next";
+    nextBtn.className = "cbn-carousel-next";
     nextBtn.setAttribute("aria-label", "Next image");
 
     const counter = document.createElement("div");
-    counter.className = "oum-carousel-counter";
+    counter.className = "cbn-carousel-counter";
 
     return { prevBtn, nextBtn, counter };
   }
@@ -143,5 +143,5 @@ const OUMCarousel = (function () {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-  OUMCarousel.init();
+  CBNCarousel.init();
 }); 

@@ -7,8 +7,8 @@ window.addEventListener('load', function() {
     updateImagePreview(imageUrls);
   }
 
-  // Restore the extended L object (OUMLeaflet.L) to the global scope (prevents conflicts with other Leaflet instances)
-  window.L = window.OUMLeaflet.L;
+  // Restore the extended L object (CBNLeaflet.L) to the global scope (prevents conflicts with other Leaflet instances)
+  window.L = window.CBNLeaflet.L;
 
   // FUNCTIONS
 

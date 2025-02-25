@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   // Event: "Add Location"-Form send
   jQuery('#cbn_add_location').submit(function(event) {
-    jQuery('#cbn_submit_btn').addClass('oum-loading');
+    jQuery('#cbn_submit_btn').addClass('cbn-loading');
     
     event.preventDefault();
     let formData = new FormData(this);
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         // For new images, get the file from selectedFiles using the filename
         let fileName = item.dataset.fileName;
-        let file = window.oumSelectedFiles.find(f => f.name === fileName);
+        let file = window.cbnSelectedFiles.find(f => f.name === fileName);
         if (file) {
           formData.append('cbn_location_images[]', file);
           imageOrder.push('new:' + fileName);
@@ -42,10 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
       processData: false,
       data: formData,
       success: function (response, textStatus, XMLHttpRequest) {
-        jQuery('#cbn_submit_btn').removeClass('oum-loading');
+        jQuery('#cbn_submit_btn').removeClass('cbn-loading');
 
         if(response.success === false) {
-          oumShowError(response.data);
+          cbnShowError(response.data);
         }
         if(response.success === true) {
           jQuery('#cbn_add_location').trigger('reset');
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
           // Determine message type based on action
           if (document.getElementById('cbn_delete_location').value === 'true') {
               // For deletion
-              OUMFormController.showFormMessage(
+              CBNFormController.showFormMessage(
                   'success',
                   wp.i18n.__('Location deleted', 'Compass'),
                   wp.i18n.__('The location has been successfully removed from the map.', 'Compass'),
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
               );
           } else if (document.getElementById('cbn_post_id').value) {
               // For edits
-              OUMFormController.showFormMessage(
+              CBNFormController.showFormMessage(
                   'success',
                   wp.i18n.__('Changes saved', 'Compass'),
                   wp.i18n.__('Your changes have been saved and will be visible after we reviewed them.', 'Compass'),
@@ -84,9 +84,9 @@ document.addEventListener('DOMContentLoaded', function() {
                       // Show thank you message with refresh button (default)
                       let thankyouDiv = document.getElementById('cbn_add_location_thankyou');
                       let thankyouHeadline = thankyouDiv?.querySelector('h3')?.textContent || wp.i18n.__('Thank you!', 'Compass');
-                      let thankyouText = thankyouDiv?.querySelector('.oum-add-location-thankyou-text')?.textContent || wp.i18n.__('We will check your location suggestion and release it as soon as possible.', 'Compass');
+                      let thankyouText = thankyouDiv?.querySelector('.cbn-add-location-thankyou-text')?.textContent || wp.i18n.__('We will check your location suggestion and release it as soon as possible.', 'Compass');
                       
-                      OUMFormController.showFormMessage(
+                      CBNFormController.showFormMessage(
                           'success',
                           thankyouHeadline,
                           thankyouText,
@@ -100,9 +100,9 @@ document.addEventListener('DOMContentLoaded', function() {
                   // Fallback to thank you message with refresh button
                   let thankyouDiv = document.getElementById('cbn_add_location_thankyou');
                   let thankyouHeadline = thankyouDiv?.querySelector('h3')?.textContent || wp.i18n.__('Thank you!', 'Compass');
-                  let thankyouText = thankyouDiv?.querySelector('.oum-add-location-thankyou-text')?.textContent || wp.i18n.__('We will check your location suggestion and release it as soon as possible.', 'Compass');
+                  let thankyouText = thankyouDiv?.querySelector('.cbn-add-location-thankyou-text')?.textContent || wp.i18n.__('We will check your location suggestion and release it as soon as possible.', 'Compass');
                   
-                  OUMFormController.showFormMessage(
+                  CBNFormController.showFormMessage(
                       'success',
                       thankyouHeadline,
                       thankyouText,
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  function oumShowError(errors) {
+  function cbnShowError(errors) {
     let errorWrapEl = jQuery('#cbn_add_location_error');
     errorWrapEl.html('');
     errors.forEach(error => {

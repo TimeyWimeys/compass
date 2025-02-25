@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function(e) {
   (function(){
 
-    // Restore the extended L object (OUMLeaflet.L) to the global scope (prevents conflicts with other Leaflet instances)
-    window.L = window.OUMLeaflet.L;
+    // Restore the extended L object (CBNLeaflet.L) to the global scope (prevents conflicts with other Leaflet instances)
+    window.L = window.CBNLeaflet.L;
 
     let $el = jQuery('#mapRenderLocation');
     let lat = $el.data('lat');

@@ -1,7 +1,7 @@
 window.addEventListener('load', function() {
 
-  // Restore the extended L object (OUMLeaflet.L) to the global scope (prevents conflicts with other Leaflet instances)
-  window.L = window.OUMLeaflet.L;
+  // Restore the extended L object (CBNLeaflet.L) to the global scope (prevents conflicts with other Leaflet instances)
+  window.L = window.CBNLeaflet.L;
 
   let map = L.map('mapGetInitial', {
       scrollWheelZoom: false,
@@ -237,16 +237,16 @@ window.addEventListener('load', function() {
               <input type="text" class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" name="cbn_custom_fields[${index}][label]" placeholder="Enter label" value="" />
             </td>
             <td>
-              <input class="oum-switch field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" id="cbn_custom_fields_${index}_required" type="checkbox" name="cbn_custom_fields[${index}][required]"><label class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" for="cbn_custom_fields_${index}_required"></label>
+              <input class="cbn-switch field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" id="cbn_custom_fields_${index}_required" type="checkbox" name="cbn_custom_fields[${index}][required]"><label class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" for="cbn_custom_fields_${index}_required"></label>
             </td>
             <td>
-              <input class="oum-switch field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" id="cbn_custom_fields_${index}_private" type="checkbox" name="cbn_custom_fields[${index}][private]"><label class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" for="cbn_custom_fields_${index}_private"></label>
+              <input class="cbn-switch field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" id="cbn_custom_fields_${index}_private" type="checkbox" name="cbn_custom_fields[${index}][private]"><label class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" for="cbn_custom_fields_${index}_private"></label>
             </td>
             <td>
               <input class="small-text field-type-text field-type-link field-type-email" type="number" min="0" name="cbn_custom_fields[${index}][maxlength]" />
             </td>
             <td>
-              <select class="oum-custom-field-fieldtype" name="cbn_custom_fields[${index}][fieldtype]">                         
+              <select class="cbn-custom-field-fieldtype" name="cbn_custom_fields[${index}][fieldtype]">                         
                   <option value="text">Text</option>
         `;
 
@@ -266,8 +266,8 @@ window.addEventListener('load', function() {
             </td>
             <td>
               <input type="text" class="regular-text field-type-checkbox field-type-radio field-type-select" name="cbn_custom_fields[${index}][options]" placeholder="Red|Blue|Green" value="" style="display: none;" />
-              <label class="field-type-select oum-custom-field-allow-empty" style="display: none;"><input class="field-type-select" type="checkbox" name="cbn_custom_fields[${index}][emptyoption]" />add empty option</label>
-              <label class="field-type-link oum-custom-field-use-label-as-text" style="display: none;"><input class="field-type-link" type="checkbox" name="cbn_custom_fields[${index}][uselabelastextoption]" />use label as text</label>
+              <label class="field-type-select cbn-custom-field-allow-empty" style="display: none;"><input class="field-type-select" type="checkbox" name="cbn_custom_fields[${index}][emptyoption]" />add empty option</label>
+              <label class="field-type-link cbn-custom-field-use-label-as-text" style="display: none;"><input class="field-type-link" type="checkbox" name="cbn_custom_fields[${index}][uselabelastextoption]" />use label as text</label>
               <textarea class="regular-text field-type-html" name="cbn_custom_fields[${index}][html]" placeholder="Enter HTML here" style="display: none;"></textarea>
             </td>
             <td>
@@ -284,11 +284,11 @@ window.addEventListener('load', function() {
     }
   });
 
-  jQuery(wrapper).on('change', '.oum-custom-field-fieldtype', function() {
+  jQuery(wrapper).on('change', '.cbn-custom-field-fieldtype', function() {
     updateCustomFieldRow(this);
   });
 
-  jQuery('.oum-custom-field-fieldtype').each(function() {
+  jQuery('.cbn-custom-field-fieldtype').each(function() {
     updateCustomFieldRow(this);
   });
 
