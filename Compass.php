@@ -8,7 +8,7 @@ Plugin Name: Compass
 Plugin URI: https://nomty.life
 Description: Our tailored map plugin
 Author: Nomty
-Version: 1.1.1
+Version: 1.1.2
 Author URI: https://nomty.life
 License: GPLv3 or later
 Text Domain: nomty
