@@ -415,7 +415,7 @@
     display: none;
 }
 
-.post-php.post-type-cbn-location .marker_icons label.checked, .post-new-php.post-type-cbn-location .marker_icons label.checked, .post-php.post-type-cbn-location .marker_icons label:not(.pro-only):hover, .post-new-php.post-type-cbn-location .marker_icons label:not(.pro-only):hover {
+.post-php.post-type-cbn-location .marker_icons label.checked, .post-new-php.post-type-cbn-location .marker_icons label.checked, .post-php.post-type-cbn-location .marker_icons label:hover, .post-new-php.post-type-cbn-location .marker_icons label:hover {
     border-color: #e02aaf;
 }
 
@@ -498,45 +498,12 @@
     display: none;
 }
 
-.taxonomy-cbn-type .marker_icons label.pro-only {
+.taxonomy-cbn-type .marker_icons label {
     cursor: default;
     overflow: visible;
 }
 
-.taxonomy-cbn-type .marker_icons label.pro-only:before {
-    content: 'PRO';
-    display: inline-block;
-    position: absolute;
-    background: red;
-    color: white;
-    right: 0;
-    top: 0;
-    font-size: 11px;
-    text-align: center;
-    padding: 0 4px;
-}
-
-.taxonomy-cbn-type .marker_icons label.pro-only .cbn-gopro-text {
-    position: absolute;
-    top: 15px;
-    right: -130px;
-    width: 115px;
-}
-
-.taxonomy-cbn-type .marker_icons label.pro:before {
-    content: 'PRO';
-    display: inline-block;
-    position: absolute;
-    background: red;
-    color: white;
-    right: 0;
-    top: 0;
-    font-size: 11px;
-    text-align: center;
-    padding: 0 4px;
-}
-
-.taxonomy-cbn-type .marker_icons label.checked, .taxonomy-cbn-type .marker_icons label:not(.pro-only):hover {
+.taxonomy-cbn-type .marker_icons label.checked, .taxonomy-cbn-type .marker_icons label:hover {
     border-color: #e02aaf;
 }
 
@@ -1119,27 +1086,6 @@
     display: none;
 }
 
-.cbn-location_page_Compass-settings .map_styles label.pro-only, .toplevel_page_Compass .map_styles label.pro-only {
-    cursor: default;
-}
-
-.cbn-location_page_Compass-settings .map_styles label.pro:before, .toplevel_page_Compass .map_styles label.pro:before {
-    content: 'PRO';
-    display: inline-block;
-    position: absolute;
-    background: red;
-    color: white;
-    right: 5px;
-    bottom: 5px;
-    padding: 0 4px;
-    font-size: 11px;
-    border: 1px solid;
-}
-
-.cbn-location_page_Compass-settings .map_styles label.checked, .toplevel_page_Compass .map_styles label.checked, .cbn-location_page_Compass-settings .map_styles label:not(.pro-only):hover, .toplevel_page_Compass .map_styles label:not(.pro-only):hover {
-    border-color: #e02aaf;
-}
-
 .cbn-location_page_Compass-settings .map_styles label .map_style_preview, .toplevel_page_Compass .map_styles label .map_style_preview {
     width: 208px;
     height: 208px;
@@ -1253,45 +1199,7 @@
     display: none;
 }
 
-.cbn-location_page_Compass-settings .marker_icons label.pro-only, .toplevel_page_Compass .marker_icons label.pro-only {
-    cursor: default;
-    overflow: visible;
-}
-
-.cbn-location_page_Compass-settings .marker_icons label.pro-only:before, .toplevel_page_Compass .marker_icons label.pro-only:before {
-    content: 'PRO';
-    display: inline-block;
-    position: absolute;
-    background: red;
-    color: white;
-    right: 0;
-    top: 0;
-    font-size: 11px;
-    text-align: center;
-    padding: 0 4px;
-}
-
-.cbn-location_page_Compass-settings .marker_icons label.pro-only .cbn-gopro-text, .toplevel_page_Compass .marker_icons label.pro-only .cbn-gopro-text {
-    position: absolute;
-    top: 15px;
-    right: -130px;
-    width: 115px;
-}
-
-.cbn-location_page_Compass-settings .marker_icons label.pro:before, .toplevel_page_Compass .marker_icons label.pro:before {
-    content: 'PRO';
-    display: inline-block;
-    position: absolute;
-    background: red;
-    color: white;
-    right: 0;
-    top: 0;
-    font-size: 11px;
-    text-align: center;
-    padding: 0 4px;
-}
-
-.cbn-location_page_Compass-settings .marker_icons label.checked, .toplevel_page_Compass .marker_icons label.checked, .cbn-location_page_Compass-settings .marker_icons label:not(.pro-only):hover, .toplevel_page_Compass .marker_icons label:not(.pro-only):hover {
+.cbn-location_page_Compass-settings .marker_icons label.checked, .toplevel_page_Compass .marker_icons label.checked, .cbn-location_page_Compass-settings .marker_icons label:hover, .toplevel_page_Compass .marker_icons label:hover {
     border-color: #e02aaf;
 }
 
@@ -1652,19 +1560,6 @@
     100% {
         transform: rotate(360deg);
     }
-}
-
-.cbn-location_page_Compass-settings .cbn-pro, .toplevel_page_Compass .cbn-pro {
-    display: inline-block;
-    background: red;
-    color: white;
-    font-size: 11px;
-    text-align: center;
-    padding: 0 4px;
-}
-
-.cbn-location_page_Compass-settings .cbn-gopro-tr td, .toplevel_page_Compass .cbn-gopro-tr td, .cbn-location_page_Compass-settings .cbn-gopro-div, .toplevel_page_Compass .cbn-gopro-div {
-    opacity: 0.65;
 }
 
 .cbn-location_page_Compass-settings .cbn-debug-info, .toplevel_page_Compass .cbn-debug-info {

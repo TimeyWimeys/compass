@@ -25,7 +25,7 @@ class TaxController extends BaseController
             if (true):
 
 
-                //PRO Feature: use types
+                //Feature: use types
                 if (get_option('cbn_enable_marker_types')) {
 
                     // Taxonomy: type

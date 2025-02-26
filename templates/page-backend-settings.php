@@ -54,35 +54,36 @@
     <?php settings_fields('cbn-settings-group'); ?>
     <?php do_settings_sections('cbn-settings-group'); ?>
     <div class="cbn-wizard">
-        <div class="hero">
-            <div class="logo">Compass</div>
-            <div class="overline"><?php echo __('Quick Setup (3/3)', 'Compass'); ?></div>
-            <h1>🎉 <?php echo __('Yeah, complete!', 'Compass'); ?></h1>
-            <ul class="steps">
-                <li class="done"></li>
-                <li class="done"></li>
-                <li class="done"></li>
-            </ul>
-        </div>
-        <div class="step-content">
-            <h3><?php echo __('Your next steps:', 'Compass'); ?></h3>
-            <?php if (get_option('cbn_wizard_usecase') == '1'): ?>
-                <ol class="next-steps">
-                    <li><?php echo __('Use the page editor or Elementor to insert the <b>"Compass"</b> block onto a page.<br>Alternatively, you can use the shortcode <code>[Compass]</code>.', 'Compass'); ?></li>
-                    <li><?php echo __('Your website visitors will see a <div class="cbn-inline-plus">+</div> button in the upper right corner of the map, which they can use to propose their own location markers. New location proposals will have status "pending" to wait for your approval in the <i>Compass > All Locations</i> menu.', 'Compass'); ?></li>
-                    <li><?php echo __('Customize styles, activate features and find help under <i>Compass > Settings</i>', 'Compass'); ?></li>
-                </ol>
-            <?php elseif (get_option('cbn_wizard_usecase') == '2'): ?>
-                <ol class="next-steps">
-                    <li><?php echo sprintf(__('Add your first Location under <a href="%s">Compass > Add Location</a>', 'Compass'), 'post-new.php?post_type=cbn-location'); ?></li>
-                    <li><?php echo __('Use the page editor or Elementor to insert the <b>"Compass"</b> block onto a page.<br>Alternatively, you can use the shortcode <code>[Compass]</code>.', 'Compass'); ?></li>
-                    <li><?php echo __('Customize styles, activate features and find help under <i>Compass > Settings</i>', 'Compass'); ?></li>
-                </ol>
-            <input type="hidden" name="cbn_wizard_finish_done" value="1">
-            <?php submit_button('Okay, got it', 'primary', 'submit', false); ?>
-        </div>
+    <div class="hero">
+        <div class="logo">Compass</div>
+        <div class="overline"><?php echo __('Quick Setup (3/3)', 'Compass'); ?></div>
+        <h1>🎉 <?php echo __('Yeah, complete!', 'Compass'); ?></h1>
+        <ul class="steps">
+            <li class="done"></li>
+            <li class="done"></li>
+            <li class="done"></li>
+        </ul>
     </div>
-<?php endif; ?>
+
+    <div class="step-content">
+    <h3><?php echo __('Your next steps:', 'Compass'); ?></h3>
+    <?php if (get_option('cbn_wizard_usecase') == '1'): ?>
+        <ol class="next-steps">
+            <li><?php echo __('Use the page editor or Elementor to insert the <b>"Compass"</b> block onto a page.<br>Alternatively, you can use the shortcode <code>[Compass]</code>.', 'Compass'); ?></li>
+            <li><?php echo __('Your website visitors will see a <div class="cbn-inline-plus">+</div> button in the upper right corner of the map, which they can use to propose their own location markers. New location proposals will have status "pending" to wait for your approval in the <i>Compass > All Locations</i> menu.', 'Compass'); ?></li>
+            <li><?php echo __('Customize styles, activate features and find help under <i>Compass > Settings</i>', 'Compass'); ?></li>
+        </ol>
+    <?php elseif (get_option('cbn_wizard_usecase') == '2'): ?>
+        <ol class="next-steps">
+            <li><?php echo sprintf(__('Add your first Location under <a href="%s">Compass > Add Location</a>', 'Compass'), 'post-new.php?post_type=cbn-location'); ?></li>
+            <li><?php echo __('Use the page editor or Elementor to insert the <b>"Compass"</b> block onto a page.<br>Alternatively, you can use the shortcode <code>[Compass]</code>.', 'Compass'); ?></li>
+            <li><?php echo __('Customize styles, activate features and find help under <i>Compass > Settings</i>', 'Compass'); ?></li>
+        </ol>
+        <input type="hidden" name="cbn_wizard_finish_done" value="1">
+        <?php submit_button('Okay, got it', 'primary', 'submit', false); ?>
+        </div>
+        </div>
+    <?php endif; ?>
 <?php else: ?>
 <?php settings_fields('cbn-settings-group'); ?>
 <?php do_settings_sections('cbn-settings-group'); ?>
@@ -231,7 +232,7 @@
                         <?php
                         $pro_items = $this->pro_marker_icons;
                         foreach ($pro_items as $val) {
-                            echo "<label class='pro-only label_marker_user_icon'><div class='marker_icon_preview' data-style='$val'></div>";
+                            echo "<label class='label_marker_user_icon'><div class='marker_icon_preview' data-style='$val'></div>";
 
                             echo "
                         <div class='icon_upload'>
@@ -299,7 +300,7 @@
                     <strong><?php echo __('Custom Height:', 'Compass'); ?></strong><br>
                     <label for="cbn_map_height"><?php echo __('Custom height', 'compass'); ?></label>
                     <input class="regular-text" type="text" name="cbn_map_height" id="cbn_map_height"
-                    placeholder="e.g. 400px" value="<?php echo esc_attr($cbn_map_height); ?>"><br><br>
+                           placeholder="e.g. 400px" value="<?php echo esc_attr($cbn_map_height); ?>"><br><br>
                     <div class="description"><?php echo __('Don\'t forget to add a unit like <b>px</b>.', 'Compass'); ?></div>
                 </td>
             </tr>
@@ -424,14 +425,15 @@
                     <?php echo __('Geosearch Provider', 'Compass'); ?>
                 </th>
                 <td>
-                    <label for="cbn_geosearch_provider"><?php echo __('cbn_geosearch_provider', 'compass'); ?></label><select name="cbn_geosearch_provider" id="cbn_geosearch_provider">
+                    <label for="cbn_geosearch_provider"><?php echo __('cbn_geosearch_provider', 'compass'); ?></label><select
+                            name="cbn_geosearch_provider" id="cbn_geosearch_provider">
                         <?php
                         $cbn_geosearch_provider = get_option('cbn_geosearch_provider') ? get_option('cbn_geosearch_provider') : 'osm';
                         $cbn_geosearch_provider_geoapify_key = get_option('cbn_geosearch_provider_geoapify_key', '');
                         $cbn_geosearch_provider_here_key = get_option('cbn_geosearch_provider_here_key', '');
                         $cbn_geosearch_provider_mapbox_key = get_option('cbn_geosearch_provider_mapbox_key', '');
                         $available_geosearch_providers = $this->cbn_geosearch_provider;
-                        $available_geosearch_providers = array_merge($available_geosearch_providers, $this->pro_cbn_geosearch_provider);
+                        $available_geosearch_providers = array_merge($available_geosearch_providers, $this->cbn_geosearch_provider);
                         foreach ($available_geosearch_providers as $val => $label) {
                             $selected = ($cbn_geosearch_provider == $val) ? 'selected' : '';
                             echo '<option value="' . esc_textarea($val) . '" ' . $selected . '>' . esc_textarea($label) . '</option>';
@@ -474,7 +476,7 @@
                     <select name="cbn_geosearch_provider" id="cbn_geosearch_provider">
                         <?php
                         $available_geosearch_providers = $this->cbn_geosearch_provider;
-                        $not_available_geosearch_providers = $this->pro_cbn_geosearch_provider;
+                        $not_available_geosearch_providers = $this->cbn_geosearch_provider;
 
                         foreach ($available_geosearch_providers as $val => $label) {
                             echo '<option value="' . esc_textarea($val) . '" selected>' . esc_textarea($label) . '</option>';
@@ -517,7 +519,7 @@
                     <?php echo __('"Show me where I am" Button', 'Compass'); ?>
                 </th>
                 <td>
-                    <input class="cbn-switch" type="checkbox" >
+                    <input class="cbn-switch" type="checkbox">
                     <label></label>
                 </td>
             </tr>
@@ -620,84 +622,85 @@
                             </thead>
                             <tbody>
                             <?php if (is_array($cbn_custom_fields)): ?>
-                            <?php foreach ($cbn_custom_fields as $index => $custom_field): ?>
-                                <tr>
-                                    <td>
-                                        <input type="text"
-                                               class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select"
-                                               name="cbn_custom_fields[<?php echo $index; ?>][label]"
-                                               placeholder="<?php echo __('Enter label', 'Compass'); ?>"
-                                               value="<?php echo esc_attr($custom_field['label']); ?>"/>
-                                    </td>
-                                    <td>
-                                        <input class="cbn-switch field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select"
-                                               id="cbn_custom_fields_<?php echo $index; ?>_required" type="checkbox"
-                                               name="cbn_custom_fields[<?php echo $index; ?>][required]" <?php echo (isset($custom_field['required'])) ? 'checked' : ''; ?> /><label
-                                                class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select"
-                                                for="cbn_custom_fields_<?php echo $index; ?>_required"></label>
-                                    </td>
-                                    <td>
-                                        <input class="cbn-switch field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select"
-                                               id="cbn_custom_fields_<?php echo $index; ?>_private" type="checkbox"
-                                               name="cbn_custom_fields[<?php echo $index; ?>][private]" <?php echo (isset($custom_field['private'])) ? 'checked' : ''; ?> /><label
-                                                class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select"
-                                                for="cbn_custom_fields_<?php echo $index; ?>_private"></label>
-                                    </td>
-                                    <td>
-                                        <input class="small-text field-type-text field-type-link field-type-email"
-                                               type="number" min="0"
-                                               name="cbn_custom_fields[<?php echo $index; ?>][maxlength]"
-                                               value="<?php echo isset($custom_field['maxlength']) ? esc_attr($custom_field['maxlength']) : ''; ?>"/>
-                                    </td>
-                                    <td>
-                                        <select class="cbn-custom-field-fieldtype"
-                                                name="cbn_custom_fields[<?php echo $index; ?>][fieldtype]">
-                                            <?php
-                                            $available_field_types = $this->cbn_custom_field_fieldtypes;
-                                            ?>
-                                            <?php
-                                            $available_field_types = array_merge($available_field_types, $this->pro_cbn_custom_field_fieldtypes);
-                                            ?>
-                                            <?php foreach ($available_field_types as $value => $label): ?>
-                                                <?php $selected = (isset($custom_field['fieldtype']) && $custom_field['fieldtype'] == $value) ? 'selected' : ''; ?>
-                                                <?php echo '<option value="' . esc_textarea($value) . '" ' . $selected . '>' . esc_textarea($label) . '</option>'; ?>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="regular-text field-type-checkbox field-type-radio field-type-select"
-                                               name="cbn_custom_fields[<?php echo $index; ?>][options]"
-                                               placeholder="Red|Blue|Green"
-                                               value="<?php echo isset($custom_field['options']) ? esc_attr($custom_field['options']) : ''; ?>"/>
-                                        <label class="field-type-select cbn-custom-field-allow-empty"><input
-                                                    class="field-type-select" type="checkbox"
-                                                    name="cbn_custom_fields[<?php echo $index; ?>][emptyoption]" <?php echo isset($custom_field['emptyoption']) ? 'checked' : ''; ?> ><?php echo __('add empty option', 'Compass'); ?>
-                                        </label>
-                                        <label class="field-type-link cbn-custom-field-use-label-as-text"><input
-                                                    class="field-type-link" type="checkbox"
-                                                    name="cbn_custom_fields[<?php echo $index; ?>][uselabelastextoption]" <?php echo isset($custom_field['uselabelastextoption']) ? 'checked' : ''; ?> ><?php echo __('use label as text', 'Compass'); ?>
-                                        </label>
-                                        <textarea class="regular-text field-type-html"
-                                                  name="cbn_custom_fields[<?php echo $index; ?>][html]"
-                                                  placeholder="Enter HTML here"><?php echo isset($custom_field['html']) ? esc_attr($custom_field['html']) : ''; ?></textarea>
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select"
-                                               name="cbn_custom_fields[<?php echo $index; ?>][description]"
-                                               placeholder="<?php echo __('Enter description (optional)', 'Compass'); ?>"
-                                               value="<?php echo isset($custom_field['description']) ? esc_textarea($custom_field['description']) : ''; ?>"/>
-                                    </td>
-                                    <td class="actions">
-                                        <a class="up" href="#"><span class="dashicons dashicons-arrow-up"></span></a>
-                                        <a class="down" href="#"><span
-                                                    class="dashicons dashicons-arrow-down"></span></a>
-                                        <a class="remove_button" href="#"><span
-                                                    class="dashicons dashicons-trash"></span></a>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
+                                <?php foreach ($cbn_custom_fields as $index => $custom_field): ?>
+                                    <tr>
+                                        <td>
+                                            <input type="text"
+                                                   class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select"
+                                                   name="cbn_custom_fields[<?php echo $index; ?>][label]"
+                                                   placeholder="<?php echo __('Enter label', 'Compass'); ?>"
+                                                   value="<?php echo esc_attr($custom_field['label']); ?>"/>
+                                        </td>
+                                        <td>
+                                            <input class="cbn-switch field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select"
+                                                   id="cbn_custom_fields_<?php echo $index; ?>_required" type="checkbox"
+                                                   name="cbn_custom_fields[<?php echo $index; ?>][required]" <?php echo (isset($custom_field['required'])) ? 'checked' : ''; ?> /><label
+                                                    class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select"
+                                                    for="cbn_custom_fields_<?php echo $index; ?>_required"></label>
+                                        </td>
+                                        <td>
+                                            <input class="cbn-switch field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select"
+                                                   id="cbn_custom_fields_<?php echo $index; ?>_private" type="checkbox"
+                                                   name="cbn_custom_fields[<?php echo $index; ?>][private]" <?php echo (isset($custom_field['private'])) ? 'checked' : ''; ?> /><label
+                                                    class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select"
+                                                    for="cbn_custom_fields_<?php echo $index; ?>_private"></label>
+                                        </td>
+                                        <td>
+                                            <input class="small-text field-type-text field-type-link field-type-email"
+                                                   type="number" min="0"
+                                                   name="cbn_custom_fields[<?php echo $index; ?>][maxlength]"
+                                                   value="<?php echo isset($custom_field['maxlength']) ? esc_attr($custom_field['maxlength']) : ''; ?>"/>
+                                        </td>
+                                        <td>
+                                            <select class="cbn-custom-field-fieldtype"
+                                                    name="cbn_custom_fields[<?php echo $index; ?>][fieldtype]">
+                                                <?php
+                                                $available_field_types = $this->cbn_custom_field_fieldtypes;
+                                                ?>
+                                                <?php
+                                                $available_field_types = array_merge($available_field_types, $this->cbn_custom_field_fieldtypes);
+                                                ?>
+                                                <?php foreach ($available_field_types as $value => $label): ?>
+                                                    <?php $selected = (isset($custom_field['fieldtype']) && $custom_field['fieldtype'] == $value) ? 'selected' : ''; ?>
+                                                    <?php echo '<option value="' . esc_textarea($value) . '" ' . $selected . '>' . esc_textarea($label) . '</option>'; ?>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   class="regular-text field-type-checkbox field-type-radio field-type-select"
+                                                   name="cbn_custom_fields[<?php echo $index; ?>][options]"
+                                                   placeholder="Red|Blue|Green"
+                                                   value="<?php echo isset($custom_field['options']) ? esc_attr($custom_field['options']) : ''; ?>"/>
+                                            <label class="field-type-select cbn-custom-field-allow-empty"><input
+                                                        class="field-type-select" type="checkbox"
+                                                        name="cbn_custom_fields[<?php echo $index; ?>][emptyoption]" <?php echo isset($custom_field['emptyoption']) ? 'checked' : ''; ?> ><?php echo __('add empty option', 'Compass'); ?>
+                                            </label>
+                                            <label class="field-type-link cbn-custom-field-use-label-as-text"><input
+                                                        class="field-type-link" type="checkbox"
+                                                        name="cbn_custom_fields[<?php echo $index; ?>][uselabelastextoption]" <?php echo isset($custom_field['uselabelastextoption']) ? 'checked' : ''; ?> ><?php echo __('use label as text', 'Compass'); ?>
+                                            </label>
+                                            <textarea class="regular-text field-type-html"
+                                                      name="cbn_custom_fields[<?php echo $index; ?>][html]"
+                                                      placeholder="Enter HTML here"><?php echo isset($custom_field['html']) ? esc_attr($custom_field['html']) : ''; ?></textarea>
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select"
+                                                   name="cbn_custom_fields[<?php echo $index; ?>][description]"
+                                                   placeholder="<?php echo __('Enter description (optional)', 'Compass'); ?>"
+                                                   value="<?php echo isset($custom_field['description']) ? esc_textarea($custom_field['description']) : ''; ?>"/>
+                                        </td>
+                                        <td class="actions">
+                                            <a class="up" href="#"><span
+                                                        class="dashicons dashicons-arrow-up"></span></a>
+                                            <a class="down" href="#"><span
+                                                        class="dashicons dashicons-arrow-down"></span></a>
+                                            <a class="remove_button" href="#"><span
+                                                        class="dashicons dashicons-trash"></span></a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
                             <?php endif; ?>
                             </tbody>
                         </table>
@@ -804,11 +807,11 @@
                     <br><br>
                     <div class="cbn_2cols">
                         <div class="cbn-gopro-div">
-                            <input class="cbn-switch" type="checkbox" >
+                            <input class="cbn-switch" type="checkbox">
                             <label><?php echo __('Video (YouTube, Vimeo)', 'Compass'); ?></label>
                         </div>
                         <div class="cbn-gopro-div">
-                            <input class="cbn-switch" type="checkbox" >
+                            <input class="cbn-switch" type="checkbox">
                             <label><?php echo __('Required', 'Compass'); ?></label>
                         </div>
                         <div>
@@ -869,11 +872,11 @@
                     <div class="cbn_2cols">
                         <div>
                             <strong><?php echo __('Image'); ?>:</strong><br>
-                            <input  class="small-text" type="number" min="1" value="10">MB
+                            <input class="small-text" type="number" min="1" value="10">MB
                         </div>
                         <div>
                             <strong><?php echo __('Audio'); ?>:</strong><br>
-                            <input  class="small-text" type="number" min="1" value="10">MB
+                            <input class="small-text" type="number" min="1" value="10">MB
                         </div>
                     </div>
                     <br><br>
@@ -916,13 +919,13 @@
                     <?php echo __('User email notification', 'Compass'); ?>
                 </th>
                 <td>
-                    <input class="cbn-switch" type="checkbox" >
+                    <input class="cbn-switch" type="checkbox">
                     <label></label><br><br>
                     <strong><?php echo __('Subject'); ?>:</strong><br>
-                    <input  class="regular-text" type="text"
+                    <input class="regular-text" type="text"
                            placeholder="<?php echo __('Your location has been approved', 'Compass'); ?>"><br><br>
                     <strong><?php echo __('Message'); ?>:</strong><br>
-                    <textarea  class="regular-text" rows="8" cols="50"
+                    <textarea class="regular-text" rows="8" cols="50"
                               placeholder="<?php echo __('Hey %name%! Your location proposal on %website_url% has been published!', 'Compass'); ?>"></textarea><br><br>
                     <span class="description"><?php echo __('Available tags'); ?>: %name%, %website_url%, %website_name%</span>
                     <br><br>
@@ -975,7 +978,8 @@
                         $cbn_thankyou_redirect = get_option('cbn_thankyou_redirect');
                         ?>
                         <input class="regular-text" type="text" name="cbn_thankyou_redirect" id="cbn_thankyou_redirect"
-                               placeholder="<?php echo 'https://loremipsum.com'; ?>" value="<?php echo esc_textarea($cbn_thankyou_redirect); ?>"></div>
+                               placeholder="<?php echo 'https://loremipsum.com'; ?>"
+                               value="<?php echo esc_textarea($cbn_thankyou_redirect); ?>"></div>
                 </td>
             </tr>
         </table>
@@ -995,10 +999,11 @@
                         <?php
                         $cbn_searchbar_type = get_option('cbn_searchbar_type') ? get_option('cbn_searchbar_type') : 'address';
                         $items = $this->cbn_searchbar_types;
-                        $items = array_merge($items, $this->pro_cbn_searchbar_types);
+                        $items = array_merge($items, $this->cbn_searchbar_types);
                         ?>
                         <div id="cbn_searchbar_type_options">
                             <?php foreach ($items
+
                             as $val => $label):
                             $checked = ($cbn_searchbar_type == $val) ? 'checked' : '';
                             ?>
@@ -1012,7 +1017,7 @@
                                 <?php elseif ($val === 'markers'): ?>
                                     <small><?php echo __('Search for specific markers and see suggestions below as you type.', 'Compass'); ?></small>
                                 <?php elseif ($val === 'live_filter'): ?>
-                                <small><?php echo __('Filter markers live as you type to instantly refine the map view.', 'Compass'); ?></small>
+                                    <small><?php echo __('Filter markers live as you type to instantly refine the map view.', 'Compass'); ?></small>
                                 <?php endif; ?>
                                 <?php endforeach; ?>
                             </label>
@@ -1036,6 +1041,7 @@
                         ?>
                         <div id="cbn_searchbar_type_options">
                             <?php foreach ($items
+
                             as $val => $label):
                             $checked = ($cbn_searchbar_type == $val) ? 'checked' : '';
                             ?>
@@ -1049,11 +1055,11 @@
                                 <?php elseif ($val === 'markers'): ?>
                                     <small><?php echo __('Search for specific markers and see suggestions below as you type.', 'Compass'); ?></small>
                                 <?php elseif ($val === 'live_filter'): ?>
-                                <small><?php echo __('Filter markers live as you type to instantly refine the map view.', 'Compass'); ?></small>
+                                    <small><?php echo __('Filter markers live as you type to instantly refine the map view.', 'Compass'); ?></small>
                                 <?php endif; ?>
                             </label>
                             <label class="cbn-gopro-div">
-                                <input type="radio" >
+                                <input type="radio">
                                 <strong><?php echo __('Live Filter Markers', 'Compass'); ?></strong>&nbsp;&nbsp;<span
                                 <small><?php echo __('Filter markers live as you type to instantly refine the map view.', 'Compass'); ?></small>
                                 <?php endforeach; ?>
@@ -1156,26 +1162,26 @@
                     <?php echo __('"Marker Categories" field', 'Compass'); ?>
                 </th>
                 <td>
-                    <input class="cbn-switch" type="checkbox" >
+                    <input class="cbn-switch" type="checkbox">
                     <label><?php echo __('Enable', 'Compass'); ?></label>
                     <br>
                     <br>
                     <strong><?php echo __('Custom Label:', 'Compass'); ?></strong><br>
-                    <input  class="regular-text" type="text" value=""
+                    <input class="regular-text" type="text" value=""
                            placeholder="<?php echo esc_attr($this->cbn_marker_types_label_default); ?>">
                     <br><br>
-                    <input class="cbn-switch" type="checkbox" >
+                    <input class="cbn-switch" type="checkbox">
                     <label><?php echo __('Allow multiple selections', 'Compass'); ?></label><br>
                     <div class="description"><?php echo __('<strong>Important:</strong> If enabled all locations will fallback to the <a href="edit.php?post_type=cbn-location&page=Compass-settings">Default Marker Icon</a> instead of a specific category icon.', 'Compass'); ?></div>
                     <br>
                     <br>
                     <br>
-                    <input class="cbn-switch" type="checkbox" >
+                    <input class="cbn-switch" type="checkbox">
                     <label><?php echo __('Allow empty selection', 'Compass'); ?></label>
                     <br>
                     <br>
                     <br>
-                    <input class="cbn-switch" type="checkbox" >
+                    <input class="cbn-switch" type="checkbox">
                     <label for="cbn_collapse_filter"><?php echo __('Collapsed Filterbox', 'Compass'); ?></label><br>
                     <div class="description"><?php echo __('If enabled the filterbox will take less space and just open on mouseover.', 'Compass'); ?></div>
                 </td>
@@ -1185,7 +1191,7 @@
                     <?php echo __('Filterbox', 'Compass'); ?>
                 </th>
                 <td>
-                    <input class="cbn-switch" type="checkbox" >
+                    <input class="cbn-switch" type="checkbox">
                     <label><?php echo __('Collapsed design', 'Compass'); ?></label>
                     <br>
                     <br>
@@ -1209,8 +1215,8 @@
                     <label for="cbn_enable_regions"></label><br><br>
 
                     <?php if ($cbn_enable_regions): ?>
-                    <div class="description"><?php echo __('You can manage Regions <a href="edit-tags.php?taxonomy=cbn-region&post_type=cbn-location">here</a>', 'Compass'); ?></div>
-                    <br>
+                        <div class="description"><?php echo __('You can manage Regions <a href="edit-tags.php?taxonomy=cbn-region&post_type=cbn-location">here</a>', 'Compass'); ?></div>
+                        <br>
                     <?php endif; ?>
                 </td>
             </tr>
@@ -1286,7 +1292,7 @@
                     <?php echo __('Public pages for locations (Single pages)', 'Compass'); ?>
                 </th>
                 <td>
-                    <input class="cbn-switch" type="checkbox" >
+                    <input class="cbn-switch" type="checkbox">
                     <label></label><br><br>
                     <span class="description"><?php echo __('This will add a "Read more"-Button to the location bubble. It will link to the location\'s single page.', 'Compass'); ?></span><br>
                     <span class="description"><?php echo __('In the backend on the "Edit location" page an additional content editor will become available. You can use shortcodes to display individual values of a location. <strong>See the Help section for details.</strong>', 'Compass'); ?></span><br><br>
@@ -1318,9 +1324,9 @@
                     <?php echo __('Restrict "Add location" to logged in users only', 'Compass'); ?>
                 </th>
                 <td>
-                    <input class="cbn-switch" type="checkbox" >
+                    <input class="cbn-switch" type="checkbox">
                     <label></label><br><br>
-                    <input class="cbn-switch" type="checkbox" >
+                    <input class="cbn-switch" type="checkbox">
                     <label><?php echo __('Redirect "Add location"-Button to registration page'); ?></label><br><br>
                 </td>
             </tr>
@@ -1343,7 +1349,7 @@
                     <?php echo __('Auto-Publish for registered users', 'Compass'); ?>
                 </th>
                 <td>
-                    <input class="cbn-switch" type="checkbox" >
+                    <input class="cbn-switch" type="checkbox">
                     <label></label><br><br>
                     <span class="description"><?php echo __('This works only for users with "edit posts" capabilities.', 'Compass'); ?></span><br><br>
                 </td>
@@ -1368,7 +1374,7 @@
                     <?php echo __('Auto-Publish for unregistered users', 'Compass'); ?>
                 </th>
                 <td>
-                    <input class="cbn-switch" type="checkbox" >
+                    <input class="cbn-switch" type="checkbox">
                     <label></label><br><br>
                     <span class="description"><strong><?php echo __('USE WITH CAUTION!', 'Compass'); ?></strong> <?php echo __('Every location proposal will be published directly without your verification. No user registration is necessary.', 'Compass'); ?></span><br><br>
                 </td>
@@ -1391,7 +1397,7 @@
                     <?php echo __('Extend WordPress user registration form with "Add location" map', 'Compass'); ?>
                 </th>
                 <td>
-                    <input class="cbn-switch" type="checkbox" >
+                    <input class="cbn-switch" type="checkbox">
                     <label></label>
                 </td>
             </tr>
@@ -1430,19 +1436,19 @@
                     <?php echo __('Admin email notification on new location proposals', 'Compass'); ?>
                 </th>
                 <td>
-                    <input class="cbn-switch" type="checkbox" >
+                    <input class="cbn-switch" type="checkbox">
                     <label></label><br><br>
 
                     <strong><?php echo __('Email address'); ?>:</strong><br>
-                    <input  class="regular-text" type="text"
+                    <input class="regular-text" type="text"
                            placeholder="<?php echo __('john@doe.com', 'Compass'); ?>"><br><br>
 
                     <strong><?php echo __('Subject'); ?>:</strong><br>
-                    <input  class="regular-text" type="text"
+                    <input class="regular-text" type="text"
                            placeholder="<?php echo __('New Compass location', 'Compass'); ?>"><br><br>
 
                     <strong><?php echo __('Message'); ?>:</strong><br>
-                    <textarea  class="regular-text" rows="8" cols="50"
+                    <textarea class="regular-text" rows="8" cols="50"
                               placeholder="<?php echo __('A new location with the title "%title%" on %website_url% has been added! Please verify and publish or use the "auto-publish" feature. \n\n %edit_location_url%', 'Compass'); ?>"></textarea><br><br>
                     <span class="description"><?php echo __('Available tags'); ?>: %title%, %website_url%, %website_name%, %edit_location_url%, %user_name%, %user_email%</span>
                     <br><br>
@@ -1472,11 +1478,11 @@
                     <?php echo __('Trigger Webhook on new or updated Locations', 'Compass'); ?>
                 </th>
                 <td>
-                    <input class="cbn-switch" type="checkbox" >
+                    <input class="cbn-switch" type="checkbox">
                     <label></label><br><br>
 
                     <strong><?php echo __('Webhook URL'); ?>:</strong><br>
-                    <input  class="regular-text" type="text"></td>
+                    <input class="regular-text" type="text"></td>
             </tr>
             <tr style="vertical-align: top;">
                 <?php
@@ -1679,7 +1685,7 @@
             <tr style="vertical-align: top;">
                 <th scope="row"><?php echo __('Additional Shortcodes', 'Compass'); ?></th>
                 <td class="top-padding-20">
-                     <code>[Compass-location value="Favorite color"
+                    <code>[Compass-location value="Favorite color"
                         post_id="12345"]</code>
                     <br><br>
                     <span class="hint"><?php echo __('Display specific values from a location. The POST_ID attribute is optional. Alternatively use the PHP function <code>cbn_get_location_value( $value, $post_id )</code> in case you just want to return the value.', 'Compass'); ?></span>
@@ -1704,12 +1710,12 @@
                         <li>CUSTOM FIELD LABEL</li>
                     </ul>
                     <br><br><br>
-                     <code>[Compass-gallery url="https://mysite.com/"
+                    <code>[Compass-gallery url="https://mysite.com/"
                         number="10"]</code>
                     <br><br>
                     <span class="hint"><?php echo __('Get a nice gallery view of all the location images. Each image is linked to the location marker on the map. Use the URL attribute to link the images to another page. Use the NUMBER attribute to limit the number of images. Both attributes are optional.', 'Compass'); ?></span>
                     <br><br><br>
-                     <code>[Compass-list]</code>
+                    <code>[Compass-list]</code>
                     <br><br>
                     <span class="hint"><?php echo __('Get a list view of all the locations. The list view is paginated. This number of items per page can be adjusted under <i>Settings > Reading</i>.', 'Compass'); ?></span>
                     <br><br>

@@ -44,11 +44,11 @@ msgid "How to use"
 msgstr ""
 
 #: elementor/includes/widgets/Compass-widget.php:52
-msgid "This block will show all <a href=\"edit.php?post_type=oum-location\">Locations</a> on a map. By default users will be able to propose new locations by clicking a + Button on the map."
+msgid "This block will show all <a href=\"edit.php?post_type=cbn-location\">Locations</a> on a map. By default users will be able to propose new locations by clicking a + Button on the map."
 msgstr ""
 
 #: elementor/includes/widgets/Compass-widget.php:52
-msgid "Please configure the map styles and features in <a class=\"link-oum-settings\" href=\"edit.php?post_type=oum-location&page=Compass-settings\">Compass > Settings</a>."
+msgid "Please configure the map styles and features in <a class=\"link-cbn-settings\" href=\"edit.php?post_type=cbn-location&page=Compass-settings\">Compass > Settings</a>."
 msgstr ""
 
 #: elementor/includes/widgets/Compass-widget.php:62
@@ -58,7 +58,7 @@ msgid "Custom Map Position"
 msgstr ""
 
 #: elementor/includes/widgets/Compass-widget.php:72
-msgid "Feel free to customize initial map position (Latitude, Longitude, Zoom OR Region).<br><br>This will override the general configuration from the <a href=\"edit.php?post_type=oum-location&page=Compass-settings\">settings</a>."
+msgid "Feel free to customize initial map position (Latitude, Longitude, Zoom OR Region).<br><br>This will override the general configuration from the <a href=\"edit.php?post_type=cbn-location&page=Compass-settings\">settings</a>."
 msgstr ""
 
 #: elementor/includes/widgets/Compass-widget.php:80
@@ -595,7 +595,7 @@ msgid "Use the page editor or Elementor to insert the <b>\"Compass\"</b> block o
 msgstr ""
 
 #: templates/page-backend-settings.php:83
-msgid "Your website visitors will see a <div class=\"oum-inline-plus\">+</div> button in the upper right corner of the map, which they can use to propose their own location markers. New location proposals will have status \"pending\" to wait for your approval in the <i>Compass > All Locations</i> menu."
+msgid "Your website visitors will see a <div class=\"cbn-inline-plus\">+</div> button in the upper right corner of the map, which they can use to propose their own location markers. New location proposals will have status \"pending\" to wait for your approval in the <i>Compass > All Locations</i> menu."
 msgstr ""
 
 #: templates/page-backend-settings.php:84
@@ -655,7 +655,7 @@ msgid "A customized and clear map showcasing only your own location markers, wit
 msgstr ""
 
 #: templates/page-backend-settings.php:161
-msgid "<a href=\"edit.php?post_type=oum-location\">Manage all Locations here</a>"
+msgid "<a href=\"edit.php?post_type=cbn-location\">Manage all Locations here</a>"
 msgstr ""
 
 #: templates/page-backend-settings.php:174
@@ -781,7 +781,7 @@ msgid "Upgrade to PRO and display a button to get the users current location."
 msgstr ""
 
 #: templates/page-backend-settings.php:617
-msgid "Hide \"made with OUM PRO\" notion"
+msgid "Hide \"made with cbn PRO\" notion"
 msgstr ""
 
 #: templates/page-backend-settings.php:639
@@ -1007,7 +1007,7 @@ msgid "Set a value between 1 (far away) and 19 (very close)."
 msgstr ""
 
 #: templates/page-backend-settings.php:1226
-msgid "You can manage Marker Categories <a href=\"edit-tags.php?taxonomy=oum-type&post_type=oum-location\">here</a>"
+msgid "You can manage Marker Categories <a href=\"edit-tags.php?taxonomy=cbn-type&post_type=cbn-location\">here</a>"
 msgstr ""
 
 #: templates/page-backend-settings.php:1237
@@ -1017,7 +1017,7 @@ msgstr ""
 
 #: templates/page-backend-settings.php:1238
 #: templates/page-backend-settings.php:1273
-msgid "<strong>Important:</strong> If enabled all locations will fallback to the <a href=\"edit.php?post_type=oum-location&page=Compass-settings\">Default Marker Icon</a> instead of a specific category icon."
+msgid "<strong>Important:</strong> If enabled all locations will fallback to the <a href=\"edit.php?post_type=cbn-location&page=Compass-settings\">Default Marker Icon</a> instead of a specific category icon."
 msgstr ""
 
 #: templates/page-backend-settings.php:1242
@@ -1056,7 +1056,7 @@ msgid "Collapsed design"
 msgstr ""
 
 #: templates/page-backend-settings.php:1322
-msgid "You can manage Regions <a href=\"edit-tags.php?taxonomy=oum-region&post_type=oum-location\">here</a>"
+msgid "You can manage Regions <a href=\"edit-tags.php?taxonomy=cbn-region&post_type=cbn-location\">here</a>"
 msgstr ""
 
 #: templates/page-backend-settings.php:1333
@@ -1261,7 +1261,7 @@ msgid "Shortcode attributes:"
 msgstr ""
 
 #: templates/page-backend-settings.php:1861
-msgid "You can use shortcode attributes to override the <a href=\"edit.php?post_type=oum-location&page=Compass-settings\">global settings</a>. This allows for custom individual maps."
+msgid "You can use shortcode attributes to override the <a href=\"edit.php?post_type=cbn-location&page=Compass-settings\">global settings</a>. This allows for custom individual maps."
 msgstr ""
 
 #: templates/page-backend-settings.php:1864
