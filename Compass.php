@@ -9,7 +9,7 @@ Plugin Name: Compass
 Plugin URI: https://nomty.life
 Description: Our tailored map plugin
 Author: Nomty
-Version: 1.1.2
+Version: 1.1.3
 Author URI: https://nomty.life
 License: GPLv3 or later
 Text Domain: nomty
@@ -54,7 +54,7 @@ function cbn_load_settings(): void
 add_action('plugins_loaded', 'cbn_load_settings');
 
 function cbn_add_settings_link($links) {
-    $settings_link = '<a href="admin.php?page=cbn-plugin-settings">Settings</a>';
+    $settings_link = '<a href="admin.php?page=cbn-settings">Settings</a>';
     array_unshift($links, $settings_link);
     return $links;
 }

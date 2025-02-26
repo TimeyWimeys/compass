@@ -65,7 +65,7 @@ final class Init
  */
 function cbn_add_settings_link($links): mixed
 {
-    $settings_link = '<a href="admin.php?page=cbn-plugin-settings">Settings</a>';
+    $settings_link = '<a href="admin.php?page=cbn-settings">Settings</a>';
     array_unshift($links, $settings_link);
     return $links;
 }
