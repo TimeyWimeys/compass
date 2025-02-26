@@ -58,3 +58,16 @@ final class Init
         return new $class();
     }
 }
+
+/**
+ * @param $links
+ * @return mixed
+ */
+function cbn_add_settings_link($links): mixed
+{
+    $settings_link = '<a href="admin.php?page=cbn-plugin-settings">Settings</a>';
+    array_unshift($links, $settings_link);
+    return $links;
+}
+
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'cbn_add_settings_link');
