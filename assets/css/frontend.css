@@ -2937,6 +2937,7 @@ body.cbn-add-location-opened {
 }
 
 .Compass-single-default-template .wp-block-columns {
+    /*noinspection CssUnresolvedCustomProperty*/
     gap: var(--wp--style--block-gap, 2em);
 }
 

@@ -1,309 +1,313 @@
-window.addEventListener('load', function() {
+/* jshint esversion: 6 */
+/* jshint browser: true, devel: true */
+/* global jQuery, ajaxurl, wp, GeoSearch, cbn_geosearch_provider, L, mapStyle, cbn_tile_provider_mapbox_key, lat, lng, zoom, console */
+window.addEventListener('load', function () {
 
-  // Initialize image preview grid if editing a location
-  let existingImages = jQuery('#cbn_location_image').val();
-  if (existingImages) {
-    let imageUrls = existingImages.split('|');
-    updateImagePreview(imageUrls);
-  }
+    // Initialize image preview grid if editing a location
+    "use strict";
+    let existingImages = jQuery('#cbn_location_image').val();
+    if (existingImages) {
+        let imageUrls = existingImages.split('|');
+        updateImagePreview(imageUrls);
+    }
 
-  // Restore the extended L object (CBNLeaflet.L) to the global scope (prevents conflicts with other Leaflet instances)
-  window.L = window.CBNLeaflet.L;
+    // Restore the extended L object (CBNLeaflet.L) to the global scope (prevents conflicts with other Leaflet instances)
+    window.L = window.CBNLeaflet.L;
 
-  // FUNCTIONS
+    // FUNCTIONS
 
-  //set lat & lng input fields
-  function setLocationLatLng(markerLatLng) {
-    jQuery('#cbn_location_lat').val(markerLatLng.lat);
-    jQuery('#cbn_location_lng').val(markerLatLng.lng);
-  }
+    //set lat & lng input fields
+    function setLocationLatLng(markerLatLng) {
+        jQuery('#cbn_location_lat').val(markerLatLng.lat);
+        jQuery('#cbn_location_lng').val(markerLatLng.lng);
+    }
 
-  //set address field
+    //set address field
 // VARIABLES
 
-  let latLngInputs = jQuery('#latLngInputs');
-  let showLatLngInputs = jQuery('#showLatLngInputs');
-  let markerIsVisible = false;
+    let latLngInputs = jQuery('#latLngInputs');
+    let showLatLngInputs = jQuery('#showLatLngInputs');
+    let markerIsVisible = false;
 
-  // Geosearch Provider
-  switch (cbn_geosearch_provider) {
-    case 'osm':
-      cbn_geosearch_selected_provider = new GeoSearch.OpenStreetMapProvider();
-      break;
-    case 'geoapify':
-      let cbn_geosearch_selected_provider = new GeoSearch.GeoapifyProvider({
-        params: {
-          apiKey: cbn_geosearch_provider_geoapify_key
-        }
-      });
-      break;
-    case 'here':
-      cbn_geosearch_selected_provider = new GeoSearch.HereProvider({
-        params: {
-          apiKey: cbn_geosearch_provider_here_key
-        }
-      });
-      break;
-    case 'mapbox':
-      cbn_geosearch_selected_provider = new GeoSearch.MapBoxProvider({
-        params: {
-          access_token: cbn_geosearch_provider_mapbox_key
-        }
-      });
-      break;
-    default:
-      cbn_geosearch_selected_provider = new GeoSearch.OpenStreetMapProvider();
-      break;
-  }
-
-
-  // SETUP MAP
-
-  let map = L.map('mapGetLocation', {
-      scrollWheelZoom: false,
-      zoomSnap: 1,
-      zoomDelta: 1,
-  });
-
-  // prevent moving/zoom outside main world bounds
-  let world_bounds = L.latLngBounds(L.latLng(-85, -200), L.latLng(85, 200));
-  let world_min_zoom = map.getBoundsZoom(world_bounds);
-  map.setMaxBounds(world_bounds);
-  map.setMinZoom(Math.ceil(world_min_zoom));
-  map.on('drag', function() {
-    map.panInsideBounds(world_bounds, { animate: false });
-  });
-
-  // Set map style
-  if (mapStyle === 'Custom1') {
-
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png').addTo(map);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
-      tileSize: 512,
-      zoomOffset: -1
-    }).addTo(map);
-
-  } else if (mapStyle === 'Custom2') {
-
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png').addTo(map);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
-      tileSize: 512,
-      zoomOffset: -1
-    }).addTo(map);
-
-  } else if (mapStyle === 'Custom3') {
-
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png').addTo(map);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
-      tileSize: 512,
-      zoomOffset: -1
-    }).addTo(map);
-
-  } else if (mapStyle === 'MapBox.streets') {
-
-    L.tileLayer.provider('MapBox', {
-      id: 'mapbox/streets-v12',
-      accessToken: cbn_tile_provider_mapbox_key
-    }).addTo(map);
-
-  } else if (mapStyle === 'MapBox.outdoors') {
-
-    L.tileLayer.provider('MapBox', {
-      id: 'mapbox/outdoors-v12',
-      accessToken: cbn_tile_provider_mapbox_key
-    }).addTo(map);
-
-  } else if (mapStyle === 'MapBox.light') {
-
-    L.tileLayer.provider('MapBox', {
-      id: 'mapbox/light-v11',
-      accessToken: cbn_tile_provider_mapbox_key
-    }).addTo(map);
-
-  } else if (mapStyle === 'MapBox.dark') {
-
-    L.tileLayer.provider('MapBox', {
-      id: 'mapbox/dark-v11',
-      accessToken: cbn_tile_provider_mapbox_key
-    }).addTo(map);
-
-  } else if (mapStyle === 'MapBox.satellite') {
-
-    L.tileLayer.provider('MapBox', {
-      id: 'mapbox/satellite-v9',
-      accessToken: cbn_tile_provider_mapbox_key
-    }).addTo(map);
-
-  } else if (mapStyle === 'MapBox.satellite-streets') {
-
-    L.tileLayer.provider('MapBox', {
-      id: 'mapbox/satellite-streets-v12',
-      accessToken: cbn_tile_provider_mapbox_key
-    }).addTo(map);
-
-  } else {
-    // Default
-    L.tileLayer.provider(mapStyle).addTo(map);
-  }
-
-  // Marker Icon
-  let markerIcon = L.icon({
-    iconUrl: marker_icon_url,
-    iconSize: [26, 41],
-    iconAnchor: [13, 41],
-    popupAnchor: [0, -25],
-    shadowUrl: marker_shadow_url,
-    shadowSize: [41, 41],
-    shadowAnchor: [13, 41]
-  });
-
-  let locationMarker = L.marker([lat, lng], {icon: markerIcon}, {
-      'draggable': true
-  });
-
-  // render map
-  if(lat && lng) {
-      //location has coordinates
-      map.setView([lat, lng], zoom);
-      locationMarker.addTo(map);
-      markerIsVisible = true;
-  }else{
-      //location has NO coordinates yet
-      map.setView([0, 0], 1);
-  }
-
-  // Control: search address
-  let search = new GeoSearch.GeoSearchControl({
-    style: 'bar',
-    showMarker: false,
-    provider: cbn_geosearch_selected_provider,
-    searchLabel: cbn_searchaddress_label
-  });
-  map.addControl(search);
-
-  // Control: get current location
-  if(enableCurrentLocation) {
-    L.control.locate({
-      flyTo: true,
-      initialZoomLevel: 12,
-      drawCircle: false,
-      drawMarker: false
-    }).addTo(map);
-  }
+    // Geosearch Provider
+    switch (cbn_geosearch_provider) {
+        case 'osm':
+            cbn_geosearch_selected_provider = new GeoSearch.OpenStreetMapProvider();
+            break;
+        case 'geoapify':
+            let cbn_geosearch_selected_provider = new GeoSearch.GeoapifyProvider({
+                params: {
+                    apiKey: cbn_geosearch_provider_geoapify_key
+                }
+            });
+            break;
+        case 'here':
+            cbn_geosearch_selected_provider = new GeoSearch.HereProvider({
+                params: {
+                    apiKey: cbn_geosearch_provider_here_key
+                }
+            });
+            break;
+        case 'mapbox':
+            cbn_geosearch_selected_provider = new GeoSearch.MapBoxProvider({
+                params: {
+                    access_token: cbn_geosearch_provider_mapbox_key
+                }
+            });
+            break;
+        default:
+            cbn_geosearch_selected_provider = new GeoSearch.OpenStreetMapProvider();
+            break;
+    }
 
 
-  // Trigger resize (sometimes necessary to render the map properly)
-  setInterval(function () {
-    map.invalidateSize();
-  }, 1000)
+    // SETUP MAP
 
+    let map = L.map('mapGetLocation', {
+        scrollWheelZoom: false,
+        zoomSnap: 1,
+        zoomDelta: 1,
+    });
 
-  // EVENTS
+    // prevent moving/zoom outside main world bounds
+    let world_bounds = L.latLngBounds(L.latLng(-85, -200), L.latLng(85, 200));
+    let world_min_zoom = map.getBoundsZoom(world_bounds);
+    map.setMaxBounds(world_bounds);
+    map.setMinZoom(Math.ceil(world_min_zoom));
+    map.on('drag', function () {
+        map.panInsideBounds(world_bounds, {animate: false});
+    });
 
-  //Event: click on map to set marker
-  map.on('click locationfound', function(e) {
-    let coords = e.latlng;
+    // Set map style
+    if (mapStyle === 'Custom1') {
 
-    locationMarker.setLatLng(coords);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png').addTo(map);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
+            tileSize: 512,
+            zoomOffset: -1
+        }).addTo(map);
 
-    if(!markerIsVisible) {
+    } else if (mapStyle === 'Custom2') {
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png').addTo(map);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
+            tileSize: 512,
+            zoomOffset: -1
+        }).addTo(map);
+
+    } else if (mapStyle === 'Custom3') {
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png').addTo(map);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
+            tileSize: 512,
+            zoomOffset: -1
+        }).addTo(map);
+
+    } else if (mapStyle === 'MapBox.streets') {
+
+        L.tileLayer.provider('MapBox', {
+            id: 'mapbox/streets-v12',
+            accessToken: cbn_tile_provider_mapbox_key
+        }).addTo(map);
+
+    } else if (mapStyle === 'MapBox.outdoors') {
+
+        L.tileLayer.provider('MapBox', {
+            id: 'mapbox/outdoors-v12',
+            accessToken: cbn_tile_provider_mapbox_key
+        }).addTo(map);
+
+    } else if (mapStyle === 'MapBox.light') {
+
+        L.tileLayer.provider('MapBox', {
+            id: 'mapbox/light-v11',
+            accessToken: cbn_tile_provider_mapbox_key
+        }).addTo(map);
+
+    } else if (mapStyle === 'MapBox.dark') {
+
+        L.tileLayer.provider('MapBox', {
+            id: 'mapbox/dark-v11',
+            accessToken: cbn_tile_provider_mapbox_key
+        }).addTo(map);
+
+    } else if (mapStyle === 'MapBox.satellite') {
+
+        L.tileLayer.provider('MapBox', {
+            id: 'mapbox/satellite-v9',
+            accessToken: cbn_tile_provider_mapbox_key
+        }).addTo(map);
+
+    } else if (mapStyle === 'MapBox.satellite-streets') {
+
+        L.tileLayer.provider('MapBox', {
+            id: 'mapbox/satellite-streets-v12',
+            accessToken: cbn_tile_provider_mapbox_key
+        }).addTo(map);
+
+    } else {
+        // Default
+        L.tileLayer.provider(mapStyle).addTo(map);
+    }
+
+    // Marker Icon
+    let markerIcon = L.icon({
+        iconUrl: marker_icon_url,
+        iconSize: [26, 41],
+        iconAnchor: [13, 41],
+        popupAnchor: [0, -25],
+        shadowUrl: marker_shadow_url,
+        shadowSize: [41, 41],
+        shadowAnchor: [13, 41]
+    });
+
+    let locationMarker = L.marker([lat, lng], {icon: markerIcon}, {
+        'draggable': true
+    });
+
+    // render map
+    if (lat && lng) {
+        //location has coordinates
+        map.setView([lat, lng], zoom);
         locationMarker.addTo(map);
         markerIsVisible = true;
+    } else {
+        //location has NO coordinates yet
+        map.setView([0, 0], 1);
     }
 
-    setLocationLatLng(coords);
-  });
+    // Control: search address
+    let search = new GeoSearch.GeoSearchControl({
+        style: 'bar',
+        showMarker: false,
+        provider: cbn_geosearch_selected_provider,
+        searchLabel: cbn_searchaddress_label
+    });
+    map.addControl(search);
 
-  //Event: geosearch success
-  map.on('geosearch/showlocation', function(e) {
-    let coords = e.marker._latlng;
-    locationMarker.setLatLng(coords);
-
-    if (!markerIsVisible) {
-      locationMarker.addTo(map);
-      markerIsVisible = true;
+    // Control: get current location
+    if (enableCurrentLocation) {
+        L.control.locate({
+            flyTo: true,
+            initialZoomLevel: 12,
+            drawCircle: false,
+            drawMarker: false
+        }).addTo(map);
     }
 
-    setLocationLatLng(coords);
 
-    //setAddress(label);
-  });
+    // Trigger resize (sometimes necessary to render the map properly)
+    setInterval(function () {
+        map.invalidateSize();
+    }, 1000);
 
-  //Event: drag marker
-  locationMarker.on('dragend', function(e) {
-      setLocationLatLng(e.target.getLatLng());
-  });
 
-  //Event: click on "edit coordinates manually"
-  showLatLngInputs.on('click', function(e) {
-      e.preventDefault();
-      jQuery(this).parent('.hint').hide();
-      latLngInputs.fadeIn();
-  });
+    // EVENTS
 
-  // Media Uploader
-  jQuery('#cbn_location_image_preview').closest('form').on('click', '.cbn_upload_image_button', function(e) {
-    e.preventDefault();
+    //Event: click on map to set marker
+    map.on('click locationfound', function (e) {
+        let coords = e.latlng;
 
-    // Create new media frame
-    let image_uploader = wp.media({
-      title: 'Custom image',
-      multiple: true,
-      library: {
-        type: 'image'
-      },
-      button: {
-        text: 'Use these images'
-      }
+        locationMarker.setLatLng(coords);
+
+        if (!markerIsVisible) {
+            locationMarker.addTo(map);
+            markerIsVisible = true;
+        }
+
+        setLocationLatLng(coords);
     });
 
-    // Bind to select event
-    image_uploader.on('select', function() {
-      let attachments = image_uploader.state().get('selection').toJSON();
-      let maxImages = 5;
-      let existingImages = jQuery('#cbn_location_image_preview img').length;
-      let remainingSlots = maxImages - existingImages;
+    //Event: geosearch success
+    map.on('geosearch/showlocation', function (e) {
+        let coords = e.marker._latlng;
+        locationMarker.setLatLng(coords);
 
-      if (attachments.length > remainingSlots) {
-        alert('Maximum ' + maxImages + ' images allowed. Only the first ' + remainingSlots + ' images will be added.');
-      }
+        if (!markerIsVisible) {
+            locationMarker.addTo(map);
+            markerIsVisible = true;
+        }
 
-      let imagesToProcess = attachments.slice(0, remainingSlots);
-      let existingUrls = jQuery('#cbn_location_image').val() ? jQuery('#cbn_location_image').val().split('|') : [];
+        setLocationLatLng(coords);
 
-      imagesToProcess.forEach(attachment => {
-        let url = attachment.sizes.large ? attachment.sizes.large.url : attachment.sizes.full.url;
-        existingUrls.push(url);
-      });
-
-      jQuery('#cbn_location_image').val(existingUrls.join('|'));
-      updateImagePreview(existingUrls);
+        //setAddress(label);
     });
 
-    image_uploader.open();
-    return false;
-  });
+    //Event: drag marker
+    locationMarker.on('dragend', function (e) {
+        setLocationLatLng(e.target.getLatLng());
+    });
 
-  // Function to update image preview
-  function updateImagePreview(imageUrls) {
-    let previewContainer = jQuery('#cbn_location_image_preview');
+    //Event: click on "edit coordinates manually"
+    showLatLngInputs.on('click', function (e) {
+        e.preventDefault();
+        jQuery(this).parent('.hint').hide();
+        latLngInputs.fadeIn();
+    });
 
-    // Remove old preview and classes
-    previewContainer.empty().removeClass('has-image');
+    // Media Uploader
+    jQuery('#cbn_location_image_preview').closest('form').on('click', '.cbn_upload_image_button', function (e) {
+        e.preventDefault();
 
-    if (!imageUrls || imageUrls.length === 0) {
-      return;
-    }
+        // Create new media frame
+        let image_uploader = wp.media({
+            title: 'Custom image',
+            multiple: true,
+            library: {
+                type: 'image'
+            },
+            button: {
+                text: 'Use these images'
+            }
+        });
 
-    previewContainer.addClass('has-image');
+        // Bind to select event
+        image_uploader.on('select', function () {
+            let attachments = image_uploader.state().get('selection').toJSON();
+            let maxImages = 5;
+            let existingImages = jQuery('#cbn_location_image_preview img').length;
+            let remainingSlots = maxImages - existingImages;
 
-    // Create preview grid
-    let gridContainer = jQuery('<div class="image-preview-grid"></div>');
+            if (attachments.length > remainingSlots) {
+                alert('Maximum ' + maxImages + ' images allowed. Only the first ' + remainingSlots + ' images will be added.');
+            }
 
-    imageUrls.forEach((url, index) => {
-      if (!url) return; // Skip empty URLs
+            let imagesToProcess = attachments.slice(0, remainingSlots);
+            let existingUrls = jQuery('#cbn_location_image').val() ? jQuery('#cbn_location_image').val().split('|') : [];
 
-      let previewItem = jQuery(`
+            imagesToProcess.forEach(attachment => {
+                let url = attachment.sizes.large ? attachment.sizes.large.url : attachment.sizes.full.url;
+                existingUrls.push(url);
+            });
+
+            jQuery('#cbn_location_image').val(existingUrls.join('|'));
+            updateImagePreview(existingUrls);
+        });
+
+        image_uploader.open();
+        return false;
+    });
+
+    // Function to update image preview
+    function updateImagePreview(imageUrls) {
+        let previewContainer = jQuery('#cbn_location_image_preview');
+
+        // Remove old preview and classes
+        previewContainer.empty().removeClass('has-image');
+
+        if (!imageUrls || imageUrls.length === 0) {
+            return;
+        }
+
+        previewContainer.addClass('has-image');
+
+        // Create preview grid
+        let gridContainer = jQuery('<div class="image-preview-grid"></div>');
+
+        imageUrls.forEach((url, index) => {
+            if (!url) return; // Skip empty URLs
+
+            let previewItem = jQuery(`
         <div class="image-preview-item" draggable="true" data-url="${url}">
           <img src="${url}" alt="Preview">
           <div class="remove-image" title="Remove image">&times;</div>
@@ -311,229 +315,229 @@ window.addEventListener('load', function() {
         </div>
       `);
 
-      // Add drag and drop functionality
-      let item = previewItem[0];
-      setupDragAndDrop(item);
+            // Add drag and drop functionality
+            let item = previewItem[0];
+            setupDragAndDrop(item);
 
-      gridContainer.append(previewItem);
-    });
+            gridContainer.append(previewItem);
+        });
 
-    previewContainer.append(gridContainer);
-  }
+        previewContainer.append(gridContainer);
+    }
 
-  // Variables for drag and drop
-  let isDragging = false;
-  let placeholder;
+    // Variables for drag and drop
+    let isDragging = false;
+    let placeholder;
 
-  function setupDragAndDrop(previewItem) {
-    previewItem.addEventListener('mousedown', function(e) {
-      if (e.target.classList.contains('remove-image')) return;
+    function setupDragAndDrop(previewItem) {
+        previewItem.addEventListener('mousedown', function (e) {
+            if (e.target.classList.contains('remove-image')) return;
 
-      isDragging = true;
-      this.classList.add('dragging');
+            isDragging = true;
+            this.classList.add('dragging');
 
-      // Get element dimensions once at start
-      const rect = this.getBoundingClientRect();
-      this.style.width = rect.width + 'px';
-      this.style.height = rect.height + 'px';
+            // Get element dimensions once at start
+            const rect = this.getBoundingClientRect();
+            this.style.width = rect.width + 'px';
+            this.style.height = rect.height + 'px';
 
-      // Create placeholder immediately
-      createPlaceholder(this);
+            // Create placeholder immediately
+            createPlaceholder(this);
 
-      // Set up dragged element
-      this.style.position = 'fixed';
-      this.style.zIndex = '1000';
-      this.style.opacity = '0.9';
-      this.style.transform = 'scale(1.05) rotate(1deg)';
-      this.style.pointerEvents = 'none';
-      this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.15)';
+            // Set up dragged element
+            this.style.position = 'fixed';
+            this.style.zIndex = '1000';
+            this.style.opacity = '0.9';
+            this.style.transform = 'scale(1.05) rotate(1deg)';
+            this.style.pointerEvents = 'none';
+            this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.15)';
 
-      // Set initial position
-      moveDraggedElement(this, e);
+            // Set initial position
+            moveDraggedElement(this, e);
 
-      document.body.style.cursor = 'grabbing';
+            document.body.style.cursor = 'grabbing';
 
-      // Store initial grid container for safety check
-      this.initialContainer = this.closest('.image-preview-grid');
-    });
+            // Store initial grid container for safety check
+            this.initialContainer = this.closest('.image-preview-grid');
+        });
 
-    previewItem.addEventListener('touchstart', handleTouchStart);
-  }
+        previewItem.addEventListener('touchstart', handleTouchStart);
+    }
 
-  function createPlaceholder(element) {
-    placeholder = document.createElement("div");
-    placeholder.classList.add("image-preview-placeholder");
-    placeholder.style.width = element.offsetWidth + "px";
-    placeholder.style.height = element.offsetHeight + "px";
-    placeholder.style.transition = "transform 0.2s ease";
-    placeholder.style.border = "2px dashed #e02aaf";
-    placeholder.style.borderRadius = "4px";
-    placeholder.style.backgroundColor = "rgba(224, 42, 175, 0.05)";
-    element.parentNode.insertBefore(placeholder, element);
-  }
+    function createPlaceholder(element) {
+        placeholder = document.createElement("div");
+        placeholder.classList.add("image-preview-placeholder");
+        placeholder.style.width = element.offsetWidth + "px";
+        placeholder.style.height = element.offsetHeight + "px";
+        placeholder.style.transition = "transform 0.2s ease";
+        placeholder.style.border = "2px dashed #e02aaf";
+        placeholder.style.borderRadius = "4px";
+        placeholder.style.backgroundColor = "rgba(224, 42, 175, 0.05)";
+        element.parentNode.insertBefore(placeholder, element);
+    }
 
-  function moveDraggedElement(draggable, e) {
-    let rect = draggable.getBoundingClientRect();
-    let centerOffsetX = rect.width / 2;
-    let centerOffsetY = rect.height / 2;
+    function moveDraggedElement(draggable, e) {
+        let rect = draggable.getBoundingClientRect();
+        let centerOffsetX = rect.width / 2;
+        let centerOffsetY = rect.height / 2;
 
-    // Position element directly at cursor with center offset
-    draggable.style.left = (e.clientX - centerOffsetX) + 'px';
-    draggable.style.top = (e.clientY - centerOffsetY) + 'px';
-  }
+        // Position element directly at cursor with center offset
+        draggable.style.left = (e.clientX - centerOffsetX) + 'px';
+        draggable.style.top = (e.clientY - centerOffsetY) + 'px';
+    }
 
-  function updatePlaceholderPosition(e) {
-    let gridContainer = document.querySelector("#cbn_location_image_preview .image-preview-grid");
-    if (!gridContainer) return;
+    function updatePlaceholderPosition(e) {
+        let gridContainer = document.querySelector("#cbn_location_image_preview .image-preview-grid");
+        if (!gridContainer) return;
 
-    let draggable = document.querySelector('.dragging');
-    if (!draggable) return;
+        let draggable = document.querySelector('.dragging');
+        if (!draggable) return;
 
-    let siblings = [...gridContainer.querySelectorAll(".image-preview-item:not(.dragging)")];
+        let siblings = [...gridContainer.querySelectorAll(".image-preview-item:not(.dragging)")];
 
-    // Find the closest sibling based on mouse position
-    let closestSibling = siblings.reduce((closest, child) => {
-        let rect = child.getBoundingClientRect();
-        let centerX = rect.left + rect.width / 2;
-        const offset = e.clientX - centerX;
+        // Find the closest sibling based on mouse position
+        let closestSibling = siblings.reduce((closest, child) => {
+            let rect = child.getBoundingClientRect();
+            let centerX = rect.left + rect.width / 2;
+            const offset = e.clientX - centerX;
 
-        if (offset < 0 && (!closest.element || offset > closest.offset)) {
-            return { offset: offset, element: child };
+            if (offset < 0 && (!closest.element || offset > closest.offset)) {
+                return {offset: offset, element: child};
+            }
+            return closest;
+        }, {offset: Number.NEGATIVE_INFINITY, element: null});
+
+        if (closestSibling.element) {
+            gridContainer.insertBefore(placeholder, closestSibling.element);
+        } else {
+            gridContainer.appendChild(placeholder);
         }
-        return closest;
-    }, { offset: Number.NEGATIVE_INFINITY, element: null });
-
-    if (closestSibling.element) {
-        gridContainer.insertBefore(placeholder, closestSibling.element);
-    } else {
-        gridContainer.appendChild(placeholder);
-    }
-  }
-
-  function handleDragMove(e) {
-    if (!isDragging) return;
-
-    let draggable = document.querySelector(".dragging");
-    if (!draggable) return;
-
-    // Update dragged element position
-    moveDraggedElement(draggable, e);
-
-    // Check if cursor is still within any grid container
-    let gridContainer = document.querySelector("#cbn_location_image_preview .image-preview-grid");
-    if (!gridContainer) return;
-
-    let gridRect = gridContainer.getBoundingClientRect();
-    const isWithinGrid = e.clientX >= gridRect.left - 50 &&
-                        e.clientX <= gridRect.right + 50 &&
-                        e.clientY >= gridRect.top - 50 &&
-                        e.clientY <= gridRect.bottom + 50;
-
-    // If cursor is outside grid boundaries, hide placeholder
-    if (!isWithinGrid && placeholder) {
-      placeholder.style.display = 'none';
-    } else if (placeholder) {
-      placeholder.style.display = 'block';
-      updatePlaceholderPosition(e);
-    }
-  }
-
-  function handleDragEnd() {
-    let draggable = document.querySelector(".dragging");
-    if (!draggable) return;
-
-    // Reset cursor
-    document.body.style.cursor = "";
-
-    // Check if we're still within the grid
-    let gridContainer = document.querySelector("#cbn_location_image_preview .image-preview-grid");
-    if (!gridContainer) {
-      // If no grid found, return item to its initial position
-      if (draggable.initialContainer) {
-        draggable.initialContainer.appendChild(draggable);
-      }
-    } else {
-      // Place draggable element at placeholder position if within grid
-      if (placeholder && placeholder.style.display !== 'none') {
-        draggable.style.transition = "none";
-        placeholder.parentNode.insertBefore(draggable, placeholder);
-      } else {
-        // If placeholder is hidden (outside grid), append to end
-        gridContainer.appendChild(draggable);
-      }
     }
 
-    // Remove placeholder
-    if (placeholder) {
-      placeholder.remove();
+    function handleDragMove(e) {
+        if (!isDragging) return;
+
+        let draggable = document.querySelector(".dragging");
+        if (!draggable) return;
+
+        // Update dragged element position
+        moveDraggedElement(draggable, e);
+
+        // Check if cursor is still within any grid container
+        let gridContainer = document.querySelector("#cbn_location_image_preview .image-preview-grid");
+        if (!gridContainer) return;
+
+        let gridRect = gridContainer.getBoundingClientRect();
+        const isWithinGrid = e.clientX >= gridRect.left - 50 &&
+            e.clientX <= gridRect.right + 50 &&
+            e.clientY >= gridRect.top - 50 &&
+            e.clientY <= gridRect.bottom + 50;
+
+        // If cursor is outside grid boundaries, hide placeholder
+        if (!isWithinGrid && placeholder) {
+            placeholder.style.display = 'none';
+        } else if (placeholder) {
+            placeholder.style.display = 'block';
+            updatePlaceholderPosition(e);
+        }
     }
 
-    // Reset draggable element styles
-    draggable.style.position = "";
-    draggable.style.zIndex = "";
-    draggable.style.top = "";
-    draggable.style.left = "";
-    draggable.style.width = "";
-    draggable.style.height = "";
-    draggable.style.transform = "";
-    draggable.style.pointerEvents = "";
-    draggable.style.boxShadow = "";
-    draggable.classList.remove("dragging");
+    function handleDragEnd() {
+        let draggable = document.querySelector(".dragging");
+        if (!draggable) return;
 
-    isDragging = false;
+        // Reset cursor
+        document.body.style.cursor = "";
 
-    // Update image order
-    updateImageOrder();
-  }
+        // Check if we're still within the grid
+        let gridContainer = document.querySelector("#cbn_location_image_preview .image-preview-grid");
+        if (!gridContainer) {
+            // If no grid found, return item to its initial position
+            if (draggable.initialContainer) {
+                draggable.initialContainer.appendChild(draggable);
+            }
+        } else {
+            // Place draggable element at placeholder position if within grid
+            if (placeholder && placeholder.style.display !== 'none') {
+                draggable.style.transition = "none";
+                placeholder.parentNode.insertBefore(draggable, placeholder);
+            } else {
+                // If placeholder is hidden (outside grid), append to end
+                gridContainer.appendChild(draggable);
+            }
+        }
 
-  function handleTouchStart(e) {
-    let touch = e.touches[0];
-    let mouseEvent = new MouseEvent("mousedown", {
-      clientX: touch.clientX,
-      clientY: touch.clientY
+        // Remove placeholder
+        if (placeholder) {
+            placeholder.remove();
+        }
+
+        // Reset draggable element styles
+        draggable.style.position = "";
+        draggable.style.zIndex = "";
+        draggable.style.top = "";
+        draggable.style.left = "";
+        draggable.style.width = "";
+        draggable.style.height = "";
+        draggable.style.transform = "";
+        draggable.style.pointerEvents = "";
+        draggable.style.boxShadow = "";
+        draggable.classList.remove("dragging");
+
+        isDragging = false;
+
+        // Update image order
+        updateImageOrder();
+    }
+
+    function handleTouchStart(e) {
+        let touch = e.touches[0];
+        let mouseEvent = new MouseEvent("mousedown", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        this.dispatchEvent(mouseEvent);
+    }
+
+    // Add document-level event listeners for drag and drop
+    document.addEventListener("mousemove", handleDragMove);
+    document.addEventListener("mouseup", handleDragEnd);
+
+    // Remove image handler with animation
+    jQuery('body').on('click', '.remove-image', function (e) {
+        e.preventDefault();
+        let item = jQuery(this).closest('.image-preview-item');
+        let url = item.data('url');
+
+        // Remove from hidden input
+        let currentUrls = jQuery('#cbn_location_image').val().split('|');
+        let newUrls = currentUrls.filter(currentUrl => currentUrl !== url);
+        jQuery('#cbn_location_image').val(newUrls.join('|'));
+
+        // Animate and remove preview item
+        item.css({
+            transition: 'all 0.3s ease',
+            transform: 'scale(0.8)',
+            opacity: '0'
+        });
+
+        setTimeout(() => {
+            item.remove();
+
+            // Remove has-image class if no images left
+            if (newUrls.length === 0) {
+                jQuery('#cbn_location_image_preview').removeClass('has-image').empty();
+            }
+        }, 300);
     });
-    this.dispatchEvent(mouseEvent);
-  }
 
-  // Add document-level event listeners for drag and drop
-  document.addEventListener("mousemove", handleDragMove);
-  document.addEventListener("mouseup", handleDragEnd);
-
-  // Remove image handler with animation
-  jQuery('body').on('click', '.remove-image', function(e) {
-    e.preventDefault();
-    let item = jQuery(this).closest('.image-preview-item');
-    let url = item.data('url');
-
-    // Remove from hidden input
-    let currentUrls = jQuery('#cbn_location_image').val().split('|');
-    let newUrls = currentUrls.filter(currentUrl => currentUrl !== url);
-    jQuery('#cbn_location_image').val(newUrls.join('|'));
-
-    // Animate and remove preview item
-    item.css({
-      transition: 'all 0.3s ease',
-      transform: 'scale(0.8)',
-      opacity: '0'
-    });
-
-    setTimeout(() => {
-      item.remove();
-
-      // Remove has-image class if no images left
-      if (newUrls.length === 0) {
-        jQuery('#cbn_location_image_preview').removeClass('has-image').empty();
-      }
-    }, 300);
-  });
-
-  // Add back the updateImageOrder function
-  function updateImageOrder() {
-    let imageUrls = [];
-    jQuery('#cbn_location_image_preview .image-preview-item').each(function() {
-      imageUrls.push(jQuery(this).data('url'));
-    });
-    jQuery('#cbn_location_image').val(imageUrls.join('|'));
-  }
+    // Add back the updateImageOrder function
+    function updateImageOrder() {
+        let imageUrls = [];
+        jQuery('#cbn_location_image_preview .image-preview-item').each(function () {
+            imageUrls.push(jQuery(this).data('url'));
+        });
+        jQuery('#cbn_location_image').val(imageUrls.join('|'));
+    }
 
 }, false);

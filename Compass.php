@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * @package CompassPlugin
@@ -42,6 +43,11 @@ function cbn_load_settings(): void
         $settings = new CompassPlugin\Pages\Settings();
         $settings->register();
     }
+
+    if (class_exists('CompassPlugin\Base\Enqueue')) {
+        $enqueue = new CompassPlugin\Base\Enqueue();
+        $enqueue->register();
+    }
 }
 
 // Zorg ervoor dat instellingen geladen worden
@@ -50,7 +56,8 @@ add_action('plugins_loaded', 'cbn_load_settings');
 /**
  * Ophalen van locatiegegevens
  */
-function cbn_get_location_value($attr, $post_id, $raw = false) {
+function cbn_get_location_value($attr, $post_id, $raw = false)
+{
     $location_controller = new CompassPlugin\Base\LocationControl();
     return $location_controller->get_location_value($attr, $post_id, $raw);
 }
@@ -58,7 +65,8 @@ function cbn_get_location_value($attr, $post_id, $raw = false) {
 /**
  * Zoek een template in de thema-map, of val terug op de plugin-map
  */
-function cbn_get_template($template_name): string {
+function cbn_get_template($template_name): string
+{
     $theme_template = get_stylesheet_directory() . '/Compass/' . $template_name;
     $plugin_template = plugin_dir_path(__FILE__) . 'templates/' . $template_name;
 

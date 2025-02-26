@@ -1,9 +1,14 @@
-(function() {
+/* jshint esversion: 6 */
+/* jshint browser: true, devel: true */
+/* global jQuery, ajaxurl, wp, console */
 
-  // marker icon selector
-  jQuery('.marker_icons input[type=radio]').on('change', function() {
-    jQuery('.marker_icons label').removeClass('checked');
-    jQuery(this).parent('label').addClass('checked');
-  });
+(function () {
+
+    // marker icon selector
+    "use strict";
+    jQuery('.marker_icons input[type=radio]').on('change', function () {
+        jQuery('.marker_icons label').removeClass('checked');
+        jQuery(this).parent('label').addClass('checked');
+    });
 
 })();
