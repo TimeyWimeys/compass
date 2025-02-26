@@ -37,7 +37,7 @@ class Enqueue extends BaseController
 
         wp_enqueue_script(
             'cbn_script',
-            plugins_url('src/js/backend.js', dirname(__FILE__, 2)),
+            plugins_url('src/js/backend-settings.js', dirname(__FILE__, 2)),
             ['wp-i18n', 'jquery', 'wp-color-picker'],
             $this->plugin_version,
             true
@@ -60,7 +60,7 @@ class Enqueue extends BaseController
     public function enqueue_frontend(): void
     {
         wp_enqueue_style('cbn_frontend_style', plugins_url('assets/css/frontend.css', dirname(__FILE__, 2)), [], time());
-        wp_enqueue_script('compass-script', plugins_url('assets/js/script.js', dirname(__FILE__, 2)), ['jquery'], '1.0.0', true);
+        wp_enqueue_script('compass-script', plugins_url('src/js/script.js', dirname(__FILE__, 2)), ['jquery'], '1.0.0', true);
     }
 
     /**

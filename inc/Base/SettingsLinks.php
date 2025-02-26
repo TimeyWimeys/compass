@@ -27,7 +27,7 @@ class SettingsLinks extends BaseController
     public function settings_link($links): mixed
     {
         /** @noinspection HtmlUnknownTarget */
-        $settings_link = '<a href="edit.php?post_type=cbn-location&page=Compass-settings">Settings</a>';
+        $settings_link = '<a href="edit.php?post_type=cbn-location&page=compass-settings">Settings</a>';
         $links[] = $settings_link;
 
         return $links;

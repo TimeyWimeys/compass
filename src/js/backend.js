@@ -73,7 +73,7 @@ jQuery(function ($) {
     $('body').on('click', '.cbn_export_csv_button', function (e) {
         e.preventDefault();
 
-        let ajaxurl = ajax_object.ajaxurl; // Haalt de juiste waarde op
+        let ajaxurl = ajax_object.ajaxurl; // Picks up the right value
 
         jQuery.ajax({
             url: ajaxurl,

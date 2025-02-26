@@ -14,6 +14,7 @@ use CompassPlugin\Base\BaseController;
 use CompassPlugin\Base\LocationControl;
 use WP_Error;
 
+
 /**
  *
  */
@@ -120,6 +121,13 @@ class Settings extends BaseController
         include plugin_dir_path(__FILE__) . '../../templates/page-backend-edit-type.php';
     }
 
+    private array $cbn_geosearch_provider = [
+        'osm' => 'OpenStreetMap',
+        'google' => 'Google Maps',
+        'mapbox' => 'Mapbox',
+        'here' => 'HERE Maps',
+        'geoapify' => 'Geoapify'
+    ];
 
     /**
      * @return void

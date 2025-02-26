@@ -432,11 +432,18 @@
                         $cbn_geosearch_provider_geoapify_key = get_option('cbn_geosearch_provider_geoapify_key', '');
                         $cbn_geosearch_provider_here_key = get_option('cbn_geosearch_provider_here_key', '');
                         $cbn_geosearch_provider_mapbox_key = get_option('cbn_geosearch_provider_mapbox_key', '');
-                        $available_geosearch_providers = $this->cbn_geosearch_provider;
-                        $available_geosearch_providers = array_merge($available_geosearch_providers, $this->cbn_geosearch_provider);
+
+                        // Ensure $this->cbn_geosearch_provider is an array
+                        if (!isset($this->cbn_geosearch_provider) || !is_array($this->cbn_geosearch_provider)) {
+                            error_log('Error: $this->cbn_geosearch_provider is not an array in page-backend-settings.php');
+                            $this->cbn_geosearch_provider = [];
+                        }
+
+                        $available_geosearch_providers = $this->cbn_geosearch_provider; // No need to merge with itself
+
                         foreach ($available_geosearch_providers as $val => $label) {
                             $selected = ($cbn_geosearch_provider == $val) ? 'selected' : '';
-                            echo '<option value="' . esc_textarea($val) . '" ' . $selected . '>' . esc_textarea($label) . '</option>';
+                            echo '<option value="' . esc_attr($val) . '" ' . $selected . '>' . esc_html($label) . '</option>';
                         }
                         ?>
                     </select><br><br>
