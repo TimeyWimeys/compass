@@ -206,41 +206,25 @@
                 <td>
                     <div class="marker_icons">
                         <?php
-                        $marker_icon = get_option('cbn_marker_icon') ? get_option('cbn_marker_icon') : 'default';
-                        $items = $this->marker_icons;
+                        $marker_icon = get_option('cbn_marker_icon') ?: 'default';
+                        $marker_user_icon = get_option('cbn_marker_user_icon');
+
+                        // Combineer marker_icons en pro_marker_icons in één array
+                        $items = array_merge($this->marker_icons ?? [], $this->pro_marker_icons ?? []);
+
                         foreach ($items as $val) {
                             $selected = ($marker_icon == $val) ? 'checked' : '';
-                            echo '<label class="' . $selected . '"><div class="marker_icon_preview" data-style="' . esc_attr($val) . '"></div><input type="radio" name="cbn_marker_icon" ' . $selected . ' value="' . esc_attr($val) . '"></label>';
-                        }
-                        ?>
-                        <?php
-                        $marker_user_icon = get_option('cbn_marker_user_icon');
-                        $pro_items = $this->pro_marker_icons;
-                        foreach ($pro_items as $val) {
-                            $selected = ($marker_icon == $val) ? 'checked' : '';
                             $user_icon_style = ($marker_user_icon) ? 'style="background-image: url(' . esc_attr($marker_user_icon) . ')"' : '';
-                            echo '<label class="' . $selected . ' pro label_marker_user_icon"><div id="cbn_marker_user_icon_preview" class="marker_icon_preview" data-style="' . esc_attr($val) . '" ' . $user_icon_style . '></div><input type="radio" name="cbn_marker_icon" ' . $selected . ' value="' . esc_attr($val) . '">';
-                            echo "
-                          <div class='icon_upload'>
-                            <a href='#' class='cbn_upload_icon_button button button-secondary'>" . __('Upload Icon', 'Compass') . "</a>
-                            <p class='description'>PNG, max. 100px</p>
-                            <input type='hidden' id='cbn_marker_user_icon' name='cbn_marker_user_icon' value='" . esc_attr($marker_user_icon) . "'>                           </div>
-                        ";
-                            echo "</label>";
-                        }
-                        ?>
-                        <?php
-                        $pro_items = $this->pro_marker_icons;
-                        foreach ($pro_items as $val) {
-                            echo "<label class='label_marker_user_icon'><div class='marker_icon_preview' data-style='$val'></div>";
 
-                            echo "
-                        <div class='icon_upload'>
-                          <button  class='button button-secondary'>" . __('Upload Icon', 'Compass') . "</button>
-                          <p class='description'>PNG, max. 100px</p>
-                        </div>
-                      ";
-                            echo "</label>";
+                            echo '<label class="' . $selected . ' label_marker_user_icon">
+                <div class="marker_icon_preview" data-style="' . esc_attr($val) . '" ' . $user_icon_style . '></div>
+                <input type="radio" name="cbn_marker_icon" ' . $selected . ' value="' . esc_attr($val) . '">
+                <div class="icon_upload">
+                    <a href="#" class="cbn_upload_icon_button button button-secondary">' . __('Upload Icon', 'Compass') . '</a>
+                    <p class="description">PNG, max. 100px</p>
+                    <input type="hidden" id="cbn_marker_user_icon" name="cbn_marker_user_icon" value="' . esc_attr($marker_user_icon) . '">
+                </div>
+              </label>';
                         }
                         ?>
                     </div>
@@ -393,7 +377,7 @@
                         <?php
                         // load map base scripts
                         $this->include_map_scripts();
-                        wp_enqueue_script('cbn_backend_settings_js', $this->plugin_url . 'src/js/backend-settings.js', array('cbn_leaflet_providers_js', 'cbn_leaflet_markercluster_js', 'cbn_leaflet_subgroups_js', 'cbn_leaflet_geosearch_js', 'cbn_leaflet_locate_js', 'cbn_leaflet_fullscreen_js', 'cbn_leaflet_search_js', 'cbn_leaflet_gesture_js', 'wp-i18n', 'cbn_global_leaflet_js'), $this->plugin_version);
+                        wp_enqueue_script('cbn_backend_settings_js', $this->plugin_url . 'src/js/backend-settings.js', ['cbn_leaflet_providers_js', 'cbn_leaflet_markercluster_js', 'cbn_leaflet_subgroups_js', 'cbn_leaflet_geosearch_js', 'cbn_leaflet_locate_js', 'cbn_leaflet_fullscreen_js', 'cbn_leaflet_search_js', 'cbn_leaflet_gesture_js', 'wp-i18n', 'cbn_global_leaflet_js'], $this->plugin_version);
                         ?>
                     </div>
                 </td>
@@ -955,11 +939,11 @@
                     <select name="cbn_action_after_submit" id="cbn_action_after_submit">
                         <?php
                         $cbn_action_after_submit = get_option('cbn_action_after_submit') ? get_option('cbn_action_after_submit') : 'text';
-                        $items = array(
+                        $items = [
                             'text' => __('Display message', 'Compass'),
                             'refresh' => __('Refresh', 'Compass'),
                             'redirect' => __('Redirect', 'Compass')
-                        );
+                        ];
 
                         foreach ($items as $val => $label) {
                             $selected = ($cbn_action_after_submit == $val) ? 'selected' : '';
@@ -985,7 +969,7 @@
                         $cbn_thankyou_redirect = get_option('cbn_thankyou_redirect');
                         ?>
                         <input class="regular-text" type="text" name="cbn_thankyou_redirect" id="cbn_thankyou_redirect"
-                               placeholder="<?php echo 'https://loremipsum.com'; ?>"
+                               placeholder="<?php echo 'https://nomty.life'; ?>"
                                value="<?php echo esc_textarea($cbn_thankyou_redirect); ?>"></div>
                 </td>
             </tr>
@@ -1242,7 +1226,7 @@
                         $selected = ($cbn_regions_layout_style == $value) ? 'selected="selected"' : '';
                         echo '<option value="' . esc_textarea($value) . '" ' . $selected . '>' . esc_textarea($label) . '</option>';
                     }
-                    echo "</select>";
+                    echo '</select>';
                     ?>
                 </td>
             </tr>
@@ -1265,16 +1249,17 @@
                     <br>
                     <?php
                     $cbn_location_date_type = get_option('cbn_location_date_type', 'modified');
-                    $items = array(
+                    $items = [
                         'modified' => __('Date of Last Modification', 'Compass'),
                         'created' => __('Publishing Date', 'Compass')
-                    );
+                    ];
                     echo "<select id='cbn_location_date_type' name='cbn_location_date_type'>";
                     foreach ($items as $value => $label) {
                         $selected = ($cbn_location_date_type == $value) ? 'selected="selected"' : '';
                         echo '<option value="' . esc_textarea($value) . '" ' . $selected . '>' . esc_textarea($label) . '</option>';
                     }
                     echo "</select>";
+
                     ?>
                 </td>
             </tr>
@@ -1501,7 +1486,7 @@
                 <td>
                     <strong><?php echo __('This JS code will be executed after the map has been loaded:'); ?></strong><br>
                     <textarea class="regular-text" name="cbn_custom_js" id="cbn_custom_js" rows="8" cols="50"
-                              placeholder="<?php echo __("e.g. console.log('The map is ready')", "Compass"); ?>"><?php echo $cbn_custom_js; ?></textarea><br><br>
+                              placeholder="<?php echo __("e.g. console.log('The map is ready')", 'Compass'); ?>"><?php echo $cbn_custom_js; ?></textarea><br><br>
                     <span class="description"></span>
                     <br><br>
                 </td>
@@ -1792,5 +1777,3 @@
         </table>
         <?php submit_button(); ?>
     </div>
-    </form>
-</div>
