@@ -5,12 +5,12 @@
  *
  */
 
-if (!isset($block_attributes['value']) || $block_attributes['value'] == '') {
-    return null;
+if ( ! isset( $block_attributes['value'] ) || $block_attributes['value'] == '' ) {
+	return null;
 } //no value attribute
 
 $post_id = $block_attributes['post_id'] ?? get_the_ID();
-$value = cbn_get_location_value($block_attributes['value'], $post_id);
+$value   = cbn_get_location_value( $block_attributes['value'], $post_id );
 
 ?>
 

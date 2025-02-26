@@ -1,74 +1,77 @@
 (function (root, factory) {
 	if (typeof define === 'function' && define.amd) {
 		// AMD. Register as an anonymous module.
-		define(['leaflet'], factory);
+		define( ['leaflet'], factory );
 	} else if (typeof modules === 'object' && module.exports) {
 		// define a Common JS module that relies on 'leaflet'
-		module.exports = factory(require('leaflet'));
+		module.exports = factory( require( 'leaflet' ) );
 	} else {
 		// Assume Leaflet is loaded into global object L already
-		factory(L);
+		factory( L );
 	}
 }(this, function (L) {
 	'use strict';
 
-	L.TileLayer.Provider = L.TileLayer.extend({
-		initialize: function (arg, options) {
-			let providers = L.TileLayer.Provider.providers;
+	L.TileLayer.Provider = L.TileLayer.extend(
+		{
+			initialize: function (arg, options) {
+				let providers = L.TileLayer.Provider.providers;
 
-			let parts = arg.split('.');
+				let parts = arg.split( '.' );
 
-			let providerName = parts[0];
-			let variantName = parts[1];
+				let providerName = parts[0];
+				let variantName  = parts[1];
 
-			if (!providers[providerName]) {
-				throw 'No such provider (' + providerName + ')';
-			}
-
-			let provider = {
-				url: providers[providerName].url,
-				options: providers[providerName].options
-			};
-
-			// overwrite values in provider from variant.
-			if (variantName && 'variants' in providers[providerName]) {
-				if (!(variantName in providers[providerName].variants)) {
-					throw 'No such variant of ' + providerName + ' (' + variantName + ')';
+				if ( ! providers[providerName]) {
+					throw 'No such provider (' + providerName + ')';
 				}
-				let variant = providers[providerName].variants[variantName];
-				let variantOptions;
-				if (typeof variant === 'string') {
-					variantOptions = {
-						variant: variant
-					};
-				} else {
-					variantOptions = variant.options;
-				}
-				provider = {
-					url: variant.url || provider.url,
-					options: L.Util.extend({}, provider.options, variantOptions)
+
+				let provider = {
+					url: providers[providerName].url,
+					options: providers[providerName].options
 				};
-			}
 
-			// replace attribution placeholders with their values from toplevel provider attribution,
-			// recursively
-			let attributionReplacer = function (attr) {
-				if (attr.indexOf('{attribution.') === -1) {
-					return attr;
-				}
-				return attr.replace(/\{attribution.(\w*)}/g,
-					function (match, attributionName) {
-						return attributionReplacer(providers[attributionName].options.attribution);
+				// overwrite values in provider from variant.
+				if (variantName && 'variants' in providers[providerName]) {
+					if ( ! (variantName in providers[providerName].variants)) {
+						throw 'No such variant of ' + providerName + ' (' + variantName + ')';
 					}
-				);
-			};
-			provider.options.attribution = attributionReplacer(provider.options.attribution);
+					let variant = providers[providerName].variants[variantName];
+					let variantOptions;
+					if (typeof variant === 'string') {
+						variantOptions = {
+							variant: variant
+						};
+					} else {
+						variantOptions = variant.options;
+					}
+					provider = {
+						url: variant.url || provider.url,
+						options: L.Util.extend( {}, provider.options, variantOptions )
+					};
+				}
 
-			// Compute final options combining provider options with any user overrides
-			let layerOpts = L.Util.extend({}, provider.options, options);
-			L.TileLayer.prototype.initialize.call(this, provider.url, layerOpts);
+				// replace attribution placeholders with their values from toplevel provider attribution,
+				// recursively
+				let attributionReplacer      = function (attr) {
+					if (attr.indexOf( '{attribution.' ) === -1) {
+						return attr;
+					}
+					return attr.replace(
+						/\{attribution.(\w*)}/g,
+						function (match, attributionName) {
+							return attributionReplacer( providers[attributionName].options.attribution );
+						}
+					);
+				};
+				provider.options.attribution = attributionReplacer( provider.options.attribution );
+
+				// Compute final options combining provider options with any user overrides
+				let layerOpts = L.Util.extend( {}, provider.options, options );
+				L.TileLayer.prototype.initialize.call( this, provider.url, layerOpts );
+			}
 		}
-	});
+	);
 
 	/**
 	 * Definition of providers.
@@ -1045,134 +1048,134 @@
 			},
 			variants: {
 				Default: 'Default',
-				Night: 'Night',
-				Original: 'Original',
-				Grey: 'Grey',
-				LandLot: 'LandLot'
-			}
-		},
-		USGS: {
-			url: 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}',
-			options: {
-				maxZoom: 20,
-				attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
-			},
-			variants: {
-				USTopo: {},
-				USImagery: {
-					url: 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}'
-				},
-				USImageryTopo: {
-					url: 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}'
-				}
-			}
-		},
-		WaymarkedTrails: {
-			url: 'https://tile.waymarkedtrails.org/{variant}/{z}/{x}/{y}.png',
-			options: {
-				maxZoom: 18,
-				attribution: 'Map data: {attribution.OpenStreetMap} | Map style: &copy; <a href="https://waymarkedtrails.org">waymarkedtrails.org</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-			},
-			variants: {
-				hiking: 'hiking',
-				cycling: 'cycling',
-				mtb: 'mtb',
-				slopes: 'slopes',
-				riding: 'riding',
-				skating: 'skating'
-			}
-		},
-		OpenAIP: {
-			url: 'https://{s}.tile.maps.openaip.net/geowebcache/service/tms/1.0.0/openaip_basemap@EPSG%3A900913@png/{z}/{x}/{y}.{ext}',
-			options: {
-				attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)',
-				ext: 'png',
-				minZoom: 4,
-				maxZoom: 14,
-				tms: true,
-				detectRetina: true,
-				subdomains: '12'
-			}
-		},
-		OpenSnowMap: {
-			url: 'https://tiles.opensnowmap.org/{variant}/{z}/{x}/{y}.png',
-			options: {
-				minZoom: 9,
-				maxZoom: 18,
-				attribution: 'Map data: {attribution.OpenStreetMap} & ODbL, &copy; <a href="https://www.opensnowmap.org/iframes/data.html">www.opensnowmap.org</a> <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-			},
-			variants: {
-				pistes: 'pistes',
-			}
-		},
-		AzureMaps: {
-			url: 
-				'https://atlas.microsoft.com/map/tile?api-version={apiVersion}'+
-				'&tilesetId={variant}&x={x}&y={y}&zoom={z}&language={language}'+
-				'&subscription-key={subscriptionKey}',
-			options: {
-				attribution: 'See https://docs.microsoft.com/en-us/rest/api/maps/render-v2/get-map-tile for details.',
-				apiVersion: '2.0',
-				variant: 'microsoft.imagery',
-				subscriptionKey: '<insert your subscription key here>',
-				language: 'en-US',
-			},
-			variants: {
-				MicrosoftImagery: 'microsoft.imagery',
-				MicrosoftBaseDarkGrey: 'microsoft.base.darkgrey',
-				MicrosoftBaseRoad: 'microsoft.base.road',
-				MicrosoftBaseHybridRoad: 'microsoft.base.hybrid.road',
-				MicrosoftTerraMain: 'microsoft.terra.main',
-				MicrosoftWeatherInfraredMain: {
-					url: 
-					'https://atlas.microsoft.com/map/tile?api-version={apiVersion}'+
-					'&tilesetId={variant}&x={x}&y={y}&zoom={z}'+
-					'&timeStamp={timeStamp}&language={language}' +
-					'&subscription-key={subscriptionKey}',
-					options: {
-						timeStamp: '2021-05-08T09:03:00Z',
-						attribution: 'See https://docs.microsoft.com/en-us/rest/api/maps/render-v2/get-map-tile#uri-parameters for details.',
-						variant: 'microsoft.weather.infrared.main',
-					},
-				},
-				MicrosoftWeatherRadarMain: {
-					url: 
-					'https://atlas.microsoft.com/map/tile?api-version={apiVersion}'+
-					'&tilesetId={variant}&x={x}&y={y}&zoom={z}'+
-					'&timeStamp={timeStamp}&language={language}' +
-					'&subscription-key={subscriptionKey}',
-					options: {
-						timeStamp: '2021-05-08T09:03:00Z',
-						attribution: 'See https://docs.microsoft.com/en-us/rest/api/maps/render-v2/get-map-tile#uri-parameters for details.',
-						variant: 'microsoft.weather.radar.main',
-					},
-				}
-			},
-		},
-		SwissFederalGeoportal: {
-			url: 'https://wmts.geo.admin.ch/1.0.0/{variant}/default/current/3857/{z}/{x}/{y}.jpeg',
-			options: {
-				attribution: '&copy; <a href="https://www.swisstopo.admin.ch/">swisstopo</a>',
-				minZoom: 2,
-				maxZoom: 18,
-				bounds: [[45.398181, 5.140242], [48.230651, 11.47757]]
-			},
-			variants: {
-				NationalMapColor: 'ch.swisstopo.pixelkarte-farbe',
-				NationalMapGrey: 'ch.swisstopo.pixelkarte-grau',
-				SWISSIMAGE: {
-					options: {
-						variant: 'ch.swisstopo.swissimage',
-						maxZoom: 19
+					Night: 'Night',
+					Original: 'Original',
+					Grey: 'Grey',
+					LandLot: 'LandLot'
 					}
-				}
-			}
-		}
-	};
+					},
+					USGS: {
+						url: 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}',
+						options: {
+							maxZoom: 20,
+							attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
+						},
+						variants: {
+							USTopo: {},
+							USImagery: {
+								url: 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}'
+							},
+							USImageryTopo: {
+								url: 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}'
+							}
+						}
+					},
+					WaymarkedTrails: {
+						url: 'https://tile.waymarkedtrails.org/{variant}/{z}/{x}/{y}.png',
+						options: {
+							maxZoom: 18,
+							attribution: 'Map data: {attribution.OpenStreetMap} | Map style: &copy; <a href="https://waymarkedtrails.org">waymarkedtrails.org</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+						},
+						variants: {
+							hiking: 'hiking',
+							cycling: 'cycling',
+							mtb: 'mtb',
+							slopes: 'slopes',
+							riding: 'riding',
+							skating: 'skating'
+						}
+					},
+					OpenAIP: {
+						url: 'https://{s}.tile.maps.openaip.net/geowebcache/service/tms/1.0.0/openaip_basemap@EPSG%3A900913@png/{z}/{x}/{y}.{ext}',
+						options: {
+							attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)',
+							ext: 'png',
+							minZoom: 4,
+							maxZoom: 14,
+							tms: true,
+							detectRetina: true,
+							subdomains: '12'
+						}
+					},
+					OpenSnowMap: {
+						url: 'https://tiles.opensnowmap.org/{variant}/{z}/{x}/{y}.png',
+						options: {
+							minZoom: 9,
+							maxZoom: 18,
+							attribution: 'Map data: {attribution.OpenStreetMap} & ODbL, &copy; <a href="https://www.opensnowmap.org/iframes/data.html">www.opensnowmap.org</a> <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+						},
+						variants: {
+							pistes: 'pistes',
+						}
+					},
+					AzureMaps: {
+						url:
+							'https://atlas.microsoft.com/map/tile?api-version={apiVersion}' +
+							'&tilesetId={variant}&x={x}&y={y}&zoom={z}&language={language}' +
+							'&subscription-key={subscriptionKey}',
+						options: {
+							attribution: 'See https://docs.microsoft.com/en-us/rest/api/maps/render-v2/get-map-tile for details.',
+							apiVersion: '2.0',
+							variant: 'microsoft.imagery',
+							subscriptionKey: '<insert your subscription key here>',
+							language: 'en-US',
+						},
+						variants: {
+							MicrosoftImagery: 'microsoft.imagery',
+							MicrosoftBaseDarkGrey: 'microsoft.base.darkgrey',
+							MicrosoftBaseRoad: 'microsoft.base.road',
+							MicrosoftBaseHybridRoad: 'microsoft.base.hybrid.road',
+							MicrosoftTerraMain: 'microsoft.terra.main',
+							MicrosoftWeatherInfraredMain: {
+								url:
+								'https://atlas.microsoft.com/map/tile?api-version={apiVersion}' +
+								'&tilesetId={variant}&x={x}&y={y}&zoom={z}' +
+								'&timeStamp={timeStamp}&language={language}' +
+								'&subscription-key={subscriptionKey}',
+								options: {
+									timeStamp: '2021-05-08T09:03:00Z',
+									attribution: 'See https://docs.microsoft.com/en-us/rest/api/maps/render-v2/get-map-tile#uri-parameters for details.',
+									variant: 'microsoft.weather.infrared.main',
+								},
+							},
+							MicrosoftWeatherRadarMain: {
+								url:
+								'https://atlas.microsoft.com/map/tile?api-version={apiVersion}' +
+								'&tilesetId={variant}&x={x}&y={y}&zoom={z}' +
+								'&timeStamp={timeStamp}&language={language}' +
+								'&subscription-key={subscriptionKey}',
+								options: {
+									timeStamp: '2021-05-08T09:03:00Z',
+									attribution: 'See https://docs.microsoft.com/en-us/rest/api/maps/render-v2/get-map-tile#uri-parameters for details.',
+									variant: 'microsoft.weather.radar.main',
+								},
+							}
+						},
+					},
+					SwissFederalGeoportal: {
+						url: 'https://wmts.geo.admin.ch/1.0.0/{variant}/default/current/3857/{z}/{x}/{y}.jpeg',
+						options: {
+							attribution: '&copy; <a href="https://www.swisstopo.admin.ch/">swisstopo</a>',
+							minZoom: 2,
+							maxZoom: 18,
+							bounds: [[45.398181, 5.140242], [48.230651, 11.47757]]
+						},
+						variants: {
+							NationalMapColor: 'ch.swisstopo.pixelkarte-farbe',
+							NationalMapGrey: 'ch.swisstopo.pixelkarte-grau',
+							SWISSIMAGE: {
+								options: {
+									variant: 'ch.swisstopo.swissimage',
+									maxZoom: 19
+								}
+							}
+						}
+					}
+					};
 
-	L.tileLayer.provider = function (provider, options) {
-		return new L.TileLayer.Provider(provider, options);
-	};
+					L.tileLayer.provider = function (provider, options) {
+						return new L.TileLayer.Provider( provider, options );
+					};
 
 	return L;
 }));

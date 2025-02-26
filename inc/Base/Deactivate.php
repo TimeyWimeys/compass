@@ -6,13 +6,12 @@ namespace CompassPlugin\Base;
 /**
  *
  */
-class Deactivate
-{
-    /**
-     * @return void
-     */
-    public static function deactivate(): void
-    {
-        flush_rewrite_rules();
-    }
+class Deactivate {
+
+	/**
+	 * @return void
+	 */
+	public static function deactivate(): void {
+		flush_rewrite_rules();
+	}
 }

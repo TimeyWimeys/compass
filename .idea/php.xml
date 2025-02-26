@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="MessDetector">
+    <phpmd_settings>
+      <phpmd_by_interpreter asDefaultInterpreter="true" interpreter_id="a1db870b-7d5b-41f3-bb3b-884d1b1ed21e" timeout="30000" />
+    </phpmd_settings>
+  </component>
   <component name="MessDetectorOptionsConfiguration">
     <option name="transferred" value="true" />
   </component>
@@ -7,12 +12,22 @@
     <option name="transferred" value="true" />
   </component>
   <component name="PHPCodeSnifferOptionsConfiguration">
+    <option name="codingStandard" value="WordPress-Extra" />
     <option name="highlightLevel" value="WARNING" />
+    <option name="installedPaths" value="C:\Users\Nomty\AppData\Roaming\Composer\vendor\wp-coding-standards\wpcs" />
+    <option name="showSniffs" value="true" />
+    <option name="useInstalledPaths" value="true" />
     <option name="transferred" value="true" />
+  </component>
+  <component name="PhpCSFixer">
+    <phpcsfixer_settings>
+      <phpcs_fixer_by_interpreter asDefaultInterpreter="true" interpreter_id="a1db870b-7d5b-41f3-bb3b-884d1b1ed21e" timeout="30000" />
+    </phpcsfixer_settings>
   </component>
   <component name="PhpCodeSniffer">
     <phpcs_settings>
-      <phpcs_by_interpreter asDefaultInterpreter="true" interpreter_id="a1db870b-7d5b-41f3-bb3b-884d1b1ed21e" timeout="30000" />
+      <PhpCSConfiguration beautifier_path="$USER_HOME$/AppData/Roaming/Composer/vendor/squizlabs/php_codesniffer/bin/phpcbf" standards="MySource;PEAR;PSR1;PSR12;PSR2;Squiz;WordPress;WordPress-Core;WordPress-Docs;WordPress-Extra;Zend" tool_path="$USER_HOME$/AppData/Roaming/Composer/vendor/squizlabs/php_codesniffer/bin/phpcs" />
+      <phpcs_by_interpreter asDefaultInterpreter="true" deletedFromTheList="true" interpreter_id="a1db870b-7d5b-41f3-bb3b-884d1b1ed21e" beautifier_path="C:\Users\Nomty\AppData\Roaming\Composer\vendor\squizlabs\php_codesniffer\bin\phpcbf" standards="MySource;PEAR;PSR1;PSR12;PSR2;Squiz;WordPress;WordPress-Core;WordPress-Docs;WordPress-Extra;Zend" tool_path="C:\Users\Nomty\AppData\Roaming\Composer\vendor\squizlabs\php_codesniffer\bin\phpcs" timeout="30000" />
     </phpcs_settings>
   </component>
   <component name="PhpIncludePathManager">

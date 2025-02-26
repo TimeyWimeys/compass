@@ -6,13 +6,12 @@ namespace CompassPlugin\Base;
 /**
  *
  */
-class Activate
-{
-    /**
-     * @return void
-     */
-    public static function activate(): void
-    {
-        flush_rewrite_rules();
-    }
+class Activate {
+
+	/**
+	 * @return void
+	 */
+	public static function activate(): void {
+		flush_rewrite_rules();
+	}
 }

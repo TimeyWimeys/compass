@@ -59,9 +59,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         // For deletion
                         CBNFormController.showFormMessage(
                             'success',
-                            wp.i18n.__('Location deleted', 'Compass'),
-                            wp.i18n.__('The location has been successfully removed from the map.', 'Compass'),
-                            wp.i18n.__('Close and refresh map', 'Compass'),
+                            wp.i18n.__('Location deleted', 'compass'),
+                            wp.i18n.__('The location has been successfully removed from the map.', 'compass'),
+                            wp.i18n.__('Close and refresh map', 'compass'),
                             function () {
                                 window.location.reload();
                             }
@@ -70,9 +70,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         // For edits
                         CBNFormController.showFormMessage(
                             'success',
-                            wp.i18n.__('Changes saved', 'Compass'),
-                            wp.i18n.__('Your changes have been saved and will be visible after we reviewed them.', 'Compass'),
-                            wp.i18n.__('Close and refresh map', 'Compass'),
+                            wp.i18n.__('Changes saved', 'compass'),
+                            wp.i18n.__('Your changes have been saved and will be visible after we reviewed them.', 'compass'),
+                            wp.i18n.__('Close and refresh map', 'compass'),
                             function () {
                                 window.location.reload();
                             }
@@ -87,14 +87,14 @@ document.addEventListener('DOMContentLoaded', function () {
                             } else {
                                 // Show thank you message with refresh button (default)
                                 let thankyouDiv = document.getElementById('cbn_add_location_thankyou');
-                                let thankyouHeadline = thankyouDiv?.querySelector('h3')?.textContent || wp.i18n.__('Thank you!', 'Compass');
-                                let thankyouText = thankyouDiv?.querySelector('.cbn-add-location-thankyou-text')?.textContent || wp.i18n.__('We will check your location suggestion and release it as soon as possible.', 'Compass');
+                                let thankyouHeadline = thankyouDiv?.querySelector('h3')?.textContent || wp.i18n.__('Thank you!', 'compass');
+                                let thankyouText = thankyouDiv?.querySelector('.cbn-add-location-thankyou-text')?.textContent || wp.i18n.__('We will check your location suggestion and release it as soon as possible.', 'compass');
 
                                 CBNFormController.showFormMessage(
                                     'success',
                                     thankyouHeadline,
                                     thankyouText,
-                                    wp.i18n.__('Close and refresh map', 'Compass'),
+                                    wp.i18n.__('Close and refresh map', 'compass'),
                                     function () {
                                         window.location.reload();
                                     }
@@ -103,14 +103,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         } else {
                             // Fallback to thank you message with refresh button
                             let thankyouDiv = document.getElementById('cbn_add_location_thankyou');
-                            let thankyouHeadline = thankyouDiv?.querySelector('h3')?.textContent || wp.i18n.__('Thank you!', 'Compass');
-                            let thankyouText = thankyouDiv?.querySelector('.cbn-add-location-thankyou-text')?.textContent || wp.i18n.__('We will check your location suggestion and release it as soon as possible.', 'Compass');
+                            let thankyouHeadline = thankyouDiv?.querySelector('h3')?.textContent || wp.i18n.__('Thank you!', 'compass');
+                            let thankyouText = thankyouDiv?.querySelector('.cbn-add-location-thankyou-text')?.textContent || wp.i18n.__('We will check your location suggestion and release it as soon as possible.', 'compass');
 
                             CBNFormController.showFormMessage(
                                 'success',
                                 thankyouHeadline,
                                 thankyouText,
-                                wp.i18n.__('Close and refresh map', 'Compass'),
+                                wp.i18n.__('Close and refresh map', 'compass'),
                                 function () {
                                     window.location.reload();
                                 }

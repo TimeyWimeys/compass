@@ -10,26 +10,24 @@ namespace CompassPlugin\Base;
 /**
  *
  */
-class SettingsLinks extends BaseController
-{
-    /**
-     * @return void
-     */
-    public function register(): void
-    {
-        add_filter('plugin_action_links_' . $this->plugin, [$this, 'settings_link']);
-    }
+class SettingsLinks extends BaseController {
 
-    /**
-     * @param $links
-     * @return mixed
-     */
-    public function settings_link($links): mixed
-    {
-        /** @noinspection HtmlUnknownTarget */
-        $settings_link = '<a href="edit.php?post_type=cbn-location&page=compass-settings">Settings</a>';
-        $links[] = $settings_link;
+	/**
+	 * @return void
+	 */
+	public function register(): void {
+		add_filter( 'plugin_action_links_' . $this->plugin, array( $this, 'settings_link' ) );
+	}
 
-        return $links;
-    }
+	/**
+	 * @param $links
+	 * @return mixed
+	 */
+	public function settings_link( $links ): mixed {
+		/** @noinspection HtmlUnknownTarget */
+		$settings_link = '<a href="edit.php?post_type=cbn-location&page=compass-settings">Settings</a>';
+		$links[]       = $settings_link;
+
+		return $links;
+	}
 }

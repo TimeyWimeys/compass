@@ -1,198 +1,253 @@
 /* jshint esversion: 6 */
 /* jshint browser: true, devel: true */
 /* global jQuery, ajaxurl, wp, L, mapStyle, GeoSearch, console */
-document.addEventListener('DOMContentLoaded', function (e) {
+document.addEventListener(
+	'DOMContentLoaded',
+	function (e) {
 
-    // Event: "Add location" Button click
-    if (document.getElementById('mapGetLocation') != null) {
-        //init map
-        let map = L.map('mapGetLocation', {
-            attributionControl: true,
-            gestureHandling: true,
-        });
+		// Event: "Add location" Button click
+		if (document.getElementById( 'mapGetLocation' ) != null) {
+			//init map
+			let map = L.map(
+				'mapGetLocation',
+				{
+					attributionControl: true,
+					gestureHandling: true,
+				}
+			);
 
-        map.attributionControl.setPrefix(false);
+			map.attributionControl.setPrefix( false );
 
-        let enableCurrentLocation = !!cbn_enable_currentlocation;
+			let enableCurrentLocation = ! ! cbn_enable_currentlocation;
 
-        // Activate Map inside overlay
-        (function () {
+			// Activate Map inside overlay
+			(function () {
 
-            let markerIsVisible = false, cbn_geosearch_selected_provider;
+				let markerIsVisible = false, cbn_geosearch_selected_provider;
 
-            // Set map style
-            if (mapStyle === 'Custom1') {
+				// Set map style
+				if (mapStyle === 'Custom1') {
 
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png').addTo(map);
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
-                    tileSize: 512,
-                    zoomOffset: -1
-                }).addTo(map);
+					L.tileLayer( 'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png' ).addTo( map );
+					L.tileLayer(
+						'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png',
+						{
+							tileSize: 512,
+							zoomOffset: -1
+						}
+					).addTo( map );
 
-            } else if (mapStyle === 'Custom2') {
+				} else if (mapStyle === 'Custom2') {
 
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png').addTo(map);
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
-                    tileSize: 512,
-                    zoomOffset: -1
-                }).addTo(map);
+					L.tileLayer( 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png' ).addTo( map );
+					L.tileLayer(
+						'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png',
+						{
+							tileSize: 512,
+							zoomOffset: -1
+						}
+					).addTo( map );
 
-            } else if (mapStyle === 'Custom3') {
+				} else if (mapStyle === 'Custom3') {
 
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png').addTo(map);
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
-                    tileSize: 512,
-                    zoomOffset: -1
-                }).addTo(map);
+					L.tileLayer( 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png' ).addTo( map );
+					L.tileLayer(
+						'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png',
+						{
+							tileSize: 512,
+							zoomOffset: -1
+						}
+					).addTo( map );
 
-            } else if (mapStyle === 'MapBox.streets') {
+				} else if (mapStyle === 'MapBox.streets') {
 
-                L.tileLayer.provider('MapBox', {
-                    id: 'mapbox/streets-v12',
-                    accessToken: cbn_tile_provider_mapbox_key
-                }).addTo(map);
+					L.tileLayer.provider(
+						'MapBox',
+						{
+							id: 'mapbox/streets-v12',
+							accessToken: cbn_tile_provider_mapbox_key
+						}
+					).addTo( map );
 
-            } else if (mapStyle === 'MapBox.outdoors') {
+				} else if (mapStyle === 'MapBox.outdoors') {
 
-                L.tileLayer.provider('MapBox', {
-                    id: 'mapbox/outdoors-v12',
-                    accessToken: cbn_tile_provider_mapbox_key
-                }).addTo(map);
+					L.tileLayer.provider(
+						'MapBox',
+						{
+							id: 'mapbox/outdoors-v12',
+							accessToken: cbn_tile_provider_mapbox_key
+						}
+					).addTo( map );
 
-            } else if (mapStyle === 'MapBox.light') {
+				} else if (mapStyle === 'MapBox.light') {
 
-                L.tileLayer.provider('MapBox', {
-                    id: 'mapbox/light-v11',
-                    accessToken: cbn_tile_provider_mapbox_key
-                }).addTo(map);
+					L.tileLayer.provider(
+						'MapBox',
+						{
+							id: 'mapbox/light-v11',
+							accessToken: cbn_tile_provider_mapbox_key
+						}
+					).addTo( map );
 
-            } else if (mapStyle === 'MapBox.dark') {
+				} else if (mapStyle === 'MapBox.dark') {
 
-                L.tileLayer.provider('MapBox', {
-                    id: 'mapbox/dark-v11',
-                    accessToken: cbn_tile_provider_mapbox_key
-                }).addTo(map);
+					L.tileLayer.provider(
+						'MapBox',
+						{
+							id: 'mapbox/dark-v11',
+							accessToken: cbn_tile_provider_mapbox_key
+						}
+					).addTo( map );
 
-            } else if (mapStyle === 'MapBox.satellite') {
+				} else if (mapStyle === 'MapBox.satellite') {
 
-                L.tileLayer.provider('MapBox', {
-                    id: 'mapbox/satellite-v9',
-                    accessToken: cbn_tile_provider_mapbox_key
-                }).addTo(map);
+					L.tileLayer.provider(
+						'MapBox',
+						{
+							id: 'mapbox/satellite-v9',
+							accessToken: cbn_tile_provider_mapbox_key
+						}
+					).addTo( map );
 
-            } else if (mapStyle === 'MapBox.satellite-streets') {
+				} else if (mapStyle === 'MapBox.satellite-streets') {
 
-                L.tileLayer.provider('MapBox', {
-                    id: 'mapbox/satellite-streets-v12',
-                    accessToken: cbn_tile_provider_mapbox_key
-                }).addTo(map);
+					L.tileLayer.provider(
+						'MapBox',
+						{
+							id: 'mapbox/satellite-streets-v12',
+							accessToken: cbn_tile_provider_mapbox_key
+						}
+					).addTo( map );
 
-            } else {
-                // Default
-                L.tileLayer.provider(mapStyle).addTo(map);
-            }
+				} else {
+					// Default
+					L.tileLayer.provider( mapStyle ).addTo( map );
+				}
 
-            // Geosearch Provider
-            switch (cbn_geosearch_provider) {
-                case 'osm':
-                    cbn_geosearch_selected_provider = new GeoSearch.OpenStreetMapProvider();
-                    break;
-                case 'geoapify':
-                    cbn_geosearch_selected_provider = new GeoSearch.GeoapifyProvider({
-                        params: {
-                            apiKey: cbn_geosearch_provider_geoapify_key
-                        }
-                    });
-                    break;
-                case 'here':
-                    cbn_geosearch_selected_provider = new GeoSearch.HereProvider({
-                        params: {
-                            apiKey: cbn_geosearch_provider_here_key
-                        }
-                    });
-                    break;
-                case 'mapbox':
-                    cbn_geosearch_selected_provider = new GeoSearch.MapBoxProvider({
-                        params: {
-                            access_token: cbn_geosearch_provider_mapbox_key
-                        }
-                    });
-                    break;
-                default:
-                    cbn_geosearch_selected_provider = new GeoSearch.OpenStreetMapProvider();
-                    break;
-            }
+				// Geosearch Provider
+				switch (cbn_geosearch_provider) {
+					case 'osm':
+						cbn_geosearch_selected_provider = new GeoSearch.OpenStreetMapProvider();
+						break;
+					case 'geoapify':
+						cbn_geosearch_selected_provider = new GeoSearch.GeoapifyProvider(
+							{
+								params: {
+									apiKey: cbn_geosearch_provider_geoapify_key
+								}
+							}
+						);
+						break;
+					case 'here':
+						cbn_geosearch_selected_provider = new GeoSearch.HereProvider(
+							{
+								params: {
+									apiKey: cbn_geosearch_provider_here_key
+								}
+							}
+						);
+						break;
+					case 'mapbox':
+						cbn_geosearch_selected_provider = new GeoSearch.MapBoxProvider(
+							{
+								params: {
+									access_token: cbn_geosearch_provider_mapbox_key
+								}
+							}
+						);
+						break;
+					default:
+						cbn_geosearch_selected_provider = new GeoSearch.OpenStreetMapProvider();
+						break;
+				}
 
-            let search = new GeoSearch.GeoSearchControl({
-                style: 'bar',
-                showMarker: false,
-                provider: cbn_geosearch_selected_provider,
-                searchLabel: cbn_searchaddress_label
-            });
-            map.addControl(search);
+				let search = new GeoSearch.GeoSearchControl(
+					{
+						style: 'bar',
+						showMarker: false,
+						provider: cbn_geosearch_selected_provider,
+						searchLabel: cbn_searchaddress_label
+					}
+				);
+				map.addControl( search );
 
-            //define marker
+				//define marker
 
-            // Marker Icon
-            let markerIcon = L.icon({
-                iconUrl: marker_icon_url,
-                iconSize: [26, 41],
-                iconAnchor: [13, 41],
-                popupAnchor: [0, -25],
-                shadowUrl: marker_shadow_url,
-                shadowSize: [41, 41],
-                shadowAnchor: [13, 41]
-            });
+				// Marker Icon
+				let markerIcon = L.icon(
+					{
+						iconUrl: marker_icon_url,
+						iconSize: [26, 41],
+						iconAnchor: [13, 41],
+						popupAnchor: [0, -25],
+						shadowUrl: marker_shadow_url,
+						shadowSize: [41, 41],
+						shadowAnchor: [13, 41]
+					}
+				);
 
-            let locationMarker = L.marker([0, 0], {icon: markerIcon}, {
-                'draggable': true
-            });
+				let locationMarker = L.marker(
+					[0, 0],
+					{icon: markerIcon},
+					{
+						'draggable': true
+					}
+				);
 
-            //initial map view
-            map.setView([start_lat, start_lng], start_zoom);
+				//initial map view
+				map.setView( [start_lat, start_lng], start_zoom );
 
-            // Bound map to fixed position
-            if (cbn_enable_fixed_map_bounds) {
-                map.setMaxBounds(map.getBounds());
-            }
+				// Bound map to fixed position
+				if (cbn_enable_fixed_map_bounds) {
+					map.setMaxBounds( map.getBounds() );
+				}
 
-            // Add control: get current location
-            if (enableCurrentLocation) {
-                L.control.locate({
-                    flyTo: true,
-                    showPopup: false
-                }).addTo(map);
-            }
+				// Add control: get current location
+				if (enableCurrentLocation) {
+					L.control.locate(
+						{
+							flyTo: true,
+							showPopup: false
+						}
+					).addTo( map );
+				}
 
-            //Event: click on map to set marker
-            map.on('click locationfound geosearch/showlocation', function (e) {
-                let coords = (typeof e.marker !== 'undefined') ? e.marker._latlng : e.latlng;
+				//Event: click on map to set marker
+				map.on(
+					'click locationfound geosearch/showlocation',
+					function (e) {
+						let coords = (typeof e.marker !== 'undefined') ? e.marker._latlng : e.latlng;
 
-                locationMarker.setLatLng(coords);
+						locationMarker.setLatLng( coords );
 
-                if (!markerIsVisible) {
-                    locationMarker.addTo(map);
-                    markerIsVisible = true;
-                }
+						if ( ! markerIsVisible) {
+							locationMarker.addTo( map );
+							markerIsVisible = true;
+						}
 
-                setLocationLatLng(coords);
-            });
+						setLocationLatLng( coords );
+					}
+				);
 
-            //Event: drag marker
-            locationMarker.on('dragend', function (e) {
-                setLocationLatLng(e.target.getLatLng());
-            });
+				//Event: drag marker
+				locationMarker.on(
+					'dragend',
+					function (e) {
+						setLocationLatLng( e.target.getLatLng() );
+					}
+				);
 
-            //set lat & lng input fields
-            function setLocationLatLng(markerLatLng) {
-                console.log(markerLatLng);
+				//set lat & lng input fields
+				function setLocationLatLng(markerLatLng) {
+					console.log( markerLatLng );
 
-                document.getElementById('cbn_location_lat').value = markerLatLng.lat;
-                document.getElementById('cbn_location_lng').value = markerLatLng.lng;
-            }
+					document.getElementById( 'cbn_location_lat' ).value = markerLatLng.lat;
+					document.getElementById( 'cbn_location_lng' ).value = markerLatLng.lng;
+				}
 
-        })();
+			})();
 
-    }
+		}
 
-});
+	}
+);
