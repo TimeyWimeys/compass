@@ -1,21 +1,19 @@
 <?php
 declare(strict_types=1);
-
 /**
- * @package CompassPlugin
+ * @package OpenUserMapPlugin
  */
 
-namespace CompassPlugin\Pages;
+namespace OpenUserMapPlugin\Pages;
 
-use CompassPlugin\Base\BaseController;
-use Elementor_cbn_Addon\Plugin;
+use Elementor_OUM_Addon\Plugin;
+use OpenUserMapPlugin\Base\BaseController;
 
 /**
  *
  */
 class Frontend extends BaseController
 {
-
     /**
      * @return void
      */
@@ -24,10 +22,16 @@ class Frontend extends BaseController
         // Shortcodes
         add_action('init', [$this, 'set_shortcodes']);
 
-        //Add user location within registration
-        if (get_option('cbn_enable_add_user_location')) :
-            add_action('register_form', [$this, 'render_block_add_user_location']);
-            add_action('user_register', [$this, 'add_user_location']);
+        if (oum_fs()->is__premium_only()):
+            if (oum_fs()->can_use_premium_code()):
+
+                //PRO: Add user location within registration
+                if (get_option('oum_enable_add_user_location')):
+                    add_action('register_form', [$this, 'render_block_add_user_location__premium_only']);
+                    add_action('user_register', [$this, 'add_user_location__premium_only']);
+                endif;
+
+            endif;
         endif;
     }
 
@@ -44,57 +48,66 @@ class Frontend extends BaseController
                 error_log('OUM: prevented shortcode rendering inside Elementor');
                 return;
             }
+
         }
 
         // Render Map
-        add_shortcode('compass', [$this, 'render_block_map']);
+        add_shortcode('open-user-map', [$this, 'render_block_map']);
 
-        //Render Image Gallery (Shortcode)
-        add_shortcode('Compass-gallery', [$this, 'render_block_gallery']);
+        //PRO: Render Image Gallery (Shortcode)
+        if (oum_fs()->is__premium_only()):
+            if (oum_fs()->can_use_premium_code()):
 
-        //Render Location Value (Shortcode)
-        add_shortcode('Compass-location', [$this, 'render_block_location']);
+                add_shortcode('open-user-map-gallery', [$this, 'render_block_gallery__premium_only']);
 
-        //Render Locations List  (Shortcode)
-        add_shortcode('Compass-list', [$this, 'render_block_list']);
+            endif;
+        endif;
+
+        //PRO: Render Location Value (Shortcode)
+        if (oum_fs()->is__premium_only()):
+            if (oum_fs()->can_use_premium_code()):
+
+                add_shortcode('open-user-map-location', [$this, 'render_block_location__premium_only']);
+
+            endif;
+        endif;
+
+        //PRO: Render Locations List  (Shortcode)
+        if (oum_fs()->is__premium_only()):
+            if (oum_fs()->can_use_premium_code()):
+
+                add_shortcode('open-user-map-list', [$this, 'render_block_list__premium_only']);
+
+            endif;
+        endif;
 
         // Whitelisting OUM scripts for Complianz plugin
-        add_filter(
-            'script_loader_tag',
-            function ($tag, $handle, $source) {
+        add_filter('script_loader_tag', function ($tag, $handle, $source) {
 
-                if (stristr($handle, 'cbn')) {
-                    $tag = '<script src="' . $source . '" data-category="functional" class="cmplz-native" id="' . $handle . '-js"></script>';
-                }
+            if (stristr($handle, 'oum')) {
+                $tag = '<script src="' . $source . '" data-category="functional" class="cmplz-native" id="' . $handle . '-js"></script>';
+            }
 
-                return $tag;
-            },
-            10,
-            3
-        );
+            return $tag;
+        }, 10, 3);
 
         // Prevent shortcode parsing by All In One SEO plugin
         add_filter('aioseo_disable_shortcode_parsing', '__return_true');
 
         // Prevent shortcode parsing by Slim SEO plugin
-        add_filter(
-            'slim_seo_skipped_shortcodes',
-            function ($shortcodes) {
-                $shortcodes[] = 'compass';
-                $shortcodes[] = 'Compass-location';
-                $shortcodes[] = 'Compass-gallery';
-                $shortcodes[] = 'Compass-list';
-                return $shortcodes;
-            }
-        );
+        add_filter('slim_seo_skipped_shortcodes', function ($shortcodes) {
+            $shortcodes[] = 'open-user-map';
+            $shortcodes[] = 'open-user-map-location';
+            $shortcodes[] = 'open-user-map-gallery';
+            $shortcodes[] = 'open-user-map-list';
+            return $shortcodes;
+        });
 
         // Prevent block parsing by Slim SEO plugin
-        add_filter(
-            'slim_seo_skipped_blocks',
-            function ($blocks) {
-                $blocks[] = 'Compass/map';
-                return $blocks;
-            }
-        );
+        add_filter('slim_seo_skipped_blocks', function ($blocks) {
+            $blocks[] = 'open-user-map/map';
+            return $blocks;
+        });
+
     }
 }

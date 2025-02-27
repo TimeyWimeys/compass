@@ -1,75 +1,66 @@
 <?php
 declare(strict_types=1);
-
 /**
- * @package CompassPlugin
+ * @package OpenUserMapPlugin
  */
 
-namespace CompassPlugin\Base;
+namespace OpenUserMapPlugin\Base;
+
+use OpenUserMapPlugin\Base\BaseController;
 
 /**
- * loads Enqueue from BaseController to register public-functions
+ *
  */
 class Enqueue extends BaseController
 {
-
     /**
      * @return void
      */
     public function register(): void
     {
-        // Admin CSS & JS
         add_action('admin_enqueue_scripts', [$this, 'enqueue_admin']);
 
-        // Frontend CSS & JS
-        add_action('wp_enqueue_scripts', [$this, 'enqueue_frontend'], true);
-
-        // Dashicons in frontend (if needed)
-        add_action('wp_enqueue_scripts', [$this, 'load_dashicons_front_end'], true);
+        //Enqueue the Dashicons script
+        add_action('wp_enqueue_scripts', [$this, 'load_dashicons_front_end']);
     }
 
     /**
-     * Loads CSS and JS for WordPress admin
+     * @return void
      */
     public function enqueue_admin(): void
     {
-        wp_enqueue_style('cbn_admin_style', plugins_url('assets/css/style.css', dirname(__DIR__)), '1.0.0');
+        // enqueue admin styles
+        wp_enqueue_style('oum_style', $this->plugin_url . 'assets/style.css', [], $this->plugin_version);
         wp_enqueue_style('wp-color-picker');
 
+        // add media API (media uploader)
+        if (!did_action('wp_enqueue_media')) {
+            wp_enqueue_media();
+        }
+
+        // enqueue admin scripts
         wp_enqueue_script(
-            'cbn_script',
-            plugins_url('src/js/backend-settings.js', dirname(__DIR__)),
+            'oum_script',
+            $this->plugin_url . 'src/js/backend.js',
             ['wp-i18n', 'jquery', 'wp-color-picker'],
             $this->plugin_version,
             true
         );
 
-        wp_localize_script(
-            'cbn_script',
-            'cbn_ajax',
-            [
-                'cbn_location_nonce' => wp_create_nonce('cbn_location'),
-            ]
-        );
+        wp_localize_script('oum_script', 'oum_ajax', [
+            'oum_location_nonce' => wp_create_nonce('oum_location')
+        ]);
 
+        // add JS translation for admin scripts
         wp_set_script_translations(
-            'cbn_script',
-            'compass',
-            plugin_dir_path(__FILE__) . 'languages'
+            'oum_script',
+            'open-user-map',
+            $this->plugin_path . 'languages'
         );
     }
 
     /**
-     * Loads CSS and JS for the frontend
-     */
-    public function enqueue_frontend(): void
-    {
-        wp_enqueue_style('cbn_frontend_style', plugins_url('assets/css/frontend.css', dirname(__DIR__)), '1.0.0');
-        wp_enqueue_script('compass-script', plugins_url('src/js/script.js', dirname(__DIR__)), ['jquery'], '1.0.0', true);
-    }
-
-    /**
-     * Loads Dashicons for the frontend (if necessary)
+     * @return void
      */
     public function load_dashicons_front_end(): void
     {

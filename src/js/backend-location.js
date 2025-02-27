@@ -1,69 +1,70 @@
-/* jshint esversion: 6 */
-/* jshint browser: true, devel: true */
-/* global jQuery, ajaxurl, wp, GeoSearch, cbn_geosearch_provider, L, mapStyle, cbn_tile_provider_mapbox_key, lat, lng, zoom, console */
-window.addEventListener('load', function () {
+window.addEventListener('load', function (e) {
 
     // Initialize image preview grid if editing a location
-    "use strict";
-    let existingImages = jQuery('#cbn_location_image').val();
+    const existingImages = jQuery('#oum_location_image').val();
     if (existingImages) {
-        let imageUrls = existingImages.split('|');
+        const imageUrls = existingImages.split('|');
         updateImagePreview(imageUrls);
     }
 
-    // Restore the extended L object (CBNLeaflet.L) to the global scope (prevents conflicts with other Leaflet instances)
-    window.L = window.CBNLeaflet.L;
+    // Restore the extended L object (OUMLeaflet.L) to the global scope (prevents conflicts with other Leaflet instances)
+    window.L = window.OUMLeaflet.L;
 
     // FUNCTIONS
 
     //set lat & lng input fields
     function setLocationLatLng(markerLatLng) {
-        jQuery('#cbn_location_lat').val(markerLatLng.lat);
-        jQuery('#cbn_location_lng').val(markerLatLng.lng);
+        jQuery('#oum_location_lat').val(markerLatLng.lat);
+        jQuery('#oum_location_lng').val(markerLatLng.lng);
     }
 
     //set address field
-// VARIABLES
+    function setAddress(label) {
+        jQuery('#oum_location_address').val(label);
+    }
 
-    let latLngInputs = jQuery('#latLngInputs');
-    let showLatLngInputs = jQuery('#showLatLngInputs');
+
+    // VARIABLES
+
+    const latLngInputs = jQuery('#latLngInputs');
+    const showLatLngInputs = jQuery('#showLatLngInputs');
     let markerIsVisible = false;
 
     // Geosearch Provider
-    switch (cbn_geosearch_provider) {
+    switch (oum_geosearch_provider) {
         case 'osm':
-            cbn_geosearch_selected_provider = new GeoSearch.OpenStreetMapProvider();
+            oum_geosearch_selected_provider = new GeoSearch.OpenStreetMapProvider();
             break;
         case 'geoapify':
-            let cbn_geosearch_selected_provider = new GeoSearch.GeoapifyProvider({
+            oum_geosearch_selected_provider = new GeoSearch.GeoapifyProvider({
                 params: {
-                    apiKey: cbn_geosearch_provider_geoapify_key
+                    apiKey: oum_geosearch_provider_geoapify_key
                 }
             });
             break;
         case 'here':
-            cbn_geosearch_selected_provider = new GeoSearch.HereProvider({
+            oum_geosearch_selected_provider = new GeoSearch.HereProvider({
                 params: {
-                    apiKey: cbn_geosearch_provider_here_key
+                    apiKey: oum_geosearch_provider_here_key
                 }
             });
             break;
         case 'mapbox':
-            cbn_geosearch_selected_provider = new GeoSearch.MapBoxProvider({
+            oum_geosearch_selected_provider = new GeoSearch.MapBoxProvider({
                 params: {
-                    access_token: cbn_geosearch_provider_mapbox_key
+                    access_token: oum_geosearch_provider_mapbox_key
                 }
             });
             break;
         default:
-            cbn_geosearch_selected_provider = new GeoSearch.OpenStreetMapProvider();
+            oum_geosearch_selected_provider = new GeoSearch.OpenStreetMapProvider();
             break;
     }
 
 
     // SETUP MAP
 
-    let map = L.map('mapGetLocation', {
+    const map = L.map('mapGetLocation', {
         scrollWheelZoom: false,
         zoomSnap: 1,
         zoomDelta: 1,
@@ -79,7 +80,7 @@ window.addEventListener('load', function () {
     });
 
     // Set map style
-    if (mapStyle === 'Custom1') {
+    if (mapStyle == 'Custom1') {
 
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png').addTo(map);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
@@ -87,7 +88,7 @@ window.addEventListener('load', function () {
             zoomOffset: -1
         }).addTo(map);
 
-    } else if (mapStyle === 'Custom2') {
+    } else if (mapStyle == 'Custom2') {
 
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png').addTo(map);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
@@ -95,7 +96,7 @@ window.addEventListener('load', function () {
             zoomOffset: -1
         }).addTo(map);
 
-    } else if (mapStyle === 'Custom3') {
+    } else if (mapStyle == 'Custom3') {
 
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png').addTo(map);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
@@ -103,46 +104,46 @@ window.addEventListener('load', function () {
             zoomOffset: -1
         }).addTo(map);
 
-    } else if (mapStyle === 'MapBox.streets') {
+    } else if (mapStyle == 'MapBox.streets') {
 
         L.tileLayer.provider('MapBox', {
             id: 'mapbox/streets-v12',
-            accessToken: cbn_tile_provider_mapbox_key
+            accessToken: oum_tile_provider_mapbox_key
         }).addTo(map);
 
-    } else if (mapStyle === 'MapBox.outdoors') {
+    } else if (mapStyle == 'MapBox.outdoors') {
 
         L.tileLayer.provider('MapBox', {
             id: 'mapbox/outdoors-v12',
-            accessToken: cbn_tile_provider_mapbox_key
+            accessToken: oum_tile_provider_mapbox_key
         }).addTo(map);
 
-    } else if (mapStyle === 'MapBox.light') {
+    } else if (mapStyle == 'MapBox.light') {
 
         L.tileLayer.provider('MapBox', {
             id: 'mapbox/light-v11',
-            accessToken: cbn_tile_provider_mapbox_key
+            accessToken: oum_tile_provider_mapbox_key
         }).addTo(map);
 
-    } else if (mapStyle === 'MapBox.dark') {
+    } else if (mapStyle == 'MapBox.dark') {
 
         L.tileLayer.provider('MapBox', {
             id: 'mapbox/dark-v11',
-            accessToken: cbn_tile_provider_mapbox_key
+            accessToken: oum_tile_provider_mapbox_key
         }).addTo(map);
 
-    } else if (mapStyle === 'MapBox.satellite') {
+    } else if (mapStyle == 'MapBox.satellite') {
 
         L.tileLayer.provider('MapBox', {
             id: 'mapbox/satellite-v9',
-            accessToken: cbn_tile_provider_mapbox_key
+            accessToken: oum_tile_provider_mapbox_key
         }).addTo(map);
 
-    } else if (mapStyle === 'MapBox.satellite-streets') {
+    } else if (mapStyle == 'MapBox.satellite-streets') {
 
         L.tileLayer.provider('MapBox', {
             id: 'mapbox/satellite-streets-v12',
-            accessToken: cbn_tile_provider_mapbox_key
+            accessToken: oum_tile_provider_mapbox_key
         }).addTo(map);
 
     } else {
@@ -177,11 +178,11 @@ window.addEventListener('load', function () {
     }
 
     // Control: search address
-    let search = new GeoSearch.GeoSearchControl({
+    const search = new GeoSearch.GeoSearchControl({
         style: 'bar',
         showMarker: false,
-        provider: cbn_geosearch_selected_provider,
-        searchLabel: cbn_searchaddress_label
+        provider: oum_geosearch_selected_provider,
+        searchLabel: oum_searchaddress_label
     });
     map.addControl(search);
 
@@ -199,7 +200,7 @@ window.addEventListener('load', function () {
     // Trigger resize (sometimes necessary to render the map properly)
     setInterval(function () {
         map.invalidateSize();
-    }, 1000);
+    }, 1000)
 
 
     // EVENTS
@@ -221,6 +222,8 @@ window.addEventListener('load', function () {
     //Event: geosearch success
     map.on('geosearch/showlocation', function (e) {
         let coords = e.marker._latlng;
+        let label = e.location.label;
+
         locationMarker.setLatLng(coords);
 
         if (!markerIsVisible) {
@@ -246,11 +249,11 @@ window.addEventListener('load', function () {
     });
 
     // Media Uploader
-    jQuery('#cbn_location_image_preview').closest('form').on('click', '.cbn_upload_image_button', function (e) {
+    jQuery('#oum_location_image_preview').closest('form').on('click', '.oum_upload_image_button', function (e) {
         e.preventDefault();
 
         // Create new media frame
-        let image_uploader = wp.media({
+        const image_uploader = wp.media({
             title: 'Custom image',
             multiple: true,
             library: {
@@ -263,24 +266,24 @@ window.addEventListener('load', function () {
 
         // Bind to select event
         image_uploader.on('select', function () {
-            let attachments = image_uploader.state().get('selection').toJSON();
-            let maxImages = 5;
-            let existingImages = jQuery('#cbn_location_image_preview img').length;
-            let remainingSlots = maxImages - existingImages;
+            const attachments = image_uploader.state().get('selection').toJSON();
+            const maxImages = 5;
+            const existingImages = jQuery('#oum_location_image_preview img').length;
+            const remainingSlots = maxImages - existingImages;
 
             if (attachments.length > remainingSlots) {
                 alert('Maximum ' + maxImages + ' images allowed. Only the first ' + remainingSlots + ' images will be added.');
             }
 
-            let imagesToProcess = attachments.slice(0, remainingSlots);
-            let existingUrls = jQuery('#cbn_location_image').val() ? jQuery('#cbn_location_image').val().split('|') : [];
+            const imagesToProcess = attachments.slice(0, remainingSlots);
+            let existingUrls = jQuery('#oum_location_image').val() ? jQuery('#oum_location_image').val().split('|') : [];
 
             imagesToProcess.forEach(attachment => {
-                let url = attachment.sizes.large ? attachment.sizes.large.url : attachment.sizes.full.url;
+                const url = attachment.sizes.large ? attachment.sizes.large.url : attachment.sizes.full.url;
                 existingUrls.push(url);
             });
 
-            jQuery('#cbn_location_image').val(existingUrls.join('|'));
+            jQuery('#oum_location_image').val(existingUrls.join('|'));
             updateImagePreview(existingUrls);
         });
 
@@ -290,7 +293,7 @@ window.addEventListener('load', function () {
 
     // Function to update image preview
     function updateImagePreview(imageUrls) {
-        let previewContainer = jQuery('#cbn_location_image_preview');
+        const previewContainer = jQuery('#oum_location_image_preview');
 
         // Remove old preview and classes
         previewContainer.empty().removeClass('has-image');
@@ -302,12 +305,12 @@ window.addEventListener('load', function () {
         previewContainer.addClass('has-image');
 
         // Create preview grid
-        let gridContainer = jQuery('<div class="image-preview-grid"></div>');
+        const gridContainer = jQuery('<div class="image-preview-grid"></div>');
 
         imageUrls.forEach((url, index) => {
             if (!url) return; // Skip empty URLs
 
-            let previewItem = jQuery(`
+            const previewItem = jQuery(`
         <div class="image-preview-item" draggable="true" data-url="${url}">
           <img src="${url}" alt="Preview">
           <div class="remove-image" title="Remove image">&times;</div>
@@ -316,7 +319,7 @@ window.addEventListener('load', function () {
       `);
 
             // Add drag and drop functionality
-            let item = previewItem[0];
+            const item = previewItem[0];
             setupDragAndDrop(item);
 
             gridContainer.append(previewItem);
@@ -377,9 +380,9 @@ window.addEventListener('load', function () {
     }
 
     function moveDraggedElement(draggable, e) {
-        let rect = draggable.getBoundingClientRect();
-        let centerOffsetX = rect.width / 2;
-        let centerOffsetY = rect.height / 2;
+        const rect = draggable.getBoundingClientRect();
+        const centerOffsetX = rect.width / 2;
+        const centerOffsetY = rect.height / 2;
 
         // Position element directly at cursor with center offset
         draggable.style.left = (e.clientX - centerOffsetX) + 'px';
@@ -387,18 +390,18 @@ window.addEventListener('load', function () {
     }
 
     function updatePlaceholderPosition(e) {
-        let gridContainer = document.querySelector("#cbn_location_image_preview .image-preview-grid");
+        const gridContainer = document.querySelector("#oum_location_image_preview .image-preview-grid");
         if (!gridContainer) return;
 
-        let draggable = document.querySelector('.dragging');
+        const draggable = document.querySelector('.dragging');
         if (!draggable) return;
 
-        let siblings = [...gridContainer.querySelectorAll(".image-preview-item:not(.dragging)")];
+        const siblings = [...gridContainer.querySelectorAll(".image-preview-item:not(.dragging)")];
 
         // Find the closest sibling based on mouse position
-        let closestSibling = siblings.reduce((closest, child) => {
-            let rect = child.getBoundingClientRect();
-            let centerX = rect.left + rect.width / 2;
+        const closestSibling = siblings.reduce((closest, child) => {
+            const rect = child.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
             const offset = e.clientX - centerX;
 
             if (offset < 0 && (!closest.element || offset > closest.offset)) {
@@ -417,17 +420,17 @@ window.addEventListener('load', function () {
     function handleDragMove(e) {
         if (!isDragging) return;
 
-        let draggable = document.querySelector(".dragging");
+        const draggable = document.querySelector(".dragging");
         if (!draggable) return;
 
         // Update dragged element position
         moveDraggedElement(draggable, e);
 
         // Check if cursor is still within any grid container
-        let gridContainer = document.querySelector("#cbn_location_image_preview .image-preview-grid");
+        const gridContainer = document.querySelector("#oum_location_image_preview .image-preview-grid");
         if (!gridContainer) return;
 
-        let gridRect = gridContainer.getBoundingClientRect();
+        const gridRect = gridContainer.getBoundingClientRect();
         const isWithinGrid = e.clientX >= gridRect.left - 50 &&
             e.clientX <= gridRect.right + 50 &&
             e.clientY >= gridRect.top - 50 &&
@@ -443,14 +446,14 @@ window.addEventListener('load', function () {
     }
 
     function handleDragEnd() {
-        let draggable = document.querySelector(".dragging");
+        const draggable = document.querySelector(".dragging");
         if (!draggable) return;
 
         // Reset cursor
         document.body.style.cursor = "";
 
         // Check if we're still within the grid
-        let gridContainer = document.querySelector("#cbn_location_image_preview .image-preview-grid");
+        const gridContainer = document.querySelector("#oum_location_image_preview .image-preview-grid");
         if (!gridContainer) {
             // If no grid found, return item to its initial position
             if (draggable.initialContainer) {
@@ -491,8 +494,8 @@ window.addEventListener('load', function () {
     }
 
     function handleTouchStart(e) {
-        let touch = e.touches[0];
-        let mouseEvent = new MouseEvent("mousedown", {
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent("mousedown", {
             clientX: touch.clientX,
             clientY: touch.clientY
         });
@@ -506,13 +509,13 @@ window.addEventListener('load', function () {
     // Remove image handler with animation
     jQuery('body').on('click', '.remove-image', function (e) {
         e.preventDefault();
-        let item = jQuery(this).closest('.image-preview-item');
-        let url = item.data('url');
+        const item = jQuery(this).closest('.image-preview-item');
+        const url = item.data('url');
 
         // Remove from hidden input
-        let currentUrls = jQuery('#cbn_location_image').val().split('|');
-        let newUrls = currentUrls.filter(currentUrl => currentUrl !== url);
-        jQuery('#cbn_location_image').val(newUrls.join('|'));
+        const currentUrls = jQuery('#oum_location_image').val().split('|');
+        const newUrls = currentUrls.filter(currentUrl => currentUrl !== url);
+        jQuery('#oum_location_image').val(newUrls.join('|'));
 
         // Animate and remove preview item
         item.css({
@@ -526,18 +529,18 @@ window.addEventListener('load', function () {
 
             // Remove has-image class if no images left
             if (newUrls.length === 0) {
-                jQuery('#cbn_location_image_preview').removeClass('has-image').empty();
+                jQuery('#oum_location_image_preview').removeClass('has-image').empty();
             }
         }, 300);
     });
 
     // Add back the updateImageOrder function
     function updateImageOrder() {
-        let imageUrls = [];
-        jQuery('#cbn_location_image_preview .image-preview-item').each(function () {
+        const imageUrls = [];
+        jQuery('#oum_location_image_preview .image-preview-item').each(function () {
             imageUrls.push(jQuery(this).data('url'));
         });
-        jQuery('#cbn_location_image').val(imageUrls.join('|'));
+        jQuery('#oum_location_image').val(imageUrls.join('|'));
     }
 
 }, false);

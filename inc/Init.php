@@ -1,34 +1,32 @@
 <?php
 declare(strict_types=1);
-
 /**
- * @package CompassPlugin
+ * @package OpenUserMapPlugin
  */
 
-namespace CompassPlugin;
+namespace OpenUserMapPlugin;
 
 /**
  *
  */
 final class Init
 {
-
     /**
-     * @return string[]
+     * Store all the classes inside an array
+     * @return array Full list of classes
      */
-    public static function get_services(): array
+    public static function get_services()
     {
-        error_log('register_services() wordt uitgevoerd');
-        $classes = [
+        $classes = array(
             Pages\Settings::class,
             Base\Enqueue::class,
             Base\SettingsLinks::class,
-            Base\LocationControl::class,
+            Base\LocationController::class,
             Base\BlockController::class,
             Base\TaxController::class,
-        ];
-        error_log('Services geregistreerd...');
+        );
 
+        // only add Frontend class when not in backend
         if (!is_admin()) {
             array_unshift($classes, Pages\Frontend::class);
         }
@@ -37,9 +35,9 @@ final class Init
     }
 
     /**
-     * @return void
+     * Loop through the classes, initialize them and call method register() if it exists
      */
-    public static function register_services(): void
+    public static function register_services()
     {
         foreach (self::get_services() as $class) {
             $service = self::instantiate($class);
@@ -51,24 +49,14 @@ final class Init
     }
 
     /**
-     * @param $class
-     * @return mixed
+     * Initialize the class
+     * @param $class class      class from the services array
+     * @return class instance   new instance of the class
      */
-    private static function instantiate($class): mixed
+    private static function instantiate($class)
     {
-        return new $class();
+        $service = new $class();
+
+        return $service;
     }
 }
-
-/**
- * @param $links
- * @return mixed
- */
-function cbn_add_settings_link($links): mixed
-{
-    $settings_link = '<a href="admin.php?page=cbn-settings">Settings</a>';
-    array_unshift($links, $settings_link);
-    return $links;
-}
-
-add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'cbn_add_settings_link');

@@ -1,14 +1,16 @@
 <?php
 declare(strict_types=1);
+/**
+ * @package OpenUserMapPlugin
+ */
 
-namespace CompassPlugin\Base;
+namespace OpenUserMapPlugin\Base;
 
 /**
  *
  */
 class Activate
 {
-
     /**
      * @return void
      */

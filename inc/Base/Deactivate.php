@@ -1,18 +1,20 @@
 <?php
 declare(strict_types=1);
+/**
+ * @package OpenUserMapPlugin
+ */
 
-namespace CompassPlugin\Base;
+namespace OpenUserMapPlugin\Base;
 
 /**
  *
  */
-class Deactivate
+class Activate
 {
-
     /**
      * @return void
      */
-    public static function deactivate(): void
+    public static function activate(): void
     {
         flush_rewrite_rules();
     }

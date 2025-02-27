@@ -1,20 +1,19 @@
 <?php
 declare(strict_types=1);
-
 /**
- * @package CompassPlugin
+ * @package OpenUserMapPlugin
  */
 
-namespace CompassPlugin\Base;
+namespace OpenUserMapPlugin\Base;
 
-use Elementor_cbn_Addon\Plugin;
+use Elementor_OUM_Addon\Plugin;
+use OpenUserMapPlugin\Base\BaseController;
 
 /**
  *
  */
 class BlockController extends BaseController
 {
-
     /**
      * @return void
      */
@@ -36,28 +35,28 @@ class BlockController extends BaseController
         register_block_type(
             $this->plugin_path . 'blocks',
             [
-                'render_callback' => is_admin() ? null : [$this, 'render_block_map'],
+                'render_callback' => is_admin() ? null : [$this, 'render_block_map']
             ]
         );
 
         // add JS translation for Gutenberg Blocks script
         /*
-        Pay Attention:
-        - currently doesnt work with wordpress.org translation --> use local translation file
-        - Translation file needs to be called "Compass-de_DE-cbn_blocks_script.json"
-        - Howto: https://developer.wordpress.org/block-editor/how-to-guides/internationalization/
+         Pay Attention: 
+         - currently doesnt work with wordpress.org translation --> use local translation file 
+         - Translation file needs to be called "open-user-map-de_DE-oum_blocks_script.json"
+         - Howto: https://developer.wordpress.org/block-editor/how-to-guides/internationalization/
          */
-        // wp_set_script_translations(
-        //     'cbn_blocks_script',
-        //     'compass',
-        //     $this->plugin_path . 'languages'
+        // wp_set_script_translations( 
+        //     'oum_blocks_script', 
+        //     'open-user-map', 
+        //     $this->plugin_path . 'languages' 
         // );
     }
 
     /**
      * Setup Elementor Widgets
      */
-    public function set_elementor_widgets(): void
+    public function set_elementor_widgets($widgets_manager): void
     {
         require_once "$this->plugin_path/elementor/includes/plugin.php";
 

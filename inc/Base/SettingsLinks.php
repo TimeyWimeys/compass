@@ -1,11 +1,12 @@
 <?php
 declare(strict_types=1);
-
 /**
- * @package CompassPlugin
+ * @package OpenUserMapPlugin
  */
 
-namespace CompassPlugin\Base;
+namespace OpenUserMapPlugin\Base;
+
+use OpenUserMapPlugin\Base\BaseController;
 
 /**
  *
@@ -27,8 +28,7 @@ class SettingsLinks extends BaseController
      */
     public function settings_link($links): mixed
     {
-        /** @noinspection HtmlUnknownTarget */
-        $settings_link = '<a href="edit.php?post_type=cbn-location&page=compass-settings">Settings</a>';
+        $settings_link = '<a href="edit.php?post_type=oum-location&page=open-user-map-settings">Settings</a>';
         $links[] = $settings_link;
 
         return $links;

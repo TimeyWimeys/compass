@@ -1,7 +1,5 @@
-/* jshint esversion: 6 */
-/* jshint browser: true, devel: true */
 export default function Save() {
 
-	return null; // use PHP
+    return null; // use PHP
 
 }

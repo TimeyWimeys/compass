@@ -1,14 +1,9 @@
-/* jshint esversion: 6 */
-/* jshint browser: true, devel: true */
-/* global jQuery, ajaxurl, wp, L, mapStyle, lat, lng, console */
+window.addEventListener('load', function (e) {
 
-window.addEventListener('load', function () {
+    // Restore the extended L object (OUMLeaflet.L) to the global scope (prevents conflicts with other Leaflet instances)
+    window.L = window.OUMLeaflet.L;
 
-    // Restore the extended L object (CBNLeaflet.L) to the global scope (prevents conflicts with other Leaflet instances)
-    "use strict";
-    window.L = window.CBNLeaflet.L;
-
-    let map = L.map('mapGetInitial', {
+    const map = L.map('mapGetInitial', {
         scrollWheelZoom: false,
         zoomSnap: 0.5,
         zoomDelta: 0.5,
@@ -24,13 +19,11 @@ window.addEventListener('load', function () {
     });
 
     // Tabs
-    document.addEventListener('DOMContentLoaded', function () {
-        let tabs = document.querySelectorAll(".nav-tab-wrapper > .nav-tab");
+    const tabs = document.querySelectorAll(".nav-tab-wrapper > .nav-tab");
 
-        for (let i = 0; i < tabs.length; i++) {
-            tabs[i].addEventListener("click", switchTab);
-        }
-    });
+    for (i = 0; i < tabs.length; i++) {
+        tabs[i].addEventListener("click", switchTab);
+    }
 
     function switchTab(event) {
         event.preventDefault();
@@ -49,17 +42,17 @@ window.addEventListener('load', function () {
     }
 
     // Map type selector
-    jQuery('.map-types input[name=cbn_map_type]').on('change', function () {
-        if (this.value === 1) {
-            jQuery('#cbn_enable_add_location').prop('checked', true);
+    jQuery('.map-types input[name=oum_map_type]').on('change', function () {
+        if (this.value == 1) {
+            jQuery('#oum_enable_add_location').prop('checked', true);
         } else {
-            jQuery('#cbn_enable_add_location').prop('checked', false);
+            jQuery('#oum_enable_add_location').prop('checked', false);
         }
     });
 
     //Color Picker
     if (jQuery.isFunction(jQuery.fn.wpColorPicker)) {
-        jQuery('input.cbn_colorpicker').wpColorPicker();
+        jQuery('input.oum_colorpicker').wpColorPicker();
     }
 
     // map style selector
@@ -82,10 +75,10 @@ window.addEventListener('load', function () {
                 jQuery('.tile-provider-mapbox').show();
 
                 // validate
-                if (jQuery('#cbn_tile_provider_mapbox_key').val() === '') {
+                if (jQuery('#oum_tile_provider_mapbox_key').val() == '') {
                     alert("Please enter a MapBox API Key");
                     window.scrollTo({
-                        top: jQuery('#cbn_tile_provider_mapbox_key').offset().top - 200,
+                        top: jQuery('#oum_tile_provider_mapbox_key').offset().top - 200,
                         behavior: 'smooth'
                     });
                 }
@@ -94,7 +87,7 @@ window.addEventListener('load', function () {
     }
 
     // marker icon selector
-    jQuery('.marker_icons input[type=radio]').on('change', function () {
+    jQuery('.marker_icons input[type=radio]').on('change', function (e) {
         jQuery('.marker_icons label').removeClass('checked');
         jQuery(this).parent('label').addClass('checked');
     });
@@ -128,42 +121,42 @@ window.addEventListener('load', function () {
 
         L.tileLayer.provider('MapBox', {
             id: 'mapbox/streets-v12',
-            accessToken: cbn_tile_provider_mapbox_key
+            accessToken: oum_tile_provider_mapbox_key
         }).addTo(map);
 
     } else if (mapStyle === 'MapBox.outdoors') {
 
         L.tileLayer.provider('MapBox', {
             id: 'mapbox/outdoors-v12',
-            accessToken: cbn_tile_provider_mapbox_key
+            accessToken: oum_tile_provider_mapbox_key
         }).addTo(map);
 
     } else if (mapStyle === 'MapBox.light') {
 
         L.tileLayer.provider('MapBox', {
             id: 'mapbox/light-v11',
-            accessToken: cbn_tile_provider_mapbox_key
+            accessToken: oum_tile_provider_mapbox_key
         }).addTo(map);
 
     } else if (mapStyle === 'MapBox.dark') {
 
         L.tileLayer.provider('MapBox', {
             id: 'mapbox/dark-v11',
-            accessToken: cbn_tile_provider_mapbox_key
+            accessToken: oum_tile_provider_mapbox_key
         }).addTo(map);
 
     } else if (mapStyle === 'MapBox.satellite') {
 
         L.tileLayer.provider('MapBox', {
             id: 'mapbox/satellite-v9',
-            accessToken: cbn_tile_provider_mapbox_key
+            accessToken: oum_tile_provider_mapbox_key
         }).addTo(map);
 
     } else if (mapStyle === 'MapBox.satellite-streets') {
 
         L.tileLayer.provider('MapBox', {
             id: 'mapbox/satellite-streets-v12',
-            accessToken: cbn_tile_provider_mapbox_key
+            accessToken: oum_tile_provider_mapbox_key
         }).addTo(map);
 
     } else {
@@ -172,62 +165,62 @@ window.addEventListener('load', function () {
     }
 
     // Geosearch Provider
-    switch (cbn_geosearch_provider) {
+    switch (oum_geosearch_provider) {
         case 'osm':
-            cbn_geosearch_selected_provider = new GeoSearch.OpenStreetMapProvider();
+            oum_geosearch_selected_provider = new GeoSearch.OpenStreetMapProvider();
             break;
         case 'geoapify':
-            cbn_geosearch_selected_provider = new GeoSearch.GeoapifyProvider({
+            oum_geosearch_selected_provider = new GeoSearch.GeoapifyProvider({
                 params: {
-                    apiKey: cbn_geosearch_provider_geoapify_key
+                    apiKey: oum_geosearch_provider_geoapify_key
                 }
             });
             break;
         case 'here':
-            cbn_geosearch_selected_provider = new GeoSearch.HereProvider({
+            oum_geosearch_selected_provider = new GeoSearch.HereProvider({
                 params: {
-                    apiKey: cbn_geosearch_provider_here_key
+                    apiKey: oum_geosearch_provider_here_key
                 }
             });
             break;
         case 'mapbox':
-            cbn_geosearch_selected_provider = new GeoSearch.MapBoxProvider({
+            oum_geosearch_selected_provider = new GeoSearch.MapBoxProvider({
                 params: {
-                    access_token: cbn_geosearch_provider_mapbox_key
+                    access_token: oum_geosearch_provider_mapbox_key
                 }
             });
             break;
         default:
-            cbn_geosearch_selected_provider = new GeoSearch.OpenStreetMapProvider();
+            oum_geosearch_selected_provider = new GeoSearch.OpenStreetMapProvider();
             break;
     }
 
-    let search = new GeoSearch.GeoSearchControl({
+    const search = new GeoSearch.GeoSearchControl({
         style: 'bar',
         showMarker: false,
-        provider: cbn_geosearch_selected_provider,
-        searchLabel: cbn_searchaddress_label,
+        provider: oum_geosearch_selected_provider,
+        searchLabel: oum_searchaddress_label,
     });
     map.addControl(search);
 
     map.setView([lat, lng], zoom);
 
     // set Initial view by move/zoom
-    map.on('move', function () {
+    map.on('move', function (e) {
         setInitialLatLngZoom(map.getCenter(), map.getZoom());
     });
 
     //set lat & lng & zoom input fields
     function setInitialLatLngZoom(mapCenterLatLng, mapZoom) {
-        jQuery('#cbn_start_lat').val(mapCenterLatLng.lat);
-        jQuery('#cbn_start_lng').val(mapCenterLatLng.lng);
-        jQuery('#cbn_start_zoom').val(mapZoom);
+        jQuery('#oum_start_lat').val(mapCenterLatLng.lat);
+        jQuery('#oum_start_lng').val(mapCenterLatLng.lng);
+        jQuery('#oum_start_zoom').val(mapZoom);
     }
 
     //Custom Fields
     let maxField = 10; //Input fields increment limitation
-    let addButton = jQuery('.cbn_add_button'); //Add button selector
-    let wrapper = jQuery('.cbn_custom_fields_wrapper'); //Input field wrapper
+    let addButton = jQuery('.oum_add_button'); //Add button selector
+    let wrapper = jQuery('.oum_custom_fields_wrapper'); //Input field wrapper
     let x = 1; //Initial field counter is 1
 
     //Once add button is clicked
@@ -241,30 +234,30 @@ window.addEventListener('load', function () {
             let fieldHTML = `
           <tr>
             <td>
-              <input type="text" class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" name="cbn_custom_fields[${index}][label]" placeholder="Enter label" value="" />
+              <input type="text" class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" name="oum_custom_fields[${index}][label]" placeholder="Enter label" value="" />
             </td>
             <td>
-              <input class="cbn-switch field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" id="cbn_custom_fields_${index}_required" type="checkbox" name="cbn_custom_fields[${index}][required]"><label class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" for="cbn_custom_fields_${index}_required"></label>
+              <input class="oum-switch field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" id="oum_custom_fields_${index}_required" type="checkbox" name="oum_custom_fields[${index}][required]"><label class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" for="oum_custom_fields_${index}_required"></label>
             </td>
             <td>
-              <input class="cbn-switch field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" id="cbn_custom_fields_${index}_private" type="checkbox" name="cbn_custom_fields[${index}][private]"><label class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" for="cbn_custom_fields_${index}_private"></label>
+              <input class="oum-switch field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" id="oum_custom_fields_${index}_private" type="checkbox" name="oum_custom_fields[${index}][private]"><label class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" for="oum_custom_fields_${index}_private"></label>
             </td>
             <td>
-              <input class="small-text field-type-text field-type-link field-type-email" type="number" min="0" name="cbn_custom_fields[${index}][maxlength]" />
+              <input class="small-text field-type-text field-type-link field-type-email" type="number" min="0" name="oum_custom_fields[${index}][maxlength]" />
             </td>
             <td>
-              <select class="cbn-custom-field-fieldtype" name="cbn_custom_fields[${index}][fieldtype]">                         
+              <select class="oum-custom-field-fieldtype" name="oum_custom_fields[${index}][fieldtype]">                         
                   <option value="text">Text</option>
         `;
 
             /* <fs_premium_only> */
             fieldHTML += `
-                  <option value="link">Link </option>
-                  <option value="email">Email </option>
-                  <option value="checkbox">Checkbox </option>
-                  <option value="radio">Radio </option>
-                  <option value="select">Select </option>
-                  <option value="html">HTML </option>
+                  <option value="link">Link [PRO]</option>
+                  <option value="email">Email [PRO]</option>
+                  <option value="checkbox">Checkbox [PRO]</option>
+                  <option value="radio">Radio [PRO]</option>
+                  <option value="select">Select [PRO]</option>
+                  <option value="html">HTML [PRO]</option>
         `;
             /* </fs_premium_only> */
 
@@ -272,13 +265,13 @@ window.addEventListener('load', function () {
               </select>
             </td>
             <td>
-              <input type="text" class="regular-text field-type-checkbox field-type-radio field-type-select" name="cbn_custom_fields[${index}][options]" placeholder="Red|Blue|Green" value="" style="display: none;" />
-              <label class="field-type-select cbn-custom-field-allow-empty" style="display: none;"><input class="field-type-select" type="checkbox" name="cbn_custom_fields[${index}][emptyoption]" />add empty option</label>
-              <label class="field-type-link cbn-custom-field-use-label-as-text" style="display: none;"><input class="field-type-link" type="checkbox" name="cbn_custom_fields[${index}][uselabelastextoption]" />use label as text</label>
-              <textarea class="regular-text field-type-html" name="cbn_custom_fields[${index}][html]" placeholder="Enter HTML here" style="display: none;"></textarea>
+              <input type="text" class="regular-text field-type-checkbox field-type-radio field-type-select" name="oum_custom_fields[${index}][options]" placeholder="Red|Blue|Green" value="" style="display: none;" />
+              <label class="field-type-select oum-custom-field-allow-empty" style="display: none;"><input class="field-type-select" type="checkbox" name="oum_custom_fields[${index}][emptyoption]" />add empty option</label>
+              <label class="field-type-link oum-custom-field-use-label-as-text" style="display: none;"><input class="field-type-link" type="checkbox" name="oum_custom_fields[${index}][uselabelastextoption]" />use label as text</label>
+              <textarea class="regular-text field-type-html" name="oum_custom_fields[${index}][html]" placeholder="Enter HTML here" style="display: none;"></textarea>
             </td>
             <td>
-              <input type="text" class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" name="cbn_custom_fields[${index}][description]" placeholder="Enter description (optional)" value="" />
+              <input type="text" class="field-type-text field-type-link field-type-email field-type-checkbox field-type-radio field-type-select" name="oum_custom_fields[${index}][description]" placeholder="Enter description (optional)" value="" />
             </td>
             <td class="actions">
               <a class="up" href="#"><span class="dashicons dashicons-arrow-up"></span></a>
@@ -291,50 +284,50 @@ window.addEventListener('load', function () {
         }
     });
 
-    jQuery(wrapper).on('change', '.cbn-custom-field-fieldtype', function () {
+    jQuery(wrapper).on('change', '.oum-custom-field-fieldtype', function (e) {
         updateCustomFieldRow(this);
     });
 
-    jQuery('.cbn-custom-field-fieldtype').each(function () {
+    jQuery('.oum-custom-field-fieldtype').each(function () {
         updateCustomFieldRow(this);
     });
 
     function updateCustomFieldRow(el) {
         jQuery(el).closest('tr').find('[class*="field-type-"]').hide();
 
-        if (jQuery(el).val() === 'text') {
+        if (jQuery(el).val() == 'text') {
             jQuery(el).closest('tr').find('.field-type-text').show();
             return;
         }
 
-        if (jQuery(el).val() === 'link') {
+        if (jQuery(el).val() == 'link') {
             jQuery(el).closest('tr').find('.field-type-link').show();
             return;
         }
 
-        if (jQuery(el).val() === 'email') {
+        if (jQuery(el).val() == 'email') {
             jQuery(el).closest('tr').find('.field-type-email').show();
             return;
         }
 
-        if (jQuery(el).val() === 'checkbox') {
+        if (jQuery(el).val() == 'checkbox') {
             jQuery(el).closest('tr').find('.field-type-checkbox').show();
             return;
         }
 
-        if (jQuery(el).val() === 'radio') {
+        if (jQuery(el).val() == 'radio') {
             jQuery(el).closest('tr').find('.field-type-radio').show();
             return;
         }
 
-        if (jQuery(el).val() === 'select') {
+        if (jQuery(el).val() == 'select') {
             jQuery(el).closest('tr').find('.field-type-select').show();
             return;
         }
 
-        if (jQuery(el).val() === 'html') {
+        if (jQuery(el).val() == 'html') {
             jQuery(el).closest('tr').find('.field-type-html').show();
-
+            return;
         }
     }
 
@@ -361,31 +354,31 @@ window.addEventListener('load', function () {
 
 
     //Setting: Action after submit
-    actionAfterSubmit(jQuery('#cbn_action_after_submit').val());
+    actionAfterSubmit(jQuery('#oum_action_after_submit').val());
 
-    jQuery('#cbn_action_after_submit').on('change', function () {
+    jQuery('#oum_action_after_submit').on('change', function (e) {
         actionAfterSubmit(this.value);
     });
 
     function actionAfterSubmit(val) {
-        if (val === 'text') {
-            jQuery('#cbn_action_after_submit_text').show();
-            jQuery('#cbn_action_after_submit_redirect').hide();
-        } else if (val === 'redirect') {
-            jQuery('#cbn_action_after_submit_text').hide();
-            jQuery('#cbn_action_after_submit_redirect').show();
+        if (val == 'text') {
+            jQuery('#oum_action_after_submit_text').show();
+            jQuery('#oum_action_after_submit_redirect').hide();
+        } else if (val == 'redirect') {
+            jQuery('#oum_action_after_submit_text').hide();
+            jQuery('#oum_action_after_submit_redirect').show();
         } else {
-            jQuery('#cbn_action_after_submit_text').hide();
-            jQuery('#cbn_action_after_submit_redirect').hide();
+            jQuery('#oum_action_after_submit_text').hide();
+            jQuery('#oum_action_after_submit_redirect').hide();
         }
     }
 
     //Setting: Redirect to registration
-    if (jQuery('#cbn_enable_user_restriction').length > 0) {
+    if (jQuery('#oum_enable_user_restriction').length > 0) {
 
-        redirectToRegistration(jQuery('#cbn_enable_user_restriction').is(':checked'));
+        redirectToRegistration(jQuery('#oum_enable_user_restriction').is(':checked'));
 
-        jQuery('#cbn_enable_user_restriction').on('click', function () {
+        jQuery('#oum_enable_user_restriction').on('click', function (e) {
             redirectToRegistration(this.checked);
         });
 
@@ -399,11 +392,11 @@ window.addEventListener('load', function () {
     }
 
     //Setting: Enable Filterable Marker Categories
-    if (jQuery('#cbn_enable_marker_types').length > 0) {
+    if (jQuery('#oum_enable_marker_types').length > 0) {
 
-        toggleMarkerCategoriesSettings(jQuery('#cbn_enable_marker_types').is(':checked'));
+        toggleMarkerCategoriesSettings(jQuery('#oum_enable_marker_types').is(':checked'));
 
-        jQuery('#cbn_enable_marker_types').on('click', function () {
+        jQuery('#oum_enable_marker_types').on('click', function (e) {
             toggleMarkerCategoriesSettings(this.checked);
         });
 
@@ -419,26 +412,26 @@ window.addEventListener('load', function () {
     }
 
     //Setting: Geoseach Provider
-    if (jQuery('#cbn_geosearch_provider').length > 0) {
+    if (jQuery('#oum_geosearch_provider').length > 0) {
 
-        toggleApiKeySettings(jQuery('#cbn_geosearch_provider').val());
+        toggleApiKeySettings(jQuery('#oum_geosearch_provider').val());
 
-        jQuery('#cbn_geosearch_provider').on('change', function (e) {
+        jQuery('#oum_geosearch_provider').on('change', function (e) {
             toggleApiKeySettings(e.target.value);
         });
 
         function toggleApiKeySettings(val) {
             jQuery('.wrap-geosearch-provider-settings > div').hide();
 
-            if (val === 'geoapify') {
+            if (val == 'geoapify') {
                 // show
                 jQuery('.geosearch-provider-geoapify').show();
             }
-            if (val === 'here') {
+            if (val == 'here') {
                 // show
                 jQuery('.geosearch-provider-here').show();
             }
-            if (val === 'mapbox') {
+            if (val == 'mapbox') {
                 // show
                 jQuery('.geosearch-provider-mapbox').show();
             }
@@ -446,11 +439,11 @@ window.addEventListener('load', function () {
     }
 
     //Setting: Enable Searchbar
-    if (jQuery('#cbn_enable_searchbar').length > 0) {
+    if (jQuery('#oum_enable_searchbar').length > 0) {
 
-        toggleSearchbarSettings(jQuery('#cbn_enable_searchbar').is(':checked'));
+        toggleSearchbarSettings(jQuery('#oum_enable_searchbar').is(':checked'));
 
-        jQuery('#cbn_enable_searchbar').on('click', function () {
+        jQuery('#oum_enable_searchbar').on('click', function (e) {
             toggleSearchbarSettings(this.checked);
         });
 

@@ -1,18 +1,13 @@
-/* jshint esversion: 6 */
-/* jshint browser: true, devel: true */
-/* global jQuery, ajaxurl, wp, console */
-
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize Masonry for each gallery
-    "use strict";
-    const galleries = document.querySelectorAll('.Compass-image-gallery');
+    const galleries = document.querySelectorAll('.open-user-map-image-gallery');
 
     galleries.forEach(function (gallery) {
         // Get all items except pagination
         const container = document.createElement('div');
-        container.className = 'cbn-gallery-items-container';
-        const items = gallery.querySelectorAll('.cbn-gallery-item');
-        const pagination = gallery.querySelector('.cbn-gallery-pagination');
+        container.className = 'oum-gallery-items-container';
+        const items = gallery.querySelectorAll('.oum-gallery-item');
+        const pagination = gallery.querySelector('.oum-gallery-pagination');
 
         // Move items to container
         items.forEach(item => container.appendChild(item));
@@ -20,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Initialize Masonry with options
         const masonry = new Masonry(container, {
-            itemSelector: '.cbn-gallery-item',
-            columnWidth: '.cbn-gallery-item',
+            itemSelector: '.oum-gallery-item',
+            columnWidth: '.oum-gallery-item',
             percentPosition: true,
             gutter: 20,
             transitionDuration: 0
