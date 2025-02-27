@@ -20,17 +20,17 @@ class LocationControl extends BaseController {
 	 */
 	public function register(): void {
 		// CPT: Location
-		add_action( 'init', array( $this, 'locationcpt' ) );
-		add_action( 'admin_init', array( $this, 'cbncapabilities' ) );
-		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
-		add_action( 'save_post', array( $this, 'save_fields' ) );
-		add_action( 'manage_cbn-location_posts_columns', array( $this, 'set_custom_location_columns' ) );
-		add_action( 'manage_cbn-location_posts_custom_column', array( $this, 'set_custom_location_columns_data' ), 10, 2 );
-		add_action( 'pre_get_posts', array( $this, 'custom_search_cbn_location' ) );
-		add_action( 'admin_menu', array( $this, 'add_pending_counter_to_menu' ) );
+		add_action( 'init', [$this, 'locationcpt']);
+		add_action( 'admin_init', [$this, 'cbncapabilities']);
+		add_action( 'add_meta_boxes', [$this, 'add_meta_box']);
+		add_action( 'save_post', [$this, 'save_fields']);
+		add_action( 'manage_cbn-location_posts_columns', [$this, 'set_custom_location_columns']);
+		add_action( 'manage_cbn-location_posts_custom_column', [$this, 'set_custom_location_columns_data'], 10, 2 );
+		add_action( 'pre_get_posts', [$this, 'custom_search_cbn_location']);
+		add_action( 'admin_menu', [$this, 'add_pending_counter_to_menu']);
 
-		add_filter( 'post_thumbnail_html', array( $this, 'default_location_header' ), 10, 5 );
-		add_filter( 'the_content', array( $this, 'default_location_content' ) );
+		add_filter( 'post_thumbnail_html', [$this, 'default_location_header'], 10, 5 );
+		add_filter( 'the_content', [$this, 'default_location_content']);
 	}
 
 	/**
@@ -38,7 +38,7 @@ class LocationControl extends BaseController {
 	 */
 
 	public static function locationcpt(): void {
-		$labels = array(
+		$labels = [
 			'name'               => __( 'Locations', 'compass' ),
 			'singular_name'      => __( 'Location', 'compass' ),
 			'add_new'            => __( 'Add new Location', 'compass' ),
@@ -52,8 +52,8 @@ class LocationControl extends BaseController {
 			'not_found_in_trash' => __( 'No Location in trash', 'compass' ),
 			'parent_item_colon'  => '',
 			'menu_name'          => __( 'compass', 'compass' ),
-		);
-		$arges  = array(
+        ];
+		$arges  = [
 			'labels'              => $labels,
 			'capability_type'     => 'cbn-location',
 			'map_meta_cap'        => true,
@@ -66,15 +66,15 @@ class LocationControl extends BaseController {
 			'has_archive'         => false,
 			'menu_position'       => 20,
 			'menu_icon'           => 'dashicons-location',
-			'supports'            => array( 'title', 'author', 'thumbnail', 'excerpt', 'revisions', 'trash' ),
-		);
+			'supports'            => ['title', 'author', 'thumbnail', 'excerpt', 'revisions', 'trash'],
+        ];
 
 		//enable single pages
 		if ( get_option( 'cbn_enable_single_page' ) ) {
 			$arges['public']             = true;
 			$arges['publicly_queryable'] = true;
 			$arges['show_in_nav_menus']  = true;
-			$arges['supports']           = array( 'title', 'author', 'editor', 'comments', 'thumbnail', 'excerpt', 'revisions', 'trash' );
+			$arges['supports']           = ['title', 'author', 'editor', 'comments', 'thumbnail', 'excerpt', 'revisions', 'trash'];
 			$arges['has_archive']        = true;
 			$arges['show_in_rest']       = true;
 		}
@@ -87,7 +87,7 @@ class LocationControl extends BaseController {
 	 */
 	public function cbncapabilities(): void {
 		// Administrator, Editor
-		$roless = array( 'editor', 'administrator' );
+		$roless = ['editor', 'administrator'];
 		foreach ( $roless as $the_role ) {
 			$roles = get_role( $the_role );
 
@@ -139,7 +139,7 @@ class LocationControl extends BaseController {
 		add_meta_box(
 			'location_customfields',
 			__( 'Compass Location Settings', 'compass' ),
-			array( $this, 'rendercfbox' ),
+			[$this, 'rendercfbox'],
 			'cbn-location',
 			'normal',
 			'high'
@@ -167,7 +167,8 @@ class LocationControl extends BaseController {
 
 		$image     = get_post_meta( $post->ID, '_cbn_location_image', true );
 		$has_image = ( isset( $image ) && $image != '' ) ? 'has-image' : '';
-		$image_tag = ( $has_image ) ? '<img src="' . esc_attr( $image ) . '" style="width: 100%;">' : '';
+
+		$image_tag = '<img class="skip-lazy" src="' . plugin_dir_url(__FILE__) . '../../assets/images/' . esc_attr( $image_filename ) . '" alt="' . esc_attr( $location['name'] ) . '">';
 
 		$audio     = get_post_meta( $post->ID, '_cbn_location_audio', true );
 		$has_audio = ( isset( $audio ) && $audio != '' ) ? 'has-audio' : '';
@@ -192,7 +193,7 @@ class LocationControl extends BaseController {
 	/**
 	 * Save Location Fields (Backend)
 	 */
-	public static function save_fields( $post_id, $fields = array() ) {
+	public static function save_fields( $post_id, $fields = []) {
 		$location_data = $_REQUEST;
 
 		// Set data source ($_REQUEST or $fields)
@@ -211,7 +212,7 @@ class LocationControl extends BaseController {
 			$images = explode( '|', $location_data['cbn_location_image'] );
 
 			// Validate image URLs
-			$valid_images = array();
+			$valid_images = [];
 			foreach ( $images as $image_url ) {
 				if ( ! empty( $image_url ) && ! str_contains( $image_url, '|' ) ) {
 					$valid_images[] = esc_url_raw( $image_url );
@@ -236,7 +237,7 @@ class LocationControl extends BaseController {
 		}
 
 		// Set post thumbnail and excerpt when saving inline (Quick Edit) and exit
-		if ( isset( $location_data['action'] ) && in_array( $location_data['action'], array( 'edit', 'inline-save' ) ) ) {
+		if ( isset( $location_data['action'] ) && in_array( $location_data['action'], ['edit', 'inline-save']) ) {
 
 			// Dont save if WordPress just auto-saves
 			if ( defined( 'DOING AUTOSAVE' ) && DOING_AUTOSAVE ) {
@@ -271,10 +272,10 @@ class LocationControl extends BaseController {
 						$text .= '...';
 					}
 
-					$post = array(
+					$post = [
 						'ID'           => $post_id,
 						'post_excerpt' => sanitize_text_field( $text ),
-					);
+                    ];
 					wp_update_post( $post );
 				}
 			}
@@ -312,7 +313,7 @@ class LocationControl extends BaseController {
 
 		$lng_validated = isset( $location_data['cbn_location_lng'] ) ? floatval( str_replace( ',', '.', sanitize_text_field( $location_data['cbn_location_lng'] ) ) ) : '';
 
-		$data = array(
+		$data = [
 			'address'      => isset( $location_data['cbn_location_address'] ) ? sanitize_text_field( $location_data['cbn_location_address'] ) : '',
 			'lat'          => $lat_validated,
 			'lng'          => $lng_validated,
@@ -320,7 +321,7 @@ class LocationControl extends BaseController {
 			'author_name'  => isset( $location_data['cbn_location_author_name'] ) ? sanitize_text_field( $location_data['cbn_location_author_name'] ) : '',
 			'author_email' => isset( $location_data['cbn_location_author_email'] ) ? sanitize_text_field( $location_data['cbn_location_author_email'] ) : '',
 			'video'        => isset( $location_data['cbn_location_video'] ) ? sanitize_text_field( $location_data['cbn_location_video'] ) : '',
-		);
+        ];
 
 		if ( isset( $location_data['cbn_location_notification'] ) ) {
 			$data['notification'] = sanitize_text_field( $location_data['cbn_location_notification'] );
@@ -357,10 +358,10 @@ class LocationControl extends BaseController {
 					$text .= '...';
 				}
 
-				$post = array(
+				$post = [
 					'ID'           => $post_id,
 					'post_excerpt' => sanitize_text_field( $text ),
-				);
+                ];
 				wp_update_post( $post );
 			}
 		}
@@ -381,7 +382,7 @@ class LocationControl extends BaseController {
 		$date       = $columns['date'] ?? '';
 
 		// Remove all columns
-		$columns = array();
+		$columns = [];
 
 		// Add columns in desired order
 		if ( $cb ) {
@@ -531,18 +532,18 @@ class LocationControl extends BaseController {
 		global $menu;
 		$count = count(
 			get_posts(
-				array(
+				[
 					'post_type'      => 'cbn-location',
 					'post_status'    => 'pending',
 					'posts_per_page' => -1,
 					'fields'         => 'ids',
-				)
+                ]
 			)
 		);
 
 		$menu_item = wp_list_filter(
 			$menu,
-			array( 2 => 'edit.php?post_type=cbn-location' ) // 2 is the position of an array item which contains URL, it will always be 2!
+			[2 => 'edit.php?post_type=cbn-location'] // 2 is the position of an array item which contains URL, it will always be 2!
 		);
 
 		if ( ! empty( $menu_item ) && $count >= 1 ) {
@@ -557,12 +558,12 @@ class LocationControl extends BaseController {
 	 */
 	public function get_location_value( $attr, $post_id, $raw = false ) {
 		$location         = get_post_meta( $post_id, '_cbn_location_key', true );
-		$custom_field_ids = get_option( 'cbn_custom_fields', array() ); // get all available custom fields
+		$custom_field_ids = get_option( 'cbn_custom_fields', []); // get all available custom fields
 		get_terms(
-			array(
+			[
 				'taxonomy'   => 'cbn-type',
 				'hide_empty' => false,
-			)
+            ]
 		); // get all available types
 		$value = '';
 
@@ -582,8 +583,8 @@ class LocationControl extends BaseController {
 
 				if ( count( $images ) > 1 && ! $raw ) {
 					// Enqueue carousel script and styles
-					wp_enqueue_style( 'cbn_frontend_css', plugin_dir_url( dirname( __DIR__, 1 ) ) . 'assets/frontend.css', array(), $this->plugin_version );
-					wp_enqueue_script( 'cbn_frontend_carousel_js', plugin_dir_url( dirname( __DIR__, 1 ) ) . 'src/js/frontend-carousel.js', array(), $this->plugin_version );
+					wp_enqueue_style( 'cbn_frontend_css', plugin_dir_url( dirname( __DIR__, 1 ) ) . 'assets/frontend.css', [], $this->plugin_version );
+					wp_enqueue_script( 'cbn_frontend_carousel_js', plugin_dir_url( dirname( __DIR__, 1 ) ) . 'src/js/frontend-carousel.js', [], $this->plugin_version , true);
 
 					// Multiple images - use carousel
 					$value  = '<div class="cbn-carousel">';
@@ -593,7 +594,7 @@ class LocationControl extends BaseController {
 						if ( ! empty( $image_url ) ) {
 							$active_class = ( $index === 0 ) ? ' active' : '';
 							$value       .= '<div class="cbn-carousel-item' . $active_class . '">';
-							$value       .= '<img class="skip-lazy" src="' . esc_url_raw( $image_url ) . '">';
+							$value       .= '<?php echo wp_get_attachment_image( $image_id, "full", false, ["class" => "skip-lazy", "alt" => esc_attr($location['name'])] ); ?>class="skip-lazy" src="' . esc_url_raw( $image_url ) . '">';
 							$value       .= '</div>';
 						}
 					}
@@ -603,7 +604,7 @@ class LocationControl extends BaseController {
 				} else {
 					// Single image or raw output
 					if ( ! $raw ) {
-						$value = '<img src="' . esc_attr( $images[0] ) . '">';
+						$value = '<?php echo wp_get_attachment_image( $image_id, "full", false, ["class" => "skip-lazy", "alt" => esc_attr($location['name'])] ); ?>src="' . esc_attr( $images[0] ) . '">';
 					} else {
 						$value = esc_attr( $image );
 					}

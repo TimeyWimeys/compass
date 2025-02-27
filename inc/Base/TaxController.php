@@ -98,7 +98,7 @@ class TaxController extends BaseController {
 		// render view
 		require_once cbn_get_template( 'page-backend-add-type.php' );
 
-		wp_enqueue_script( 'cbn_backend_type_js', $this->plugin_url . 'src/js/backend-type.js', array( 'wp-polyfill' ), $this->plugin_version );
+		wp_enqueue_script( 'cbn_backend_type_js', $this->plugin_url . 'src/js/backend-type.js', array( 'wp-polyfill' ), $this->plugin_version , true);
 	}
 
 	/**
@@ -110,7 +110,7 @@ class TaxController extends BaseController {
 		// render view
 		require_once cbn_get_template( 'page-backend-edit-type.php' );
 
-		wp_enqueue_script( 'cbn_backend_type_js', $this->plugin_url . 'src/js/backend-type.js', array( 'wp-polyfill' ), $this->plugin_version );
+		wp_enqueue_script( 'cbn_backend_type_js', $this->plugin_url . 'src/js/backend-type.js', array( 'wp-polyfill' ), $this->plugin_version , true);
 	}
 
 	/**

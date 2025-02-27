@@ -202,7 +202,7 @@ endif;
 					if ( ! empty( $image_url ) ) {
 						$active_class = ( $index === 0 ) ? ' active' : '';
 						$media_tag   .= '<div class="cbn-carousel-item' . $active_class . '">';
-						$media_tag   .= '<img class="skip-lazy" src="' . esc_url_raw( $image_url ) . '" alt="' . esc_attr( $location['name'] ) . '">';
+						$media_tag   .= '<?php echo wp_get_attachment_image( $image_id, "full", false, ["class" => "skip-lazy", "alt" => esc_attr($location['name'])] ); ?>' . esc_url_raw( $image_url ) . '" alt="' . esc_attr( $location['name'] ) . '">';
 						$media_tag   .= '</div>';
 					}
 				}
@@ -211,7 +211,7 @@ endif;
 				$media_tag .= '</div>';
 			} else {
 				// Single image - use regular image display
-				$media_tag = '<div class="cbn_location_image"><img class="skip-lazy" src="' . esc_url_raw( $location['image'] ) . '" alt=""></div>';
+				$media_tag = '<div class="cbn_location_image"><?php echo wp_get_attachment_image( $image_id, "full", false, ["class" => "skip-lazy", "alt" => esc_attr($location['name'])] ); ?>' . esc_url_raw( $location['image'] ) . '" alt=""></div>';
 			}
 		}
 
