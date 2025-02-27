@@ -120,23 +120,6 @@
 
     <tr style="vertical-align: top;">
         <th scope="row">
-            <?php echo __('Audio', 'open-user-map'); ?>
-        </th>
-        <td>
-            <a href="#"
-               class="oum_upload_audio_button button button-secondary"><?php echo __('Upload Audio', 'open-user-map'); ?></a>
-            <input type="hidden" id="oum_location_audio" name="oum_location_audio"
-                   value="<?php echo esc_attr($audio); ?>">
-            <br><br>
-            <div id="oum_location_audio_preview" class="<?php echo $has_audio; ?>">
-                <?php echo $audio_tag; ?>
-                <div onclick="oumRemoveAudioUpload()" class="remove-upload">&times;</div>
-            </div>
-        </td>
-    </tr>
-
-    <tr style="vertical-align: top;">
-        <th scope="row">
             <?php echo __('Description', 'open-user-map'); ?>
         </th>
         <td>

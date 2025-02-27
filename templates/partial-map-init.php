@@ -245,7 +245,7 @@ $all_meta = $wpdb->get_results($wpdb->prepare(
     "SELECT post_id, meta_key, meta_value 
     FROM $wpdb->postmeta 
     WHERE post_id IN (" . implode(',', array_fill(0, count($post_ids), '%d')) . ")
-    AND meta_key IN ('_oum_location_key', '_oum_location_image', '_oum_location_audio')",
+    AND meta_key IN ('_oum_location_key', '_oum_location_image')",
     $post_ids
 ));
 
@@ -310,13 +310,6 @@ foreach ($posts as $post) {
         // Convert relative path to absolute URL if needed
         return (strpos($url, 'http') !== 0) ? site_url() . $url : $url;
     }, $images);
-
-    $audio = isset($indexed_meta[$post_id]['_oum_location_audio']) ?
-        $indexed_meta[$post_id]['_oum_location_audio'] : '';
-
-    // Convert audio to absolute URL if needed
-    $absolute_audio = (isset($audio) && $audio != '' && strpos($audio, 'http') !== 0) ?
-        site_url() . $audio : $audio;
 
     // Optimized custom fields processing
     $custom_fields = [];
@@ -391,7 +384,6 @@ foreach ($posts as $post) {
         'lng' => $location_meta['lng'],
         'text' => $text,
         'images' => $absolute_images,
-        'audio' => $absolute_audio,
         'video' => $video,
         'icon' => $icon,
         'custom_fields' => $custom_fields,

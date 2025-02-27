@@ -250,81 +250,45 @@
                                         $selected = ($marker_icon == $val) ? 'checked' : '';
                                         echo '<label class="' . $selected . '"><div class="marker_icon_preview" data-style="' . esc_attr($val) . '"></div><input type="radio" name="oum_marker_icon" ' . $selected . ' value="' . esc_attr($val) . '"></label>';
                                     }
-
                                     ?>
+                                    <?php
+                                    $marker_user_icon = get_option('oum_marker_user_icon');
+                                    $custom_items = $this->pro_marker_icons;
 
-                                    <?php if (true): ?>
-                                        <?php if (true): ?>
+                                    foreach ($custom_items as $val) {
+                                        $selected = ($marker_icon == $val) ? 'checked' : '';
+                                        $user_icon_style = ($marker_user_icon) ? 'style="background-image: url(' . esc_attr($marker_user_icon) . ')"' : '';
 
-                                            <?php
-                                            //pro marker icons
-                                            $marker_user_icon = get_option('oum_marker_user_icon');
-                                            $pro_items = $this->pro_marker_icons;
-
-                                            foreach ($pro_items as $val) {
-                                                $selected = ($marker_icon == $val) ? 'checked' : '';
-                                                $user_icon_style = ($marker_user_icon) ? 'style="background-image: url(' . esc_attr($marker_user_icon) . ')"' : '';
-
-                                                echo '<label class="' . $selected . ' label_marker_user_icon"><div id="oum_marker_user_icon_preview" class="marker_icon_preview" data-style="' . esc_attr($val) . '" ' . $user_icon_style . '></div><input type="radio" name="oum_marker_icon" ' . $selected . ' value="' . esc_attr($val) . '">';
-
-                                                echo "<div class='icon_upload'><a href='#' class='oum_upload_icon_button button button-secondary'>" . __('Upload Icon', 'open-user-map') . "</a><p class='description'>PNG, max. 100px</p><input type='hidden' id='oum_marker_user_icon' name='oum_marker_user_icon' value='" . esc_attr($marker_user_icon) . "'></div>";
-
-                                                echo "</label>";
-                                            }
-                                            ?>
-
-                                        <?php endif; ?>
-                                    <?php endif; ?>
-
+                                        echo '<label class="' . $selected . ' label_marker_user_icon"><div id="oum_marker_user_icon_preview" class="marker_icon_preview" data-style="' . esc_attr($val) . '" ' . $user_icon_style . '></div><input type="radio" name="oum_marker_icon" ' . $selected . ' value="' . esc_attr($val) . '">';
+                                        echo "<div class='icon_upload'><a href='#' class='oum_upload_icon_button button button-secondary'>" . __('Upload Icon', 'open-user-map') . "</a><p class='description'>PNG, max. 100px</p><input type='hidden' id='oum_marker_user_icon' name='oum_marker_user_icon' value='" . esc_attr($marker_user_icon) . "'></div>";
+                                        echo "</label>";
+                                    }
+                                    ?>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="vertical-align: top;">
+                            <?php
+                            $oum_ui_color = get_option('oum_ui_color') ? get_option('oum_ui_color') : 'rgba(40, 127, 214, 1)'; // Standaard RGBA
+                            ?>
+                            <th scope="row">
+                                <?php echo __('UI Elements color', 'open-user-map'); ?>
+                            </th>
+                            <td>
+                                <div id="oum_ui_color_wrap">
+                                    <label>
+                                        <input type="text" class="oum_colorpicker_alpha" id="oum_ui_color" name="oum_ui_color"
+                                               value="<?php echo esc_attr($oum_ui_color); ?>">
+                                    </label>
+                                    <br>
+                                    <strong><?php echo __('RGBA Preview:', 'open-user-map'); ?></strong>
+                                    <div id="oum_ui_rgba_preview"
+                                         style="width: 50px; height: 20px; border: 1px solid #000; background-color: <?php echo esc_attr($oum_ui_color); ?>;">
+                                    </div>
                                 </div>
                             </td>
                         </tr>
 
-                        <?php if (true): ?>
-                            <?php if (true): ?>
-
-                                <tr style="vertical-align: top;">
-                                    <?php
-                                    $oum_ui_color = get_option('oum_ui_color') ? get_option('oum_ui_color') : $this->oum_ui_color_default;
-                                    ?>
-                                    <th scope="row">
-                                        <?php echo __('UI Elements color', 'open-user-map'); ?>
-                                    </th>
-                                    <td>
-                                        <div id="oum_ui_color_wrap">
-                                            <label>
-                                                <input type="text" class="oum_colorpicker" name="oum_ui_color"
-                                                       value="<?php echo esc_attr($oum_ui_color); ?>"
-                                                       placeholder="<?php echo esc_attr($oum_ui_color); ?>">
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            <?php endif; ?>
-                        <?php endif; ?>
-
-                        <?php if (true): ?>
-
-                            <tr style="vertical-align: top;" class="oum-gopro-tr">
-                                <?php
-                                $oum_ui_color = $this->oum_ui_color_default;
-                                ?>
-                                <th scope="row">
-                                    <?php echo __('UI Elements color', 'open-user-map'); ?>
-                                </th>
-                                <td>
-                                    <div id="oum_ui_color_wrap">
-                                        <label>
-                                            <input disabled type="text" class="oum_colorpicker"
-                                                   value="<?php echo esc_attr($oum_ui_color); ?>"
-                                                   placeholder="<?php echo esc_attr($oum_ui_color); ?>">
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-
-                        <?php endif; ?>
 
                         <tr style="vertical-align: top;">
                             <th scope="row">
@@ -387,7 +351,8 @@
                                 <div class="form-field geo-coordinates-wrap">
                                     <div class="map-wrap">
                                         <div id="mapGetInitial"
-                                             class="leaflet-map map-style_<?php echo esc_attr($map_style); ?>"></div>
+                                             class="leaflet-map map-style_<?php echo esc_attr($map_style); ?>">
+                                        </div>
                                     </div>
                                     <div class="input-wrap">
                                         <div class="latlng-wrap">
@@ -426,12 +391,10 @@
                                         </div>
 
                                         <div class="additional-map-settings">
-
                                             <input class="oum-switch" type="checkbox" id="oum_enable_fixed_map_bounds"
                                                    name="oum_enable_fixed_map_bounds" <?php echo ($oum_enable_fixed_map_bounds == 'on') ? 'checked' : ''; ?>>
                                             <label for="oum_enable_fixed_map_bounds"><?php echo __('Keep map focus in fixed position', 'open-user-map'); ?></label><br>
                                             <span class="description"><?php echo __('If enabled, the visible map will try to stay in the boundaries. (Initial Map View).', 'open-user-map'); ?><?php echo __('This does not work when using Custom Map Positions (e.g. Regions).', 'open-user-map'); ?></span>
-
                                         </div>
                                     </div>
 
@@ -449,14 +412,11 @@
                                         const oum_geosearch_provider_mapbox_key = `<?php echo get_option('oum_geosearch_provider_mapbox_key', ''); ?>`;
                                         const oum_searchaddress_label = `<?php echo esc_attr($oum_searchaddress_label); ?>`;
                                     </script>
-
                                     <?php
                                     // load map base scripts
                                     $this->include_map_scripts();
-
                                     wp_enqueue_script('oum_backend_settings_js', $this->plugin_url . 'src/js/backend-settings.js', array('oum_leaflet_providers_js', 'oum_leaflet_markercluster_js', 'oum_leaflet_subgroups_js', 'oum_leaflet_geosearch_js', 'oum_leaflet_locate_js', 'oum_leaflet_fullscreen_js', 'oum_leaflet_search_js', 'oum_leaflet_gesture_js', 'wp-i18n', 'oum_global_leaflet_js'), $this->plugin_version);
                                     ?>
-
                                 </div>
                             </td>
                         </tr>
@@ -484,101 +444,88 @@
                                 <label for="oum_enable_scrollwheel_zoom_map"></label><br><br>
                             </td>
                         </tr>
+                        <tr style="vertical-align: top;">
+                            <th scope="row">
+                                <?php echo __('Geosearch Provider', 'open-user-map'); ?>
+                            </th>
+                            <td>
+                                <label for="oum_geosearch_provider"></label>
+                                <select name="oum_geosearch_provider" id="oum_geosearch_provider">
+                                    <?php
+                                    $oum_geosearch_provider = get_option('oum_geosearch_provider', 'osm');
+                                    $available_geosearch_providers = array_merge($this->oum_geosearch_provider, $this->pro_oum_geosearch_provider);
 
-                        <?php if (true): ?>
-                            <?php if (true): ?>
+                                    foreach ($available_geosearch_providers as $val => $label) {
+                                        $selected = ($oum_geosearch_provider == $val) ? 'selected' : '';
+                                        echo '<option value="' . esc_attr($val) . '" ' . $selected . '>' . esc_html($label) . '</option>';
+                                    }
+                                    ?>
+                                </select><br><br>
+                                <div class="wrap-geosearch-provider-settings">
+                                    <?php
+                                    $providers = [
+                                        'geoapify' => [
+                                            'label' => __('Geoapify API Key:', 'open-user-map'),
+                                            'option' => 'oum_geosearch_provider_geoapify_key',
+                                            'url' => 'https://www.geoapify.com/get-started-with-maps-api',
+                                            'description' => __('You can get a Geoapify API key <a href="%s">here</a>. It is free to use with up to 3000 requests per day. Please attribute Geoapify service if you use their free plan.', 'open-user-map')
+                                        ],
+                                        'here' => [
+                                            'label' => __('Here API Key:', 'open-user-map'),
+                                            'option' => 'oum_geosearch_provider_here_key',
+                                            'url' => 'https://developer.here.com/',
+                                            'description' => __('You can get a Here API key <a href="%s">here</a>. It is free to use with up to 30,000 requests per month. Please attribute Here service if you use their free plan.', 'open-user-map')
+                                        ],
+                                        'mapbox' => [
+                                            'label' => __('MapBox API Key:', 'open-user-map'),
+                                            'option' => 'oum_geosearch_provider_mapbox_key',
+                                            'url' => 'https://account.mapbox.com/signup/',
+                                            'description' => __('You can get a MapBox API key <a href="%s">here</a>. It is free to use with up to 100,000 geocoding requests per month. Please attribute MapBox service if you use their free plan.', 'open-user-map')
+                                        ]
+                                    ];
 
-                                <tr style="vertical-align: top;">
-                                    <th scope="row">
-                                        <?php echo __('Geosearch Provider', 'open-user-map'); ?>
-                                    </th>
-                                    <td>
-                                        <label for="oum_geosearch_provider"></label><select
-                                                name="oum_geosearch_provider" id="oum_geosearch_provider">
-                                            <?php
-                                            $oum_geosearch_provider = get_option('oum_geosearch_provider') ? get_option('oum_geosearch_provider') : 'osm';
-                                            $oum_geosearch_provider_geoapify_key = get_option('oum_geosearch_provider_geoapify_key', '');
-                                            $oum_geosearch_provider_here_key = get_option('oum_geosearch_provider_here_key', '');
-                                            $oum_geosearch_provider_mapbox_key = get_option('oum_geosearch_provider_mapbox_key', '');
-
-                                            $available_geosearch_providers = $this->oum_geosearch_provider;
-
-                                            // add PRO providers
-                                            $available_geosearch_providers = array_merge($available_geosearch_providers, $this->pro_oum_geosearch_provider);
-
-                                            foreach ($available_geosearch_providers as $val => $label) {
-                                                $selected = ($oum_geosearch_provider == $val) ? 'selected' : '';
-                                                echo '<option value="' . esc_textarea($val) . '" ' . $selected . '>' . esc_textarea($label) . '</option>';
-                                            }
-                                            ?>
-                                        </select><br><br>
-                                        <div class="wrap-geosearch-provider-settings">
-                                            <div class="geosearch-provider-geoapify">
-                                                /* translators: %s is the URL to the "GeoApify API key" page */
-                                                <strong><?php echo __('Geoapify API Key:', 'open-user-map'); ?></strong><br>
-                                                <label for="oum_geosearch_provider_geoapify_key"></label><input
-                                                        class="regular-text" type="text"
-                                                        name="oum_geosearch_provider_geoapify_key"
-                                                        id="oum_geosearch_provider_geoapify_key"
-                                                        value="<?php echo esc_attr($oum_geosearch_provider_geoapify_key); ?>">
-                                                <br><br>
-                                                <span class="description"><?php echo sprintf(__('You can get a Geoapify API key <a href="%s">here</a>. It is free to use with up to 3000 requests per day. Please attribute Geoapify service if you use their free plan.', 'open-user-map'), 'https://www.geoapify.com/get-started-with-maps-api'); ?></span><br>
-                                            </div>
-                                            <div class="geosearch-provider-here">
-                                                /* translators: %s is the URL to the "Here API key" page */
-                                                <strong><?php echo __('Here API Key:', 'open-user-map'); ?></strong><br>
-                                                <label for="oum_geosearch_provider_here_key"></label><input
-                                                        class="regular-text" type="text"
-                                                        name="oum_geosearch_provider_here_key"
-                                                        id="oum_geosearch_provider_here_key"
-                                                        value="<?php echo esc_attr($oum_geosearch_provider_here_key); ?>">
-                                                <br><br>
-                                                <span class="description"><?php echo sprintf(__('You can get a Here API key <a href="%s">here</a>. It is free to use with up to 30,000 requests per month. Please attribute Here service if you use their free plan.', 'open-user-map'), 'https://developer.here.com/'); ?></span><br>
-                                            </div>
-                                            <div class="geosearch-provider-mapbox">
-                                                /* translators: %s is the URL to the "MapBox API key" page */
-                                                <strong><?php echo __('MapBox API Key:', 'open-user-map'); ?></strong><br>
-                                                <label for="oum_geosearch_provider_mapbox_key"></label><input
-                                                        class="regular-text" type="text"
-                                                        name="oum_geosearch_provider_mapbox_key"
-                                                        id="oum_geosearch_provider_mapbox_key"
-                                                        value="<?php echo esc_attr($oum_geosearch_provider_mapbox_key); ?>">
-                                                <br><br>
-                                                <span class="description"><?php echo sprintf(__('You can get a MapBox API key <a href="%s">here</a>. It is free to use with up to 100,000 geocoding requests per month. Please attribute MapBox service if you use their free plan.', 'open-user-map'), 'https://account.mapbox.com/signup/'); ?></span><br>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            <?php endif; ?>
-                        <?php endif; ?>
-
-                        <?php if (true): ?>
-
-                            <tr style="vertical-align: top;">
-                                <th scope="row">
-                                    <?php echo __('Geosearch Provider', 'open-user-map'); ?>
-                                </th>
-                                <td>
-                                    <label for="oum_geosearch_provider"></label><select name="oum_geosearch_provider"
-                                                                                        id="oum_geosearch_provider">
-                                        <?php
-                                        $available_geosearch_providers = $this->oum_geosearch_provider;
-                                        $not_available_geosearch_providers = $this->pro_oum_geosearch_provider;
-
-                                        foreach ($available_geosearch_providers as $val => $label) {
-                                            echo '<option value="' . esc_textarea($val) . '" selected>' . esc_textarea($label) . '</option>';
-                                        }
-
-                                        foreach ($not_available_geosearch_providers as $val => $label) {
-                                            echo '<option disabled>' . esc_textarea($label) . '</option>';
-                                        }
+                                    foreach ($providers as $key => $data) :
+                                        $api_key = get_option($data['option'], '');
                                         ?>
-                                    </select>
-                                </td>
-                            </tr>
+                                        <div class="geosearch-provider-<?php echo esc_attr($key); ?>">
+                                            /* translators: %s is the URL to the "<?php echo esc_html($key); ?> API key"
+                                            page */
+                                            <strong><?php echo esc_html($data['label']); ?></strong><br>
+                                            <label for="<?php echo esc_attr($data['option']); ?>"></label>
+                                            <input class="regular-text" type="text"
+                                                   name="<?php echo esc_attr($data['option']); ?>"
+                                                   id="<?php echo esc_attr($data['option']); ?>"
+                                                   value="<?php echo esc_attr($api_key); ?>">
+                                            <br><br>
+                                            <span class="description"><?php echo sprintf(esc_html__($data['description'], 'open-user-map'), esc_url($data['url'])); ?></span><br>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </td>
+                        </tr>
 
-                        <?php endif; ?>
+                        <tr style="vertical-align: top;">
+                            <th scope="row">
+                                <?php echo __('Geosearch Provider', 'open-user-map'); ?>
+                            </th>
+                            <td>
+                                <label for="oum_geosearch_provider"></label><select name="oum_geosearch_provider"
+                                                                                    id="oum_geosearch_provider">
+                                    <?php
+                                    $available_geosearch_providers = $this->oum_geosearch_provider;
+                                    $not_available_geosearch_providers = $this->pro_oum_geosearch_provider;
+
+                                    foreach ($available_geosearch_providers as $val => $label) {
+                                        echo '<option value="' . esc_textarea($val) . '" selected>' . esc_textarea($label) . '</option>';
+                                    }
+
+                                    foreach ($not_available_geosearch_providers as $val => $label) {
+                                        echo '<option disabled>' . esc_textarea($label) . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </td>
+                        </tr>
 
                         <tr style="vertical-align: top;">
                             <?php
@@ -592,41 +539,31 @@
                             </td>
                         </tr>
 
-                        <?php if (true): ?>
-                            <?php if (true): ?>
+                        <tr style="vertical-align: top;">
+                            <?php
+                            $oum_enable_currentlocation = get_option('oum_enable_currentlocation');
+                            ?>
+                            <th scope="row">
+                                <?php echo __('"Show me where I am" Button', 'open-user-map'); ?>
+                            </th>
+                            <td>
+                                <input class="oum-switch" type="checkbox" name="oum_enable_currentlocation"
+                                       id="oum_enable_currentlocation" <?php echo ($oum_enable_currentlocation) ? 'checked' : ''; ?>>
+                                <label for="oum_enable_currentlocation"></label><br><br>
+                            </td>
+                        </tr>
 
-                                <tr style="vertical-align: top;">
-                                    <?php
-                                    $oum_enable_currentlocation = get_option('oum_enable_currentlocation');
-                                    ?>
-                                    <th scope="row">
-                                        <?php echo __('"Show me where I am" Button', 'open-user-map'); ?>
-                                    </th>
-                                    <td>
-                                        <input class="oum-switch" type="checkbox" name="oum_enable_currentlocation"
-                                               id="oum_enable_currentlocation" <?php echo ($oum_enable_currentlocation) ? 'checked' : ''; ?>>
-                                        <label for="oum_enable_currentlocation"></label><br><br>
-                                    </td>
-                                </tr>
-
-                            <?php endif; ?>
-                        <?php endif; ?>
-
-                        <?php if (true): ?>
-
-                            <tr style="vertical-align: top;" class="oum-gopro-tr">
-                                <th scope="row">
-                                    <?php echo __('"Show me where I am" Button', 'open-user-map'); ?>
-                                </th>
-                                <td>
-                                    <label>
-                                        <input class="oum-switch" type="checkbox" disabled>
-                                    </label>
-                                    <label></label>
-                                </td>
-                            </tr>
-
-                        <?php endif; ?>
+                        <tr style="vertical-align: top;" class="oum-gopro-tr">
+                            <th scope="row">
+                                <?php echo __('"Show me where I am" Button', 'open-user-map'); ?>
+                            </th>
+                            <td>
+                                <label>
+                                    <input class="oum-switch" type="checkbox" disabled>
+                                </label>
+                                <label></label>
+                            </td>
+                        </tr>
 
                     </table>
                 </div>
@@ -764,26 +701,15 @@
                                                     <td>
                                                         <label>
                                                             <select class="oum-custom-field-fieldtype"
-                                                                    name="oum_custom_fields[<?php echo $index; ?>][fieldtype]">
+                                                                    name="oum_custom_fields[<?php echo esc_attr($index); ?>][fieldtype]">
                                                                 <?php
                                                                 $available_field_types = $this->oum_custom_field_fieldtypes;
-                                                                ?>
-
-                                                                <?php if (true): ?>
-                                                                    <?php if (true): ?>
-
-                                                                        <?php
-                                                                        $available_field_types = array_merge($available_field_types, $this->pro_oum_custom_field_fieldtypes);
-                                                                        ?>
-
-                                                                    <?php endif; ?>
-                                                                <?php endif; ?>
-
-                                                                <?php foreach ($available_field_types as $value => $label): ?>
-                                                                    <?php $selected = (isset($custom_field['fieldtype']) && $custom_field['fieldtype'] == $value) ? 'selected' : ''; ?>
-
-                                                                    <?php echo '<option value="' . esc_textarea($value) . '" ' . $selected . '>' . esc_textarea($label) . '</option>'; ?>
-
+                                                                foreach ($available_field_types as $value => $label):
+                                                                    $selected = (isset($custom_field['fieldtype']) && $custom_field['fieldtype'] == $value) ? 'selected' : '';
+                                                                    ?>
+                                                                    <option value="<?php echo esc_attr($value); ?>" <?php echo esc_attr($selected); ?>>
+                                                                        <?php echo esc_html($label); ?>
+                                                                    </option>
                                                                 <?php endforeach; ?>
                                                             </select>
                                                         </label>
@@ -805,9 +731,9 @@
                                                                     name="oum_custom_fields[<?php echo $index; ?>][uselabelastextoption]" <?php echo isset($custom_field['uselabelastextoption']) ? 'checked' : ''; ?> ><?php echo __('use label as text', 'open-user-map'); ?>
                                                         </label>
                                                         <label>
-<textarea class="regular-text field-type-html"
-          name="oum_custom_fields[<?php echo $index; ?>][html]"
-          placeholder="Enter HTML here"><?php echo isset($custom_field['html']) ? esc_attr($custom_field['html']) : ''; ?></textarea>
+                                                            <textarea class="regular-text field-type-html"
+                                                                      name="oum_custom_fields[<?php echo $index; ?>][html]"
+                                                                      placeholder="Enter HTML here"><?php echo isset($custom_field['html']) ? esc_attr($custom_field['html']) : ''; ?></textarea>
                                                         </label>
                                                     </td>
                                                     <td>
@@ -831,9 +757,7 @@
                                             <?php endforeach; ?>
                                         <?php endif; ?>
                                         </tbody>
-
                                     </table>
-
                                 </div>
                                 <div>
                                     <a href="#" class="oum_add_button button" title="Add field">Add field</a>
@@ -868,8 +792,7 @@
                                                                               name="oum_address_label"
                                                                               id="oum_address_label"
                                                                               placeholder="<?php echo esc_attr($this->oum_address_label_default); ?>"
-                                                                              value="<?php echo esc_attr($oum_address_label); ?>">
-                                <br><br>
+                                                                              value="<?php echo esc_attr($oum_address_label); ?>"><br><br>
                             </td>
                         </tr>
 
@@ -908,8 +831,6 @@
                             <?php
                             $oum_enable_image = get_option('oum_enable_image', 'on');
                             $oum_image_required = get_option('oum_image_required');
-                            $oum_enable_audio = get_option('oum_enable_audio', 'on');
-                            $oum_audio_required = get_option('oum_audio_required');
                             $oum_enable_video = get_option('oum_enable_video', false);
                             $oum_video_required = get_option('oum_video_required');
                             $oum_upload_media_label = get_option('oum_upload_media_label');
@@ -930,63 +851,38 @@
                                     </div>
                                 </div>
                                 <br><br>
-
-                                <?php if (true): ?>
-                                    <?php if (true): ?>
-
-                                        <div class="oum_2cols">
-                                            <div>
-                                                <input class="oum-switch" type="checkbox" name="oum_enable_video"
-                                                       id="oum_enable_video" <?php echo ($oum_enable_video === 'on') ? 'checked' : ''; ?>>
-                                                <label for="oum_enable_video"><?php echo __('Video (YouTube, Vimeo)', 'open-user-map'); ?></label>
-                                            </div>
-                                            <div>
-                                                <input class="oum-switch" type="checkbox" name="oum_video_required"
-                                                       id="oum_video_required" <?php echo ($oum_video_required) ? 'checked' : ''; ?>>
-                                                <label for="oum_video_required"><?php echo __('Required', 'open-user-map'); ?></label>
-                                            </div>
-                                        </div>
-                                        <br><br>
-
-                                    <?php endif; ?>
-                                <?php endif; ?>
-
-                                <?php if (true): ?>
-
-                                    <div class="oum_2cols">
-                                        <div class="oum-gopro-div">
-                                            <label>
-                                                <input class="oum-switch" type="checkbox" disabled>
-                                            </label>
-                                            <label><?php echo __('Video (YouTube, Vimeo)', 'open-user-map'); ?></label>
-                                        </div>
-                                        <div class="oum-gopro-div">
-                                            <label>
-                                                <input class="oum-switch" type="checkbox" disabled>
-                                            </label>
-                                            <label><?php echo __('Required', 'open-user-map'); ?></label>
-                                        </div>
-                                        <div>
-
-                                        </div>
-                                    </div>
-                                    <br><br>
-
-                                <?php endif; ?>
-
                                 <div class="oum_2cols">
                                     <div>
-                                        <input class="oum-switch" type="checkbox" name="oum_enable_audio"
-                                               id="oum_enable_audio" <?php echo ($oum_enable_audio === 'on') ? 'checked' : ''; ?>>
-                                        <label for="oum_enable_audio"><?php echo __('Audio', 'open-user-map'); ?></label>
+                                        <input class="oum-switch" type="checkbox" name="oum_enable_video"
+                                               id="oum_enable_video" <?php echo ($oum_enable_video === 'on') ? 'checked' : ''; ?>>
+                                        <label for="oum_enable_video"><?php echo __('Video (YouTube, Vimeo)', 'open-user-map'); ?></label>
                                     </div>
                                     <div>
-                                        <input class="oum-switch" type="checkbox" name="oum_audio_required"
-                                               id="oum_audio_required" <?php echo ($oum_audio_required) ? 'checked' : ''; ?>>
-                                        <label for="oum_audio_required"><?php echo __('Required', 'open-user-map'); ?></label>
+                                        <input class="oum-switch" type="checkbox" name="oum_video_required"
+                                               id="oum_video_required" <?php echo ($oum_video_required) ? 'checked' : ''; ?>>
+                                        <label for="oum_video_required"><?php echo __('Required', 'open-user-map'); ?></label>
                                     </div>
                                 </div>
                                 <br><br>
+
+                                <div class="oum_2cols">
+                                    <div class="oum-gopro-div">
+                                        <label>
+                                            <input class="oum-switch" type="checkbox" disabled>
+                                        </label>
+                                        <label><?php echo __('Video (YouTube, Vimeo)', 'open-user-map'); ?></label>
+                                    </div>
+                                    <div class="oum-gopro-div">
+                                        <label>
+                                            <input class="oum-switch" type="checkbox" disabled>
+                                        </label>
+                                        <label><?php echo __('Required', 'open-user-map'); ?></label>
+                                    </div>
+                                    <div>
+
+                                    </div>
+                                </div>
+                                <br><br><br><br>
 
                                 <strong><?php echo __('Custom Label:', 'open-user-map'); ?></strong><br>
                                 <label for="oum_upload_media_label"></label><input class="regular-text" type="text"
@@ -998,149 +894,115 @@
                             </td>
                         </tr>
 
-                        <?php if (true): ?>
-                            <?php if (true): ?>
-
-                                <tr style="vertical-align: top;">
-                                    <?php
-                                    $oum_max_image_filesize = get_option('oum_max_image_filesize') ? get_option('oum_max_image_filesize') : 10;
-                                    $oum_max_audio_filesize = get_option('oum_max_audio_filesize') ? get_option('oum_max_audio_filesize') : 10;
-                                    ?>
-                                    <th scope="row">
-                                        /* translators: Information regarding max upload-size for users */
-                                        <?php echo __('Max upload size', 'open-user-map'); ?>
-                                        <br><br>
-                                    </th>
-                                    <td>
-                                        <div class="oum_2cols">
-                                            <div>
-                                                <strong><?php echo __('Image'); ?>:</strong><br>
-                                                <label for="oum_max_image_filesize"></label><input class="small-text"
-                                                                                                   type="number" min="1"
-                                                                                                   name="oum_max_image_filesize"
-                                                                                                   id="oum_max_image_filesize"
-                                                                                                   value="<?php echo esc_attr($oum_max_image_filesize); ?>">MB
-                                            </div>
-                                            <div>
-                                                <strong><?php echo __('Audio'); ?>:</strong><br>
-                                                <label for="oum_max_audio_filesize"></label><input class="small-text"
-                                                                                                   type="number" min="1"
-                                                                                                   name="oum_max_audio_filesize"
-                                                                                                   id="oum_max_audio_filesize"
-                                                                                                   value="<?php echo esc_attr($oum_max_audio_filesize); ?>">MB
-                                            </div>
-                                        </div>
-                                        <br><br>
-                                    </td>
-                                </tr>
-
-                            <?php endif; ?>
-                        <?php endif; ?>
-
-                        <?php if (true): ?>
-
-                            <tr style="vertical-align: top;" class="oum-gopro-tr">
-                                <th scope="row">
-                                    <?php echo __('Max upload size', 'open-user-map'); ?>
-                                </th>
-                                <td>
-                                    <div class="oum_2cols">
-                                        <div>
-                                            <strong><?php echo __('Image'); ?>:</strong><br>
-                                            <label>
-                                                <input disabled class="small-text" type="number" min="1" value="10">
-                                            </label>MB
-                                        </div>
-                                        <div>
-                                            <strong><?php echo __('Audio'); ?>:</strong><br>
-                                            <label>
-                                                <input disabled class="small-text" type="number" min="1" value="10">
-                                            </label>MB
-                                        </div>
+                        <tr style="vertical-align: top;">
+                            <?php
+                            $oum_max_image_filesize = get_option('oum_max_image_filesize') ? get_option('oum_max_image_filesize') : 10;
+                            ?>
+                            <th scope="row">
+                                /* translators: Information regarding max upload-size for users */
+                                <?php echo __('Max upload size', 'open-user-map'); ?>
+                                <br><br>
+                            </th>
+                            <td>
+                                <div class="oum_2cols">
+                                    <div>
+                                        <strong><?php echo __('Image'); ?>:</strong><br>
+                                        <label for="oum_max_image_filesize"></label><input class="small-text"
+                                                                                           type="number" min="1"
+                                                                                           name="oum_max_image_filesize"
+                                                                                           id="oum_max_image_filesize"
+                                                                                           value="<?php echo esc_attr($oum_max_image_filesize); ?>">MB
                                     </div>
-                                    <br><br>
-                                </td>
-                            </tr>
+                                </div>
+                                <br><br>
+                            </td>
+                        </tr>
 
-                        <?php endif; ?>
 
-                        <?php if (true): ?>
-                            <?php if (true): ?>
+                        <tr style="vertical-align: top;" class="oum-gopro-tr">
+                            <th scope="row">
+                                <?php echo __('Max upload size', 'open-user-map'); ?>
+                            </th>
+                            <td>
+                                <div class="oum_2cols">
+                                    <div>
+                                        <strong><?php echo __('Image'); ?>:</strong><br>
+                                        <label>
+                                            <input disabled class="small-text" type="number" min="1" value="10">
+                                        </label>MB
+                                    </div>
+                                </div>
+                                <br><br>
+                            </td>
+                        </tr>
 
-                                <tr style="vertical-align: top;">
-                                    <?php
-                                    $oum_enable_user_notification = get_option('oum_enable_user_notification');
-                                    $oum_user_notification_label = get_option('oum_user_notification_label');
-                                    $oum_user_notification_subject = get_option('oum_user_notification_subject') ? get_option('oum_user_notification_subject') : __('Your location has been approved', 'open-user-map');
-                                    $oum_user_notification_message = get_option('oum_user_notification_message') ? get_option('oum_user_notification_message') : __('Hey %name%! Your location proposal on %website_url% has been published!', 'open-user-map');
-                                    ?>
-                                    <th scope="row">
-                                        <?php echo __('User email notification', 'open-user-map'); ?>
-                                        <br><br>
-                                    </th>
-                                    <td>
-                                        <input class="oum-switch" type="checkbox" id="oum_enable_user_notification"
-                                               name="oum_enable_user_notification" <?php echo ($oum_enable_user_notification == 'on') ? 'checked' : ''; ?>>
-                                        <label for="oum_enable_user_notification"><?php echo __('Enable'); ?></label><br><br>
+                        <tr style="vertical-align: top;">
+                            <?php
+                            $oum_enable_user_notification = get_option('oum_enable_user_notification');
+                            $oum_user_notification_label = get_option('oum_user_notification_label');
+                            $oum_user_notification_subject = get_option('oum_user_notification_subject') ? get_option('oum_user_notification_subject') : __('Your location has been approved', 'open-user-map');
+                            $oum_user_notification_message = get_option('oum_user_notification_message') ? get_option('oum_user_notification_message') : __('Hey %name%! Your location proposal on %website_url% has been published!', 'open-user-map');
+                            ?>
+                            <th scope="row">
+                                <?php echo __('User email notification', 'open-user-map'); ?>
+                                <br><br>
+                            </th>
+                            <td>
+                                <input class="oum-switch" type="checkbox" id="oum_enable_user_notification"
+                                       name="oum_enable_user_notification" <?php echo ($oum_enable_user_notification == 'on') ? 'checked' : ''; ?>>
+                                <label for="oum_enable_user_notification"><?php echo __('Enable'); ?></label><br><br>
 
-                                        <strong><?php echo __('Custom Label:', 'open-user-map'); ?></strong><br>
-                                        <label for="oum_user_notification_label"></label><input class="regular-text"
-                                                                                                type="text"
-                                                                                                name="oum_user_notification_label"
-                                                                                                id="oum_user_notification_label"
-                                                                                                placeholder="<?php echo esc_attr($this->oum_user_notification_label_default); ?>"
-                                                                                                value="<?php echo esc_textarea($oum_user_notification_label); ?>">
-                                        <br><br>
+                                <strong><?php echo __('Custom Label:', 'open-user-map'); ?></strong><br>
+                                <label for="oum_user_notification_label"></label><input class="regular-text"
+                                                                                        type="text"
+                                                                                        name="oum_user_notification_label"
+                                                                                        id="oum_user_notification_label"
+                                                                                        placeholder="<?php echo esc_attr($this->oum_user_notification_label_default); ?>"
+                                                                                        value="<?php echo esc_textarea($oum_user_notification_label); ?>">
+                                <br><br>
 
-                                        <strong><?php echo __('Subject'); ?>:</strong><br>
-                                        <label for="oum_user_notification_subject"></label><input class="regular-text"
-                                                                                                  type="text"
-                                                                                                  name="oum_user_notification_subject"
-                                                                                                  id="oum_user_notification_subject"
-                                                                                                  value="<?php echo esc_textarea($oum_user_notification_subject); ?>"><br><br>
+                                <strong><?php echo __('Subject'); ?>:</strong><br>
+                                <label for="oum_user_notification_subject"></label><input class="regular-text"
+                                                                                          type="text"
+                                                                                          name="oum_user_notification_subject"
+                                                                                          id="oum_user_notification_subject"
+                                                                                          value="<?php echo esc_textarea($oum_user_notification_subject); ?>"><br><br>
 
-                                        <strong><?php echo __('Message'); ?>:</strong><br>
-                                        <label for="oum_user_notification_message"></label><textarea
-                                                class="regular-text" name="oum_user_notification_message"
-                                                id="oum_user_notification_message" rows="8"
-                                                cols="50"><?php echo esc_textarea($oum_user_notification_message); ?></textarea><br>
-                                        <span class="description"><?php echo __('Available tags'); ?>: %name%, %website_url%, %website_name%</span>
-                                        <br><br>
-                                    </td>
-                                </tr>
+                                <strong><?php echo __('Message'); ?>:</strong><br>
+                                <label for="oum_user_notification_message"></label><textarea
+                                        class="regular-text" name="oum_user_notification_message"
+                                        id="oum_user_notification_message" rows="8"
+                                        cols="50"><?php echo esc_textarea($oum_user_notification_message); ?></textarea><br>
+                                <span class="description"><?php echo __('Available tags'); ?>: %name%, %website_url%, %website_name%</span>
+                                <br><br>
+                            </td>
+                        </tr>
 
-                            <?php endif; ?>
-                        <?php endif; ?>
+                        <tr style="vertical-align: top;" class="oum-gopro-tr">
+                            <th scope="row">
+                                <?php echo __('User email notification', 'open-user-map'); ?>
+                            </th>
+                            <td>
+                                <label>
+                                    <input class="oum-switch" type="checkbox" disabled>
+                                </label>
+                                <label></label><br><br>
 
-                        <?php if (true): ?>
+                                <strong><?php echo __('Subject'); ?>:</strong><br>
+                                <label>
+                                    <input disabled class="regular-text" type="text"
+                                           placeholder="<?php echo __('Your location has been approved', 'open-user-map'); ?>">
+                                </label><br><br>
 
-                            <tr style="vertical-align: top;" class="oum-gopro-tr">
-                                <th scope="row">
-                                    <?php echo __('User email notification', 'open-user-map'); ?>
-                                </th>
-                                <td>
-                                    <label>
-                                        <input class="oum-switch" type="checkbox" disabled>
-                                    </label>
-                                    <label></label><br><br>
-
-                                    <strong><?php echo __('Subject'); ?>:</strong><br>
-                                    <label>
-                                        <input disabled class="regular-text" type="text"
-                                               placeholder="<?php echo __('Your location has been approved', 'open-user-map'); ?>">
-                                    </label><br><br>
-
-                                    <strong><?php echo __('Message'); ?>:</strong><br>
-                                    <label>
+                                <strong><?php echo __('Message'); ?>:</strong><br>
+                                <label>
 <textarea disabled class="regular-text" rows="8" cols="50"
           placeholder="<?php echo __('Hey %name%! Your location proposal on %website_url% has been published!', 'open-user-map'); ?>"></textarea>
-                                    </label><br><br>
-                                    <span class="description"><?php echo __('Available tags'); ?>: %name%, %website_url%, %website_name%</span>
-                                    <br><br>
-                                </td>
-                            </tr>
-
-                        <?php endif; ?>
+                                </label><br><br>
+                                <span class="description"><?php echo __('Available tags'); ?>: %name%, %website_url%, %website_name%</span>
+                                <br><br>
+                            </td>
+                        </tr>
 
                         <?php
                         $oum_submit_button_label = get_option('oum_submit_button_label');
@@ -1211,101 +1073,70 @@
 
                 <div id="tab-3" class="tab-pane">
                     <table class="form-table">
-
-                        <?php if (true): ?>
-                            <?php if (true): ?>
-
-                                <tr style="vertical-align: top;">
-                                    <th scope="row"><?php echo __('Searchbar', 'open-user-map'); ?></th>
-                                    <td>
-                                        <?php
-                                        $oum_enable_searchbar = get_option('oum_enable_searchbar', 'on');
-                                        ?>
-                                        <input class="oum-switch" type="checkbox" name="oum_enable_searchbar"
-                                               id="oum_enable_searchbar" <?php echo ($oum_enable_searchbar === 'on') ? 'checked' : ''; ?>>
-                                        <label for="oum_enable_searchbar"></label><br><br>
-                                        <div class="wrap-searchbar-settings">
-                                            <?php
-                                            $oum_searchbar_type = get_option('oum_searchbar_type') ? get_option('oum_searchbar_type') : 'address';
-                                            $items = $this->oum_searchbar_types;
-
-                                            // Add premium searchbar types
-                                            $items = array_merge($items, $this->pro_oum_searchbar_types);
-                                            ?>
-
-                                            <div id="oum_searchbar_type_options">
-                                                <?php foreach ($items as $val => $label):
-                                                    $checked = ($oum_searchbar_type == $val) ? 'checked' : '';
-                                                    ?>
-                                                    <label>
-                                                        <input type="radio" name="oum_searchbar_type"
-                                                               value="<?php echo esc_attr($val); ?>" <?php echo $checked; ?>>
-                                                        <strong><?php echo esc_html($label); ?></strong><?php echo ($val === 'live_filter') ? '&nbsp;&nbsp;' : ''; ?>
-                                                        <br>
-                                                        <?php if ($val === 'address'): ?>
-                                                            <small><?php echo __('Find a specific address – type to see matching suggestions below and locate them on the map.', 'open-user-map'); ?></small>
-                                                        <?php elseif ($val === 'markers'): ?>
-                                                            <small><?php echo __('Search for specific markers and see suggestions below as you type.', 'open-user-map'); ?></small>
-                                                        <?php elseif ($val === 'live_filter'): ?>
-                                                            <small><?php echo __('Filter markers live as you type to instantly refine the map view.', 'open-user-map'); ?></small>
-                                                        <?php endif; ?>
-                                                    </label>
-                                                <?php endforeach; ?>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            <?php endif; ?>
-                        <?php endif; ?>
-
-                        <?php if (true): ?>
-
-                            <tr style="vertical-align: top;">
-                                <th scope="row"><?php echo __('Searchbar', 'open-user-map'); ?></th>
-                                <td>
+                        <tr style="vertical-align: top;">
+                            <th scope="row"><?php echo __('Searchbar', 'open-user-map'); ?></th>
+                            <td>
+                                <?php
+                                $oum_enable_searchbar = get_option('oum_enable_searchbar', 'on');
+                                ?>
+                                <input class="oum-switch" type="checkbox" name="oum_enable_searchbar"
+                                       id="oum_enable_searchbar" <?php echo ($oum_enable_searchbar === 'on') ? 'checked' : ''; ?>>
+                                <label for="oum_enable_searchbar"></label><br><br>
+                                <div class="wrap-searchbar-settings">
                                     <?php
-                                    $oum_enable_searchbar = get_option('oum_enable_searchbar', 'on');
+                                    $oum_searchbar_type = get_option('oum_searchbar_type') ?: 'address';
+                                    $items = $this->oum_searchbar_types; // Bevat nu alle opties, inclusief wat eerder pro was
                                     ?>
-                                    <input class="oum-switch" type="checkbox" name="oum_enable_searchbar"
-                                           id="oum_enable_searchbar" <?php echo ($oum_enable_searchbar === 'on') ? 'checked' : ''; ?>>
-                                    <label for="oum_enable_searchbar"></label><br><br>
-                                    <div class="wrap-searchbar-settings">
-                                        <?php
-                                        $oum_searchbar_type = get_option('oum_searchbar_type') ? get_option('oum_searchbar_type') : 'address';
-                                        $items = $this->oum_searchbar_types;
-                                        ?>
 
-                                        <div id="oum_searchbar_type_options">
-                                            <?php foreach ($items as $val => $label):
-                                                $checked = ($oum_searchbar_type == $val) ? 'checked' : '';
-                                                ?>
-                                                <label>
-                                                    <input type="radio" name="oum_searchbar_type"
-                                                           value="<?php echo esc_attr($val); ?>" <?php echo $checked; ?>>
-                                                    <strong><?php echo esc_html($label); ?></strong><?php echo ($val === 'live_filter') ? '&nbsp;&nbsp;' : ''; ?>
-                                                    <br>
-                                                    <?php if ($val === 'address'): ?>
-                                                        <small><?php echo __('Find a specific address – type to see matching suggestions below and locate them on the map.', 'open-user-map'); ?></small>
-                                                    <?php elseif ($val === 'markers'): ?>
-                                                        <small><?php echo __('Search for specific markers and see suggestions below as you type.', 'open-user-map'); ?></small>
-                                                    <?php elseif ($val === 'live_filter'): ?>
-                                                        <small><?php echo __('Filter markers live as you type to instantly refine the map view.', 'open-user-map'); ?></small>
-                                                    <?php endif; ?>
-                                                </label>
-                                            <?php endforeach; ?>
-                                            <label class="oum-gopro-div">
-                                                <input type="radio" disabled>
-                                                <strong><?php echo __('Live Filter Markers', 'open-user-map'); ?></strong>&nbsp;&nbsp;<span
-                                                        class="oum-pro">PRO</span><br>
-                                                <small><?php echo __('Filter markers live as you type to instantly refine the map view.', 'open-user-map'); ?></small>
+                                    <div id="oum_searchbar_type_options">
+                                        <?php foreach ($items as $val => $label):
+                                            $checked = ($oum_searchbar_type == $val) ? 'checked' : '';
+                                            ?>
+                                            <label>
+                                                <input type="radio" name="oum_searchbar_type"
+                                                       value="<?php echo esc_attr($val); ?>" <?php echo esc_attr($checked); ?>>
+                                                <strong><?php echo esc_html($label); ?></strong>
+                                                <br>
+                                                <?php
+                                                $descriptions = [
+                                                    'address' => __('Find a specific address – type to see matching suggestions below and locate them on the map.', 'open-user-map'),
+                                                    'markers' => __('Search for specific markers and see suggestions below as you type.', 'open-user-map'),
+                                                    'live_filter' => __('Filter markers live as you type to instantly refine the map view.', 'open-user-map'),
+                                                ];
+                                                if (isset($descriptions[$val])): ?>
+                                                    <small><?php echo esc_html($descriptions[$val]); ?></small>
+                                                <?php endif; ?>
                                             </label>
-                                        </div>
+                                        <?php endforeach; ?>
                                     </div>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                        </tr>
 
-                        <?php endif; ?>
+                        <tr style="vertical-align: top;">
+                            <th scope="row"><?php echo __('Searchbar', 'open-user-map'); ?></th>
+                            <td>
+                                <?php
+                                $oum_enable_searchbar = get_option('oum_enable_searchbar', 'on');
+                                ?>
+                                <input class="oum-switch" type="checkbox" name="oum_enable_searchbar"
+                                       id="oum_enable_searchbar" <?php echo ($oum_enable_searchbar === 'on') ? 'checked' : ''; ?>>
+                                <label for="oum_enable_searchbar"></label><br><br>
+                                <div class="wrap-searchbar-settings">
+                                    <?php
+                                    $oum_searchbar_type = get_option('oum_searchbar_type') ? get_option('oum_searchbar_type') : 'address';
+                                    $items = $this->oum_searchbar_types;
+                                    ?>
+
+                                    <div id="oum_searchbar_type_options">
+                                        <?php foreach ($items as $val => $label):
+                                            $checked = ($oum_searchbar_type == $val) ? 'checked' : '';
+                                            ?>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
 
                         <tr style="vertical-align: top;">
                             <th scope="row">
@@ -1358,83 +1189,72 @@
                             </td>
                         </tr>
 
-                        <?php if (true): ?>
-                            <?php if (true): ?>
-
-                                <tr style="vertical-align: top;">
-                                    <?php
-                                    $oum_enable_marker_types = get_option('oum_enable_marker_types');
-                                    $oum_enable_empty_marker_type = get_option('oum_enable_empty_marker_type', true);
-                                    $oum_enable_multiple_marker_types = get_option('oum_enable_multiple_marker_types', false);
-                                    $oum_collapse_filter = get_option('oum_collapse_filter');
-                                    $oum_marker_types_label = get_option('oum_marker_types_label') ? get_option('oum_marker_types_label') : $this->oum_marker_types_label_default;
-                                    ?>
-                                    <th scope="row">
-                                        <?php echo __('Marker Categories', 'open-user-map'); ?>
-                                        <br><br>
-                                    </th>
-                                    <td>
-                                        <input class="oum-switch" type="checkbox" name="oum_enable_marker_types"
-                                               id="oum_enable_marker_types" <?php echo ($oum_enable_marker_types) ? 'checked' : ''; ?>>
-                                        <label for="oum_enable_marker_types"><?php echo __('Enable', 'open-user-map'); ?></label><br>
-                                        <?php if ($oum_enable_marker_types): ?>
-                                            <div class="description"><?php echo __('You can manage Marker Categories <a href="edit-tags.php?taxonomy=oum-type&post_type=oum-location">here</a>', 'open-user-map'); ?></div>
-                                            <br>
-                                        <?php endif; ?>
-                                        <br>
-
-                                        <div class="wrap-marker-categories-settings">
-                                            <strong><?php echo __('Custom Label:', 'open-user-map'); ?></strong><br>
-                                            <label for="oum_marker_types_label"></label><input class="regular-text"
-                                                                                               type="text"
-                                                                                               name="oum_marker_types_label"
-                                                                                               id="oum_marker_types_label"
-                                                                                               placeholder="<?php echo esc_attr($this->oum_marker_types_label_default); ?>"
-                                                                                               value="<?php echo esc_attr($oum_marker_types_label); ?>">
-                                            <br><br><br>
-
-                                            <input class="oum-switch" type="checkbox"
-                                                   name="oum_enable_multiple_marker_types"
-                                                   id="oum_enable_multiple_marker_types" <?php echo ($oum_enable_multiple_marker_types) ? 'checked' : ''; ?>>
-                                            <label for="oum_enable_multiple_marker_types"><?php echo __('Allow multiple selections', 'open-user-map'); ?></label><br>
-                                            <div class="description"><?php echo __('<strong>Important:</strong> If enabled all locations will fallback to the <a href="edit.php?post_type=oum-location&page=open-user-map-settings">Default Marker Icon</a> instead of a specific category icon.', 'open-user-map'); ?></div>
-                                            <br><br><br>
-
-                                            <input class="oum-switch" type="checkbox"
-                                                   name="oum_enable_empty_marker_type"
-                                                   id="oum_enable_empty_marker_type" <?php echo ($oum_enable_empty_marker_type) ? 'checked' : ''; ?>>
-                                            <label for="oum_enable_empty_marker_type"><?php echo __('Allow empty selection', 'open-user-map'); ?></label>
-                                            <br><br><br>
-
-                                            <input class="oum-switch" type="checkbox" name="oum_collapse_filter"
-                                                   id="oum_collapse_filter" <?php echo ($oum_collapse_filter) ? 'checked' : ''; ?>>
-                                            <label for="oum_collapse_filter"><?php echo __('Collapsed Filterbox', 'open-user-map'); ?></label><br>
-                                            <div class="description"><?php echo __('If enabled the filterbox will take less space and just open on mouseover.', 'open-user-map'); ?></div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            <?php endif; ?>
-                        <?php endif; ?>
-
-                        <?php if (true): ?>
-
-                            <tr style="vertical-align: top;" class="oum-gopro-tr">
-                                <th scope="row">
-                                    <?php echo __('Filterbox', 'open-user-map'); ?>
-                                </th>
-                                <td>
-                                    <label>
-                                        <input class="oum-switch" type="checkbox" disabled>
-                                    </label>
-                                    <label><?php echo __('Collapsed design', 'open-user-map'); ?></label>
+                        <tr style="vertical-align: top;">
+                            <?php
+                            $oum_enable_marker_types = get_option('oum_enable_marker_types');
+                            $oum_enable_empty_marker_type = get_option('oum_enable_empty_marker_type', true);
+                            $oum_enable_multiple_marker_types = get_option('oum_enable_multiple_marker_types', false);
+                            $oum_collapse_filter = get_option('oum_collapse_filter');
+                            $oum_marker_types_label = get_option('oum_marker_types_label') ? get_option('oum_marker_types_label') : $this->oum_marker_types_label_default;
+                            ?>
+                            <th scope="row">
+                                <?php echo __('Marker Categories', 'open-user-map'); ?>
+                                <br><br>
+                            </th>
+                            <td>
+                                <input class="oum-switch" type="checkbox" name="oum_enable_marker_types"
+                                       id="oum_enable_marker_types" <?php echo ($oum_enable_marker_types) ? 'checked' : ''; ?>>
+                                <label for="oum_enable_marker_types"><?php echo __('Enable', 'open-user-map'); ?></label><br>
+                                <?php if ($oum_enable_marker_types): ?>
+                                    <div class="description"><?php echo __('You can manage Marker Categories <a href="edit-tags.php?taxonomy=oum-type&post_type=oum-location">here</a>', 'open-user-map'); ?></div>
                                     <br>
-                                    <br>
-                                </td>
-                            </tr>
+                                <?php endif; ?>
+                                <br>
 
-                        <?php endif; ?>
+                                <div class="wrap-marker-categories-settings">
+                                    <strong><?php echo __('Custom Label:', 'open-user-map'); ?></strong><br>
+                                    <label for="oum_marker_types_label"></label><input class="regular-text"
+                                                                                       type="text"
+                                                                                       name="oum_marker_types_label"
+                                                                                       id="oum_marker_types_label"
+                                                                                       placeholder="<?php echo esc_attr($this->oum_marker_types_label_default); ?>"
+                                                                                       value="<?php echo esc_attr($oum_marker_types_label); ?>">
+                                    <br><br><br>
 
+                                    <input class="oum-switch" type="checkbox"
+                                           name="oum_enable_multiple_marker_types"
+                                           id="oum_enable_multiple_marker_types" <?php echo ($oum_enable_multiple_marker_types) ? 'checked' : ''; ?>>
+                                    <label for="oum_enable_multiple_marker_types"><?php echo __('Allow multiple selections', 'open-user-map'); ?></label><br>
+                                    <div class="description"><?php echo __('<strong>Important:</strong> If enabled all locations will fallback to the <a href="edit.php?post_type=oum-location&page=open-user-map-settings">Default Marker Icon</a> instead of a specific category icon.', 'open-user-map'); ?></div>
+                                    <br><br><br>
+
+                                    <input class="oum-switch" type="checkbox"
+                                           name="oum_enable_empty_marker_type"
+                                           id="oum_enable_empty_marker_type" <?php echo ($oum_enable_empty_marker_type) ? 'checked' : ''; ?>>
+                                    <label for="oum_enable_empty_marker_type"><?php echo __('Allow empty selection', 'open-user-map'); ?></label>
+                                    <br><br><br>
+
+                                    <input class="oum-switch" type="checkbox" name="oum_collapse_filter"
+                                           id="oum_collapse_filter" <?php echo ($oum_collapse_filter) ? 'checked' : ''; ?>>
+                                    <label for="oum_collapse_filter"><?php echo __('Collapsed Filterbox', 'open-user-map'); ?></label><br>
+                                    <div class="description"><?php echo __('If enabled the filterbox will take less space and just open on mouseover.', 'open-user-map'); ?></div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr style="vertical-align: top;" class="oum-gopro-tr">
+                            <th scope="row">
+                                <?php echo __('Filterbox', 'open-user-map'); ?>
+                            </th>
+                            <td>
+                                <label>
+                                    <input class="oum-switch" type="checkbox" disabled>
+                                </label>
+                                <label><?php echo __('Collapsed design', 'open-user-map'); ?></label>
+                                <br>
+                                <br>
+                            </td>
+                        </tr>
                     </table>
                 </div>
 
@@ -1478,14 +1298,11 @@
                                 ?>
                             </td>
                         </tr>
-
                     </table>
                 </div>
 
                 <div id="tab-5" class="tab-pane">
-
                     <table class="form-table">
-
                         <tr style="vertical-align: top;">
                             <?php
                             $oum_enable_location_date = get_option('oum_enable_location_date');
@@ -1515,344 +1332,258 @@
                             </td>
                         </tr>
 
-                        <?php if (true): ?>
-                            <?php if (true): ?>
+                        <tr style="vertical-align: top;">
+                            <?php
+                            $oum_enable_single_page = get_option('oum_enable_single_page');
+                            ?>
+                            <th scope="row">
+                                <?php echo __('Public pages for locations (Single pages)', 'open-user-map'); ?>
+                                <br><br>
+                            </th>
+                            <td>
+                                <input class="oum-switch" type="checkbox" id="oum_enable_single_page"
+                                       name="oum_enable_single_page" <?php echo ($oum_enable_single_page == 'on') ? 'checked' : ''; ?>>
+                                <label for="oum_enable_single_page"></label><br><br>
+                                <span class="description"><?php echo __('This will add a "Read more"-Button to the location bubble. It will link to the location\'s single page.', 'open-user-map'); ?></span><br>
+                                <span class="description"><?php echo __('In the backend on the "Edit location" page an additional content editor will become available. You can use shortcodes to display individual values of a location. <strong>See the Help section for details.</strong>', 'open-user-map'); ?></span><br><br>
+                            </td>
+                        </tr>
 
-                                <tr style="vertical-align: top;">
-                                    <?php
-                                    $oum_enable_single_page = get_option('oum_enable_single_page');
-                                    ?>
-                                    <th scope="row">
-                                        <?php echo __('Public pages for locations (Single pages)', 'open-user-map'); ?>
-                                        <br><br>
-                                    </th>
-                                    <td>
-                                        <input class="oum-switch" type="checkbox" id="oum_enable_single_page"
-                                               name="oum_enable_single_page" <?php echo ($oum_enable_single_page == 'on') ? 'checked' : ''; ?>>
-                                        <label for="oum_enable_single_page"></label><br><br>
-                                        <span class="description"><?php echo __('This will add a "Read more"-Button to the location bubble. It will link to the location\'s single page.', 'open-user-map'); ?></span><br>
-                                        <span class="description"><?php echo __('In the backend on the "Edit location" page an additional content editor will become available. You can use shortcodes to display individual values of a location. <strong>See the Help section for details.</strong>', 'open-user-map'); ?></span><br><br>
-                                    </td>
-                                </tr>
+                        <tr style="vertical-align: top;">
+                            <?php
+                            $oum_enable_user_restriction = get_option('oum_enable_user_restriction');
+                            $oum_enable_redirect_to_registration = get_option('oum_enable_redirect_to_registration');
+                            ?>
+                            <th scope="row">
+                                <?php echo __('Restrict "Add location" to logged in users only', 'open-user-map'); ?>
+                                <br><br>
+                            </th>
+                            <td>
+                                <input class="oum-switch" type="checkbox" id="oum_enable_user_restriction"
+                                       name="oum_enable_user_restriction" <?php echo ($oum_enable_user_restriction == 'on') ? 'checked' : ''; ?>>
+                                <label for="oum_enable_user_restriction"></label><br><br>
+                                <span class="description"><?php echo __('If enabled, only registered users can add new locations. The minimum required role is "Subscriber". <a target="_blank" href="https://www.open-user-map.com/knowledge-base/redirect-users-to-the-map-after-login/?ref=settings">Here</a> is an article on how to redirect users to the map page after login.', 'open-user-map'); ?></span><br><br>
+                                <div id="redirect_to_registration">
+                                    <input class="oum-switch" type="checkbox"
+                                           id="oum_enable_redirect_to_registration"
+                                           name="oum_enable_redirect_to_registration" <?php echo ($oum_enable_redirect_to_registration == 'on') ? 'checked' : ''; ?>>
+                                    <label for="oum_enable_redirect_to_registration"><?php echo __('Redirect "Add location"-Button to registration page'); ?></label><br><br>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="vertical-align: top;" class="oum-gopro-tr">
+                            <th scope="row">
+                                <?php echo __('Restrict "Add location" to logged in users only', 'open-user-map'); ?>
+                            </th>
+                            <td>
+                                <label>
+                                    <input class="oum-switch" type="checkbox" disabled>
+                                </label>
+                                <label></label><br><br>
+                                <label>
+                                    <input class="oum-switch" type="checkbox" disabled>
+                                </label>
+                                <label><?php echo __('Redirect "Add location"-Button to registration page', 'open-user-map'); ?></label><br><br>
+                            </td>
+                        </tr>
+                        <tr style="vertical-align: top;">
+                            <?php
+                            $oum_enable_auto_publish = get_option('oum_enable_auto_publish');
+                            ?>
+                            <th scope="row">
+                                <?php echo __('Auto-Publish for registered users', 'open-user-map'); ?>
+                                <br><br>
+                            </th>
+                            <td>
+                                <input class="oum-switch" type="checkbox" id="oum_enable_auto_publish"
+                                       name="oum_enable_auto_publish" <?php echo ($oum_enable_auto_publish == 'on') ? 'checked' : ''; ?>>
+                                <label for="oum_enable_auto_publish"></label><br><br>
+                                <span class="description"><?php echo __('This works only for users with "edit posts" capabilities.', 'open-user-map'); ?></span><br><br>
+                            </td>
+                        </tr>
 
-                            <?php endif; ?>
-                        <?php endif; ?>
+                        <tr style="vertical-align: top;" class="oum-gopro-tr">
+                            <th scope="row">
+                                <?php echo __('Auto-Publish for registered users', 'open-user-map'); ?>
+                            </th>
+                            <td>
+                                <label>
+                                    <input class="oum-switch" type="checkbox" disabled>
+                                </label>
+                                <label></label><br><br>
+                                <span class="description"><?php echo __('This works only for users with "edit posts" capabilities.', 'open-user-map'); ?></span><br><br>
+                            </td>
+                        </tr>
 
-                        <?php if (true): ?>
+                        <tr style="vertical-align: top;">
+                            <?php
+                            $oum_enable_auto_publish_for_everyone = get_option('oum_enable_auto_publish_for_everyone');
+                            ?>
+                            <th scope="row">
+                                <?php echo __('Auto-Publish for unregistered users', 'open-user-map'); ?>
+                                <br><br>
+                            </th>
+                            <td>
+                                <input class="oum-switch" type="checkbox"
+                                       id="oum_enable_auto_publish_for_everyone"
+                                       name="oum_enable_auto_publish_for_everyone" <?php echo ($oum_enable_auto_publish_for_everyone == 'on') ? 'checked' : ''; ?>>
+                                <label for="oum_enable_auto_publish_for_everyone"></label><br><br>
+                                <span class="description"><strong><?php echo __('USE WITH CAUTION!', 'open-user-map'); ?></strong> <?php echo __('Every location proposal will be published directly without your verification. No user registration is necessary.', 'open-user-map'); ?></span><br><br>
+                            </td>
+                        </tr>
 
-                            <tr style="vertical-align: top;" class="oum-gopro-tr">
-                                <th scope="row">
-                                    <?php echo __('Public pages for locations (Single pages)', 'open-user-map'); ?>
-                                </th>
-                                <td>
-                                    <label>
-                                        <input class="oum-switch" type="checkbox" disabled>
-                                    </label>
-                                    <label></label><br><br>
-                                    <span class="description"><?php echo __('This will add a "Read more"-Button to the location bubble. It will link to the location\'s single page.', 'open-user-map'); ?></span><br>
-                                    <span class="description"><?php echo __('In the backend on the "Edit location" page an additional content editor will become available. You can use shortcodes to display individual values of a location. <strong>See the Help section for details.</strong>', 'open-user-map'); ?></span><br><br>
-                                </td>
-                            </tr>
+                        <tr style="vertical-align: top;" class="oum-gopro-tr">
+                            <th scope="row">
+                                <?php echo __('Auto-Publish for unregistered users', 'open-user-map'); ?>
+                            </th>
+                            <td>
+                                <label>
+                                    <input class="oum-switch" type="checkbox" disabled>
+                                </label>
+                                <label></label><br><br>
+                                <span class="description"><strong><?php echo __('USE WITH CAUTION!', 'open-user-map'); ?></strong> <?php echo __('Every location proposal will be published directly without your verification. No user registration is necessary.', 'open-user-map'); ?></span><br><br>
+                            </td>
+                        </tr>
 
-                        <?php endif; ?>
+                        <tr style="vertical-align: top;">
+                            <?php
+                            $oum_enable_add_user_location = get_option('oum_enable_add_user_location');
+                            ?>
+                            <th scope="row">
+                                <?php echo __('Extend WordPress user registration form with "Add location" map', 'open-user-map'); ?>
+                                <br><br>
+                            </th>
+                            <td>
+                                <input class="oum-switch" type="checkbox" id="oum_enable_add_user_location"
+                                       name="oum_enable_add_user_location" <?php echo ($oum_enable_add_user_location == 'on') ? 'checked' : ''; ?>>
+                                <label for="oum_enable_add_user_location"></label><br><br>
+                            </td>
+                        </tr>
 
-                        <?php if (true): ?>
-                            <?php if (true): ?>
+                        <tr style="vertical-align: top;" class="oum-gopro-tr">
+                            <th scope="row">
+                                <?php echo __('Extend WordPress user registration form with "Add location" map', 'open-user-map'); ?>
+                            </th>
+                            <td>
+                                <label>
+                                    <input class="oum-switch" type="checkbox" disabled>
+                                </label>
+                                <label></label>
+                            </td>
+                        </tr>
 
-                                <tr style="vertical-align: top;">
-                                    <?php
-                                    $oum_enable_user_restriction = get_option('oum_enable_user_restriction');
-                                    $oum_enable_redirect_to_registration = get_option('oum_enable_redirect_to_registration');
-                                    ?>
-                                    <th scope="row">
-                                        <?php echo __('Restrict "Add location" to logged in users only', 'open-user-map'); ?>
-                                        <br><br>
-                                    </th>
-                                    <td>
-                                        <input class="oum-switch" type="checkbox" id="oum_enable_user_restriction"
-                                               name="oum_enable_user_restriction" <?php echo ($oum_enable_user_restriction == 'on') ? 'checked' : ''; ?>>
-                                        <label for="oum_enable_user_restriction"></label><br><br>
-                                        <span class="description"><?php echo __('If enabled, only registered users can add new locations. The minimum required role is "Subscriber". <a target="_blank" href="https://www.open-user-map.com/knowledge-base/redirect-users-to-the-map-after-login/?ref=settings">Here</a> is an article on how to redirect users to the map page after login.', 'open-user-map'); ?></span><br><br>
-                                        <div id="redirect_to_registration">
-                                            <input class="oum-switch" type="checkbox"
-                                                   id="oum_enable_redirect_to_registration"
-                                                   name="oum_enable_redirect_to_registration" <?php echo ($oum_enable_redirect_to_registration == 'on') ? 'checked' : ''; ?>>
-                                            <label for="oum_enable_redirect_to_registration"><?php echo __('Redirect "Add location"-Button to registration page'); ?></label><br><br>
-                                        </div>
-                                    </td>
-                                </tr>
+                        <tr style="vertical-align: top;">
+                            <?php
+                            $oum_enable_admin_notification = get_option('oum_enable_admin_notification');
+                            $oum_admin_notification_email = get_option('oum_admin_notification_email') ? get_option('oum_admin_notification_email') : get_option('admin_email');
+                            $oum_admin_notification_subject = get_option('oum_admin_notification_subject') ? get_option('oum_admin_notification_subject') : __('New Open User Map location', 'open-user-map');
+                            $oum_admin_notification_message = get_option('oum_admin_notification_message') ? get_option('oum_admin_notification_message') : __('A new location with the title "%title%" on %website_url% has been added! Please verify and publish or use the "auto-publish" feature.', 'open-user-map');
+                            ?>
+                            <th scope="row">
+                                <?php echo __('Admin email notification on new location proposals', 'open-user-map'); ?>
+                                <br><br>
+                            </th>
+                            <td>
+                                <input class="oum-switch" type="checkbox" id="oum_enable_admin_notification"
+                                       name="oum_enable_admin_notification" <?php echo ($oum_enable_admin_notification == 'on') ? 'checked' : ''; ?>>
+                                <label for="oum_enable_admin_notification"></label><br><br>
 
-                            <?php endif; ?>
-                        <?php endif; ?>
+                                <strong><?php echo __('Email address'); ?>:</strong><br>
+                                <label for="oum_admin_notification_email"></label><input class="regular-text"
+                                                                                         type="text"
+                                                                                         name="oum_admin_notification_email"
+                                                                                         id="oum_admin_notification_email"
+                                                                                         value="<?php echo esc_textarea($oum_admin_notification_email); ?>"><br><br>
 
-                        <?php if (true): ?>
+                                <strong><?php echo __('Subject'); ?>:</strong><br>
+                                <label for="oum_admin_notification_subject"></label><input class="regular-text"
+                                                                                           type="text"
+                                                                                           name="oum_admin_notification_subject"
+                                                                                           id="oum_admin_notification_subject"
+                                                                                           value="<?php echo esc_textarea($oum_admin_notification_subject); ?>"><br><br>
 
-                            <tr style="vertical-align: top;" class="oum-gopro-tr">
-                                <th scope="row">
-                                    <?php echo __('Restrict "Add location" to logged in users only', 'open-user-map'); ?>
-                                </th>
-                                <td>
-                                    <label>
-                                        <input class="oum-switch" type="checkbox" disabled>
-                                    </label>
-                                    <label></label><br><br>
-                                    <label>
-                                        <input class="oum-switch" type="checkbox" disabled>
-                                    </label>
-                                    <label><?php echo __('Redirect "Add location"-Button to registration page', 'open-user-map'); ?></label><br><br>
-                                </td>
-                            </tr>
+                                <strong><?php echo __('Message'); ?>:</strong><br>
+                                <label for="oum_admin_notification_message"></label><textarea
+                                        class="regular-text" name="oum_admin_notification_message"
+                                        id="oum_admin_notification_message" rows="8"
+                                        cols="50"><?php echo esc_textarea($oum_admin_notification_message); ?></textarea><br>
+                                <span class="description"><?php echo __('Available tags'); ?>: %title%, %website_url%, %website_name%, %edit_location_url%, %user_name%, %user_email%</span>
+                                <br><br>
+                            </td>
+                        </tr>
 
-                        <?php endif; ?>
+                        <tr style="vertical-align: top;" class="oum-gopro-tr">
+                            <th scope="row">
+                                <?php echo __('Admin email notification on new location proposals', 'open-user-map'); ?>
+                            </th>
+                            <td>
+                                <label>
+                                    <input class="oum-switch" type="checkbox" disabled>
+                                </label>
+                                <label></label><br><br>
 
-                        <?php if (true): ?>
-                            <?php if (true): ?>
+                                <strong><?php echo __('Email address'); ?>:</strong><br>
+                                <label>
+                                    <input disabled class="regular-text" type="text"
+                                           placeholder="<?php echo __('john@doe.com', 'open-user-map'); ?>">
+                                </label><br><br>
 
-                                <tr style="vertical-align: top;">
-                                    <?php
-                                    $oum_enable_auto_publish = get_option('oum_enable_auto_publish');
-                                    ?>
-                                    <th scope="row">
-                                        <?php echo __('Auto-Publish for registered users', 'open-user-map'); ?>
-                                        <br><br>
-                                    </th>
-                                    <td>
-                                        <input class="oum-switch" type="checkbox" id="oum_enable_auto_publish"
-                                               name="oum_enable_auto_publish" <?php echo ($oum_enable_auto_publish == 'on') ? 'checked' : ''; ?>>
-                                        <label for="oum_enable_auto_publish"></label><br><br>
-                                        <span class="description"><?php echo __('This works only for users with "edit posts" capabilities.', 'open-user-map'); ?></span><br><br>
-                                    </td>
-                                </tr>
+                                <strong><?php echo __('Subject'); ?>:</strong><br>
+                                <label>
+                                    <input disabled class="regular-text" type="text"
+                                           placeholder="<?php echo __('New Open User Map location', 'open-user-map'); ?>">
+                                </label><br><br>
 
-                            <?php endif; ?>
-                        <?php endif; ?>
-
-                        <?php if (true): ?>
-
-                            <tr style="vertical-align: top;" class="oum-gopro-tr">
-                                <th scope="row">
-                                    <?php echo __('Auto-Publish for registered users', 'open-user-map'); ?>
-                                </th>
-                                <td>
-                                    <label>
-                                        <input class="oum-switch" type="checkbox" disabled>
-                                    </label>
-                                    <label></label><br><br>
-                                    <span class="description"><?php echo __('This works only for users with "edit posts" capabilities.', 'open-user-map'); ?></span><br><br>
-                                </td>
-                            </tr>
-
-                        <?php endif; ?>
-
-                        <?php if (true): ?>
-                            <?php if (true): ?>
-
-                                <tr style="vertical-align: top;">
-                                    <?php
-                                    $oum_enable_auto_publish_for_everyone = get_option('oum_enable_auto_publish_for_everyone');
-                                    ?>
-                                    <th scope="row">
-                                        <?php echo __('Auto-Publish for unregistered users', 'open-user-map'); ?>
-                                        <br><br>
-                                    </th>
-                                    <td>
-                                        <input class="oum-switch" type="checkbox"
-                                               id="oum_enable_auto_publish_for_everyone"
-                                               name="oum_enable_auto_publish_for_everyone" <?php echo ($oum_enable_auto_publish_for_everyone == 'on') ? 'checked' : ''; ?>>
-                                        <label for="oum_enable_auto_publish_for_everyone"></label><br><br>
-                                        <span class="description"><strong><?php echo __('USE WITH CAUTION!', 'open-user-map'); ?></strong> <?php echo __('Every location proposal will be published directly without your verification. No user registration is necessary.', 'open-user-map'); ?></span><br><br>
-                                    </td>
-                                </tr>
-
-                            <?php endif; ?>
-                        <?php endif; ?>
-
-                        <?php if (true): ?>
-
-                            <tr style="vertical-align: top;" class="oum-gopro-tr">
-                                <th scope="row">
-                                    <?php echo __('Auto-Publish for unregistered users', 'open-user-map'); ?>
-                                </th>
-                                <td>
-                                    <label>
-                                        <input class="oum-switch" type="checkbox" disabled>
-                                    </label>
-                                    <label></label><br><br>
-                                    <span class="description"><strong><?php echo __('USE WITH CAUTION!', 'open-user-map'); ?></strong> <?php echo __('Every location proposal will be published directly without your verification. No user registration is necessary.', 'open-user-map'); ?></span><br><br>
-                                </td>
-                            </tr>
-
-                        <?php endif; ?>
-
-                        <?php if (true): ?>
-                            <?php if (true): ?>
-
-                                <tr style="vertical-align: top;">
-                                    <?php
-                                    $oum_enable_add_user_location = get_option('oum_enable_add_user_location');
-                                    ?>
-                                    <th scope="row">
-                                        <?php echo __('Extend WordPress user registration form with "Add location" map', 'open-user-map'); ?>
-                                        <br><br>
-                                    </th>
-                                    <td>
-                                        <input class="oum-switch" type="checkbox" id="oum_enable_add_user_location"
-                                               name="oum_enable_add_user_location" <?php echo ($oum_enable_add_user_location == 'on') ? 'checked' : ''; ?>>
-                                        <label for="oum_enable_add_user_location"></label><br><br>
-                                    </td>
-                                </tr>
-
-                            <?php endif; ?>
-                        <?php endif; ?>
-
-                        <?php if (true): ?>
-
-                            <tr style="vertical-align: top;" class="oum-gopro-tr">
-                                <th scope="row">
-                                    <?php echo __('Extend WordPress user registration form with "Add location" map', 'open-user-map'); ?>
-                                </th>
-                                <td>
-                                    <label>
-                                        <input class="oum-switch" type="checkbox" disabled>
-                                    </label>
-                                    <label></label>
-                                </td>
-                            </tr>
-
-                        <?php endif; ?>
-
-                        <?php if (true): ?>
-                            <?php if (true): ?>
-
-                                <tr style="vertical-align: top;">
-                                    <?php
-                                    $oum_enable_admin_notification = get_option('oum_enable_admin_notification');
-                                    $oum_admin_notification_email = get_option('oum_admin_notification_email') ? get_option('oum_admin_notification_email') : get_option('admin_email');
-                                    $oum_admin_notification_subject = get_option('oum_admin_notification_subject') ? get_option('oum_admin_notification_subject') : __('New Open User Map location', 'open-user-map');
-                                    $oum_admin_notification_message = get_option('oum_admin_notification_message') ? get_option('oum_admin_notification_message') : __('A new location with the title "%title%" on %website_url% has been added! Please verify and publish or use the "auto-publish" feature.', 'open-user-map');
-                                    ?>
-                                    <th scope="row">
-                                        <?php echo __('Admin email notification on new location proposals', 'open-user-map'); ?>
-                                        <br><br>
-                                    </th>
-                                    <td>
-                                        <input class="oum-switch" type="checkbox" id="oum_enable_admin_notification"
-                                               name="oum_enable_admin_notification" <?php echo ($oum_enable_admin_notification == 'on') ? 'checked' : ''; ?>>
-                                        <label for="oum_enable_admin_notification"></label><br><br>
-
-                                        <strong><?php echo __('Email address'); ?>:</strong><br>
-                                        <label for="oum_admin_notification_email"></label><input class="regular-text"
-                                                                                                 type="text"
-                                                                                                 name="oum_admin_notification_email"
-                                                                                                 id="oum_admin_notification_email"
-                                                                                                 value="<?php echo esc_textarea($oum_admin_notification_email); ?>"><br><br>
-
-                                        <strong><?php echo __('Subject'); ?>:</strong><br>
-                                        <label for="oum_admin_notification_subject"></label><input class="regular-text"
-                                                                                                   type="text"
-                                                                                                   name="oum_admin_notification_subject"
-                                                                                                   id="oum_admin_notification_subject"
-                                                                                                   value="<?php echo esc_textarea($oum_admin_notification_subject); ?>"><br><br>
-
-                                        <strong><?php echo __('Message'); ?>:</strong><br>
-                                        <label for="oum_admin_notification_message"></label><textarea
-                                                class="regular-text" name="oum_admin_notification_message"
-                                                id="oum_admin_notification_message" rows="8"
-                                                cols="50"><?php echo esc_textarea($oum_admin_notification_message); ?></textarea><br>
-                                        <span class="description"><?php echo __('Available tags'); ?>: %title%, %website_url%, %website_name%, %edit_location_url%, %user_name%, %user_email%</span>
-                                        <br><br>
-                                    </td>
-                                </tr>
-
-                            <?php endif; ?>
-                        <?php endif; ?>
-
-                        <?php if (true): ?>
-
-                            <tr style="vertical-align: top;" class="oum-gopro-tr">
-                                <th scope="row">
-                                    <?php echo __('Admin email notification on new location proposals', 'open-user-map'); ?>
-                                </th>
-                                <td>
-                                    <label>
-                                        <input class="oum-switch" type="checkbox" disabled>
-                                    </label>
-                                    <label></label><br><br>
-
-                                    <strong><?php echo __('Email address'); ?>:</strong><br>
-                                    <label>
-                                        <input disabled class="regular-text" type="text"
-                                               placeholder="<?php echo __('john@doe.com', 'open-user-map'); ?>">
-                                    </label><br><br>
-
-                                    <strong><?php echo __('Subject'); ?>:</strong><br>
-                                    <label>
-                                        <input disabled class="regular-text" type="text"
-                                               placeholder="<?php echo __('New Open User Map location', 'open-user-map'); ?>">
-                                    </label><br><br>
-
-                                    <strong><?php echo __('Message'); ?>:</strong><br>
-                                    <label>
+                                <strong><?php echo __('Message'); ?>:</strong><br>
+                                <label>
 <textarea disabled class="regular-text" rows="8" cols="50"
           placeholder="<?php echo __('A new location with the title "%title%" on %website_url% has been added! Please verify and publish or use the "auto-publish" feature. \n\n %edit_location_url%', 'open-user-map'); ?>"></textarea>
-                                    </label><br><br>
-                                    <span class="description"><?php echo __('Available tags'); ?>: %title%, %website_url%, %website_name%, %edit_location_url%, %user_name%, %user_email%</span>
-                                    <br><br>
-                                </td>
-                            </tr>
+                                </label><br><br>
+                                <span class="description"><?php echo __('Available tags'); ?>: %title%, %website_url%, %website_name%, %edit_location_url%, %user_name%, %user_email%</span>
+                                <br><br>
+                            </td>
+                        </tr>
 
-                        <?php endif; ?>
+                        <tr style="vertical-align: top;">
+                            <?php
+                            $oum_enable_webhook_notification = get_option('oum_enable_webhook_notification');
+                            $oum_webhook_notification_url = get_option('oum_webhook_notification_url');
+                            ?>
+                            <th scope="row">
+                                <?php echo __('Trigger Webhook on new or updated Locations', 'open-user-map'); ?>
+                                <br><br>
+                            </th>
+                            <td>
+                                <input class="oum-switch" type="checkbox" id="oum_enable_webhook_notification"
+                                       name="oum_enable_webhook_notification" <?php echo ($oum_enable_webhook_notification == 'on') ? 'checked' : ''; ?>>
+                                <label for="oum_enable_webhook_notification"></label><br><br>
 
-                        <?php if (true): ?>
-                            <?php if (true): ?>
+                                <strong><?php echo __('Webhook URL'); ?>:</strong><br>
+                                <label for="oum_webhook_notification_url"></label><input class="regular-text"
+                                                                                         type="text"
+                                                                                         name="oum_webhook_notification_url"
+                                                                                         id="oum_webhook_notification_url"
+                                                                                         value="<?php echo esc_url($oum_webhook_notification_url); ?>">
 
-                                <tr style="vertical-align: top;">
-                                    <?php
-                                    $oum_enable_webhook_notification = get_option('oum_enable_webhook_notification');
-                                    $oum_webhook_notification_url = get_option('oum_webhook_notification_url');
-                                    ?>
-                                    <th scope="row">
-                                        <?php echo __('Trigger Webhook on new or updated Locations', 'open-user-map'); ?>
-                                        <br><br>
-                                    </th>
-                                    <td>
-                                        <input class="oum-switch" type="checkbox" id="oum_enable_webhook_notification"
-                                               name="oum_enable_webhook_notification" <?php echo ($oum_enable_webhook_notification == 'on') ? 'checked' : ''; ?>>
-                                        <label for="oum_enable_webhook_notification"></label><br><br>
+                            </td>
+                        </tr>
 
-                                        <strong><?php echo __('Webhook URL'); ?>:</strong><br>
-                                        <label for="oum_webhook_notification_url"></label><input class="regular-text"
-                                                                                                 type="text"
-                                                                                                 name="oum_webhook_notification_url"
-                                                                                                 id="oum_webhook_notification_url"
-                                                                                                 value="<?php echo esc_url($oum_webhook_notification_url); ?>">
+                        <tr style="vertical-align: top;" class="oum-gopro-tr">
+                            <th scope="row">
+                                <?php echo __('Trigger Webhook on new or updated Locations', 'open-user-map'); ?>
+                            </th>
+                            <td>
+                                <label>
+                                    <input class="oum-switch" type="checkbox" disabled>
+                                </label>
+                                <label></label><br><br>
 
-                                    </td>
-                                </tr>
-
-                            <?php endif; ?>
-                        <?php endif; ?>
-
-                        <?php if (true): ?>
-
-                            <tr style="vertical-align: top;" class="oum-gopro-tr">
-                                <th scope="row">
-                                    <?php echo __('Trigger Webhook on new or updated Locations', 'open-user-map'); ?>
-                                </th>
-                                <td>
-                                    <label>
-                                        <input class="oum-switch" type="checkbox" disabled>
-                                    </label>
-                                    <label></label><br><br>
-
-                                    <strong><?php echo __('Webhook URL'); ?>:</strong><br>
-                                    <label>
-                                        <input disabled class="regular-text" type="text">
-                                    </label>
-                                </td>
-                            </tr>
-
-                        <?php endif; ?>
+                                <strong><?php echo __('Webhook URL'); ?>:</strong><br>
+                                <label>
+                                    <input disabled class="regular-text" type="text">
+                                </label>
+                            </td>
+                        </tr>
 
                         <tr style="vertical-align: top;">
                             <?php
@@ -1871,149 +1602,116 @@
                                 <br><br>
                             </td>
                         </tr>
-
                     </table>
-
                 </div>
-
                 <div id="tab-6" class="tab-pane">
-
                     <table class="form-table">
 
-                        <?php if (true): ?>
-                            <?php if (true): ?>
-
-                                <tr style="vertical-align: top;">
-                                    <th scope="row">
-                                        <?php echo __('Export all Locations', 'open-user-map'); ?>
-                                        <br><br>
-                                    </th>
-                                    <td>
-                                        <button class="oum_export_csv_button button button-secondary"><?php echo __('Export to CSV', 'open-user-map'); ?></button>
-                                        <br><br>
-                                        <div class="description">
-                                            <strong>This is how the export works:</strong><br>
-                                            <ul>
-                                                <li>Only published locations will be exported</li>
-                                                <li>The CSV uses Comma as delimiter</li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            <?php endif; ?>
-                        <?php endif; ?>
-
-                        <?php if (true): ?>
-
-                            <tr style="vertical-align: top;" class="oum-gopro-tr">
-                                <th scope="row">
-                                    <?php echo __('Export all Locations', 'open-user-map'); ?>
-                                </th>
-                                <td>
-                                    <button disabled
-                                            class="button button-secondary"><?php echo __('Export to CSV', 'open-user-map'); ?></button>
+                        <tr style="vertical-align: top;">
+                            <th scope="row">
+                                <?php echo __('Export all Locations', 'open-user-map'); ?>
+                                <br><br>
+                            </th>
+                            <td>
+                                <button class="oum_export_csv_button button button-secondary"><?php echo __('Export to CSV', 'open-user-map'); ?></button>
+                                <br><br>
+                                <div class="description">
+                                    <strong>This is how the export works:</strong><br>
+                                    <ul>
+                                        <li>Only published locations will be exported</li>
+                                        <li>The CSV uses Comma as delimiter</li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="vertical-align: top;" class="oum-gopro-tr">
+                            <th scope="row">
+                                <?php echo __('Export all Locations', 'open-user-map'); ?>
+                            </th>
+                            <td>
+                                <button disabled
+                                        class="button button-secondary"><?php echo __('Export to CSV', 'open-user-map'); ?></button>
+                                <br><br>
+                                <div class="description">
+                                    <strong>This is how the export works:</strong><br>
+                                    <ul>
+                                        <li>Only published locations will be exported</li>
+                                        <li>The CSV uses Comma as delimiter</li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="vertical-align: top;">
+                            <th scope="row">
+                                <?php echo __('Import all Locations', 'open-user-map'); ?>
+                                <br><br>
+                            </th>
+                            <td>
+                                <div class="csv_upload">
+                                    <button class="oum_upload_csv_button button button-secondary"><?php echo __('Upload CSV & Import', 'open-user-map'); ?></button>
                                     <br><br>
                                     <div class="description">
-                                        <strong>This is how the export works:</strong><br>
+                                        <strong>This is important to make the import work:</strong><br>
                                         <ul>
-                                            <li>Only published locations will be exported</li>
-                                            <li>The CSV uses Comma as delimiter</li>
+                                            <li>Be patient, this can take a while.</li>
+                                            <li>Be aware that every location with matching POST ID will be
+                                                overwritten. <span style="color: red">Consider creating a DB Backup before!</span>
+                                            </li>
+                                            <li>To import new locations leave values in the post_id column
+                                                empty
+                                            </li>
+                                            <li>Download an Export file first and use it as template for your
+                                                import
+                                            </li>
+                                            <li>Comma or Semicolon work as delimiter</li>
+                                            <li>Non-existing Marker Categories will be created automatically
+                                            </li>
+                                            <li>Multiselect values need to be written like so: Red|Green|Blue
+                                            </li>
+                                            <li>All imported locations will have status "Draft". You need to
+                                                publish them yourself.
+                                            </li>
                                         </ul>
                                     </div>
-                                </td>
-                            </tr>
-
-                        <?php endif; ?>
-
-
-                        <?php if (true): ?>
-                            <?php if (true): ?>
-
-                                <tr style="vertical-align: top;">
-                                    <th scope="row">
-                                        <?php echo __('Import all Locations', 'open-user-map'); ?>
-                                        <br><br>
-                                    </th>
-                                    <td>
-                                        <div class="csv_upload">
-                                            <button class="oum_upload_csv_button button button-secondary"><?php echo __('Upload CSV & Import', 'open-user-map'); ?></button>
-                                            <br><br>
-                                            <div class="description">
-                                                <strong>This is important to make the import work:</strong><br>
-                                                <ul>
-                                                    <li>Be patient, this can take a while.</li>
-                                                    <li>Be aware that every location with matching POST ID will be
-                                                        overwritten. <span style="color: red">Consider creating a DB Backup before!</span>
-                                                    </li>
-                                                    <li>To import new locations leave values in the post_id column
-                                                        empty
-                                                    </li>
-                                                    <li>Download an Export file first and use it as template for your
-                                                        import
-                                                    </li>
-                                                    <li>Comma or Semicolon work as delimiter</li>
-                                                    <li>Non-existing Marker Categories will be created automatically
-                                                    </li>
-                                                    <li>Multiselect values need to be written like so: Red|Green|Blue
-                                                    </li>
-                                                    <li>All imported locations will have status "Draft". You need to
-                                                        publish them yourself.
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            <?php endif; ?>
-                        <?php endif; ?>
-
-                        <?php if (true): ?>
-
-                            <tr style="vertical-align: top;" class="oum-gopro-tr">
-                                <th scope="row">
-                                    <?php echo __('Import all Locations', 'open-user-map'); ?>
-                                </th>
-                                <td>
-                                    <div class="csv_upload">
-                                        <button disabled
-                                                class="button button-secondary"><?php echo __('Upload CSV & Import', 'open-user-map'); ?></button>
-                                        <br><br>
-                                        <div class="description">
-                                            <strong>This is important to make the import work:</strong><br>
-                                            <ul>
-                                                <li>Be patient, this can take a while.</li>
-                                                <li>Be aware that every location with matching POST ID will be
-                                                    overwritten. <span style="color: red">Consider creating a DB Backup before!</span>
-                                                </li>
-                                                <li>To import new locations leave values in the post_id column empty
-                                                </li>
-                                                <li>Download an Export file first and use it as template for your
-                                                    import
-                                                </li>
-                                                <li>Comma or Semicolon work as delimiter</li>
-                                                <li>Non-existing Marker Categories will be created automatically</li>
-                                                <li>Multiselect values need to be written like so: Red|Green|Blue</li>
-                                                <li>All imported locations will have status "Draft". You need to publish
-                                                    them yourself.
-                                                </li>
-                                            </ul>
-                                        </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="vertical-align: top;" class="oum-gopro-tr">
+                            <th scope="row">
+                                <?php echo __('Import all Locations', 'open-user-map'); ?>
+                            </th>
+                            <td>
+                                <div class="csv_upload">
+                                    <button disabled
+                                            class="button button-secondary"><?php echo __('Upload CSV & Import', 'open-user-map'); ?></button>
+                                    <br><br>
+                                    <div class="description">
+                                        <strong>This is important to make the import work:</strong><br>
+                                        <ul>
+                                            <li>Be patient, this can take a while.</li>
+                                            <li>Be aware that every location with matching POST ID will be
+                                                overwritten. <span style="color: red">Consider creating a DB Backup before!</span>
+                                            </li>
+                                            <li>To import new locations leave values in the post_id column empty
+                                            </li>
+                                            <li>Download an Export file first and use it as template for your
+                                                import
+                                            </li>
+                                            <li>Comma or Semicolon work as delimiter</li>
+                                            <li>Non-existing Marker Categories will be created automatically</li>
+                                            <li>Multiselect values need to be written like so: Red|Green|Blue</li>
+                                            <li>All imported locations will have status "Draft". You need to publish
+                                                them yourself.
+                                            </li>
+                                        </ul>
                                     </div>
-                                </td>
-                            </tr>
-
-                        <?php endif; ?>
-
+                                </div>
+                            </td>
+                        </tr>
                     </table>
-
                 </div>
-
                 <div id="tab-7" class="tab-pane">
-
                     <table class="form-table">
-
                         <tr style="vertical-align: top;">
                             <th scope="row">
                                 <?php echo __('🚀 Getting started', 'open-user-map'); ?>
@@ -2226,14 +1924,6 @@
                                             <td><?php echo __('Enable or disable the "Search for Markers" button.', 'open-user-map'); ?></td>
                                         </tr>
                                         <tr>
-                                            <td><code>enable_currentlocation</code></td>
-                                            <td>
-                                                <code>enable_currentlocation="true"</code><br>
-                                                <code>enable_currentlocation="false"</code>
-                                            </td>
-                                            <td><?php echo __('Enable or disable the "Show me where I am" button.', 'open-user-map'); ?></td>
-                                        </tr>
-                                        <tr>
                                             <td><code>enable_fullscreen</code></td>
                                             <td>
                                                 <code>enable_fullscreen="true"</code><br>
@@ -2281,7 +1971,6 @@
                                 <ul>
                                     <li>title</li>
                                     <li>image</li>
-                                    <li>audio</li>
                                     <li>video</li>
                                     <li>type</li>
                                     <li>map</li>
@@ -2376,33 +2065,25 @@
                                 <span class="hint"><?php echo __('Make use of filter hooks to extend the functionality of the Open User Map plugin.', 'open-user-map'); ?><?php echo __('Find more info on how to use hooks <a href="https://www.open-user-map.com/knowledge-base/change-or-extend-content-of-each-location-bubble/?ref=pluginsettings">here</a>.', 'open-user-map'); ?></span><br><br>
                                 <strong><?php echo __('Customize location bubble content:', 'open-user-map'); ?></strong><br><br>
                                 <code class="block"><pre>add_filter('oum_location_bubble_content', function ( $content, $location ) {
-
-  // extend or change content
-  $content .= 'Post ID: ' . $location['post_id'];
-
-  return $content;
-}, 10, 2);</pre>
+                                        // extend or change content $content .= 'Post ID: ' . $location['post_id'];
+                                        return $content; }, 10, 2);</pre>
                                 </code>
                                 <br><br><br>
 
                                 <strong><?php echo __('Customize location list item content:', 'open-user-map'); ?></strong><br><br>
-                                <code class="block"><pre>add_filter('oum_location_list_item_content', function ( $content, $location ) {
-
-  // extend or change content
-  $content .= 'Post ID: ' . $location['post_id'];
-
-  return $content;
-}, 10, 2);</pre>
-                                </code>
+                                <pre><code class="block">
+                                    add_filter('oum_location_bubble_content', function ($content, $location) {
+                                    $content .= 'Post ID: ' . $location['post_id'];
+                                    return $content;
+                                    }, 10, 2);
+                                </code></pre>
                                 <br><br><br>
                                 <strong><?php echo __('Customize location bubble image (eg. to add a lightbox):', 'open-user-map'); ?></strong><br><br>
                                 <code class="block"><pre>add_filter('oum_location_bubble_image', function ( $image, $location ) {
-
-  // extend or change image
-  $image = '&lt;a class=&quot;lightbox&quot; href=&quot;' . $location['image'] . '&quot;&gt;' . $image . '&lt;/a&gt;';
-
-  return $image;
-}, 10, 2);</pre>
+                                    $image = '&lt;a class=&quot;lightbox&quot; href=&quot;' . $location['image'] . '&quot;&gt;' . $image . '&lt;/a&gt;';
+                                    return $image;
+                                    }, 10, 2);
+                                    </pre>
                                 </code>
                                 <br><br><br>
                             </td>
@@ -2412,9 +2093,6 @@
                             <th scope="row">
                                 <?php echo __('Support', 'open-user-map'); ?>
                             </th>
-                            <td class="top-padding-20">
-                                <?php echo __('Please have a look at our <a href="https://www.open-user-map.com/support/knowledge-base/" target="_blank">Knowledge Base</a> and the <a href="https://wordpress.org/plugins/open-user-map/#faq" target="_blank">FAQ</a>. We keep it up to date.', 'open-user-map'); ?>
-                            </td>
                         </tr>
 
                         <tr style="vertical-align: top;">
@@ -2448,16 +2126,11 @@
                                 </div>
                             </td>
                         </tr>
-
                     </table>
-
                 </div>
-
             </div>
-
             <?php submit_button(); ?>
 
         <?php endif; ?>
-
     </form>
 </div>

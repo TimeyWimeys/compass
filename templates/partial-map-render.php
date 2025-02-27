@@ -42,8 +42,6 @@ foreach ($locations_list as $location) {
     // HOOK: modify location image
     $media_tag = apply_filters('oum_location_bubble_image', $media_tag, $location);
 
-    $audio_tag = $location['audio'] ? '<audio controls="controls" style="width:100%"><source type="audio/mp4" src="' . $location['audio'] . '"><source type="audio/mpeg" src="' . $location['audio'] . '"><source type="audio/wav" src="' . $location['audio'] . '"></audio>' : '';
-
     $address_tag = '';
 
     if (get_option('oum_enable_address', 'on') === 'on') {
@@ -184,7 +182,6 @@ foreach ($locations_list as $location) {
     $content .= $name_tag;
     $content .= $custom_fields;
     $content .= $description_tag;
-    $content .= $audio_tag;
     $content .= $link_tag;
     $content .= '</div>';
     $content .= $edit_button;
@@ -208,7 +205,6 @@ foreach ($locations_list as $location) {
         'address' => esc_attr($location["address"]),
         'text' => wp_kses_post($location["text"]),
         'image' => !empty($location['images']) ? implode('|', array_map('esc_url', $location['images'])) : '',
-        'audio' => esc_url($location["audio"]),
         'video' => esc_url($location["video"]),
         'custom_fields' => $location['custom_fields'],
     ];
@@ -345,20 +341,6 @@ $oum_map_height_mobile = (is_numeric($oum_map_height_mobile)) ? $oum_map_height_
                     <?php endforeach; ?>
                 </div>
             </div>
-        <?php endif; ?>
-
-        <?php if (true): ?>
-            <?php if (true): ?>
-
-                <?php if ($oum_disable_oum_attribution != 'on'): ?>
-
-                    <div class="oum-attribution">made with <a href="https://www.open-user-map.com/?ref=map"
-                                                              title="Open User Map | Everybody can add locations"
-                                                              target="_blank">OUM PRO</a></div>
-
-                <?php endif; ?>
-
-            <?php endif; ?>
         <?php endif; ?>
 
         <script type="text/javascript" id="oum-inline-js"
@@ -514,7 +496,6 @@ $oum_map_height_mobile = (is_numeric($oum_map_height_mobile)) ? $oum_map_height_
             .open-user-map .oum-tabs {border-color: <?php echo $oum_ui_color; ?> !important}
             .open-user-map .oum-tabs .nav-item:hover {color: <?php echo $oum_ui_color; ?> !important; border-color: <?php echo $oum_ui_color; ?> !important}
             .open-user-map .oum-tabs .nav-item.active {color: <?php echo $oum_ui_color; ?> !important; border-color: <?php echo $oum_ui_color; ?> !important}
-            .open-user-map .box-wrap .map-wrap .oum-attribution a {color: <?php echo $oum_ui_color; ?> !important;}
             /* Message CTA Buttons */
             .open-user-map .add-location .location-overlay-content #oum_add_location_thankyou button {background-color: <?php echo $oum_ui_color; ?> !important; border-color: <?php echo $oum_ui_color; ?> !important;}
             .open-user-map .add-location .location-overlay-content .oum-delete-confirmation button {background-color: <?php echo $oum_ui_color; ?> !important; border-color: <?php echo $oum_ui_color; ?> !important;}

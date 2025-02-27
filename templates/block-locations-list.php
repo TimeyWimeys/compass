@@ -107,8 +107,6 @@ if ($locations_query->have_posts()) :
             $image = $image_thumb;
         }
 
-        $audio = get_post_meta($post_id, '_oum_location_audio', true);
-
         // custom fields
         $custom_fields = [];
         $meta_custom_fields = isset($location_meta['custom_fields']) ? $location_meta['custom_fields'] : false;
@@ -184,7 +182,6 @@ if ($locations_query->have_posts()) :
             'lng' => $geolocation['lng'],
             'text' => $text,
             'image' => $image,
-            'audio' => $audio,
             'video' => $video,
             'icon' => $icon,
             'custom_fields' => $custom_fields,
@@ -265,12 +262,6 @@ endif;
 
             //HOOK: modify location image
             $media_tag = apply_filters('oum_location_bubble_image', $media_tag, $location);
-
-
-            // Convert relative audio path to absolute URL if needed
-            $audio_url = ($location['audio'] && strpos($location['audio'], 'http') !== 0) ? site_url() . $location['audio'] : $location['audio'];
-            $audio_tag = $audio_url ? '<audio controls="controls" style="width:100%"><source type="audio/mp4" src="' . esc_attr($audio_url) . '"><source type="audio/mpeg" src="' . esc_attr($audio_url) . '"><source type="audio/wav" src="' . esc_attr($audio_url) . '"></audio>' : '';
-
             $address_tag = '';
 
             if (get_option('oum_enable_address', 'on') === 'on') {
@@ -377,7 +368,6 @@ endif;
             $content .= $name_tag;
             $content .= $custom_fields;
             $content .= $description_tag;
-            $content .= $audio_tag;
             $content .= $link_tag;
             $content .= '</div>';
 

@@ -217,7 +217,7 @@
                                                                      placeholder="<?php echo $oum_description_label; ?><?php echo (get_option('oum_description_required')) ? '*' : ''; ?>" <?php echo (get_option('oum_description_required')) ? 'required' : ''; ?>></textarea>
                 <?php endif; ?>
 
-                <?php if (get_option('oum_enable_image', 'on') === 'on' || get_option('oum_enable_audio', 'on') === 'on' || get_option('oum_enable_video') === 'on'): ?>
+                <?php if (get_option('oum_enable_image', 'on') === 'on' || get_option('oum_enable_video') === 'on'): ?>
                     <label class="oum-label"><?php echo $oum_upload_media_label; ?></label>
                     <div class="oum_media">
 
@@ -259,27 +259,6 @@
                                     </div>
                                 <?php endif; ?>
                             <?php endif; ?>
-                        <?php endif; ?>
-
-                        <?php if (get_option('oum_enable_audio', 'on') === 'on'): ?>
-                            <div class="media-upload oum-audio-upload">
-                                <label style="color: #e02aaf" for="oum_location_audio"
-                                       title="<?php echo __('Upload Audio', 'open-user-map'); ?>">
-                                    <span class="dashicons dashicons-format-audio"></span>
-                                </label>
-                                <input type="file"
-                                       id="oum_location_audio"
-                                       name="oum_location_audio"
-                                       accept="audio/mp3,audio/mpeg3,audio/wav,audio/mp4,audio/mpeg,audio/x-m4a"
-                                       multiple="multiple"
-                                />
-                                <div class="preview">
-                                    <div class="audio-preview"></div>
-                                    <div id="oum_remove_audio" class="remove-upload">×</div>
-                                </div>
-                                <input type="hidden" id="oum_remove_existing_audio" name="oum_remove_existing_audio"
-                                       value="1"/>
-                            </div>
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
