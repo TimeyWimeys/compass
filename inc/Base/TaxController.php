@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 /**
  * @package OpenUserMapPlugin
  */
@@ -8,17 +7,11 @@ namespace OpenUserMapPlugin\Base;
 
 use OpenUserMapPlugin\Base\BaseController;
 
-/**
- *
- */
 class TaxController extends BaseController
 {
     public $settings;
 
-    /**
-     * @return void
-     */
-    public function register(): void
+    public function register()
     {
 
         if (oum_fs()->is__premium_only()):
@@ -28,11 +21,11 @@ class TaxController extends BaseController
                 if (get_option('oum_enable_marker_types')) {
 
                     // Taxonomy: type
-                    add_action('init', [$this, 'type_tax']);
-                    add_action('oum-type_add_form_fields', [$this, 'type_tax_add_custom_fields']);
-                    add_action('oum-type_edit_form_fields', [$this, 'type_tax_edit_custom_fields'], 10, 2);
-                    add_action('edited_oum-type', [$this, 'type_tax_save']);
-                    add_action('create_oum-type', [$this, 'type_tax_save']);
+                    add_action('init', array($this, 'type_tax'));
+                    add_action('oum-type_add_form_fields', array($this, 'type_tax_add_custom_fields'));
+                    add_action('oum-type_edit_form_fields', array($this, 'type_tax_edit_custom_fields'), 10, 2);
+                    add_action('edited_oum-type', array($this, 'type_tax_save'));
+                    add_action('create_oum-type', array($this, 'type_tax_save'));
                 }
 
             endif;
@@ -41,13 +34,13 @@ class TaxController extends BaseController
         if (get_option('oum_enable_regions')) {
 
             // Taxonomy: region
-            add_action('init', [$this, 'region_tax']);
-            add_action('oum-region_add_form_fields', [$this, 'region_tax_add_custom_fields']);
-            add_action('oum-region_edit_form_fields', [$this, 'region_tax_edit_custom_fields'], 10, 2);
-            add_action('edited_oum-region', [$this, 'region_tax_save']);
-            add_action('create_oum-region', [$this, 'region_tax_save']);
-            add_action('manage_edit-oum-region_columns', [$this, 'set_custom_region_columns']);
-            add_action('manage_oum-region_custom_column', [$this, 'set_custom_region_columns_data'], 10, 3); // this method has 3 attributes
+            add_action('init', array($this, 'region_tax'));
+            add_action('oum-region_add_form_fields', array($this, 'region_tax_add_custom_fields'));
+            add_action('oum-region_edit_form_fields', array($this, 'region_tax_edit_custom_fields'), 10, 2);
+            add_action('edited_oum-region', array($this, 'region_tax_save'));
+            add_action('create_oum-region', array($this, 'region_tax_save'));
+            add_action('manage_edit-oum-region_columns', array($this, 'set_custom_region_columns'));
+            add_action('manage_oum-region_custom_column', array($this, 'set_custom_region_columns_data'), 10, 3); // this method has 3 attributes
 
         }
     }
@@ -56,9 +49,9 @@ class TaxController extends BaseController
      * Taxonomy: oum-type
      */
 
-    public static function type_tax(): void
+    public static function type_tax()
     {
-        $labels = [
+        $labels = array(
             'name' => __('Marker Categories', 'open-user-map'),
             'singular_name' => __('Marker Category', 'open-user-map'),
             'menu_name' => __('Marker Categories', 'open-user-map'),
@@ -74,9 +67,9 @@ class TaxController extends BaseController
             'add_or_remove_items' => __('Add or remove Marker Categories', 'open-user-map'),
             'separate_items_with_commas' => __('Separate Marker Categories with commas', 'open-user-map'),
             'back_to_items' => __('Back to Marker Categories', 'open-user-map'),
-        ];
+        );
 
-        $args = [
+        $args = array(
             'labels' => $labels,
             'public' => false,
             'show_ui' => true,
@@ -86,46 +79,33 @@ class TaxController extends BaseController
             'show_in_quick_edit' => true,
             'hierarchical' => false,
             'show_in_rest' => true,
-        ];
+        );
 
         register_taxonomy('oum-type', 'oum-location', $args);
     }
 
-    /**
-     * @param $term
-     * @return void
-     */
-    public function type_tax_add_custom_fields($term): void
+    public function type_tax_add_custom_fields($term)
     {
         wp_nonce_field('oum_location', 'oum_location_nonce');
 
         // render view
         require_once oum_get_template('page-backend-add-type.php');
 
-        wp_enqueue_script('oum_backend_type_js', $this->plugin_url . 'src/js/backend-type.js', ['wp-polyfill'], $this->plugin_version);
+        wp_enqueue_script('oum_backend_type_js', $this->plugin_url . 'src/js/backend-type.js', array('wp-polyfill'), $this->plugin_version);
     }
 
-    /**
-     * @param $tag
-     * @param $taxonomy
-     * @return void
-     */
-    public function type_tax_edit_custom_fields($tag, $taxonomy): void
+    public function type_tax_edit_custom_fields($tag, $taxonomy)
     {
         wp_nonce_field('oum_location', 'oum_location_nonce');
 
         // render view
         require_once oum_get_template('page-backend-edit-type.php');
 
-        wp_enqueue_script('oum_backend_type_js', $this->plugin_url . 'src/js/backend-type.js', ['wp-polyfill'], $this->plugin_version);
+        wp_enqueue_script('oum_backend_type_js', $this->plugin_url . 'src/js/backend-type.js', array('wp-polyfill'), $this->plugin_version);
 
     }
 
-    /**
-     * @param $term_id
-     * @return void
-     */
-    public function type_tax_save($term_id): void
+    public function type_tax_save($term_id)
     {
         // Dont save without nonce
         if (!isset($_POST['oum_location_nonce'])) {
@@ -175,9 +155,9 @@ class TaxController extends BaseController
      * Taxonomy: oum-region
      */
 
-    public static function region_tax(): void
+    public static function region_tax()
     {
-        $labels = [
+        $labels = array(
             'name' => __('Regions', 'open-user-map'),
             'singular_name' => __('Region', 'open-user-map'),
             'menu_name' => __('Regions', 'open-user-map'),
@@ -193,9 +173,9 @@ class TaxController extends BaseController
             'add_or_remove_items' => __('Add or remove Regions', 'open-user-map'),
             'separate_items_with_commas' => __('Separate Regions with commas', 'open-user-map'),
             'back_to_items' => __('Back to Regions', 'open-user-map'),
-        ];
+        );
 
-        $args = [
+        $args = array(
             'labels' => $labels,
             'public' => false,
             'show_ui' => true,
@@ -206,31 +186,22 @@ class TaxController extends BaseController
             'meta_box_cb' => false,
             'hierarchical' => false,
             'show_in_rest' => false,
-        ];
+        );
 
         register_taxonomy('oum-region', 'oum-location', $args);
     }
 
-    /**
-     * @param $term
-     * @return void
-     */
-    public function region_tax_add_custom_fields($term): void
+    public function region_tax_add_custom_fields($term)
     {
         wp_nonce_field('oum_location', 'oum_location_nonce');
 
         // render view
         require_once oum_get_template('page-backend-add-region.php');
 
-
+        
     }
 
-    /**
-     * @param $tag
-     * @param $taxonomy
-     * @return void
-     */
-    public function region_tax_edit_custom_fields($tag, $taxonomy): void
+    public function region_tax_edit_custom_fields($tag, $taxonomy)
     {
         wp_nonce_field('oum_location', 'oum_location_nonce');
 
@@ -240,32 +211,28 @@ class TaxController extends BaseController
 
     }
 
-    /**
-     * @param $term_id
-     * @return void
-     */
-    public function region_tax_save($term_id): void
-    {
-        // Dont save without nonce
-        if (!isset($_POST['oum_location_nonce'])) {
-            return $term_id;
-        }
+     public function region_tax_save($term_id)
+     {
+         // Dont save without nonce
+         if (!isset($_POST['oum_location_nonce'])) {
+             return $term_id;
+         }
 
-        // Dont save if nonce is incorrect
-        $nonce = $_POST['oum_location_nonce'];
-        if (!wp_verify_nonce($nonce, 'oum_location')) {
-            return $term_id;
-        }
+         // Dont save if nonce is incorrect
+         $nonce = $_POST['oum_location_nonce'];
+         if (!wp_verify_nonce($nonce, 'oum_location')) {
+             return $term_id;
+         }
 
-        // Dont save if wordpress just auto-saves
-        if (defined('DOING AUTOSAVE') && DOING_AUTOSAVE) {
-            return $term_id;
-        }
+         // Dont save if wordpress just auto-saves
+         if (defined('DOING AUTOSAVE') && DOING_AUTOSAVE) {
+             return $term_id;
+         }
 
-        if (isset($_POST['oum_lat'])) {
+         if (isset($_POST['oum_lat'])) {
             // Validation
             $oum_lat_validated = floatval(str_replace(',', '.', sanitize_text_field($_POST['oum_lat'])));
-            if (!$oum_lat_validated) {
+            if(!$oum_lat_validated) {
                 $oum_lat_validated = '';
             }
 
@@ -277,7 +244,7 @@ class TaxController extends BaseController
         if (isset($_POST['oum_lng'])) {
             // Validation
             $oum_lng_validated = floatval(str_replace(',', '.', sanitize_text_field($_POST['oum_lng'])));
-            if (!$oum_lng_validated) {
+            if(!$oum_lng_validated) {
                 $oum_lng_validated = '';
             }
 
@@ -289,7 +256,7 @@ class TaxController extends BaseController
         if (isset($_POST['oum_zoom'])) {
             // Validation
             $oum_zoom_validated = floatval(str_replace(',', '.', sanitize_text_field($_POST['oum_zoom'])));
-            if (!$oum_zoom_validated) {
+            if(!$oum_zoom_validated) {
                 $oum_zoom_validated = '';
             }
 
@@ -297,13 +264,9 @@ class TaxController extends BaseController
                 update_term_meta($term_id, 'oum_zoom', $oum_zoom_validated);
             }
         }
-    }
+     }
 
-    /**
-     * @param $columns
-     * @return mixed
-     */
-    public static function set_custom_region_columns($columns): mixed
+    public static function set_custom_region_columns($columns)
     {
         // preserve default columns
         $name = $columns['name'];
@@ -316,19 +279,13 @@ class TaxController extends BaseController
         return $columns;
     }
 
-    /**
-     * @param $content
-     * @param $column
-     * @param $term_id
-     * @return void
-     */
-    public static function set_custom_region_columns_data($content, $column, $term_id): void
+    public static function set_custom_region_columns_data($content, $column, $term_id)
     {
         $data = get_term_meta($term_id);
 
-        $lat = $data['oum_lat'][0] ?? '';
-        $lng = $data['oum_lng'][0] ?? '';
-        $zoom = $data['oum_zoom'][0] ?? '';
+        $lat = isset($data['oum_lat'][0]) ? $data['oum_lat'][0] : '';
+        $lng = isset($data['oum_lng'][0]) ? $data['oum_lng'][0] : '';
+        $zoom = isset($data['oum_zoom'][0]) ? $data['oum_zoom'][0] : '';
 
         switch ($column) {
             case 'geocoordinates':

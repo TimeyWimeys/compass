@@ -32,6 +32,45 @@ if(isset($block_attributes['ids']) && $block_attributes['ids'] != '') {
   $query['post__in'] = $selected_ids;
 };
 
+// Custom Attribute: Filter for user (current or specific user ID)
+if ( oum_fs()->is__premium_only() ):
+  if ( oum_fs()->can_use_premium_code() ):
+
+    if(isset($block_attributes['user']) && $block_attributes['user'] != '') {
+      if($block_attributes['user'] === 'current') {
+        // Get current user ID (only if logged in)
+        if(is_user_logged_in()) {
+          $current_user_id = get_current_user_id();
+          $query['author'] = $current_user_id;
+        } else {
+          // If user is not logged in, don't show any locations
+          $query['author'] = -1; // This will return no results
+        }
+      } elseif(strpos($block_attributes['user'], 'role:') === 0) {
+        // Filter by user role
+        $role = str_replace('role:', '', $block_attributes['user']);
+        
+        // Get all users with this role
+        $users_with_role = get_users(['role' => $role, 'fields' => 'ID']);
+        
+        if(!empty($users_with_role)) {
+          $query['author__in'] = $users_with_role;
+        } else {
+          // No users with this role, return no results
+          $query['author'] = -1;
+        }
+      } else {
+        // Try to convert to numeric user ID
+        $user_id = intval($block_attributes['user']);
+        if($user_id > 0) {
+          $query['author'] = $user_id;
+        }
+      }
+    }
+
+  endif;
+endif;
+
 // Init WP_Query
 $locations_query = new WP_Query($query);
 
@@ -68,15 +107,6 @@ if ($locations_query->have_posts()) :
       $image = $image_thumb;
     }
 
-    //make image url relative
-    $site_url = 'http://';
-    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
-      $site_url = 'https://';
-    }
-    $site_url .= $_SERVER['SERVER_NAME'];
-
-    $image = str_replace($site_url, '', $image);
-
     $audio = get_post_meta($post_id, '_oum_location_audio', true);
 
     // custom fields
@@ -94,7 +124,8 @@ if ($locations_query->have_posts()) :
           array_push($custom_fields, array(
             'label' => $active_custom_field['label'],
             'val' => $meta_custom_fields[$index],
-            'fieldtype' => $active_custom_field['fieldtype']
+            'fieldtype' => $active_custom_field['fieldtype'],
+            'uselabelastextoption' => isset($active_custom_field['uselabelastextoption']) ? $active_custom_field['uselabelastextoption'] : false
           ));
         }
       }
@@ -201,9 +232,12 @@ endif;
           
           foreach($images as $index => $image_url) {
             if(!empty($image_url)) {
+              // Convert relative path to absolute URL if needed
+              $absolute_image_url = (strpos($image_url, 'http') !== 0) ? site_url() . $image_url : $image_url;
+              
               $active_class = ($index === 0) ? ' active' : '';
               $media_tag .= '<div class="oum-carousel-item' . $active_class . '">';
-              $media_tag .= '<img class="skip-lazy" src="' . esc_url_raw($image_url) . '" alt="' . esc_attr($location['name']) . '">';
+              $media_tag .= '<img class="skip-lazy" src="' . esc_url_raw($absolute_image_url) . '" alt="' . esc_attr($location['name']) . '">';
               $media_tag .= '</div>';
             }
           }
@@ -212,7 +246,9 @@ endif;
           $media_tag .= '</div>';
         } else {
           // Single image - use regular image display
-          $media_tag = '<div class="oum_location_image"><img class="skip-lazy" src="'. esc_url_raw($location['image']) .'"></div>';
+          // Convert relative path to absolute URL if needed
+          $absolute_image_url = (strpos($location['image'], 'http') !== 0) ? site_url() . $location['image'] : $location['image'];
+          $media_tag = '<div class="oum_location_image"><img class="skip-lazy" src="'. esc_url_raw($absolute_image_url) .'"></div>';
         }
       }
 
@@ -231,7 +267,9 @@ endif;
       $media_tag = apply_filters('oum_location_bubble_image', $media_tag, $location);
 
 
-      $audio_tag = $location['audio']? '<audio controls="controls" style="width:100%"><source type="audio/mp4" src="'.$location['audio'].'"><source type="audio/mpeg" src="'.$location['audio'].'"><source type="audio/wav" src="'.$location['audio'].'"></audio>' : '';
+      // Convert relative audio path to absolute URL if needed
+      $audio_url = ($location['audio'] && strpos($location['audio'], 'http') !== 0) ? site_url() . $location['audio'] : $location['audio'];
+      $audio_tag = $audio_url ? '<audio controls="controls" style="width:100%"><source type="audio/mp4" src="'.esc_attr($audio_url).'"><source type="audio/mpeg" src="'.esc_attr($audio_url).'"><source type="audio/wav" src="'.esc_attr($audio_url).'"></audio>' : '';
 
       $address_tag = '';
 
@@ -297,7 +335,13 @@ endif;
               if(wp_http_validate_url($custom_field['val'])) {
                 
                 //URL
-                $custom_fields .= '<div class="oum_custom_field"><strong>' . $custom_field['label'] . ':</strong> <a target="_blank" href="' . $custom_field['val'] . '">' . $custom_field['val'] . '</a></div>';
+                if(isset($custom_field['uselabelastextoption']) && $custom_field['uselabelastextoption']) {
+                  // Use label as link text
+                  $custom_fields .= '<div class="oum_custom_field"><a target="_blank" href="' . $custom_field['val'] . '">' . $custom_field['label'] . '</a></div>';
+                } else {
+                  // Show label and use URL as link text
+                  $custom_fields .= '<div class="oum_custom_field"><strong>' . $custom_field['label'] . ':</strong> <a target="_blank" href="' . $custom_field['val'] . '">' . $custom_field['val'] . '</a></div>';
+                }
               
               }elseif(is_email($custom_field['val']) && ($custom_field['fieldtype'] == 'email')){
 

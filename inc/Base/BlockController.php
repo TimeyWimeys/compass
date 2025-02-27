@@ -1,42 +1,33 @@
 <?php
-declare(strict_types=1);
 /**
  * @package OpenUserMapPlugin
  */
 
 namespace OpenUserMapPlugin\Base;
 
-use Elementor_OUM_Addon\Plugin;
 use OpenUserMapPlugin\Base\BaseController;
 
-/**
- *
- */
 class BlockController extends BaseController
 {
-    /**
-     * @return void
-     */
-    public function register(): void
-    {
+    public function register() {
         // Gutenberg Blocks
-        add_action('init', [$this, 'set_gutenberg_blocks']);
+        add_action('init', array($this, 'set_gutenberg_blocks'));
 
         // Elementor Widgets
-        add_action('plugins_loaded', [$this, 'set_elementor_widgets']);
+        add_action('plugins_loaded', array($this, 'set_elementor_widgets'));
     }
 
     /**
      * Setup Gutenberg Blocks
      */
-    public function set_gutenberg_blocks(): void
-    {
+    public function set_gutenberg_blocks()
+    {   
         // Register Block
-        register_block_type(
+        register_block_type( 
             $this->plugin_path . 'blocks',
-            [
-                'render_callback' => is_admin() ? null : [$this, 'render_block_map']
-            ]
+            array(
+                'render_callback' => is_admin() ? null : array($this, 'render_block_map')
+            )
         );
 
         // add JS translation for Gutenberg Blocks script
@@ -56,11 +47,11 @@ class BlockController extends BaseController
     /**
      * Setup Elementor Widgets
      */
-    public function set_elementor_widgets($widgets_manager): void
+    public function set_elementor_widgets($widgets_manager)
     {
         require_once "$this->plugin_path/elementor/includes/plugin.php";
 
         // Run the plugin
-        Plugin::instance();
+        \Elementor_OUM_Addon\Plugin::instance();
     }
 }

@@ -181,6 +181,45 @@ if(isset($block_attributes['ids']) && $block_attributes['ids'] != '') {
   $query['post__in'] = $selected_ids;
 };
 
+// Custom Attribute: Filter for user (current or specific user ID)
+if ( oum_fs()->is__premium_only() ):
+  if ( oum_fs()->can_use_premium_code() ):
+
+    if(isset($block_attributes['user']) && $block_attributes['user'] != '') {
+      if($block_attributes['user'] === 'current') {
+        // Get current user ID (only if logged in)
+        if(is_user_logged_in()) {
+          $current_user_id = get_current_user_id();
+          $query['author'] = $current_user_id;
+        } else {
+          // If user is not logged in, don't show any locations
+          $query['author'] = -1; // This will return no results
+        }
+      } elseif(strpos($block_attributes['user'], 'role:') === 0) {
+        // Filter by user role
+        $role = str_replace('role:', '', $block_attributes['user']);
+        
+        // Get all users with this role
+        $users_with_role = get_users(['role' => $role, 'fields' => 'ID']);
+        
+        if(!empty($users_with_role)) {
+          $query['author__in'] = $users_with_role;
+        } else {
+          // No users with this role, return no results
+          $query['author'] = -1;
+        }
+      } else {
+        // Try to convert to numeric user ID
+        $user_id = intval($block_attributes['user']);
+        if($user_id > 0) {
+          $query['author'] = $user_id;
+        }
+      }
+    }
+
+  endif;
+endif;
+
 // Custom Attribute: Pre-select region
 if(isset($regions) && isset($block_attributes['region']) && $block_attributes['region'] != '') {
   $oum_start_region_name = $block_attributes['region'];
@@ -266,19 +305,18 @@ foreach ($posts as $post) {
         }
     }
 
-    // Make image URLs relative
-    $site_url = 'http://';
-    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
-        $site_url = 'https://';
-    }
-    $site_url .= $_SERVER['SERVER_NAME'];
-
-    $images = array_map(function($url) use ($site_url) {
-        return str_replace($site_url, '', $url);
+    // Convert to absolute URLs for JavaScript display
+    $absolute_images = array_map(function($url) {
+        // Convert relative path to absolute URL if needed
+        return (strpos($url, 'http') !== 0) ? site_url() . $url : $url;
     }, $images);
 
     $audio = isset($indexed_meta[$post_id]['_oum_location_audio']) ? 
         $indexed_meta[$post_id]['_oum_location_audio'] : '';
+    
+    // Convert audio to absolute URL if needed
+    $absolute_audio = (isset($audio) && $audio != '' && strpos($audio, 'http') !== 0) ? 
+        site_url() . $audio : $audio;
 
     // Optimized custom fields processing
     $custom_fields = [];
@@ -352,9 +390,8 @@ foreach ($posts as $post) {
       'lat' => $location_meta['lat'],
       'lng' => $location_meta['lng'],
       'text' => $text,
-      'images' => $images,
-      'image' => !empty($images) ? $images[0] : '',
-      'audio' => $audio,
+      'images' => $absolute_images,
+      'audio' => $absolute_audio,
       'video' => $video,
       'icon' => $icon,
       'custom_fields' => $custom_fields,

@@ -1,20 +1,13 @@
 <?php
-declare(strict_types=1);
 /**
  * @package OpenUserMapPlugin
  */
 
 namespace OpenUserMapPlugin\Base;
 
-/**
- *
- */
-class Activate
+class Deactivate
 {
-    /**
-     * @return void
-     */
-    public static function activate(): void
+    public static function deactivate()
     {
         flush_rewrite_rules();
     }

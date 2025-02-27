@@ -89,7 +89,7 @@ foreach ($locations_list as $location){
             foreach($entries as $entry) {
                 if(filter_var($entry, FILTER_VALIDATE_URL)) {
                     $formatted_entries[] = sprintf(
-                        '<a target="_blank" href="%s">%s</a>',
+                        '<a href="%s">%s</a>',
                         esc_url($entry),
                         esc_html($entry)
                     );
@@ -116,13 +116,13 @@ foreach ($locations_list as $location){
             if(filter_var($value, FILTER_VALIDATE_URL)) {
                 if(!empty($custom_field['uselabelastextoption'])) {
                     $field_html .= sprintf(
-                        '<a target="_blank" href="%s">%s</a>',
+                        '<a href="%s">%s</a>',
                         esc_url($value),
                         esc_html($custom_field['label'])
                     );
                 } else {
                     $field_html .= sprintf(
-                        '<strong>%s:</strong> <a target="_blank" href="%s">%s</a>',
+                        '<strong>%s:</strong> <a href="%s">%s</a>',
                         esc_html($custom_field['label']),
                         esc_url($value),
                         esc_html($value)
@@ -209,7 +209,7 @@ foreach ($locations_list as $location){
     'post_id' => esc_attr($location["post_id"]),
     'address' => esc_attr($location["address"]),
     'text' => wp_kses_post($location["text"]),
-    'image' => isset($location['images']) && !empty($location['images']) ? implode('|', array_map('esc_url', $location['images'])) : esc_url($location["image"]),
+    'image' => isset($location['images']) && !empty($location['images']) ? implode('|', array_map('esc_url', $location['images'])) : '',
     'audio' => esc_url($location["audio"]),
     'video' => esc_url($location["video"]),
     'custom_fields' => $location['custom_fields'],
@@ -346,7 +346,16 @@ $oum_map_height_mobile = (is_numeric($oum_map_height_mobile)) ? $oum_map_height_
       <?php endif; ?>
     <?php endif; ?>
 
-    <script type="text/javascript" data-category="functional" class="cmplz-native" id="oum-inline-js">
+    <script type="text/javascript" id="oum-inline-js" 
+      data-category="functional" 
+      class="cmplz-native" 
+      data-minify="0"
+      data-no-optimize="1"
+      data-no-defer="1"
+      data-no-combine="1"
+      data-cfasync="false"
+      data-pagespeed-no-defer
+      data-boot="1">
       var map_el = `map-<?php echo $unique_id; ?>`;
 
       if(document.getElementById(map_el)) {

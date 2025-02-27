@@ -1,8 +1,8 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     // Initialize Masonry for each gallery
     const galleries = document.querySelectorAll('.open-user-map-image-gallery');
-
-    galleries.forEach(function (gallery) {
+    
+    galleries.forEach(function(gallery) {
         // Get all items except pagination
         const container = document.createElement('div');
         container.className = 'oum-gallery-items-container';
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // Initialize imagesLoaded
-        imagesLoaded(container, function () {
+        imagesLoaded(container, function() {
             masonry.layout();
             // Show gallery after layout is complete
             gallery.style.opacity = 1;
@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Update layout after each image loads
         const images = container.querySelectorAll('img');
-        images.forEach(function (img) {
-            img.addEventListener('load', function () {
+        images.forEach(function(img) {
+            img.addEventListener('load', function() {
                 masonry.layout();
             });
         });

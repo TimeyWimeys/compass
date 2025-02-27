@@ -185,7 +185,10 @@
           <textarea id="oum_location_text" name="oum_location_text" placeholder="<?php echo $oum_description_label; ?><?php echo (get_option('oum_description_required'))? '*' : ''; ?>" <?php echo (get_option('oum_description_required'))? 'required' : ''; ?>></textarea>
         <?php endif; ?>
         
-        <div class="oum_media">
+        <?php if(get_option('oum_enable_image', 'on') === 'on' || get_option('oum_enable_audio', 'on') === 'on' || (oum_fs()->is__premium_only() && oum_fs()->can_use_premium_code() && get_option('oum_enable_video') === 'on')): ?>
+          <label class="oum-label"><?php echo $oum_upload_media_label; ?></label>
+          <div class="oum_media">
+
           <?php if(get_option('oum_enable_image', 'on') === 'on'): ?>
             <div class="media-upload oum-image-upload">
               <div class="media-upload-top">
@@ -203,10 +206,6 @@
                 <?php if(get_option('oum_image_required')): ?>required<?php endif; ?> 
                 data-max-files="5"
               />
-              <div class="preview">
-                <span></span>
-                <div id="oum_remove_image" class="remove-upload">×</div>
-              </div>
               <input type="hidden" id="oum_remove_existing_image" name="oum_remove_existing_image" value="0" />
             </div>
 
@@ -244,7 +243,8 @@
               <input type="hidden" id="oum_remove_existing_audio" name="oum_remove_existing_audio" value="1" />
             </div>
           <?php endif; ?>
-        </div>
+          </div>
+        <?php endif; ?>
 
         <?php if ( oum_fs()->is__premium_only() ): ?>
           <?php if ( oum_fs()->can_use_premium_code() ): ?>

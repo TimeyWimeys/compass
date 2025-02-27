@@ -1,14 +1,10 @@
 <?php
-declare(strict_types=1);
 /**
  * @package OpenUserMapPlugin
  */
 
 namespace OpenUserMapPlugin;
 
-/**
- *
- */
 final class Init
 {
     /**
@@ -27,11 +23,11 @@ final class Init
         );
 
         // only add Frontend class when not in backend
-        if (!is_admin()) {
+        if(!is_admin()) {
             array_unshift($classes, Pages\Frontend::class);
         }
 
-        return $classes;
+        return $classes; 
     }
 
     /**
