@@ -17,7 +17,7 @@
       }
     }
   }
-  
+
   .oum_custom_field_description {
     font-style: italic;
     font-size: 14px;
@@ -32,7 +32,7 @@
       position: relative;
       width: 50%;
       padding-top: 30%;
-  
+
       #mapGetLocation {
         position: absolute;
         z-index: 1;
@@ -51,7 +51,7 @@
               background-repeat: no-repeat;
               background-size: 30px;
               background-color: #fff;
-  
+
               input[type=text] {
                 width: calc(100% - 35px);
                 padding: 9px 13px 9px 0;
@@ -67,7 +67,7 @@
                   font-size: 16px;
                 }
               }
-    
+
               button.reset {
                 right: 25px;
                 background-color: #fff;
@@ -76,7 +76,6 @@
                 padding: 0 8px;
                 border: none;
                 box-shadow: none;
-                margin: 0;
                 outline: none;
                 font-size: 14px;
                 opacity: 0.5;
@@ -108,27 +107,28 @@
           .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
             filter: saturate(3);
           }
+
           // label tiles
         }
-  
+
         &.map-style_Custom2 {
           // map tiles
           .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
             filter: sepia(1) invert(0) saturate(28) hue-rotate(-53deg);
           }
-  
+
           // label tiles
           .leaflet-tile-pane .leaflet-layer:nth-child(2) .leaflet-tile {
             filter: sepia(0) contrast(1) invert(1) brightness(2);
           }
         }
-  
+
         &.map-style_Custom3 {
           // map tiles
           .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
             filter: sepia(1) invert(1) saturate(100) brightness(1) hue-rotate(-300deg);
           }
-  
+
           // label tiles
           .leaflet-tile-pane .leaflet-layer:nth-child(2) .leaflet-tile {
             filter: sepia(0) contrast(1) invert(1) brightness(2);
@@ -161,11 +161,11 @@
         }
 
         .latlng-wrap {
-          >div:not(.hint) {
+          > div:not(.hint) {
             display: flex;
             justify-content: space-between;
 
-            >div {
+            > div {
               width: 49%;
             }
           }
@@ -199,17 +199,17 @@
       border: 2px dashed #ddd;
       border-radius: 4px;
       position: relative;
-      
+
       &.dragover {
         background: #f5f5f5;
         border-color: #999;
       }
-      
+
       &:empty {
         display: none;
         margin: 0;
       }
-      
+
       .image-preview-item {
         position: relative;
         aspect-ratio: 1;
@@ -221,7 +221,7 @@
         will-change: transform;
         user-select: none;
         transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
-        
+
         &.dragging {
           cursor: grabbing;
           background: #fff;
@@ -231,7 +231,7 @@
           transform: scale(1.05) rotate(1deg);
           z-index: 1000;
         }
-        
+
         img {
           width: 100%;
           height: 100%;
@@ -239,7 +239,7 @@
           display: block;
           pointer-events: none;
         }
-        
+
         .remove-image {
           position: absolute;
           top: 5px;
@@ -257,7 +257,7 @@
           color: #666;
           transition: all 0.2s ease;
           z-index: 2;
-          
+
           &:hover {
             background: #fff;
             color: #000;
@@ -384,7 +384,6 @@
       font-size: 14px;
       line-height: 23px;
       padding-left: 50px;
-      position: relative;
       margin-top: -18px;
 
       &::before {
@@ -399,7 +398,7 @@
         transition: background-color 0.5s linear;
         z-index: 5;
         position: absolute;
-        left: 0px;
+        left: 0;
         top: 1px;
       }
 
@@ -411,7 +410,7 @@
         background-color: #fff;
         content: "";
         transition: margin 0.1s linear;
-        box-shadow: 0px 0px 5px #aaa;
+        box-shadow: 0 0 5px #aaa;
         position: absolute;
         left: 2px;
         top: 3px;
@@ -458,7 +457,7 @@
         &[data-style="default"] {
           background-image: url('../src/leaflet/images/marker-icon_default-2x.png');
         }
-    
+
         &[data-style="custom1"] {
           background-image: url('../src/leaflet/images/marker-icon_custom1-2x.png');
         }
@@ -544,7 +543,7 @@
           top: 0;
           font-size: 11px;
           text-align: center;
-          padding: 0px 4px;
+          padding: 0 4px;
         }
 
         .oum-gopro-text {
@@ -565,7 +564,7 @@
         top: 0;
         font-size: 11px;
         text-align: center;
-        padding: 0px 4px;
+        padding: 0 4px;
       }
 
       &.checked,
@@ -583,7 +582,7 @@
         &[data-style="default"] {
           background-image: url('../src/leaflet/images/marker-icon_default-2x.png');
         }
-    
+
         &[data-style="custom1"] {
           background-image: url('../src/leaflet/images/marker-icon_custom1-2x.png');
         }
@@ -687,7 +686,7 @@
               background-repeat: no-repeat;
               background-size: 30px;
               background-color: #fff;
-  
+
               input[type=text] {
                 width: calc(100% - 35px);
                 padding: 9px 13px 9px 0;
@@ -703,7 +702,7 @@
                   font-size: 16px;
                 }
               }
-    
+
               button.reset {
                 right: 25px;
                 background-color: #fff;
@@ -712,7 +711,6 @@
                 padding: 0 8px;
                 border: none;
                 box-shadow: none;
-                margin: 0;
                 outline: none;
                 font-size: 14px;
                 opacity: 0.5;
@@ -788,7 +786,7 @@
         justify-content: space-between;
         padding-top: 1rem;
 
-        >div {
+        > div {
           input {
             width: 100%;
           }
@@ -832,12 +830,12 @@
     background: #fff;
 
     #adminmenu li#menu-settings a::after {
-      border-right-color: rgb(109,189,230);
+      border-right-color: rgb(109, 189, 230);
     }
 
     #wpwrap {
       height: 100%;
-  
+
       #wpbody {
         height: 100%;
       }
@@ -854,8 +852,8 @@
       background: #fff;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-  
-      >* {
+
+      > * {
         display: flex;
         flex-direction: column;
         padding: 30vh 9% 9% 9%;
@@ -873,13 +871,13 @@
         text-align: center;
         font-size: 17px;
       }
-  
+
       .hero {
         background: url(images/block-bg.jpg) no-repeat center #26aee7;
         background-size: cover;
         color: white;
         width: 100%;
-  
+
         .logo {
           background: url(images/icon-256x256.png) no-repeat top left transparent;
           background-size: 50px;
@@ -894,14 +892,14 @@
           line-height: 50px;
           letter-spacing: -1px;
         }
-  
+
         ul.steps {
           display: flex;
           gap: 15px;
           position: absolute;
           top: 85vh;
           left: 22%;
-  
+
           li {
             display: block;
             border: 2px solid #fff;
@@ -909,13 +907,13 @@
             width: 8px;
             height: 8px;
             background: none;
-  
+
             &.done {
               background: #fff;
             }
           }
         }
-  
+
         .overline {
           font-weight: bold;
           color: #fff;
@@ -925,7 +923,7 @@
           opacity: 0.7;
           margin-bottom: 30px;
         }
-  
+
         h1 {
           color: #fff;
           font-size: 70px;
@@ -935,7 +933,7 @@
           margin: 0;
         }
       }
-  
+
       .step-content {
         width: 100%;
         max-width: 900px;
@@ -950,10 +948,10 @@
           justify-content: space-between;
           gap: 30px;
           margin-bottom: 30px;
-      
+
           .option {
             flex-basis: 300px;
-      
+
             label {
               display: block;
               height: calc(100% - 8px);
@@ -961,47 +959,47 @@
               padding: 0;
               background: #fff;
               border: 4px solid #f0f0f1;
-      
+
               .map-type-preview {
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-position: top right;
                 aspect-ratio: 2;
-        
+
                 &[data-type="interactive"] {
                   background-image: url(images/map_type_interactive.jpg);
                 }
-      
+
                 &[data-type="simple"] {
                   background-image: url(images/map_type_simple.jpg);
                 }
               }
-      
+
               .label-text {
                 padding: 23px 30px 20px 56px;
                 position: relative;
-      
+
                 h2 {
                   margin-top: 0;
                   margin-bottom: 6px;
                 }
-      
+
                 input[type=radio] {
                   position: absolute;
                   left: 25px;
                   top: 29px;
                 }
               }
-      
-      
+
+
               &:has(input[type=radio]:checked) {
                 border-color: #e02aaf;
                 opacity: 1;
               }
-      
+
               &:has(input[type=radio]:not(:checked)) {
                 opacity: 0.6;
-      
+
                 &:hover {
                   border-color: #e02aaf;
                   opacity: 1;
@@ -1018,7 +1016,7 @@
             margin-bottom: 20px;
           }
         }
-  
+
         .button-primary {
           font-size: 16px;
           height: 49px;
@@ -1041,7 +1039,7 @@
     display: inline-block;
     background: #50aa96;
     color: white;
-    padding: 0px 4px;
+    padding: 0 4px;
     font-size: 12px;
   }
 
@@ -1124,7 +1122,7 @@
           background-size: cover;
           background-position: top right;
           aspect-ratio: 2;
-  
+
           &[data-type="interactive"] {
             background-image: url(images/map_type_interactive.jpg);
           }
@@ -1208,7 +1206,7 @@
         color: white;
         right: 5px;
         bottom: 5px;
-        padding: 0px 4px;
+        padding: 0 4px;
         font-size: 11px;
         border: 1px solid;
       }
@@ -1230,10 +1228,10 @@
           text-align: center;
           font-size: 12px;
           padding: 5px;
-          background: rgba(255,255,255,0.9);
+          background: rgba(255, 255, 255, 0.9);
         }
 
-        &.commercial > div{
+        &.commercial > div {
           &::after {
             content: 'API KEY';
             display: inline-block;
@@ -1248,15 +1246,15 @@
             border-radius: 2px;
           }
         }
-    
+
         &[data-style="Stadia.StamenTonerLite"] {
           background-image: url('images/map_style_Stamen.TonerLite.png');
         }
-    
+
         &[data-style="Esri.WorldStreetMap"] {
           background-image: url('images/map_style_Esri.WorldStreetMap.png');
         }
-    
+
         &[data-style="OpenStreetMap.Mapnik"] {
           background-image: url('images/map_style_OpenStreetMap.Mapnik.png');
         }
@@ -1264,7 +1262,7 @@
         &[data-style="OpenStreetMap.DE"] {
           background-image: url('images/map_style_OpenStreetMap.DE.png');
         }
-    
+
         &[data-style="CartoDB.Positron"] {
           background-image: url('images/map_style_CartoDB.Positron.png');
         }
@@ -1276,15 +1274,15 @@
         &[data-style="Esri.WorldImagery"] {
           background-image: url('images/map_style_Esri.WorldImagery.png');
         }
-    
+
         &[data-style="Custom1"] {
           background-image: url('images/map_style_Custom1.png');
         }
-    
+
         &[data-style="Custom2"] {
           background-image: url('images/map_style_Custom2.png');
         }
-    
+
         &[data-style="Custom3"] {
           background-image: url('images/map_style_Custom3.png');
         }
@@ -1351,7 +1349,7 @@
           top: 0;
           font-size: 11px;
           text-align: center;
-          padding: 0px 4px;
+          padding: 0 4px;
         }
 
         .oum-gopro-text {
@@ -1372,7 +1370,7 @@
         top: 0;
         font-size: 11px;
         text-align: center;
-        padding: 0px 4px;
+        padding: 0 4px;
       }
 
       &.checked,
@@ -1390,7 +1388,7 @@
         &[data-style="default"] {
           background-image: url('../src/leaflet/images/marker-icon_default-2x.png');
         }
-    
+
         &[data-style="custom1"] {
           background-image: url('../src/leaflet/images/marker-icon_custom1-2x.png');
         }
@@ -1479,7 +1477,7 @@
         top: 0;
         right: 0;
         bottom: 0;
-        left: 0; 
+        left: 0;
 
         .leaflet-control-geosearch {
           &.leaflet-geosearch-bar {
@@ -1489,7 +1487,7 @@
               background-repeat: no-repeat;
               background-size: 30px;
               background-color: #fff;
-  
+
               input[type=text] {
                 width: calc(100% - 35px);
                 padding: 9px 13px 9px 0;
@@ -1505,7 +1503,7 @@
                   font-size: 16px;
                 }
               }
-    
+
               button.reset {
                 right: 25px;
                 background-color: #fff;
@@ -1514,7 +1512,6 @@
                 padding: 0 8px;
                 border: none;
                 box-shadow: none;
-                margin: 0;
                 outline: none;
                 font-size: 14px;
                 opacity: 0.5;
@@ -1546,27 +1543,28 @@
           .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
             filter: saturate(3);
           }
+
           // label tiles
         }
-  
+
         &.map-style_Custom2 {
           // map tiles
           .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
             filter: sepia(1) invert(0) saturate(28) hue-rotate(-53deg);
           }
-  
+
           // label tiles
           .leaflet-tile-pane .leaflet-layer:nth-child(2) .leaflet-tile {
             filter: sepia(0) contrast(1) invert(1) brightness(2);
           }
         }
-  
+
         &.map-style_Custom3 {
           // map tiles
           .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
             filter: sepia(1) invert(1) saturate(100) brightness(1) hue-rotate(-300deg);
           }
-  
+
           // label tiles
           .leaflet-tile-pane .leaflet-layer:nth-child(2) .leaflet-tile {
             filter: sepia(0) contrast(1) invert(1) brightness(2);
@@ -1583,7 +1581,7 @@
         display: flex;
         justify-content: space-between;
 
-        >div {
+        > div {
           input {
             width: 100%;
           }
@@ -1630,7 +1628,7 @@
       border: 1px solid #c3c4c7;
       margin-bottom: 15px;
 
-      th, 
+      th,
       td {
         border: 1px solid #c3c4c7;
         padding: 12px;
@@ -1665,12 +1663,12 @@
             a {
               text-decoration: none !important;
               display: inline-block;
-      
-              &.up, 
+
+              &.up,
               &.down {
                 color: green;
               }
-      
+
               &.remove_button {
                 color: red;
               }
@@ -1697,7 +1695,6 @@
       font-size: 14px;
       line-height: 23px;
       padding-left: 50px;
-      position: relative;
       margin-top: -18px;
 
       &::before {
@@ -1712,7 +1709,7 @@
         transition: background-color 0.5s linear;
         z-index: 5;
         position: absolute;
-        left: 0px;
+        left: 0;
         top: 1px;
       }
 
@@ -1724,7 +1721,7 @@
         background-color: #fff;
         content: "";
         transition: margin 0.1s linear;
-        box-shadow: 0px 0px 5px #aaa;
+        box-shadow: 0 0 5px #aaa;
         position: absolute;
         left: 2px;
         top: 3px;
@@ -1746,7 +1743,6 @@
     position: relative;
 
     .oum-import-loading {
-      display: none;
       position: relative;
       margin-left: 10px;
       vertical-align: middle;
@@ -1770,8 +1766,12 @@
   }
 
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
   .oum-pro {
@@ -1780,7 +1780,7 @@
     color: white;
     font-size: 11px;
     text-align: center;
-    padding: 0px 4px;
+    padding: 0 4px;
   }
 
   .oum-gopro-tr td,
@@ -1887,7 +1887,7 @@
 // Pagebuilder: Gutenberg & Elementor
 .wp-block.wp-block-open-user-map-map,
 .elementor-editor-active .elementor-widget-open_user_map_widget .elementor-widget-container,
-.elementor-editor-preview .elementor-widget-open_user_map_widget .elementor-widget-container{
+.elementor-editor-preview .elementor-widget-open_user_map_widget .elementor-widget-container {
   background: url(images/block-bg.jpg) top center no-repeat;
   background-size: cover;
 

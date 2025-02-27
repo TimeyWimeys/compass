@@ -5,13 +5,16 @@
 
 namespace OpenUserMapPlugin;
 
+/**
+ *
+ */
 final class Init
 {
     /**
      * Store all the classes inside an array
      * @return array Full list of classes
      */
-    public static function get_services()
+    public static function get_services(): array
     {
         $classes = array(
             Pages\Settings::class,
@@ -23,17 +26,17 @@ final class Init
         );
 
         // only add Frontend class when not in backend
-        if(!is_admin()) {
+        if (!is_admin()) {
             array_unshift($classes, Pages\Frontend::class);
         }
 
-        return $classes; 
+        return $classes;
     }
 
     /**
      * Loop through the classes, initialize them and call method register() if it exists
      */
-    public static function register_services()
+    public static function register_services(): void
     {
         foreach (self::get_services() as $class) {
             $service = self::instantiate($class);
@@ -49,7 +52,7 @@ final class Init
      * @param $class class      class from the services array
      * @return class instance   new instance of the class
      */
-    private static function instantiate($class)
+    private static function instantiate($class): object
     {
         $service = new $class();
 

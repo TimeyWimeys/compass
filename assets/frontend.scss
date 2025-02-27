@@ -1,7 +1,7 @@
 // Variables
 $colors: (
-  primary: #e02aaf,
-  highlight: red
+        primary: #e02aaf,
+        highlight: red
 );
 
 $search_input_width: 300px;
@@ -142,7 +142,7 @@ $search_input_width: 300px;
     max-width: inherit;
   }
 
-  input[type="radio"], 
+  input[type="radio"],
   input[type="checkbox"] {
     margin: inherit;
     padding: inherit;
@@ -169,6 +169,7 @@ $search_input_width: 300px;
   .elementor-widget-open_user_map_widget {
     width: 100%;
   }
+
   /* end resets */
 
   $marker_size: 22px;
@@ -192,7 +193,6 @@ $search_input_width: 300px;
       font-size: 1rem;
       line-height: 22px;
       padding-left: 50px;
-      position: relative;
       margin-left: 4px !important;
       margin-top: -16px;
 
@@ -208,7 +208,7 @@ $search_input_width: 300px;
         transition: background-color 0.5s linear;
         z-index: 5;
         position: absolute;
-        left: 0px;
+        left: 0;
         top: 1px;
       }
 
@@ -220,7 +220,7 @@ $search_input_width: 300px;
         background-color: #fff;
         content: "";
         transition: margin 0.1s linear;
-        box-shadow: 0px 0px 5px #aaa;
+        box-shadow: 0 0 5px #aaa;
         position: absolute;
         left: 2px;
         top: 3px;
@@ -236,7 +236,7 @@ $search_input_width: 300px;
       margin: 0 0 0 20px;
     }
   }
-  
+
   .box-wrap {
     .tab-wrap {
       .oum-tabs {
@@ -244,20 +244,20 @@ $search_input_width: 300px;
         flex-wrap: wrap;
         justify-content: center;
         border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-    
+
         .nav-item {
           font-size: 1.2rem;
           padding: 3px 15px;
           border-bottom: 3px solid transparent;
           color: inherit;
           cursor: pointer;
-    
+
           &.active {
             font-weight: bold;
             border-color: black;
             color: black;
           }
-    
+
           &:hover {
             border-color: black;
           }
@@ -299,8 +299,12 @@ $search_input_width: 300px;
       }
 
       @keyframes oum-spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
       }
 
       // Initially hide controls until map is loaded
@@ -321,7 +325,7 @@ $search_input_width: 300px;
         bottom: 0;
         left: 0;
         height: 100%;
-  
+
         a {
           text-decoration: none !important;
           padding: 0;
@@ -353,9 +357,9 @@ $search_input_width: 300px;
         }
 
         .leaflet-popup {
-          box-shadow: 0 3px 14px rgba(0,0,0,0.2);
+          box-shadow: 0 3px 14px rgba(0, 0, 0, 0.2);
         }
-  
+
         .leaflet-popup-content-wrapper {
           position: relative;
           z-index: 1;
@@ -363,16 +367,16 @@ $search_input_width: 300px;
           border-radius: 2px;
           overflow: hidden;
           padding: 0;
-  
+
           .leaflet-popup-content {
             margin: 0;
             width: 250px;
             max-height: 400px;
             overflow: auto;
-  
+
             .oum_location_image {
               background-color: #eee;
-      
+
               img {
                 width: 100%;
                 aspect-ratio: 1.77;
@@ -405,18 +409,18 @@ $search_input_width: 300px;
                 margin: 0 auto;
               }
             }
-  
+
             .oum_location_text {
               padding: 15px;
-  
+
               * {
                 color: #000;
               }
-  
+
               a {
                 color: map-get($colors, "primary");
               }
-  
+
               .oum_location_date {
                 opacity: 0.8;
                 text-transform: uppercase;
@@ -424,7 +428,7 @@ $search_input_width: 300px;
                 font-size: 11px;
                 margin-bottom: 5px;
               }
-  
+
               .oum_location_address {
                 opacity: 0.8;
                 text-transform: uppercase;
@@ -432,14 +436,14 @@ $search_input_width: 300px;
                 font-size: 11px;
                 margin-bottom: 10px;
               }
-  
+
               .oum_location_name {
                 font-size: 20px;
                 font-weight: bold;
                 margin-top: 0;
                 margin-bottom: 10px;
               }
-  
+
               .oum_location_custom_fields {
                 font-size: 14px;
                 opacity: 0.8;
@@ -447,15 +451,14 @@ $search_input_width: 300px;
                 .oum_custom_field {
                   margin-bottom: 10px;
                 }
-  
+
                 a {
                   display: inline-block;
                   hyphens: auto;
                 }
-  
+
                 a[href*=facebook] {
                   display: inline-block;
-                  margin: 6px 1px;
                   top: -2px;
                   position: relative;
                   width: 20px;
@@ -465,10 +468,9 @@ $search_input_width: 300px;
                   text-indent: -9999px;
                   margin: 6px 0;
                 }
-  
+
                 a[href*=instagram] {
                   display: inline-block;
-                  margin: 6px 1px;
                   top: -2px;
                   position: relative;
                   width: 20px;
@@ -478,10 +480,9 @@ $search_input_width: 300px;
                   text-indent: -9999px;
                   margin: 6px 0;
                 }
-  
+
                 a[href*=linkedin] {
                   display: inline-block;
-                  margin: 6px 1px;
                   top: -2px;
                   position: relative;
                   width: 20px;
@@ -491,10 +492,9 @@ $search_input_width: 300px;
                   text-indent: -9999px;
                   margin: 6px 0;
                 }
-  
+
                 a[href*=twitter] {
                   display: inline-block;
-                  margin: 6px 1px;
                   top: -2px;
                   position: relative;
                   width: 20px;
@@ -504,10 +504,9 @@ $search_input_width: 300px;
                   text-indent: -9999px;
                   margin: 6px 0;
                 }
-  
+
                 a[href*=youtube] {
                   display: inline-block;
-                  margin: 6px 1px;
                   top: -2px;
                   position: relative;
                   width: 20px;
@@ -517,10 +516,9 @@ $search_input_width: 300px;
                   text-indent: -9999px;
                   margin: 6px 0;
                 }
-  
+
                 a[href*=soundcloud] {
                   display: inline-block;
-                  margin: 6px 1px;
                   top: -2px;
                   position: relative;
                   width: 20px;
@@ -530,9 +528,9 @@ $search_input_width: 300px;
                   text-indent: -9999px;
                   margin: 6px 0;
                 }
-  
+
                 .oum_custom_field span {
-                  background:rgba(0, 0, 0, 0.1);
+                  background: rgba(0, 0, 0, 0.1);
                   display: inline-block;
                   padding: 3px 5px;
                   border-radius: 5px;
@@ -540,16 +538,16 @@ $search_input_width: 300px;
                   font-size: 13px;
                 }
               }
-  
+
               .oum_location_description {
                 font-size: 14px;
                 opacity: 0.8;
               }
-  
+
               audio {
                 margin-top: 15px;
               }
-  
+
               .oum_read_more {
                 margin-top: 10px;
               }
@@ -560,33 +558,34 @@ $search_input_width: 300px;
             }
           }
         }
-  
+
         &.map-style_Custom1 {
           // map tiles
           .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
             filter: saturate(3);
           }
+
           // label tiles
         }
-  
+
         &.map-style_Custom2 {
           // map tiles
           .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
             filter: sepia(1) invert(0) saturate(28) hue-rotate(-53deg);
           }
-  
+
           // label tiles
           .leaflet-tile-pane .leaflet-layer:nth-child(2) .leaflet-tile {
             filter: sepia(0) contrast(1) invert(1) brightness(2);
           }
         }
-  
+
         &.map-style_Custom3 {
           // map tiles
           .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
             filter: sepia(1) invert(1) saturate(100) brightness(1) hue-rotate(-300deg);
           }
-  
+
           // label tiles
           .leaflet-tile-pane .leaflet-layer:nth-child(2) .leaflet-tile {
             filter: sepia(0) contrast(1) invert(1) brightness(2);
@@ -612,7 +611,7 @@ $search_input_width: 300px;
             opacity: 1;
           }
         }
-  
+
         .leaflet-popup-close-button {
           background: #fff;
           border-radius: 99px;
@@ -647,7 +646,7 @@ $search_input_width: 300px;
             }
           }
         }
-  
+
         .leaflet-control-layers-overlays {
           label {
             img {
@@ -658,16 +657,16 @@ $search_input_width: 300px;
             }
           }
         }
-  
+
         .leaflet-control-search {
           height: 34px;
           box-sizing: border-box;
-          
+
           &.search-exp {
             width: $search_input_width;
             max-width: 70vw;
           }
-  
+
           .search-input {
             box-sizing: border-box;
             width: calc(100% - 34px);
@@ -677,23 +676,23 @@ $search_input_width: 300px;
             box-shadow: none !important;
             outline: none !important;
             font-size: 14px;
-  
+
             @media screen and (max-width: 768px) {
               font-size: 16px;
             }
           }
-  
+
           .search-button {
             background: url(images/ico_search_marker.png) 0 0 no-repeat #fff;
             background-size: contain;
           }
-  
+
           .search-tooltip {
             width: 100%;
             margin: 0;
             padding: 0;
             list-style: none;
-  
+
             .search-tip {
               font-size: 12px;
               line-height: 24px;
@@ -701,7 +700,7 @@ $search_input_width: 300px;
               padding-left: 8px;
               padding-right: 8px;
               display: flex;
-  
+
               img {
                 width: 20px;
                 height: 20px;
@@ -711,17 +710,17 @@ $search_input_width: 300px;
             }
           }
         }
-  
+
         .leaflet-control-geosearch {
           &.leaflet-geosearch-button {
             display: flex;
             flex-wrap: nowrap;
-  
+
             &.active {
               width: $search_input_width;
               max-width: 70vw;
             }
-    
+
             form {
               position: relative;
               left: 0;
@@ -730,7 +729,7 @@ $search_input_width: 300px;
               padding: 0;
               width: calc(100% - 30px);
               max-width: 100%;
-    
+
               input[type=text] {
                 width: calc(100% - 20px);
                 margin: 0 20px 0 0 !important;
@@ -740,7 +739,7 @@ $search_input_width: 300px;
                 box-shadow: none !important;
                 outline: none !important;
                 font-size: 14px;
-  
+
                 @media screen and (max-width: 768px) {
                   font-size: 16px;
                 }
@@ -753,7 +752,6 @@ $search_input_width: 300px;
                 padding: 0 8px;
                 border: none;
                 box-shadow: none;
-                margin: 0;
                 outline: none;
                 font-size: 14px;
                 opacity: 0.5;
@@ -766,17 +764,17 @@ $search_input_width: 300px;
               .results {
                 color: #333;
               }
-    
+
               .results.active {
                 width: calc(100% + 30px);
                 color: #333;
-                
+
                 &::after {
                   display: none;
                 }
               }
             }
-    
+
             a.leaflet-bar-part {
               flex: 0 0 30px;
               width: 30px;
@@ -787,14 +785,14 @@ $search_input_width: 300px;
               background-position: center center;
               background-repeat: no-repeat;
               border-radius: 0;
-    
+
               &::before,
               &::after {
                 display: none;
               }
             }
           }
-  
+
           &.leaflet-geosearch-bar {
             form {
               background-image: url(images/ico_search_address_2.png);
@@ -806,7 +804,7 @@ $search_input_width: 300px;
               .results {
                 color: #333;
               }
-  
+
               input[type=text] {
                 width: calc(100% - 35px);
                 padding: 9px 13px 9px 0;
@@ -817,13 +815,13 @@ $search_input_width: 300px;
                 margin: 0 !important;
                 outline: none !important;
                 font-size: 14px;
-  
+
                 @media screen and (max-width: 768px) {
                   padding: 0;
                   font-size: 16px;
                 }
               }
-    
+
               button.reset {
                 right: 25px;
                 background-color: #fff;
@@ -832,7 +830,6 @@ $search_input_width: 300px;
                 padding: 0 8px;
                 border: none;
                 box-shadow: none;
-                margin: 0;
                 outline: none;
                 font-size: 14px;
                 opacity: 0.5;
@@ -849,7 +846,7 @@ $search_input_width: 300px;
           font-size: 10px;
         }
       }
-  
+
       .open-add-location-overlay {
         box-sizing: border-box;
         position: absolute;
@@ -871,7 +868,7 @@ $search_input_width: 300px;
         width: 50px;
         overflow: hidden;
         transition: width 0.1s ease-in;
-  
+
         span.btn_icon {
           display: block;
           position: absolute;
@@ -884,7 +881,7 @@ $search_input_width: 300px;
           font-size: 35px;
           line-height: 25px;
         }
-  
+
         span.btn_text {
           font-size: 16px;
           line-height: 1;
@@ -894,12 +891,12 @@ $search_input_width: 300px;
           word-break: keep-all;
           opacity: 0;
         }
-  
+
         &:hover,
         &:active {
           background: darken(map-get($colors, "primary"), 10%);
           width: 158px;
-  
+
           span.btn_text {
             opacity: 1;
             transition: opacity 0.1s ease-in;
@@ -907,24 +904,24 @@ $search_input_width: 300px;
           }
         }
       }
-  
+
       #oum_search_marker {
         z-index: 400;
         position: absolute !important;
         top: 8px;
         left: 50%;
         transform: translateX(-50%);
-  
-  
+
+
         .leaflet-control-search {
           box-sizing: border-box;
           height: 34px;
-          
+
           &.search-exp {
             width: $search_input_width;
             max-width: 50vw;
           }
-  
+
           .search-input {
             box-sizing: border-box;
             width: calc(100% - 34px);
@@ -934,23 +931,23 @@ $search_input_width: 300px;
             box-shadow: none !important;
             outline: none !important;
             font-size: 14px;
-  
+
             @media screen and (max-width: 768px) {
               font-size: 16px;
             }
           }
-  
+
           .search-button {
             background: url(images/ico_search_marker.png) 0 0 no-repeat #fff;
             background-size: contain;
           }
-  
+
           .search-tooltip {
             width: 100%;
             margin: 0;
             padding: 0;
             list-style: none;
-  
+
             .search-tip {
               font-size: 12px;
               line-height: 24px;
@@ -958,7 +955,7 @@ $search_input_width: 300px;
               padding-left: 8px;
               padding-right: 8px;
               display: flex;
-  
+
               img {
                 width: 20px;
                 height: 20px;
@@ -1019,14 +1016,13 @@ $search_input_width: 300px;
           display: none;
           background: rgba(255, 255, 255, 0.95);
           color: #333;
-          padding: 6px;
           border: 1px solid rgba(0, 0, 0, 0.2);
           border-radius: 5px;
           position: relative;
           z-index: 2;
           flex-direction: column;
           gap: 5px;
-          padding-right: 30px;
+          padding: 6px 30px 6px 6px;
 
           label {
             display: flex;
@@ -1043,7 +1039,6 @@ $search_input_width: 300px;
               top: 2px;
               appearance: auto;
               accent-color: map-get($colors, "primary");
-              position: relative;
               width: 16px;
               height: 16px;
               flex-shrink: 0;
@@ -1088,7 +1083,7 @@ $search_input_width: 300px;
           }
         }
       }
-    
+
 
       .oum-attribution {
         position: absolute;
@@ -1102,7 +1097,7 @@ $search_input_width: 300px;
         padding: 3px 6px;
         margin: 0;
         line-height: 1;
-        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
 
@@ -1127,16 +1122,16 @@ $search_input_width: 300px;
       display: flex;
       flex-direction: row;
 
-      >.tab-wrap {
+      > .tab-wrap {
         width: 170px;
-  
+
         .oum-tabs {
           flex-direction: column;
           border-bottom: none;
           border-right: 1px solid rgba(0, 0, 0, 0.5);
           height: 100%;
           justify-content: unset;
-  
+
           .nav-item {
             padding: 10px 10px 10px 20px;
             line-height: 1.1;
@@ -1144,21 +1139,21 @@ $search_input_width: 300px;
             border-right: 3px solid transparent;
             color: inherit;
             hyphens: auto;
-  
+
             &.active {
               font-weight: bold;
               border-color: black;
               color: black;
             }
-  
+
             &:hover {
               border-color: black;
             }
           }
         }
       }
-  
-      >.map-wrap {
+
+      > .map-wrap {
         width: calc(100% - 150px);
       }
     }
@@ -1175,7 +1170,7 @@ $search_input_width: 300px;
     display: none;
     position: fixed;
     z-index: 9999;
-    background: radial-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9));
+    background: radial-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
     top: 0;
     left: 0;
     right: 0;
@@ -1218,11 +1213,11 @@ $search_input_width: 300px;
         display: inline-block;
         color: #333;
         cursor: pointer;
-  
+
         &:hover {
           color: map-get($colors, "primary");
         }
-  
+
         @media screen and (max-width: 768px) {
           top: 16px;
           right: 16px;
@@ -1310,7 +1305,7 @@ $search_input_width: 300px;
             line-height: 1.5;
           }
 
-          >div {
+          > div {
             margin: 0 10px 10px 0;
 
             label {
@@ -1318,7 +1313,7 @@ $search_input_width: 300px;
               align-items: center;
               margin-left: 6px;
               margin-right: 10px;
-    
+
               @media screen and (max-width: 768px) {
                 display: block;
                 margin-left: 0;
@@ -1363,14 +1358,14 @@ $search_input_width: 300px;
           position: relative;
           aspect-ratio: 1.53;
           margin: 0 2px 25px;
-      
+
           #mapGetLocation {
             position: absolute;
             z-index: 1;
             top: 0;
             right: 0;
             bottom: 0;
-            left: 0; 
+            left: 0;
             border: 1px solid #888;
             border-radius: 2px;
 
@@ -1386,7 +1381,7 @@ $search_input_width: 300px;
               padding: 0;
               margin: 0;
             }
-    
+
             .leaflet-tile-pane img.leaflet-tile {
               box-shadow: none;
               padding: 0;
@@ -1403,7 +1398,7 @@ $search_input_width: 300px;
                   background-repeat: no-repeat;
                   background-size: 30px;
                   background-color: #fff;
-      
+
                   input[type=text] {
                     width: calc(100% - 35px);
                     padding: 9px 13px 9px 0;
@@ -1414,12 +1409,12 @@ $search_input_width: 300px;
                     margin: 0 !important;
                     outline: none !important;
                     font-size: 14px;
-  
+
                     @media screen and (max-width: 768px) {
                       font-size: 16px;
                     }
                   }
-        
+
                   button.reset {
                     right: 25px;
                     background-color: #fff;
@@ -1428,7 +1423,6 @@ $search_input_width: 300px;
                     padding: 0 8px;
                     border: none;
                     box-shadow: none;
-                    margin: 0;
                     outline: none;
                     font-size: 14px;
                     opacity: 0.5;
@@ -1446,27 +1440,28 @@ $search_input_width: 300px;
               .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
                 filter: saturate(3);
               }
+
               // label tiles
             }
-      
+
             &.map-style_Custom2 {
               // map tiles
               .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
                 filter: sepia(1) invert(0) saturate(28) hue-rotate(-53deg);
               }
-      
+
               // label tiles
               .leaflet-tile-pane .leaflet-layer:nth-child(2) .leaflet-tile {
                 filter: sepia(0) contrast(1) invert(1) brightness(2);
               }
             }
-      
+
             &.map-style_Custom3 {
               // map tiles
               .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
                 filter: sepia(1) invert(1) saturate(100) brightness(1) hue-rotate(-300deg);
               }
-  
+
               // label tiles
               .leaflet-tile-pane .leaflet-layer:nth-child(2) .leaflet-tile {
                 filter: sepia(0) contrast(1) invert(1) brightness(2);
@@ -1527,7 +1522,7 @@ $search_input_width: 300px;
               &:hover {
                 transform: scale(1.05);
               }
-              
+
               .dashicons {
                 width: 32px;
                 height: 32px;
@@ -1662,21 +1657,21 @@ $search_input_width: 300px;
               gap: 15px;
 
               .audio-preview {
-                width: 70%;  // Limit width to prevent x-button from going off-screen
-                margin-top: 2px;  // Slight adjustment to align with x-button
+                width: 70%; // Limit width to prevent x-button from going off-screen
+                margin-top: 2px; // Slight adjustment to align with x-button
 
                 audio {
                   width: 100%;
-                  height: 40px;  // Increased height for better visibility
-                  margin: 0;  // Reset margin
-                  vertical-align: middle;  // Help with alignment
+                  height: 40px; // Increased height for better visibility
+                  margin: 0; // Reset margin
+                  vertical-align: middle; // Help with alignment
                 }
               }
 
               .remove-upload {
-                position: static;  // Remove absolute positioning
-                transform: none;  // Remove transform
-                margin-top: 2px;  // Match audio player adjustment
+                position: static; // Remove absolute positioning
+                transform: none; // Remove transform
+                margin-top: 2px; // Match audio player adjustment
               }
 
               &.active {
@@ -1719,7 +1714,7 @@ $search_input_width: 300px;
               background: #fff;
               will-change: transform;
               user-select: none;
-              
+
               &.dragging {
                 cursor: grabbing;
                 background: #fff;
@@ -1817,12 +1812,11 @@ $search_input_width: 300px;
             background-repeat: no-repeat;
             background-position: center center;
             background-size: 30px;
-            background-size: 40px;
             width: 100px;
             opacity: 0.6;
           }
 
-          &:hover, 
+          &:hover,
           &:active {
             color: white;
             background-color: darken(map-get($colors, "primary"), 10%);
@@ -1863,10 +1857,8 @@ $search_input_width: 300px;
         }
 
         button {
-          margin: 30px 0 0;
           cursor: pointer;
           font-size: 19px;
-          margin: 40px 0 10px;
           background: map-get($colors, "primary");
           padding: 15px 30px;
           line-height: 1;
@@ -1874,7 +1866,7 @@ $search_input_width: 300px;
           color: white;
           position: relative;
 
-          &:hover, 
+          &:hover,
           &:active {
             color: white;
             background: darken(map-get($colors, "primary"), 10%);
@@ -1894,7 +1886,7 @@ $search_input_width: 300px;
             &.oum-add-location-headline {
               display: none;
             }
-  
+
             &.oum-edit-location-headline {
               display: block;
             }
@@ -1904,7 +1896,7 @@ $search_input_width: 300px;
             display: block;
           }
         }
-        
+
         #oum_add_location_thankyou {
           .oum-add-location-thankyou-text {
             // Remove the display: none rule
@@ -1923,14 +1915,14 @@ $search_input_width: 300px;
       @media screen and (max-width: 768px) {
         padding-top: 100%;
       }
-  
+
       #mapGetLocation {
         position: absolute;
         z-index: 1;
         top: 0;
         right: 0;
         bottom: 0;
-        left: 0; 
+        left: 0;
         border: 1px solid #888;
         border-radius: 2px;
 
@@ -1966,7 +1958,7 @@ $search_input_width: 300px;
               background-repeat: no-repeat;
               background-size: 30px;
               background-color: #fff;
-  
+
               input[type=text] {
                 width: calc(100% - 35px);
                 padding: 9px 13px 9px 0;
@@ -1982,7 +1974,7 @@ $search_input_width: 300px;
                   font-size: 16px;
                 }
               }
-        
+
               button.reset {
                 right: 25px;
                 background-color: #fff;
@@ -1991,7 +1983,6 @@ $search_input_width: 300px;
                 padding: 0 8px;
                 border: none;
                 box-shadow: none;
-                margin: 0;
                 outline: none;
                 font-size: 14px;
                 opacity: 0.5;
@@ -2009,27 +2000,28 @@ $search_input_width: 300px;
           .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
             filter: saturate(3);
           }
+
           // label tiles
         }
-  
+
         &.map-style_Custom2 {
           // map tiles
           .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
             filter: sepia(1) invert(0) saturate(28) hue-rotate(-53deg);
           }
-  
+
           // label tiles
           .leaflet-tile-pane .leaflet-layer:nth-child(2) .leaflet-tile {
             filter: sepia(0) contrast(1) invert(1) brightness(2);
           }
         }
-  
+
         &.map-style_Custom3 {
           // map tiles
           .leaflet-tile-pane .leaflet-layer:first-of-type .leaflet-tile {
             filter: sepia(1) invert(1) saturate(100) brightness(1) hue-rotate(-300deg);
           }
-  
+
           // label tiles
           .leaflet-tile-pane .leaflet-layer:nth-child(2) .leaflet-tile {
             filter: sepia(0) contrast(1) invert(1) brightness(2);
@@ -2042,29 +2034,29 @@ $search_input_width: 300px;
   &.oum-container-for-fullscreen {
     z-index: 99999999;
 
-    #location-fullscreen-container { 
+    #location-fullscreen-container {
       display: none;
       position: fixed;
-      left:0;
+      left: 0;
       right: 0;
-      top:0;
+      top: 0;
       bottom: 0;
       overflow: hidden;
-      
+
       .location-content-wrap {
         background-color: #fff;
         color: #333;
         height: 100%;
         overflow: auto;
-  
+
         // Add carousel styles for fullscreen container
         .oum-carousel {
           @include oum-carousel;
         }
-  
+
         .oum_location_image {
           background-color: #eee;
-  
+
           img {
             max-height: 70vw;
             max-width: 100%;
@@ -2093,19 +2085,19 @@ $search_input_width: 300px;
             }
           }
         }
-    
+
         .oum_location_text {
           padding: 35px 20px;
           line-height: 1.5;
-  
+
           * {
             color: #000;
           }
-  
+
           a {
             color: map-get($colors, "primary");
           }
-    
+
           .oum_location_date {
             opacity: 0.8;
             text-transform: uppercase;
@@ -2113,7 +2105,7 @@ $search_input_width: 300px;
             font-size: 11px;
             margin-bottom: 5px;
           }
-    
+
           .oum_location_address {
             opacity: 0.8;
             text-transform: uppercase;
@@ -2121,14 +2113,14 @@ $search_input_width: 300px;
             font-size: 11px;
             margin-bottom: 10px;
           }
-    
+
           .oum_location_name {
             font-size: 20px;
             font-weight: bold;
             margin-top: 0;
             margin-bottom: 10px;
           }
-    
+
           .oum_location_custom_fields {
             font-size: 14px;
             opacity: 0.8;
@@ -2136,15 +2128,14 @@ $search_input_width: 300px;
             .oum_custom_field {
               margin-bottom: 10px;
             }
-    
+
             a {
               display: inline-block;
               hyphens: auto;
             }
-    
+
             a[href*=facebook] {
               display: inline-block;
-              margin: 6px 1px;
               top: -2px;
               position: relative;
               width: 20px;
@@ -2154,7 +2145,7 @@ $search_input_width: 300px;
               text-indent: -9999px;
               margin: 6px 0;
             }
-    
+
             a[href*=instagram] {
               display: inline-block;
               margin: 6px 1px;
@@ -2165,12 +2156,10 @@ $search_input_width: 300px;
               background: url(images/ico_instagram_50x50.png) no-repeat center center transparent;
               background-size: contain;
               text-indent: -9999px;
-              margin: 6px 0;
             }
-    
+
             a[href*=linkedin] {
               display: inline-block;
-              margin: 6px 1px;
               top: -2px;
               position: relative;
               width: 20px;
@@ -2178,9 +2167,8 @@ $search_input_width: 300px;
               background: url(images/ico_linkedin_50x50.png) no-repeat center center transparent;
               background-size: contain;
               text-indent: -9999px;
-              margin: 6px 0;
             }
-    
+
             a[href*=twitter] {
               display: inline-block;
               margin: 6px 1px;
@@ -2191,12 +2179,10 @@ $search_input_width: 300px;
               background: url(images/ico_twitter_50x50.png) no-repeat center center transparent;
               background-size: contain;
               text-indent: -9999px;
-              margin: 6px 0;
             }
-    
+
             a[href*=youtube] {
               display: inline-block;
-              margin: 6px 1px;
               top: -2px;
               position: relative;
               width: 20px;
@@ -2204,9 +2190,8 @@ $search_input_width: 300px;
               background: url(images/ico_youtube_50x50.png) no-repeat center center transparent;
               background-size: contain;
               text-indent: -9999px;
-              margin: 6px 0;
             }
-    
+
             a[href*=soundcloud] {
               display: inline-block;
               margin: 6px 1px;
@@ -2217,11 +2202,10 @@ $search_input_width: 300px;
               background: url(images/ico_soundcloud_50x50.png) no-repeat center center transparent;
               background-size: contain;
               text-indent: -9999px;
-              margin: 6px 0;
             }
-  
+
             .oum_custom_field span {
-              background:rgba(0, 0, 0, 0.1);
+              background: rgba(0, 0, 0, 0.1);
               display: inline-block;
               padding: 3px 5px;
               border-radius: 5px;
@@ -2229,16 +2213,16 @@ $search_input_width: 300px;
               font-size: 13px;
             }
           }
-    
+
           .oum_location_description {
             font-size: 14px;
             opacity: 0.8;
           }
-    
+
           audio {
             margin-top: 15px;
           }
-  
+
           .oum_read_more {
             margin-top: 10px;
           }
@@ -2258,7 +2242,7 @@ $search_input_width: 300px;
         position: absolute;
         cursor: pointer;
       }
-  
+
       #close-location-fullscreen {
         position: absolute;
         z-index: 1;
@@ -2274,14 +2258,14 @@ $search_input_width: 300px;
         height: 24px;
         text-align: center;
         cursor: pointer;
-  
+
         &:hover {
           color: map-get($colors, "primary");
         }
       }
-  
-      @media (max-width: 768px) { 
-        &.visible { 
+
+      @media (max-width: 768px) {
+        &.visible {
           display: block;
         }
       }
@@ -2299,6 +2283,7 @@ $search_input_width: 300px;
     border-radius: 0;
     max-width: inherit;
   }
+
   /* end resets */
 
   position: relative;
@@ -2433,7 +2418,7 @@ $search_input_width: 300px;
 
 .open-user-map-locations-list {
   $colors: (primary : #e02aaf,
-      highlight: red);
+          highlight: red);
 
   /* resets */
   img {
@@ -2445,7 +2430,7 @@ $search_input_width: 300px;
     max-width: inherit;
   }
 
-  input[type="radio"], 
+  input[type="radio"],
   input[type="checkbox"] {
     margin: inherit;
     padding: inherit;
@@ -2472,6 +2457,7 @@ $search_input_width: 300px;
   .elementor-widget-open_user_map_widget {
     width: 100%;
   }
+
   /* end resets */
 
   .oum-locations-list-item {
@@ -2574,7 +2560,6 @@ $search_input_width: 300px;
           background: url(images/ico_facebook_50x50.png) no-repeat center center transparent;
           background-size: contain;
           text-indent: -9999px;
-          margin: 6px 0;
         }
 
         a[href*=instagram] {
@@ -2587,7 +2572,6 @@ $search_input_width: 300px;
           background: url(images/ico_instagram_50x50.png) no-repeat center center transparent;
           background-size: contain;
           text-indent: -9999px;
-          margin: 6px 0;
         }
 
         a[href*=linkedin] {
@@ -2600,7 +2584,6 @@ $search_input_width: 300px;
           background: url(images/ico_linkedin_50x50.png) no-repeat center center transparent;
           background-size: contain;
           text-indent: -9999px;
-          margin: 6px 0;
         }
 
         a[href*=twitter] {
@@ -2613,7 +2596,6 @@ $search_input_width: 300px;
           background: url(images/ico_twitter_50x50.png) no-repeat center center transparent;
           background-size: contain;
           text-indent: -9999px;
-          margin: 6px 0;
         }
 
         a[href*=youtube] {
@@ -2626,12 +2608,10 @@ $search_input_width: 300px;
           background: url(images/ico_youtube_50x50.png) no-repeat center center transparent;
           background-size: contain;
           text-indent: -9999px;
-          margin: 6px 0;
         }
 
         a[href*=soundcloud] {
           display: inline-block;
-          margin: 6px 1px;
           top: -2px;
           position: relative;
           width: 20px;
@@ -2643,7 +2623,7 @@ $search_input_width: 300px;
         }
 
         .oum_custom_field span {
-          background:rgba(0, 0, 0, 0.1);
+          background: rgba(0, 0, 0, 0.1);
           display: inline-block;
           padding: 3px 5px;
           border-radius: 5px;
@@ -2702,7 +2682,7 @@ $search_input_width: 300px;
 
   // Add carousel styles
   .oum-carousel {
-      @include oum-carousel;
+    @include oum-carousel;
   }
 }
 
@@ -2780,16 +2760,16 @@ body.oum-add-location-opened {
   .wp-block-columns {
     gap: var(--wp--style--block-gap, 2em);
   }
-  
+
   // Add vertical spacing between elements
   .wp-block-shortcode {
     margin-bottom: 1.5em;
-    
+
     &:last-child {
       margin-bottom: 0;
     }
   }
-  
+
   // Basic responsive adjustment
   @media (max-width: 781px) {
     .wp-block-columns {

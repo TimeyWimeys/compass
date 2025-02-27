@@ -7,9 +7,16 @@ namespace OpenUserMapPlugin\Base;
 
 use OpenUserMapPlugin\Base\BaseController;
 
+/**
+ *
+ */
 class BlockController extends BaseController
 {
-    public function register() {
+    /**
+     * @return void
+     */
+    public function register(): void
+    {
         // Gutenberg Blocks
         add_action('init', array($this, 'set_gutenberg_blocks'));
 
@@ -20,10 +27,10 @@ class BlockController extends BaseController
     /**
      * Setup Gutenberg Blocks
      */
-    public function set_gutenberg_blocks()
-    {   
+    public function set_gutenberg_blocks(): void
+    {
         // Register Block
-        register_block_type( 
+        register_block_type(
             $this->plugin_path . 'blocks',
             array(
                 'render_callback' => is_admin() ? null : array($this, 'render_block_map')
@@ -47,7 +54,7 @@ class BlockController extends BaseController
     /**
      * Setup Elementor Widgets
      */
-    public function set_elementor_widgets($widgets_manager)
+    public function set_elementor_widgets($widgets_manager): void
     {
         require_once "$this->plugin_path/elementor/includes/plugin.php";
 

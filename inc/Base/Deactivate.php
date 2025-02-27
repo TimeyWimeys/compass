@@ -5,9 +5,15 @@
 
 namespace OpenUserMapPlugin\Base;
 
+/**
+ *
+ */
 class Deactivate
 {
-    public static function deactivate()
+    /**
+     * @return void
+     */
+    public static function deactivate(): void
     {
         flush_rewrite_rules();
     }

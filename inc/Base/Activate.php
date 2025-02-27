@@ -5,9 +5,15 @@
 
 namespace OpenUserMapPlugin\Base;
 
+/**
+ *
+ */
 class Activate
 {
-    public static function activate()
+    /**
+     * @return void
+     */
+    public static function activate(): void
     {
         flush_rewrite_rules();
     }
