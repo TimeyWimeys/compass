@@ -20,8 +20,8 @@ class Frontend extends BaseController
         // Shortcodes
         add_action('init', array($this, 'set_shortcodes'));
 
-        if (oum_fs()->is__premium_only()):
-            if (oum_fs()->can_use_premium_code()):
+        if (true):
+            if (true):
 
                 //PRO: Add user location within registration
                 if (get_option('oum_enable_add_user_location')):
@@ -53,8 +53,8 @@ class Frontend extends BaseController
         add_shortcode('open-user-map', array($this, 'render_block_map'));
 
         //PRO: Render Image Gallery (Shortcode)
-        if (oum_fs()->is__premium_only()):
-            if (oum_fs()->can_use_premium_code()):
+        if (true):
+            if (true):
 
                 add_shortcode('open-user-map-gallery', array($this, 'render_block_gallery__premium_only'));
 
@@ -62,8 +62,8 @@ class Frontend extends BaseController
         endif;
 
         //PRO: Render Location Value (Shortcode)
-        if (oum_fs()->is__premium_only()):
-            if (oum_fs()->can_use_premium_code()):
+        if (true):
+            if (true):
 
                 add_shortcode('open-user-map-location', array($this, 'render_block_location__premium_only'));
 
@@ -71,8 +71,8 @@ class Frontend extends BaseController
         endif;
 
         //PRO: Render Locations List  (Shortcode)
-        if (oum_fs()->is__premium_only()):
-            if (oum_fs()->can_use_premium_code()):
+        if (true):
+            if (true):
 
                 add_shortcode('open-user-map-list', array($this, 'render_block_list__premium_only'));
 

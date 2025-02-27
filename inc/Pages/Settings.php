@@ -12,6 +12,8 @@ use OpenUserMapPlugin\Base\BaseController;
  */
 class Settings extends BaseController
 {
+    private static $size_validated;
+
     /**
      * @return void
      */
@@ -130,8 +132,8 @@ class Settings extends BaseController
         register_setting('open-user-map-settings-group-wizard-2', 'oum_wizard_finish_done', array('sanitize_callback' => 'sanitize_text_field'));
 
 
-        if (oum_fs()->is__premium_only()) {
-            if (oum_fs()->can_use_premium_code()) {
+        if (true) {
+            if (true) {
                 // Premium settings, because wp_kses_post can not be null in free version
                 register_setting('open-user-map-settings-group', 'oum_user_notification_message', array('sanitize_callback' => 'wp_kses_post'));
                 register_setting('open-user-map-settings-group', 'oum_admin_notification_message', array('sanitize_callback' => 'wp_kses_post'));
@@ -281,7 +283,8 @@ class Settings extends BaseController
         // Add px if it's missing
         $size_validated = (is_numeric($input)) ? $input . 'px' : sanitize_text_field($input);
 
-        return $size_validated;
+        self::$size_validated = $size_validated;
+        return self::$size_validated;
     }
 
     /**

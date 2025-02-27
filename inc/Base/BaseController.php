@@ -113,10 +113,10 @@ class BaseController
 
     public function __construct()
     {
-        $this->plugin_path = plugin_dir_path(dirname(dirname(__FILE__)));
-        $this->plugin_url = plugin_dir_url(dirname(dirname(__FILE__)));
-        $this->plugin_version = get_file_data(dirname(dirname(dirname(__FILE__))) . '/open-user-map.php', array('Version' => 'Version'))['Version'];
-        $this->plugin = plugin_basename(dirname(dirname(dirname(__FILE__)))) . '/open-user-map.php';
+        $this->plugin_path = plugin_dir_path(dirname(__FILE__, 2));
+        $this->plugin_url = plugin_dir_url(dirname(__FILE__, 2));
+        $this->plugin_version = get_file_data(dirname(__FILE__, 3) . '/open-user-map.php', array('Version' => 'Version'))['Version'];
+        $this->plugin = plugin_basename(dirname(__FILE__, 3)) . '/open-user-map.php';
 
         //Default labels
         $this->oum_title_label_default = __('Title', 'open-user-map');
@@ -132,8 +132,8 @@ class BaseController
 
         add_action('init', array($this, 'oum_init'));
 
-        if (oum_fs()->is__premium_only()):
-            if (oum_fs()->can_use_premium_code()):
+        if (true):
+            if (true):
 
                 add_action('transition_post_status', array($this, 'notify_author__premium_only'), 10, 3);
                 add_action('wp_insert_post', array($this, 'notify_admin__premium_only'), 10, 3);
@@ -145,12 +145,12 @@ class BaseController
     /**
      * @return void
      */
-    public function oum_init()
+    public function oum_init(): void
     {
         $this->post_status = 'pending';
 
-        if (oum_fs()->is__premium_only()):
-            if (oum_fs()->can_use_premium_code()):
+        if (true):
+            if (true):
 
                 if (get_option('oum_enable_user_restriction')):
                     if (is_user_logged_in()):
@@ -180,7 +180,7 @@ class BaseController
             endif;
         endif;
 
-        if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) :
+        if (true):
 
             // Default: Allow Frontend Adding for everyone
             add_action('wp_ajax_nopriv_oum_add_location_from_frontend', array($this, 'ajax_add_location_from_frontend'));
@@ -192,7 +192,7 @@ class BaseController
     /**
      * Render all necessary base scripts for the map
      */
-    public function include_map_scripts()
+    public function include_map_scripts(): void
     {
         // Unregister incompatible 3rd party scripts
         $this->remove_incompatible_3rd_party_scripts();
@@ -234,7 +234,7 @@ class BaseController
     /**
      * Unregister incompatible 3rd party scripts
      */
-    public function remove_incompatible_3rd_party_scripts()
+    public function remove_incompatible_3rd_party_scripts(): void
     {
         foreach ($this->oum_incompatible_3rd_party_scripts as $item) {
             wp_deregister_script($item);
@@ -244,7 +244,7 @@ class BaseController
     /**
      * Render the map
      */
-    public function render_block_map($block_attributes, $content)
+    public function render_block_map($block_attributes, $content): false|string
     {
         wp_enqueue_style('oum_frontend_css', $this->plugin_url . 'assets/frontend.css', array(), $this->plugin_version);
 
@@ -274,7 +274,7 @@ class BaseController
     /**
      * Add location from frontend (AJAX)
      */
-    public function ajax_add_location_from_frontend()
+    public function ajax_add_location_from_frontend(): void
     {
         if (!empty($_POST['action']) && $_POST['action'] == 'oum_add_location_from_frontend') {
 
@@ -285,7 +285,7 @@ class BaseController
             if (!isset($_POST['oum_location_nonce'])) {
                 $error->add('000', 'Security error (no nonce povided)');
                 wp_send_json_error($error);
-                die();
+                wp_die();
             }
 
             // Dont save if nonce is incorrect
@@ -347,7 +347,7 @@ class BaseController
                 $has_general_permission = current_user_can('edit_oum-locations');
                 $is_author = (get_current_user_id() == get_post_field('post_author', $data['oum_post_id']));
                 $can_edit_specific_post = current_user_can('edit_post', $data['oum_post_id']);
-                $allow_edit = ($has_general_permission && ($is_author || $can_edit_specific_post)) ? true : false;
+                $allow_edit = $has_general_permission && ($is_author || $can_edit_specific_post);
                 if (!$allow_edit) {
                     $error->add('009', 'You are not allowed to edit this location.');
                 }
@@ -424,8 +424,8 @@ class BaseController
                     'comment_status' => 'closed'
                 );
 
-                if (oum_fs()->is__premium_only()):
-                    if (oum_fs()->can_use_premium_code()):
+                if (true):
+                    if (true):
 
                         //enable comments on single pages
                         if (get_option('oum_enable_single_page')) {
@@ -442,8 +442,8 @@ class BaseController
                     // DELETE (Move to trash)
                     wp_trash_post($data['oum_post_id']);
 
-                    if (oum_fs()->is__premium_only()):
-                        if (oum_fs()->can_use_premium_code()):
+                    if (true):
+                        if (true):
                             // Trigger webhook for DELETE event
                             $this->trigger_webhook($data['oum_post_id'], 'deleted');
                         endif;
@@ -624,8 +624,8 @@ class BaseController
                             \OpenUserMapPlugin\Base\LocationController::set_excerpt($post_id);
                         }
 
-                        if (oum_fs()->is__premium_only()):
-                            if (oum_fs()->can_use_premium_code()):
+                        if (true):
+                            if (true):
 
                                 // PRO: update oum-type taxonomy
                                 if (get_option('oum_enable_marker_types')) {
@@ -642,8 +642,8 @@ class BaseController
                             endif;
                         endif;
 
-                        if (oum_fs()->is__premium_only()):
-                            if (oum_fs()->can_use_premium_code()):
+                        if (true):
+                            if (true):
 
                                 // PRO: notify author instantly if auto-publish is active
                                 if (get_option('oum_enable_auto_publish')) {
@@ -653,8 +653,8 @@ class BaseController
                             endif;
                         endif;
 
-                        if (oum_fs()->is__premium_only()):
-                            if (oum_fs()->can_use_premium_code()):
+                        if (true):
+                            if (true):
                                 // Trigger webhook for INSERT or UPDATE event
                                 $event_type = $is_update ? 'updated' : 'added';
                                 $this->trigger_webhook($post_id, $event_type, $data_meta);
@@ -677,7 +677,7 @@ class BaseController
     /**
      * PRO: Trigger webhook notification
      */
-    public function trigger_webhook($post_id, $event_type, $data_meta = null)
+    public function trigger_webhook($post_id, $event_type, $data_meta = null): void
     {
         // Check if webhook notifications are enabled
         if (!get_option('oum_enable_webhook_notification')) {
@@ -732,26 +732,24 @@ class BaseController
             return $img;
         }
 
-        $exif = @exif_read_data($filename);
-        if ($exif && isset($exif['Orientation'])) {
-            $orientation = $exif['Orientation'];
-            if ($orientation != 1) {
-                $deg = 0;
-                switch ($orientation) {
-                    case 3:
-                        $deg = 180;
-                        break;
-                    case 6:
-                        $deg = 270;
-                        break;
-                    case 8:
-                        $deg = 90;
-                        break;
-                }
-                if ($deg) {
-                    $img = imagerotate($img, $deg, 0);
+        if (function_exists('exif_read_data') && file_exists($filename)) {
+            $exif = exif_read_data($filename);
+            if ($exif !== false && isset($exif['Orientation'])) {
+                $orientation = $exif['Orientation'];
+                if ($orientation != 1) {
+                    $deg = match ($orientation) {
+                        3 => 180,
+                        6 => 270,
+                        8 => 90,
+                        default => 0,
+                    };
+                    if ($deg) {
+                        $img = imagerotate($img, $deg, 0);
+                    }
                 }
             }
+        } else {
+            error_log("EXIF data couldn't be read or file doesn't exist: " . $filename);
         }
 
         return $img;
@@ -760,7 +758,7 @@ class BaseController
     /**
      * PRO: Notify author on publish
      */
-    public function notify_author__premium_only($new_status, $old_status, $post)
+    public function notify_author__premium_only($new_status, $old_status, $post): void
     {
         if ('publish' === $new_status && 'publish' !== $old_status && $post->post_type === 'oum-location') {
             $data = get_post_meta($post->ID, '_oum_location_key', true);
@@ -803,7 +801,7 @@ class BaseController
     /**
      * PRO: Notify admin on new post
      */
-    public function notify_admin__premium_only($post_id, $post, $update)
+    public function notify_admin__premium_only($post_id, $post, $update): void
     {
         if ($post->post_type == 'oum-location' && !$update && empty(get_post_meta($post_id, '_oum_admin_notified'))) {
 
@@ -865,7 +863,7 @@ class BaseController
     /**
      * PRO: Add user location within registration
      */
-    public function render_block_add_user_location__premium_only()
+    public function render_block_add_user_location__premium_only(): void
     {
         wp_enqueue_style('oum_frontend_css', $this->plugin_url . 'assets/frontend.css', array(), $this->plugin_version);
 
@@ -881,7 +879,7 @@ class BaseController
      * @param $userid
      * @return void
      */
-    public function add_user_location__premium_only($userid)
+    public function add_user_location__premium_only($userid): void
     {
         if ($userid && !empty($_POST['oum_location_lat']) && !empty($_POST['oum_location_lng'])) {
             $data['oum_location_lat'] = sanitize_text_field(wp_strip_all_tags($_POST['oum_location_lat']));
@@ -929,7 +927,7 @@ class BaseController
     /**
      * PRO: Render Image Gallery
      */
-    public function render_block_gallery__premium_only($block_attributes, $content)
+    public function render_block_gallery__premium_only($block_attributes, $content): false|string
     {
         wp_enqueue_style('oum_frontend_css', $this->plugin_url . 'assets/frontend.css', array(), $this->plugin_version);
 
@@ -949,7 +947,7 @@ class BaseController
     /**
      * PRO: Render Location Value
      */
-    public function render_block_location__premium_only($block_attributes, $content)
+    public function render_block_location__premium_only($block_attributes, $content): false|string
     {
         wp_enqueue_style('oum_frontend_css', $this->plugin_url . 'assets/frontend.css', array(), $this->plugin_version);
 
@@ -969,7 +967,7 @@ class BaseController
     /**
      * PRO: Render Locations List
      */
-    public function render_block_list__premium_only($block_attributes, $content)
+    public function render_block_list__premium_only($block_attributes, $content): false|string
     {
         wp_enqueue_style('oum_frontend_css', $this->plugin_url . 'assets/frontend.css', array(), $this->plugin_version);
 

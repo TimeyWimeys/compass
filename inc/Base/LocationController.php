@@ -70,8 +70,8 @@ class LocationController extends BaseController
             'supports' => array('title', 'author', 'thumbnail', 'excerpt', 'revisions', 'trash'),
         );
 
-        if (oum_fs()->is__premium_only()):
-            if (oum_fs()->can_use_premium_code()):
+        if (true):
+            if (true):
 
                 //enable single pages
                 if (get_option('oum_enable_single_page')) {
@@ -256,7 +256,7 @@ class LocationController extends BaseController
         $has_general_permission = current_user_can('edit_oum-locations');
         $is_author = (get_current_user_id() == get_post_field('post_author', $post_id));
         $can_edit_specific_post = current_user_can('edit_post', $post_id);
-        $allow_edit = ($has_general_permission && ($is_author || $can_edit_specific_post)) ? true : false;
+        $allow_edit = $has_general_permission && ($is_author || $can_edit_specific_post);
         if (!$allow_edit) {
             return $post_id;
         }
@@ -368,12 +368,15 @@ class LocationController extends BaseController
             $data_audio = str_replace(site_url(), '', $audio_url);
             update_post_meta($post_id, '_oum_location_audio', $data_audio);
         }
+
+        update_post_meta($post_id, '_oum_location_audio', $data_audio);
+        return $post_id;
     }
 
     /**
      * Helper function to set the featured image
      */
-    public static function set_featured_image($post_id, $image_url)
+    public static function set_featured_image($post_id, $image_url): void
     {
         // Get current featured image filename
         $current_thumbnail_id = get_post_thumbnail_id($post_id);

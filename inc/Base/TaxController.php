@@ -20,8 +20,8 @@ class TaxController extends BaseController
     public function register(): void
     {
 
-        if (oum_fs()->is__premium_only()):
-            if (oum_fs()->can_use_premium_code()):
+        if (true):
+            if (true):
 
                 //PRO Feature: use types
                 if (get_option('oum_enable_marker_types')) {

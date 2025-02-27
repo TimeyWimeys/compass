@@ -88,6 +88,7 @@
                     <?php elseif (get_option('oum_wizard_usecase') == '2'): ?>
 
                         <ol class="next-steps">
+                            /* translators: %s is the URL to the "Add Location" page */
                             <li><?php echo sprintf(__('Add your first Location under <a href="%s">Open User Map > Add Location</a>', 'open-user-map'), 'post-new.php?post_type=oum-location'); ?></li>
                             <li><?php echo __('Use the page editor or Elementor to insert the <b>"Open User Map"</b> block onto a page.<br>Alternatively, you can use the shortcode <code>[open-user-map]</code>.', 'open-user-map'); ?></li>
                             <li><?php echo __('Customize styles, activate features and find help under <i>Open User Map > Settings</i>', 'open-user-map'); ?></li>
@@ -227,6 +228,7 @@
                                                                                                  id="oum_tile_provider_mapbox_key"
                                                                                                  value="<?php echo esc_attr($oum_tile_provider_mapbox_key); ?>">
                                         <br><br>
+                                        /* translators: %s is the URL to the "MapBox API key" page */
                                         <span class="description"><?php echo sprintf(__('You can get a MapBox API key <a href="%s">here</a>. It is free to use with up to 200,000 map tile requests per month. Please attribute MapBox service if you use their free plan.', 'open-user-map'), 'https://account.mapbox.com/signup/'); ?></span><br>
                                     </div>
                                 </div>
@@ -251,8 +253,8 @@
 
                                     ?>
 
-                                    <?php if (oum_fs()->is__premium_only()): ?>
-                                        <?php if (oum_fs()->can_use_premium_code()): ?>
+                                    <?php if (true): ?>
+                                        <?php if (true): ?>
 
                                             <?php
                                             //pro marker icons
@@ -263,15 +265,9 @@
                                                 $selected = ($marker_icon == $val) ? 'checked' : '';
                                                 $user_icon_style = ($marker_user_icon) ? 'style="background-image: url(' . esc_attr($marker_user_icon) . ')"' : '';
 
-                                                echo '<label class="' . $selected . ' pro label_marker_user_icon"><div id="oum_marker_user_icon_preview" class="marker_icon_preview" data-style="' . esc_attr($val) . '" ' . $user_icon_style . '></div><input type="radio" name="oum_marker_icon" ' . $selected . ' value="' . esc_attr($val) . '">';
+                                                echo '<label class="' . $selected . ' label_marker_user_icon"><div id="oum_marker_user_icon_preview" class="marker_icon_preview" data-style="' . esc_attr($val) . '" ' . $user_icon_style . '></div><input type="radio" name="oum_marker_icon" ' . $selected . ' value="' . esc_attr($val) . '">';
 
-                                                echo "
-                          <div class='icon_upload'>
-                            <a href='#' class='oum_upload_icon_button button button-secondary'>" . __('Upload Icon', 'open-user-map') . "</a>
-                            <p class='description'>PNG, max. 100px</p>
-                            <input type='hidden' id='oum_marker_user_icon' name='oum_marker_user_icon' value='" . esc_attr($marker_user_icon) . "'>
-                          </div>
-                        ";
+                                                echo "<div class='icon_upload'><a href='#' class='oum_upload_icon_button button button-secondary'>" . __('Upload Icon', 'open-user-map') . "</a><p class='description'>PNG, max. 100px</p><input type='hidden' id='oum_marker_user_icon' name='oum_marker_user_icon' value='" . esc_attr($marker_user_icon) . "'></div>";
 
                                                 echo "</label>";
                                             }
@@ -280,36 +276,12 @@
                                         <?php endif; ?>
                                     <?php endif; ?>
 
-                                    <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
-
-                                        <?php
-                                        //pro marker icons
-                                        $pro_items = $this->pro_marker_icons;
-
-                                        foreach ($pro_items as $val) {
-                                            echo "<label class='pro-only label_marker_user_icon'><div class='marker_icon_preview' data-style='$val'></div>";
-
-                                            echo "
-                        <div class='icon_upload'>
-                          <button disabled class='button button-secondary'>" . __('Upload Icon', 'open-user-map') . "</button>
-                          <p class='description'>PNG, max. 100px</p>
-                        </div>
-                      ";
-
-                                            echo "<a class='oum-gopro-text' href='" . oum_fs()->get_upgrade_url() . "'>" . __('Upgrade to PRO to use custom icons.', 'open-user-map') . "</a>";
-
-                                            echo "</label>";
-                                        }
-                                        ?>
-
-                                    <?php endif; ?>
-
                                 </div>
                             </td>
                         </tr>
 
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
+                        <?php if (true): ?>
+                            <?php if (true): ?>
 
                                 <tr style="vertical-align: top;">
                                     <?php
@@ -317,7 +289,6 @@
                                     ?>
                                     <th scope="row">
                                         <?php echo __('UI Elements color', 'open-user-map'); ?>
-                                        <br><span class="oum-pro">PRO</span><br>
                                     </th>
                                     <td>
                                         <div id="oum_ui_color_wrap">
@@ -333,7 +304,7 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+                        <?php if (true): ?>
 
                             <tr style="vertical-align: top;" class="oum-gopro-tr">
                                 <?php
@@ -341,9 +312,6 @@
                                 ?>
                                 <th scope="row">
                                     <?php echo __('UI Elements color', 'open-user-map'); ?>
-                                    <br><span class="oum-pro">PRO</span><br>
-                                    <a class="oum-gopro-text"
-                                       href="<?php echo oum_fs()->get_upgrade_url(); ?>"><?php echo __('Upgrade to PRO to set a custom color for buttons and icons.', 'open-user-map'); ?></a>
                                 </th>
                                 <td>
                                     <div id="oum_ui_color_wrap">
@@ -472,7 +440,7 @@
                                         const lat = '<?php echo esc_attr($start_lat) ? esc_attr($start_lat) : '28'; ?>';
                                         const lng = '<?php echo esc_attr($start_lng) ? esc_attr($start_lng) : '0'; ?>';
                                         const zoom = '<?php echo esc_attr($start_zoom) ? esc_attr($start_zoom) : '1'; ?>';
-                                        const mapStyle = '<?php echo $map_style; ?>';
+                                        const mapStyle = '<?php echo esc_html($map_style); ?>';
                                         const oum_tile_provider_mapbox_key = `<?php echo esc_attr($oum_tile_provider_mapbox_key); ?>`;
                                         let oum_geosearch_selected_provider = ``;
                                         const oum_geosearch_provider = `<?php echo get_option('oum_geosearch_provider') ? get_option('oum_geosearch_provider') : 'osm'; ?>`;
@@ -517,13 +485,12 @@
                             </td>
                         </tr>
 
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
+                        <?php if (true): ?>
+                            <?php if (true): ?>
 
                                 <tr style="vertical-align: top;">
                                     <th scope="row">
                                         <?php echo __('Geosearch Provider', 'open-user-map'); ?>
-                                        <br><span class="oum-pro">PRO</span><br>
                                     </th>
                                     <td>
                                         <label for="oum_geosearch_provider"></label><select
@@ -547,6 +514,7 @@
                                         </select><br><br>
                                         <div class="wrap-geosearch-provider-settings">
                                             <div class="geosearch-provider-geoapify">
+                                                /* translators: %s is the URL to the "GeoApify API key" page */
                                                 <strong><?php echo __('Geoapify API Key:', 'open-user-map'); ?></strong><br>
                                                 <label for="oum_geosearch_provider_geoapify_key"></label><input
                                                         class="regular-text" type="text"
@@ -557,6 +525,7 @@
                                                 <span class="description"><?php echo sprintf(__('You can get a Geoapify API key <a href="%s">here</a>. It is free to use with up to 3000 requests per day. Please attribute Geoapify service if you use their free plan.', 'open-user-map'), 'https://www.geoapify.com/get-started-with-maps-api'); ?></span><br>
                                             </div>
                                             <div class="geosearch-provider-here">
+                                                /* translators: %s is the URL to the "Here API key" page */
                                                 <strong><?php echo __('Here API Key:', 'open-user-map'); ?></strong><br>
                                                 <label for="oum_geosearch_provider_here_key"></label><input
                                                         class="regular-text" type="text"
@@ -567,6 +536,7 @@
                                                 <span class="description"><?php echo sprintf(__('You can get a Here API key <a href="%s">here</a>. It is free to use with up to 30,000 requests per month. Please attribute Here service if you use their free plan.', 'open-user-map'), 'https://developer.here.com/'); ?></span><br>
                                             </div>
                                             <div class="geosearch-provider-mapbox">
+                                                /* translators: %s is the URL to the "MapBox API key" page */
                                                 <strong><?php echo __('MapBox API Key:', 'open-user-map'); ?></strong><br>
                                                 <label for="oum_geosearch_provider_mapbox_key"></label><input
                                                         class="regular-text" type="text"
@@ -583,14 +553,11 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+                        <?php if (true): ?>
 
                             <tr style="vertical-align: top;">
                                 <th scope="row">
                                     <?php echo __('Geosearch Provider', 'open-user-map'); ?>
-                                    <br><span class="oum-pro">PRO</span><br>
-                                    <a class="oum-gopro-text"
-                                       href="<?php echo oum_fs()->get_upgrade_url(); ?>"><?php echo __('Upgrade to PRO to use Geoapify or Here Maps as address search provider.', 'open-user-map'); ?></a>
                                 </th>
                                 <td>
                                     <label for="oum_geosearch_provider"></label><select name="oum_geosearch_provider"
@@ -625,8 +592,8 @@
                             </td>
                         </tr>
 
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
+                        <?php if (true): ?>
+                            <?php if (true): ?>
 
                                 <tr style="vertical-align: top;">
                                     <?php
@@ -634,7 +601,6 @@
                                     ?>
                                     <th scope="row">
                                         <?php echo __('"Show me where I am" Button', 'open-user-map'); ?>
-                                        <br><span class="oum-pro">PRO</span><br>
                                     </th>
                                     <td>
                                         <input class="oum-switch" type="checkbox" name="oum_enable_currentlocation"
@@ -646,14 +612,11 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+                        <?php if (true): ?>
 
                             <tr style="vertical-align: top;" class="oum-gopro-tr">
                                 <th scope="row">
                                     <?php echo __('"Show me where I am" Button', 'open-user-map'); ?>
-                                    <br><span class="oum-pro">PRO</span><br>
-                                    <a class="oum-gopro-text"
-                                       href="<?php echo oum_fs()->get_upgrade_url(); ?>"><?php echo __('Upgrade to PRO and display a button to get the users current location.', 'open-user-map'); ?></a>
                                 </th>
                                 <td>
                                     <label>
@@ -663,26 +626,6 @@
                                 </td>
                             </tr>
 
-                        <?php endif; ?>
-
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
-
-                                <tr style="vertical-align: top;">
-                                    <?php
-                                    $oum_disable_oum_attribution = get_option('oum_disable_oum_attribution');
-                                    ?>
-                                    <th scope="row">
-                                        <?php echo __('Hide "made with OUM PRO" notion', 'open-user-map'); ?>
-                                    </th>
-                                    <td>
-                                        <input class="oum-switch" type="checkbox" name="oum_disable_oum_attribution"
-                                               id="oum_disable_oum_attribution" <?php echo ($oum_disable_oum_attribution) ? 'checked' : ''; ?>>
-                                        <label for="oum_disable_oum_attribution"></label><br><br>
-                                    </td>
-                                </tr>
-
-                            <?php endif; ?>
                         <?php endif; ?>
 
                     </table>
@@ -760,13 +703,6 @@
                         <tr style="vertical-align: top;">
                             <th scope="row">
                                 <?php echo __('Custom fields', 'open-user-map'); ?>
-                                <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
-
-                                    <br><span class="oum-pro">PRO</span><br>
-                                    <a class="oum-gopro-text"
-                                       href="<?php echo oum_fs()->get_upgrade_url(); ?>"><?php echo __('Upgrade to PRO to use various field types like links, checkboxes, radio buttons and dropdowns', 'open-user-map'); ?></a>
-
-                                <?php endif; ?>
                             </th>
                             <td>
                                 <div class="oum_custom_fields_wrapper">
@@ -780,7 +716,7 @@
                                             <th><?php echo __('Required', 'open-user-map'); ?></th>
                                             <th><?php echo __('Private', 'open-user-map'); ?></th>
                                             <th><?php echo __('Max. length', 'open-user-map'); ?></th>
-                                            <th><?php echo __('Field type', 'open-user-map'); ?> <span class="oum-pro">PRO</span>
+                                            <th><?php echo __('Field type', 'open-user-map'); ?>
                                             </th>
                                             <th><?php echo __('Options', 'open-user-map'); ?></th>
                                             <th><?php echo __('Description', 'open-user-map'); ?></th>
@@ -833,8 +769,8 @@
                                                                 $available_field_types = $this->oum_custom_field_fieldtypes;
                                                                 ?>
 
-                                                                <?php if (oum_fs()->is__premium_only()): ?>
-                                                                    <?php if (oum_fs()->can_use_premium_code()): ?>
+                                                                <?php if (true): ?>
+                                                                    <?php if (true): ?>
 
                                                                         <?php
                                                                         $available_field_types = array_merge($available_field_types, $this->pro_oum_custom_field_fieldtypes);
@@ -995,8 +931,8 @@
                                 </div>
                                 <br><br>
 
-                                <?php if (oum_fs()->is__premium_only()): ?>
-                                    <?php if (oum_fs()->can_use_premium_code()): ?>
+                                <?php if (true): ?>
+                                    <?php if (true): ?>
 
                                         <div class="oum_2cols">
                                             <div>
@@ -1009,16 +945,13 @@
                                                        id="oum_video_required" <?php echo ($oum_video_required) ? 'checked' : ''; ?>>
                                                 <label for="oum_video_required"><?php echo __('Required', 'open-user-map'); ?></label>
                                             </div>
-                                            <div>
-                                                <span class="oum-pro">PRO</span>
-                                            </div>
                                         </div>
                                         <br><br>
 
                                     <?php endif; ?>
                                 <?php endif; ?>
 
-                                <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+                                <?php if (true): ?>
 
                                     <div class="oum_2cols">
                                         <div class="oum-gopro-div">
@@ -1034,7 +967,7 @@
                                             <label><?php echo __('Required', 'open-user-map'); ?></label>
                                         </div>
                                         <div>
-                                            <span class="oum-pro">PRO</span>
+
                                         </div>
                                     </div>
                                     <br><br>
@@ -1065,8 +998,8 @@
                             </td>
                         </tr>
 
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
+                        <?php if (true): ?>
+                            <?php if (true): ?>
 
                                 <tr style="vertical-align: top;">
                                     <?php
@@ -1074,8 +1007,9 @@
                                     $oum_max_audio_filesize = get_option('oum_max_audio_filesize') ? get_option('oum_max_audio_filesize') : 10;
                                     ?>
                                     <th scope="row">
+                                        /* translators: Information regarding max upload-size for users */
                                         <?php echo __('Max upload size', 'open-user-map'); ?>
-                                        <br><span class="oum-pro">PRO</span><br>
+                                        <br><br>
                                     </th>
                                     <td>
                                         <div class="oum_2cols">
@@ -1103,14 +1037,11 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+                        <?php if (true): ?>
 
                             <tr style="vertical-align: top;" class="oum-gopro-tr">
                                 <th scope="row">
                                     <?php echo __('Max upload size', 'open-user-map'); ?>
-                                    <br><span class="oum-pro">PRO</span><br>
-                                    <a class="oum-gopro-text"
-                                       href="<?php echo oum_fs()->get_upgrade_url(); ?>"><?php echo __('Upgrade to PRO to set the maximum file size for image and audio uploads.', 'open-user-map'); ?></a>
                                 </th>
                                 <td>
                                     <div class="oum_2cols">
@@ -1133,8 +1064,8 @@
 
                         <?php endif; ?>
 
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
+                        <?php if (true): ?>
+                            <?php if (true): ?>
 
                                 <tr style="vertical-align: top;">
                                     <?php
@@ -1145,7 +1076,7 @@
                                     ?>
                                     <th scope="row">
                                         <?php echo __('User email notification', 'open-user-map'); ?>
-                                        <br><span class="oum-pro">PRO</span><br>
+                                        <br><br>
                                     </th>
                                     <td>
                                         <input class="oum-switch" type="checkbox" id="oum_enable_user_notification"
@@ -1181,14 +1112,11 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+                        <?php if (true): ?>
 
                             <tr style="vertical-align: top;" class="oum-gopro-tr">
                                 <th scope="row">
                                     <?php echo __('User email notification', 'open-user-map'); ?>
-                                    <br><span class="oum-pro">PRO</span><br>
-                                    <a class="oum-gopro-text"
-                                       href="<?php echo oum_fs()->get_upgrade_url(); ?>"><?php echo __('Upgrade to PRO to notify your users after their location proposal has been approved!', 'open-user-map'); ?></a>
                                 </th>
                                 <td>
                                     <label>
@@ -1284,8 +1212,8 @@
                 <div id="tab-3" class="tab-pane">
                     <table class="form-table">
 
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
+                        <?php if (true): ?>
+                            <?php if (true): ?>
 
                                 <tr style="vertical-align: top;">
                                     <th scope="row"><?php echo __('Searchbar', 'open-user-map'); ?></th>
@@ -1312,7 +1240,7 @@
                                                     <label>
                                                         <input type="radio" name="oum_searchbar_type"
                                                                value="<?php echo esc_attr($val); ?>" <?php echo $checked; ?>>
-                                                        <strong><?php echo esc_html($label); ?></strong><?php echo ($val === 'live_filter') ? '&nbsp;&nbsp;<span class="oum-pro">PRO</span>' : ''; ?>
+                                                        <strong><?php echo esc_html($label); ?></strong><?php echo ($val === 'live_filter') ? '&nbsp;&nbsp;' : ''; ?>
                                                         <br>
                                                         <?php if ($val === 'address'): ?>
                                                             <small><?php echo __('Find a specific address – type to see matching suggestions below and locate them on the map.', 'open-user-map'); ?></small>
@@ -1331,7 +1259,7 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+                        <?php if (true): ?>
 
                             <tr style="vertical-align: top;">
                                 <th scope="row"><?php echo __('Searchbar', 'open-user-map'); ?></th>
@@ -1355,7 +1283,7 @@
                                                 <label>
                                                     <input type="radio" name="oum_searchbar_type"
                                                            value="<?php echo esc_attr($val); ?>" <?php echo $checked; ?>>
-                                                    <strong><?php echo esc_html($label); ?></strong><?php echo ($val === 'live_filter') ? '&nbsp;&nbsp;<span class="oum-pro">PRO</span>' : ''; ?>
+                                                    <strong><?php echo esc_html($label); ?></strong><?php echo ($val === 'live_filter') ? '&nbsp;&nbsp;' : ''; ?>
                                                     <br>
                                                     <?php if ($val === 'address'): ?>
                                                         <small><?php echo __('Find a specific address – type to see matching suggestions below and locate them on the map.', 'open-user-map'); ?></small>
@@ -1430,8 +1358,8 @@
                             </td>
                         </tr>
 
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
+                        <?php if (true): ?>
+                            <?php if (true): ?>
 
                                 <tr style="vertical-align: top;">
                                     <?php
@@ -1443,7 +1371,7 @@
                                     ?>
                                     <th scope="row">
                                         <?php echo __('Marker Categories', 'open-user-map'); ?>
-                                        <br><span class="oum-pro">PRO</span><br>
+                                        <br><br>
                                     </th>
                                     <td>
                                         <input class="oum-switch" type="checkbox" name="oum_enable_marker_types"
@@ -1489,57 +1417,11 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
-
-                            <tr style="vertical-align: top;" class="oum-gopro-tr">
-                                <th scope="row">
-                                    <?php echo __('"Marker Categories" field', 'open-user-map'); ?>
-                                    <br><span class="oum-pro">PRO</span><br>
-                                    <a class="oum-gopro-text"
-                                       href="<?php echo oum_fs()->get_upgrade_url(); ?>"><?php echo __('Upgrade to PRO and use marker categories. Each category can have a custom marker icon.', 'open-user-map'); ?></a>
-                                </th>
-                                <td>
-                                    <label>
-                                        <input class="oum-switch" type="checkbox" disabled>
-                                    </label>
-                                    <label><?php echo __('Enable', 'open-user-map'); ?></label>
-                                    <br>
-                                    <br>
-                                    <strong><?php echo __('Custom Label:', 'open-user-map'); ?></strong><br>
-                                    <label>
-                                        <input disabled class="regular-text" type="text" value=""
-                                               placeholder="<?php echo esc_attr($this->oum_marker_types_label_default); ?>">
-                                    </label>
-                                    <br><br>
-                                    <label>
-                                        <input class="oum-switch" type="checkbox" disabled>
-                                    </label>
-                                    <label><?php echo __('Allow multiple selections', 'open-user-map'); ?></label><br>
-                                    <div class="description"><?php echo __('<strong>Important:</strong> If enabled all locations will fallback to the <a href="edit.php?post_type=oum-location&page=open-user-map-settings">Default Marker Icon</a> instead of a specific category icon.', 'open-user-map'); ?></div>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <label>
-                                        <input class="oum-switch" type="checkbox" disabled>
-                                    </label>
-                                    <label><?php echo __('Allow empty selection', 'open-user-map'); ?></label>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <label>
-                                        <input class="oum-switch" type="checkbox" disabled>
-                                    </label>
-                                    <label for="oum_collapse_filter"><?php echo __('Collapsed Filterbox', 'open-user-map'); ?></label><br>
-                                    <div class="description"><?php echo __('If enabled the filterbox will take less space and just open on mouseover.', 'open-user-map'); ?></div>
-                                </td>
-                            </tr>
+                        <?php if (true): ?>
 
                             <tr style="vertical-align: top;" class="oum-gopro-tr">
                                 <th scope="row">
                                     <?php echo __('Filterbox', 'open-user-map'); ?>
-                                    <br><span class="oum-pro">PRO</span><br>
-                                    <a class="oum-gopro-text"
-                                       href="<?php echo oum_fs()->get_upgrade_url(); ?>"><?php echo __('Upgrade to PRO and add category filters to the map.', 'open-user-map'); ?></a>
                                 </th>
                                 <td>
                                     <label>
@@ -1633,8 +1515,8 @@
                             </td>
                         </tr>
 
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
+                        <?php if (true): ?>
+                            <?php if (true): ?>
 
                                 <tr style="vertical-align: top;">
                                     <?php
@@ -1642,7 +1524,7 @@
                                     ?>
                                     <th scope="row">
                                         <?php echo __('Public pages for locations (Single pages)', 'open-user-map'); ?>
-                                        <br><span class="oum-pro">PRO</span><br>
+                                        <br><br>
                                     </th>
                                     <td>
                                         <input class="oum-switch" type="checkbox" id="oum_enable_single_page"
@@ -1656,14 +1538,11 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+                        <?php if (true): ?>
 
                             <tr style="vertical-align: top;" class="oum-gopro-tr">
                                 <th scope="row">
                                     <?php echo __('Public pages for locations (Single pages)', 'open-user-map'); ?>
-                                    <br><span class="oum-pro">PRO</span><br>
-                                    <a class="oum-gopro-text"
-                                       href="<?php echo oum_fs()->get_upgrade_url(); ?>"><?php echo __('Upgrade to PRO to enable single pages.', 'open-user-map'); ?></a>
                                 </th>
                                 <td>
                                     <label>
@@ -1677,8 +1556,8 @@
 
                         <?php endif; ?>
 
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
+                        <?php if (true): ?>
+                            <?php if (true): ?>
 
                                 <tr style="vertical-align: top;">
                                     <?php
@@ -1687,7 +1566,7 @@
                                     ?>
                                     <th scope="row">
                                         <?php echo __('Restrict "Add location" to logged in users only', 'open-user-map'); ?>
-                                        <br><span class="oum-pro">PRO</span><br>
+                                        <br><br>
                                     </th>
                                     <td>
                                         <input class="oum-switch" type="checkbox" id="oum_enable_user_restriction"
@@ -1706,14 +1585,11 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+                        <?php if (true): ?>
 
                             <tr style="vertical-align: top;" class="oum-gopro-tr">
                                 <th scope="row">
                                     <?php echo __('Restrict "Add location" to logged in users only', 'open-user-map'); ?>
-                                    <br><span class="oum-pro">PRO</span><br>
-                                    <a class="oum-gopro-text"
-                                       href="<?php echo oum_fs()->get_upgrade_url(); ?>"><?php echo __('Upgrade to PRO to enable the "Add location" feature only to logged in users!', 'open-user-map'); ?></a>
                                 </th>
                                 <td>
                                     <label>
@@ -1723,14 +1599,14 @@
                                     <label>
                                         <input class="oum-switch" type="checkbox" disabled>
                                     </label>
-                                    <label><?php echo __('Redirect "Add location"-Button to registration page'); ?></label><br><br>
+                                    <label><?php echo __('Redirect "Add location"-Button to registration page', 'open-user-map'); ?></label><br><br>
                                 </td>
                             </tr>
 
                         <?php endif; ?>
 
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
+                        <?php if (true): ?>
+                            <?php if (true): ?>
 
                                 <tr style="vertical-align: top;">
                                     <?php
@@ -1738,7 +1614,7 @@
                                     ?>
                                     <th scope="row">
                                         <?php echo __('Auto-Publish for registered users', 'open-user-map'); ?>
-                                        <br><span class="oum-pro">PRO</span><br>
+                                        <br><br>
                                     </th>
                                     <td>
                                         <input class="oum-switch" type="checkbox" id="oum_enable_auto_publish"
@@ -1751,14 +1627,11 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+                        <?php if (true): ?>
 
                             <tr style="vertical-align: top;" class="oum-gopro-tr">
                                 <th scope="row">
                                     <?php echo __('Auto-Publish for registered users', 'open-user-map'); ?>
-                                    <br><span class="oum-pro">PRO</span><br>
-                                    <a class="oum-gopro-text"
-                                       href="<?php echo oum_fs()->get_upgrade_url(); ?>"><?php echo __('Upgrade to PRO to auto-publish location proposals from registered users without your approval!', 'open-user-map'); ?></a>
                                 </th>
                                 <td>
                                     <label>
@@ -1771,8 +1644,8 @@
 
                         <?php endif; ?>
 
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
+                        <?php if (true): ?>
+                            <?php if (true): ?>
 
                                 <tr style="vertical-align: top;">
                                     <?php
@@ -1780,7 +1653,7 @@
                                     ?>
                                     <th scope="row">
                                         <?php echo __('Auto-Publish for unregistered users', 'open-user-map'); ?>
-                                        <br><span class="oum-pro">PRO</span><br>
+                                        <br><br>
                                     </th>
                                     <td>
                                         <input class="oum-switch" type="checkbox"
@@ -1794,14 +1667,11 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+                        <?php if (true): ?>
 
                             <tr style="vertical-align: top;" class="oum-gopro-tr">
                                 <th scope="row">
                                     <?php echo __('Auto-Publish for unregistered users', 'open-user-map'); ?>
-                                    <br><span class="oum-pro">PRO</span><br>
-                                    <a class="oum-gopro-text"
-                                       href="<?php echo oum_fs()->get_upgrade_url(); ?>"><?php echo __('Upgrade to PRO to auto-publish location proposals from unregistered users without your approval!', 'open-user-map'); ?></a>
                                 </th>
                                 <td>
                                     <label>
@@ -1814,8 +1684,8 @@
 
                         <?php endif; ?>
 
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
+                        <?php if (true): ?>
+                            <?php if (true): ?>
 
                                 <tr style="vertical-align: top;">
                                     <?php
@@ -1823,7 +1693,7 @@
                                     ?>
                                     <th scope="row">
                                         <?php echo __('Extend WordPress user registration form with "Add location" map', 'open-user-map'); ?>
-                                        <br><span class="oum-pro">PRO</span><br>
+                                        <br><br>
                                     </th>
                                     <td>
                                         <input class="oum-switch" type="checkbox" id="oum_enable_add_user_location"
@@ -1835,14 +1705,11 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+                        <?php if (true): ?>
 
                             <tr style="vertical-align: top;" class="oum-gopro-tr">
                                 <th scope="row">
                                     <?php echo __('Extend WordPress user registration form with "Add location" map', 'open-user-map'); ?>
-                                    <br><span class="oum-pro">PRO</span><br>
-                                    <a class="oum-gopro-text"
-                                       href="<?php echo oum_fs()->get_upgrade_url(); ?>"><?php echo __('Upgrade to PRO to allow users to add their location within registration. Create a map of your registered users!', 'open-user-map'); ?></a>
                                 </th>
                                 <td>
                                     <label>
@@ -1854,8 +1721,8 @@
 
                         <?php endif; ?>
 
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
+                        <?php if (true): ?>
+                            <?php if (true): ?>
 
                                 <tr style="vertical-align: top;">
                                     <?php
@@ -1866,7 +1733,7 @@
                                     ?>
                                     <th scope="row">
                                         <?php echo __('Admin email notification on new location proposals', 'open-user-map'); ?>
-                                        <br><span class="oum-pro">PRO</span><br>
+                                        <br><br>
                                     </th>
                                     <td>
                                         <input class="oum-switch" type="checkbox" id="oum_enable_admin_notification"
@@ -1900,14 +1767,11 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+                        <?php if (true): ?>
 
                             <tr style="vertical-align: top;" class="oum-gopro-tr">
                                 <th scope="row">
                                     <?php echo __('Admin email notification on new location proposals', 'open-user-map'); ?>
-                                    <br><span class="oum-pro">PRO</span><br>
-                                    <a class="oum-gopro-text"
-                                       href="<?php echo oum_fs()->get_upgrade_url(); ?>"><?php echo __('Upgrade to PRO to get notified instantly when a new location proposal has been added!', 'open-user-map'); ?></a>
                                 </th>
                                 <td>
                                     <label>
@@ -1939,8 +1803,8 @@
 
                         <?php endif; ?>
 
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
+                        <?php if (true): ?>
+                            <?php if (true): ?>
 
                                 <tr style="vertical-align: top;">
                                     <?php
@@ -1949,7 +1813,7 @@
                                     ?>
                                     <th scope="row">
                                         <?php echo __('Trigger Webhook on new or updated Locations', 'open-user-map'); ?>
-                                        <br><span class="oum-pro">PRO</span><br>
+                                        <br><br>
                                     </th>
                                     <td>
                                         <input class="oum-switch" type="checkbox" id="oum_enable_webhook_notification"
@@ -1969,14 +1833,11 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+                        <?php if (true): ?>
 
                             <tr style="vertical-align: top;" class="oum-gopro-tr">
                                 <th scope="row">
                                     <?php echo __('Trigger Webhook on new or updated Locations', 'open-user-map'); ?>
-                                    <br><span class="oum-pro">PRO</span><br>
-                                    <a class="oum-gopro-text"
-                                       href="<?php echo oum_fs()->get_upgrade_url(); ?>"><?php echo __('Upgrade to PRO to trigger external web services (e.g. Zapier) on a new or updated Location.', 'open-user-map'); ?></a>
                                 </th>
                                 <td>
                                     <label>
@@ -2019,13 +1880,13 @@
 
                     <table class="form-table">
 
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
+                        <?php if (true): ?>
+                            <?php if (true): ?>
 
                                 <tr style="vertical-align: top;">
                                     <th scope="row">
                                         <?php echo __('Export all Locations', 'open-user-map'); ?>
-                                        <br><span class="oum-pro">PRO</span><br>
+                                        <br><br>
                                     </th>
                                     <td>
                                         <button class="oum_export_csv_button button button-secondary"><?php echo __('Export to CSV', 'open-user-map'); ?></button>
@@ -2043,14 +1904,11 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+                        <?php if (true): ?>
 
                             <tr style="vertical-align: top;" class="oum-gopro-tr">
                                 <th scope="row">
                                     <?php echo __('Export all Locations', 'open-user-map'); ?>
-                                    <br><span class="oum-pro">PRO</span><br>
-                                    <a class="oum-gopro-text"
-                                       href="<?php echo oum_fs()->get_upgrade_url(); ?>"><?php echo __('Upgrade to PRO to export your locations.', 'open-user-map'); ?></a>
                                 </th>
                                 <td>
                                     <button disabled
@@ -2069,13 +1927,13 @@
                         <?php endif; ?>
 
 
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
+                        <?php if (true): ?>
+                            <?php if (true): ?>
 
                                 <tr style="vertical-align: top;">
                                     <th scope="row">
                                         <?php echo __('Import all Locations', 'open-user-map'); ?>
-                                        <br><span class="oum-pro">PRO</span><br>
+                                        <br><br>
                                     </th>
                                     <td>
                                         <div class="csv_upload">
@@ -2111,14 +1969,11 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+                        <?php if (true): ?>
 
                             <tr style="vertical-align: top;" class="oum-gopro-tr">
                                 <th scope="row">
                                     <?php echo __('Import all Locations', 'open-user-map'); ?>
-                                    <br><span class="oum-pro">PRO</span><br>
-                                    <a class="oum-gopro-text"
-                                       href="<?php echo oum_fs()->get_upgrade_url(); ?>"><?php echo __('Upgrade to PRO to import your locations.', 'open-user-map'); ?></a>
                                 </th>
                                 <td>
                                     <div class="csv_upload">
@@ -2254,7 +2109,7 @@
                                             <td><?php echo __('Filter locations by Post ID. Separate multiple IDs with a | symbol.', 'open-user-map'); ?></td>
                                         </tr>
                                         <tr>
-                                            <td><code>user</code> <span class="oum-pro">PRO</span></td>
+                                            <td><code>user</code></td>
                                             <td>
                                                 <code>user="current"</code><br>
                                                 <code>user="123"</code><br>
@@ -2400,7 +2255,7 @@
 
                                         <p>
                                             <strong><?php echo __('Example 2: Simple map showing only locations from the current user', 'open-user-map'); ?></strong>
-                                            <span class="oum-pro">PRO</span></p>
+                                        </p>
                                         <code>[open-user-map map_type="simple" user="current" enable_fullscreen="true"
                                             enable_searchbar="false"]</code>
 
@@ -2417,7 +2272,7 @@
                         <tr style="vertical-align: top;">
                             <th scope="row"><?php echo __('Additional Shortcodes', 'open-user-map'); ?></th>
                             <td class="top-padding-20">
-                                <span class="oum-pro">PRO</span> <code>[open-user-map-location value="Favorite color"
+                                <code>[open-user-map-location value="Favorite color"
                                     post_id="12345"]</code>
                                 <br><br>
                                 <span class="hint"><?php echo __('Display specific values from a location. The POST_ID attribute is optional. Alternatively use the PHP function <code>oum_get_location_value( $value, $post_id )</code> in case you just want to return the value.', 'open-user-map'); ?></span>
@@ -2443,7 +2298,7 @@
                                 </ul>
                                 <br><br>
 
-                                <span class="oum-pro">PRO</span> <code>[open-user-map-gallery]</code>
+                                <code>[open-user-map-gallery]</code>
                                 <br><br>
                                 <span class="hint"><?php echo __('Get a nice gallery view of all the location images. Each image is linked to the location marker on the map.', 'open-user-map'); ?></span>
                                 <br><br>
@@ -2460,7 +2315,7 @@
                                 </ul>
                                 <br><br>
 
-                                <span class="oum-pro">PRO</span> <code>[open-user-map-list]</code>
+                                <code>[open-user-map-list]</code>
                                 <br><br>
                                 <span class="hint"><?php echo __('Get a list view of all the locations. The list view is paginated. This number of items per page can be adjusted under <i>Settings > Reading</i>.', 'open-user-map'); ?></span>
                                 <br><br>
@@ -2529,7 +2384,7 @@
 }, 10, 2);</pre>
                                 </code>
                                 <br><br><br>
-                                <span class="oum-pro">PRO</span>
+
                                 <strong><?php echo __('Customize location list item content:', 'open-user-map'); ?></strong><br><br>
                                 <code class="block"><pre>add_filter('oum_location_list_item_content', function ( $content, $location ) {
 

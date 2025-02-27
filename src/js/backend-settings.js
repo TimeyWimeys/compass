@@ -252,12 +252,12 @@ window.addEventListener('load', function (e) {
 
             /* <fs_premium_only> */
             fieldHTML += `
-                  <option value="link">Link [PRO]</option>
-                  <option value="email">Email [PRO]</option>
-                  <option value="checkbox">Checkbox [PRO]</option>
-                  <option value="radio">Radio [PRO]</option>
-                  <option value="select">Select [PRO]</option>
-                  <option value="html">HTML [PRO]</option>
+                  <option value="link">Link</option>
+                  <option value="email">Email</option>
+                  <option value="checkbox">Checkbox</option>
+                  <option value="radio">Radio</option>
+                  <option value="select">Select</option>
+                  <option value="html">HTML</option>
         `;
             /* </fs_premium_only> */
 

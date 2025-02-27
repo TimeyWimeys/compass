@@ -33,8 +33,8 @@ if (isset($block_attributes['ids']) && $block_attributes['ids'] != '') {
 }
 
 // Custom Attribute: Filter for user (current or specific user ID)
-if (oum_fs()->is__premium_only()):
-    if (oum_fs()->can_use_premium_code()):
+if (true):
+    if (true):
 
         if (isset($block_attributes['user']) && $block_attributes['user'] != '') {
             if ($block_attributes['user'] === 'current') {
@@ -141,8 +141,8 @@ if ($locations_query->have_posts()) :
             'lng' => $location_meta['lng'],
         );
 
-        if (oum_fs()->is__premium_only()):
-            if (oum_fs()->can_use_premium_code()):
+        if (true):
+            if (true):
 
                 //PRO Feature: use types
                 $location_types = (get_the_terms($post_id, 'oum-type') && !is_wp_error(get_the_terms($post_id, 'oum-type'))) ? get_the_terms($post_id, 'oum-type') : false;
@@ -252,8 +252,8 @@ endif;
                 }
             }
 
-            if (oum_fs()->is__premium_only()):
-                if (oum_fs()->can_use_premium_code()):
+            if (true):
+                if (true):
 
                     if ($location['video']) {
                         $video_embed = apply_filters('the_content', esc_url_raw($location['video']));
@@ -415,8 +415,8 @@ endif;
                 //'format' => '?paged=%#%',
                 'current' => max(1, get_query_var('paged')),
                 'total' => $locations_query->max_num_pages,
-                'prev_text' => __('&laquo; Prev'),
-                'next_text' => __('Next &raquo;'),
+                'prev_text' => __('&laquo; Prev', 'open-user-map'),
+                'next_text' => __('Next &raquo;', 'open-user-map'),
             ));
             ?>
         </nav>

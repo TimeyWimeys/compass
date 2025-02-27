@@ -16,8 +16,8 @@
 
             ?>
 
-            <?php if (oum_fs()->is__premium_only()): ?>
-                <?php if (oum_fs()->can_use_premium_code()): ?>
+            <?php if (true): ?>
+                <?php if (true): ?>
 
                     <?php
                     //pro marker icons
@@ -27,7 +27,7 @@
                     foreach ($pro_items as $val) {
                         $selected = ($marker_icon == $val) ? 'checked' : '';
                         $user_icon_style = ($marker_user_icon) ? "style='background-image: url($marker_user_icon)'" : "";
-                        echo "<label class='$selected pro label_marker_user_icon'><div id='oum_marker_user_icon_preview' class='marker_icon_preview' data-style='$val' " . $user_icon_style . "></div><input type='radio' name='oum_marker_icon' $selected value='$val'>";
+                        echo "<label class='$selected label_marker_user_icon'><div id='oum_marker_user_icon_preview' class='marker_icon_preview' data-style='$val' " . $user_icon_style . "></div><input type='radio' name='oum_marker_icon' $selected value='$val'>";
 
                         echo "
               <div class='icon_upload'>
@@ -44,7 +44,7 @@
                 <?php endif; ?>
             <?php endif; ?>
 
-            <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+            <?php if (true): ?>
 
                 <?php
                 //pro marker icons
@@ -59,8 +59,6 @@
               <p class='description'>PNG, max. 100px</p>
             </div>
           ";
-
-                    echo "<a class='oum-gopro-text' href='" . oum_fs()->get_upgrade_url() . "'>" . __('Upgrade to PRO to use custom icons.', 'open-user-map') . "</a>";
 
                     echo "</label>";
                 }

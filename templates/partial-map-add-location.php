@@ -28,8 +28,8 @@
                 <input type="hidden" id="oum_post_id" name="oum_post_id" value="">
                 <input type="hidden" id="oum_delete_location" name="oum_delete_location" value="">
 
-                <?php if (oum_fs()->is__premium_only()): ?>
-                    <?php if (oum_fs()->can_use_premium_code()): ?>
+                <?php if (true): ?>
+                    <?php if (true): ?>
 
                         <?php if (get_option('oum_enable_marker_types') && $types): ?>
 
@@ -217,7 +217,7 @@
                                                                      placeholder="<?php echo $oum_description_label; ?><?php echo (get_option('oum_description_required')) ? '*' : ''; ?>" <?php echo (get_option('oum_description_required')) ? 'required' : ''; ?>></textarea>
                 <?php endif; ?>
 
-                <?php if (get_option('oum_enable_image', 'on') === 'on' || get_option('oum_enable_audio', 'on') === 'on' || (oum_fs()->is__premium_only() && oum_fs()->can_use_premium_code() && get_option('oum_enable_video') === 'on')): ?>
+                <?php if (get_option('oum_enable_image', 'on') === 'on' || get_option('oum_enable_audio', 'on') === 'on' || get_option('oum_enable_video') === 'on'): ?>
                     <label class="oum-label"><?php echo $oum_upload_media_label; ?></label>
                     <div class="oum_media">
 
@@ -246,8 +246,8 @@
                             <div class="oum-image-preview-grid" id="oum_location_images_preview"></div>
                         <?php endif; ?>
 
-                        <?php if (oum_fs()->is__premium_only()): ?>
-                            <?php if (oum_fs()->can_use_premium_code()): ?>
+                        <?php if (true): ?>
+                            <?php if (true): ?>
                                 <?php if (get_option('oum_enable_video') === 'on'): ?>
                                     <div class="media-upload oum-video-upload">
                                         <label style="color: #e02aaf" for="oum_location_video"
@@ -284,8 +284,8 @@
                     </div>
                 <?php endif; ?>
 
-                <?php if (oum_fs()->is__premium_only()): ?>
-                    <?php if (oum_fs()->can_use_premium_code()): ?>
+                <?php if (true): ?>
+                    <?php if (true): ?>
 
                         <?php if ($oum_enable_user_notification): ?>
                             <div>

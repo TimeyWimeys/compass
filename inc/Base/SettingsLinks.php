@@ -28,7 +28,7 @@ class SettingsLinks extends BaseController
     public function settings_link($links): mixed
     {
         $settings_link = '<a href="edit.php?post_type=oum-location&page=open-user-map-settings">Settings</a>';
-        array_push($links, $settings_link);
+        $links[] = $settings_link;
 
         return $links;
     }

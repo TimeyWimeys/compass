@@ -50,13 +50,12 @@
                     const oum_geosearch_provider_here_key = `<?php echo get_option('oum_geosearch_provider_here_key', ''); ?>`;
                     const oum_geosearch_provider_mapbox_key = `<?php echo get_option('oum_geosearch_provider_mapbox_key', ''); ?>`;
                     const oum_searchaddress_label = `<?php echo esc_attr(get_option('oum_searchaddress_label') ? get_option('oum_searchaddress_label') : $this->oum_searchaddress_label_default); ?>`;
-
-                    <?php if($marker_icon == 'user1' && $marker_user_icon): ?>
-                    const marker_icon_url = `<?php echo esc_url($marker_user_icon); ?>`;
-                    <?php else: ?>
-                    const marker_icon_url = `<?php echo esc_url($this->plugin_url); ?>src/leaflet/images/marker-icon_<?php echo esc_attr($marker_icon); ?>-2x.png`;
-                    <?php endif; ?>
-
+                    <?php
+                    $marker_icon_url = ($marker_icon == 'user1' && $marker_user_icon)
+                        ? esc_url($marker_user_icon)
+                        : esc_url($this->plugin_url) . "src/leaflet/images/marker-icon_" . esc_attr($marker_icon) . "-2x.png";
+                    ?>
+                    const marker_icon_url = `<?php echo $marker_icon_url; ?>`;
                     const marker_shadow_url = '<?php echo esc_url($this->plugin_url); ?>src/leaflet/images/marker-shadow.png';
                 </script>
 
@@ -96,8 +95,8 @@
         </td>
     </tr>
 
-    <?php if (oum_fs()->is__premium_only()): ?>
-        <?php if (oum_fs()->can_use_premium_code()): ?>
+    <?php if (true): ?>
+        <?php if (true): ?>
 
             <tr style="vertical-align: top;">
                 <th scope="row">
@@ -302,8 +301,8 @@
         <?php endforeach; ?>
     <?php endif; ?>
 
-    <?php if (oum_fs()->is__premium_only()): ?>
-        <?php if (oum_fs()->can_use_premium_code()): ?>
+    <?php if (true): ?>
+        <?php if (true): ?>
 
             <tr style="vertical-align: top;">
                 <th scope="row">

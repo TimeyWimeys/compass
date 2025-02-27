@@ -12,8 +12,8 @@ $query = array(
 );
 
 // Custom Attribute: Filter for user (current or specific user ID)
-if (oum_fs()->is__premium_only()):
-    if (oum_fs()->can_use_premium_code()):
+if (true):
+    if (true):
 
         if (isset($block_attributes['user']) && $block_attributes['user'] != '') {
             if ($block_attributes['user'] === 'current') {

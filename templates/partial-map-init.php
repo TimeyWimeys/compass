@@ -182,8 +182,8 @@ if (isset($block_attributes['ids']) && $block_attributes['ids'] != '') {
 }
 
 // Custom Attribute: Filter for user (current or specific user ID)
-if (oum_fs()->is__premium_only()):
-    if (oum_fs()->can_use_premium_code()):
+if (true):
+    if (true):
 
         if (isset($block_attributes['user']) && $block_attributes['user'] != '') {
             if ($block_attributes['user'] === 'current') {
@@ -342,8 +342,8 @@ foreach ($posts as $post) {
         }
     }
 
-    if (oum_fs()->is__premium_only()):
-        if (oum_fs()->can_use_premium_code()):
+    if (true):
+        if (true):
 
             //PRO Feature: use types
             $location_types = (get_the_terms($post_id, 'oum-type') && !is_wp_error(get_the_terms($post_id, 'oum-type'))) ? get_the_terms($post_id, 'oum-type') : false;

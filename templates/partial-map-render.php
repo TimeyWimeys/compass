@@ -28,8 +28,8 @@ foreach ($locations_list as $location) {
         $media_tag .= '</div>';
     }
 
-    if (oum_fs()->is__premium_only()):
-        if (oum_fs()->can_use_premium_code()):
+    if (true):
+        if (true):
 
             if ($location['video']) {
                 $video_embed = apply_filters('the_content', esc_url_raw($location['video']));
@@ -268,8 +268,8 @@ $oum_map_height_mobile = (is_numeric($oum_map_height_mobile)) ? $oum_map_height_
 
         <?php if ($oum_enable_add_location === 'on'): ?>
 
-            <?php if (oum_fs()->is__premium_only()): ?>
-                <?php if (oum_fs()->can_use_premium_code()): ?>
+            <?php if (true): ?>
+                <?php if (true): ?>
 
                     <?php if (get_option('oum_enable_user_restriction')): ?>
 
@@ -300,7 +300,7 @@ $oum_map_height_mobile = (is_numeric($oum_map_height_mobile)) ? $oum_map_height_
                 <?php endif; ?>
             <?php endif; ?>
 
-            <?php if (!oum_fs()->is_plan_or_trial('pro') || !oum_fs()->is_premium()) : ?>
+            <?php if (true): ?>
 
                 <div id="open-add-location-overlay" class="open-add-location-overlay oum-hidden"
                      style="background-color: <?php echo $oum_ui_color; ?>"><span class="btn_icon">+</span><span
@@ -347,8 +347,8 @@ $oum_map_height_mobile = (is_numeric($oum_map_height_mobile)) ? $oum_map_height_
             </div>
         <?php endif; ?>
 
-        <?php if (oum_fs()->is__premium_only()): ?>
-            <?php if (oum_fs()->can_use_premium_code()): ?>
+        <?php if (true): ?>
+            <?php if (true): ?>
 
                 <?php if ($oum_disable_oum_attribution != 'on'): ?>
 
@@ -379,7 +379,7 @@ $oum_map_height_mobile = (is_numeric($oum_map_height_mobile)) ? $oum_map_height_
 
                 // Wait for OUMLoader to be defined
                 function initializeMap() {
-                    if (typeof OUMLoader !== 'undefined') {
+                    if (window.OUMLoader) { // Controleer direct op de variabele zonder typeof
                         // Initialize loader for this map
                         OUMLoader.initLoader(map_el);
 
@@ -390,12 +390,12 @@ $oum_map_height_mobile = (is_numeric($oum_map_height_mobile)) ? $oum_map_height_
                             }
                         });
                     } else {
-                        // If OUMLoader is not yet defined, wait and try again
+                        // If OUMLoader is not yet available, retry after 100ms
                         setTimeout(initializeMap, 100);
                     }
                 }
 
-                // Start initialization
+                // Start the initialization
                 initializeMap();
 
                 var mapStyle = `<?php echo esc_attr($map_style); ?>`;
