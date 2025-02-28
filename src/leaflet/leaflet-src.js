@@ -11969,7 +11969,7 @@
    * @example
    *
    * ```js
-   * L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.webp?{foo}', {foo: 'bar', attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+   * L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
    * ```
    *
    * @section URL template
@@ -11978,7 +11978,7 @@
    * A string of the following form:
    *
    * ```
-   * 'https://{s}.somedomain.com/blabla/{z}/{x}/{y}{r}.webp'
+   * 'https://{s}.somedomain.com/blabla/{z}/{x}/{y}{r}.png'
    * ```
    *
    * `{s}` means one of the available subdomains (used sequentially to help with browser parallel requests per domain limitation; subdomain values are specified in options; `a`, `b` or `c` by default, can be omitted), `{z}` — zoom level, `{x}` and `{y}` — tile coordinates. `{r}` can be used to add "&commat;2x" to the URL to load retina tiles.
@@ -11986,7 +11986,7 @@
    * You can use custom keys in the template, which will be [evaluated](#util-template) from TileLayer options, like this:
    *
    * ```
-   * L.tileLayer('https://{s}.somedomain.com/{foo}/{z}/{x}/{y}.webp', {foo: 'bar'});
+   * L.tileLayer('https://{s}.somedomain.com/{foo}/{z}/{x}/{y}.png', {foo: 'bar'});
    * ```
    */
 

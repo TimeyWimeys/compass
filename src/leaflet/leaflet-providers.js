@@ -77,7 +77,7 @@
 
 	L.TileLayer.Provider.providers = {
 		OpenStreetMap: {
-			url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.webp',
+			url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
 			options: {
 				maxZoom: 19,
 				attribution:
@@ -86,27 +86,27 @@
 			variants: {
 				Mapnik: {},
 				DE: {
-					url: 'https://tile.openstreetmap.de/{z}/{x}/{y}.webp',
+					url: 'https://tile.openstreetmap.de/{z}/{x}/{y}.png',
 					options: {
 						maxZoom: 18
 					}
 				},
 				CH: {
-					url: 'https://tile.osm.ch/switzerland/{z}/{x}/{y}.webp',
+					url: 'https://tile.osm.ch/switzerland/{z}/{x}/{y}.png',
 					options: {
 						maxZoom: 18,
 						bounds: [[45, 5], [48, 11]]
 					}
 				},
 				France: {
-					url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.webp',
+					url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
 					options: {
 						maxZoom: 20,
 						attribution: '&copy; OpenStreetMap France | {attribution.OpenStreetMap}'
 					}
 				},
 				HOT: {
-					url: 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.webp',
+					url: 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
 					options: {
 						attribution:
 							'{attribution.OpenStreetMap}, ' +
@@ -115,7 +115,7 @@
 					}
 				},
 				BZH: {
-					url: 'https://tile.openstreetmap.bzh/br/{z}/{x}/{y}.webp',
+					url: 'https://tile.openstreetmap.bzh/br/{z}/{x}/{y}.png',
 					options: {
 						attribution: '{attribution.OpenStreetMap}, Tiles courtesy of <a href="http://www.openstreetmap.bzh/" target="_blank">Breton OpenStreetMap Team</a>',
 						bounds: [[46.2, -5.5], [50, 0.7]]
@@ -124,7 +124,7 @@
 			}
 		},
 		MapTilesAPI: {
-			url: 'https://maptiles.p.rapidapi.com/{variant}/{z}/{x}/{y}.webp?rapidapi-key={apikey}',
+			url: 'https://maptiles.p.rapidapi.com/{variant}/{z}/{x}/{y}.png?rapidapi-key={apikey}',
 			options: {
 				attribution:
 					'&copy; <a href="http://www.maptilesapi.com/">MapTiles API</a>, {attribution.OpenStreetMap}',
@@ -153,41 +153,41 @@
 			}
 		},
 		OpenSeaMap: {
-			url: 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.webp',
+			url: 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png',
 			options: {
 				attribution: 'Map data: &copy; <a href="http://www.openseamap.org">OpenSeaMap</a> contributors'
 			}
 		},
 		OPNVKarte: {
-			url: 'https://tileserver.memomaps.de/tilegen/{z}/{x}/{y}.webp',
+			url: 'https://tileserver.memomaps.de/tilegen/{z}/{x}/{y}.png',
 			options: {
 				maxZoom: 18,
 				attribution: 'Map <a href="https://memomaps.de/">memomaps.de</a> <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, map data {attribution.OpenStreetMap}'
 			}
 		},
 		OpenTopoMap: {
-			url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.webp',
+			url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
 			options: {
 				maxZoom: 17,
 				attribution: 'Map data: {attribution.OpenStreetMap}, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
 			}
 		},
 		OpenRailwayMap: {
-			url: 'https://{s}.tiles.openrailwaymap.org/standard/{z}/{x}/{y}.webp',
+			url: 'https://{s}.tiles.openrailwaymap.org/standard/{z}/{x}/{y}.png',
 			options: {
 				maxZoom: 19,
 				attribution: 'Map data: {attribution.OpenStreetMap} | Map style: &copy; <a href="https://www.OpenRailwayMap.org">OpenRailwayMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
 			}
 		},
 		OpenFireMap: {
-			url: 'http://openfiremap.org/hytiles/{z}/{x}/{y}.webp',
+			url: 'http://openfiremap.org/hytiles/{z}/{x}/{y}.png',
 			options: {
 				maxZoom: 19,
 				attribution: 'Map data: {attribution.OpenStreetMap} | Map style: &copy; <a href="http://www.openfiremap.org">OpenFireMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
 			}
 		},
 		SafeCast: {
-			url: 'https://s3.amazonaws.com/te512.safecast.org/{z}/{x}/{y}.webp',
+			url: 'https://s3.amazonaws.com/te512.safecast.org/{z}/{x}/{y}.png',
 			options: {
 				maxZoom: 16,
 				attribution: 'Map data: {attribution.OpenStreetMap} | Map style: &copy; <a href="https://blog.safecast.org/about/">SafeCast</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
@@ -325,7 +325,7 @@
 			}
 		},
 		Thunderforest: {
-			url: 'https://{s}.tile.thunderforest.com/{variant}/{z}/{x}/{y}.webp?apikey={apikey}',
+			url: 'https://{s}.tile.thunderforest.com/{variant}/{z}/{x}/{y}.png?apikey={apikey}',
 			options: {
 				attribution:
 					'&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, {attribution.OpenStreetMap}',
@@ -358,7 +358,7 @@
 			}
 		},
 		CyclOSM: {
-			url: 'https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.webp',
+			url: 'https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png',
 			options: {
 				maxZoom: 20,
 				attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: {attribution.OpenStreetMap}'
@@ -534,7 +534,7 @@
 			}
 		},
 		OpenWeatherMap: {
-			url: 'http://{s}.tile.openweathermap.org/map/{variant}/{z}/{x}/{y}.webp?appid={apiKey}',
+			url: 'http://{s}.tile.openweathermap.org/map/{variant}/{z}/{x}/{y}.png?appid={apiKey}',
 			options: {
 				maxZoom: 19,
 				attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
@@ -794,7 +794,7 @@
 			}
 		},
 		MtbMap: {
-			url: 'http://tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.webp',
+			url: 'http://tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png',
 			options: {
 				attribution:
 					'{attribution.OpenStreetMap} &amp; USGS'
@@ -822,7 +822,7 @@
 			}
 		},
 		HikeBike: {
-			url: 'https://tiles.wmflabs.org/{variant}/{z}/{x}/{y}.webp',
+			url: 'https://tiles.wmflabs.org/{variant}/{z}/{x}/{y}.png',
 			options: {
 				maxZoom: 19,
 				attribution: '{attribution.OpenStreetMap}',
@@ -887,7 +887,7 @@
 			}
 		},
 		nlmaps: {
-			url: 'https://service.pdok.nl/brt/achtergrondkaart/wmts/v2_0/{variant}/EPSG:3857/{z}/{x}/{y}.webp',
+			url: 'https://service.pdok.nl/brt/achtergrondkaart/wmts/v2_0/{variant}/EPSG:3857/{z}/{x}/{y}.png',
 			options: {
 				minZoom: 6,
 				maxZoom: 19,
@@ -982,7 +982,7 @@
 			// Justice Map (http://www.justicemap.org/)
 			// Visualize race and income data for your community, county and country.
 			// Includes tools for data journalists, bloggers and community activists.
-			url: 'https://www.justicemap.org/tile/{size}/{variant}/{z}/{x}/{y}.webp',
+			url: 'https://www.justicemap.org/tile/{size}/{variant}/{z}/{x}/{y}.png',
 			options: {
 				attribution: '<a href="http://www.justicemap.org/terms.php">Justice Map</a>',
 				// one of 'county', 'tract', 'block'
@@ -1035,7 +1035,7 @@
 			}
 		},
 		OneMapSG: {
-			url: 'https://maps-{s}.onemap.sg/v3/{variant}/{z}/{x}/{y}.webp',
+			url: 'https://maps-{s}.onemap.sg/v3/{variant}/{z}/{x}/{y}.png',
 			options: {
 				variant: 'Default',
 				minZoom: 11,
@@ -1068,7 +1068,7 @@
 			}
 		},
 		WaymarkedTrails: {
-			url: 'https://tile.waymarkedtrails.org/{variant}/{z}/{x}/{y}.webp',
+			url: 'https://tile.waymarkedtrails.org/{variant}/{z}/{x}/{y}.png',
 			options: {
 				maxZoom: 18,
 				attribution: 'Map data: {attribution.OpenStreetMap} | Map style: &copy; <a href="https://waymarkedtrails.org">waymarkedtrails.org</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
@@ -1095,7 +1095,7 @@
 			}
 		},
 		OpenSnowMap: {
-			url: 'https://tiles.opensnowmap.org/{variant}/{z}/{x}/{y}.webp',
+			url: 'https://tiles.opensnowmap.org/{variant}/{z}/{x}/{y}.png',
 			options: {
 				minZoom: 9,
 				maxZoom: 18,
