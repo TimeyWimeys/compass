@@ -162,7 +162,7 @@ if ($locations_query->have_posts()) :
         if ($current_marker_icon == 'user1' && $current_marker_user_icon) {
             $icon = esc_url($current_marker_user_icon);
         } else {
-            $icon = esc_url($this->plugin_url) . 'src/leaflet/images/marker-icon_' . esc_attr($current_marker_icon) . '-2x.png';
+            $icon = esc_url($this->plugin_url) . 'src/leaflet/images/marker-icon_' . esc_attr($current_marker_icon) . '-2x.webp';
         }
 
         // Date: modified or published

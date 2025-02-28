@@ -330,7 +330,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_facebook_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_facebook_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
     margin: 6px 0;
@@ -342,7 +342,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_instagram_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_instagram_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
     margin: 6px 0;
@@ -354,7 +354,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_linkedin_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_linkedin_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
     margin: 6px 0;
@@ -366,7 +366,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_twitter_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_twitter_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
     margin: 6px 0;
@@ -378,7 +378,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_youtube_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_youtube_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
     margin: 6px 0;
@@ -390,7 +390,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_soundcloud_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_soundcloud_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
     margin: 6px 0;
@@ -563,7 +563,8 @@
 }
 
 .open-user-map .box-wrap .map-wrap .leaflet-map .edit-location-button {
-    background: url(images/ico_pen.png) no-repeat 62% 29% #fff;
+    background: rgba(0, 0, 0, 0.3);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M117,258v648h648v-328.5c0-5.76,7.04-16.7,11.53-20.47,20.53-17.24,50.86-4.55,54.36,21.58l.15,361.92c-1.16,16.79-14.26,30.81-31.49,31.51H82.46c-18.42-1.58-30.64-15.27-31.5-33.5V225.45c.52-14.94,9.66-27.65,24.01-31.99,122.51-3.31,245.67-.67,368.41-1.33,25.74,2.63,39.8,31.36,24.04,52.78-3.33,4.53-14.44,13.09-19.91,13.09H117Z" fill="%23fff"/><path d="M831.76,52.26c9.24-1.31,18.47.99,25.71,6.76l108.5,108.5c10.73,14.26,8.59,31.02-3.01,43.94l-454.49,453.51c-61.85,29.5-126.03,54.62-188.93,82.07-22.82,7.56-45.53-10.6-43.52-34.53,26.19-66.56,54.21-133.48,85-197.99L814.48,60.98c4.79-3.97,11-7.82,17.28-8.71Z" fill="%23fff"/></svg>');
     background-size: 66%;
     border-radius: 99px;
     height: 24px;
@@ -650,7 +651,8 @@
 }
 
 .open-user-map .box-wrap .map-wrap .leaflet-map .leaflet-control-search .search-button {
-    background: url(images/ico_search_marker.png) 0 0 no-repeat #fff;
+    background: rgba(0, 0, 0, 0.3);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M415.86,330.86c-.57.57-12.96,2.91-15.64,3.86-77.13,27.18-110.28,115.25-69.41,186.61l-48.31,89.65c-40.44-72.79-81.51-147.78-112.96-225.02-27.85-68.39-50.28-131.6,3.5-195.43,90.79-107.75,269.61-29.91,250.68,107.68-.51,3.69-6.68,31.44-7.86,32.64ZM271.8,197.3c-106.83,11-95.49,178.87,17.68,170.68,111.16-8.05,100.51-182.85-17.68-170.68Z" fill="#fff"/> <path d="M435.81,352.31c86.82-7.08,143.87,85.25,100.35,160.04l72.07,66.92c13.53,20.45-9.95,42.56-29.56,28.56l-71.16-64.58c-77.49,54.54-181.77-9.87-166.05-104.28,7.63-45.86,48.08-82.88,94.34-86.66ZM434.78,383.28c-85.21,9.83-83.99,141.06,1.69,148.75,112.03,10.05,109.29-161.55-1.69-148.75Z" fill="#fff"/></svg>');
     background-size: contain;
 }
 
@@ -747,8 +749,8 @@
     flex: 0 0 30px;
     width: 30px;
     mask-image: none;
-    background-image: url(images/ico_search_address_2.png);
-    background-color: #fff;
+    background: rgba(0, 0, 0, 0.3);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M752,0v752H0V0h752ZM186.77,159.19c-4.27.62-8.6,4.99-8.79,9.29l.08,271.96c.53,3.18,3.46,6.25,6.24,7.76,5.41,2.94,37.98,10.83,39.24,12.76,1.04,13.32,7.11,24.91,13.31,36.39l-77.85,78.14c-6.73,10.33,4.59,21.81,14.51,15.51l78.21-77.86c3.04-1.05,4.3,1.86,6.58,3.06,43.34,22.76,87.96,5.36,106.37-39.04l85.08-26.93,6.3.22,126.72,40.36c6.85.19,12.47-4.08,12.27-11.28-.59-90.73.99-181.7-.79-272.28-2.68-4.98-6.72-5.76-11.48-7.52-41.8-15.42-87.23-25.71-129.38-40.7-44.72,12.11-88.4,28.06-132.92,41.01l-129.44-40.62c-1.42-.57-2.79-.45-4.27-.23Z" fill="#fff"/> <path d="M186.77,159.19c1.47-.21,2.84-.34,4.27.23l129.44,40.62c44.52-12.95,88.2-28.9,132.92-41.01,42.15,14.98,87.58,25.28,129.38,40.7,4.76,1.76,8.81,2.54,11.48,7.52,1.78,90.59.21,181.55.79,272.28.2,7.19-5.42,11.47-12.27,11.28l-126.72-40.36-6.3-.22-85.08,26.93c-18.4,44.39-63.03,61.8-106.37,39.04-2.28-1.2-3.54-4.11-6.58-3.06l-78.21,77.86c-9.93,6.31-21.24-5.17-14.51-15.51l77.85-78.14c-6.2-11.48-12.27-23.07-13.31-36.39-1.26-1.93-33.83-9.82-39.24-12.76-2.78-1.51-5.7-4.58-6.24-7.76l-.08-271.96c.19-4.29,4.52-8.67,8.79-9.29ZM309,219l-110-34v246l25.37,6.93c1.66-.56,3.06-8.4,4.15-10.91,13.95-32.21,45.38-49.91,80.48-44.02v-164ZM441,185l-109.9,34.1.06,172.74c22.8,11.36,35.5,36.28,36.84,61.16l72.99-22v-246ZM574,465v-244.5l-111-35.5v244.5l111,35.5ZM292.81,403.29c-67.1,3.45-60.94,106.95,6.67,101.69s59.22-105.08-6.67-101.69Z" fill="#fff"/></svg>');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
@@ -760,11 +762,11 @@
 }
 
 .open-user-map .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-bar form {
-    background-image: url(images/ico_search_address_2.png);
+    background: rgba(0, 0, 0, 0.3);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M752,0v752H0V0h752ZM186.77,159.19c-4.27.62-8.6,4.99-8.79,9.29l.08,271.96c.53,3.18,3.46,6.25,6.24,7.76,5.41,2.94,37.98,10.83,39.24,12.76,1.04,13.32,7.11,24.91,13.31,36.39l-77.85,78.14c-6.73,10.33,4.59,21.81,14.51,15.51l78.21-77.86c3.04-1.05,4.3,1.86,6.58,3.06,43.34,22.76,87.96,5.36,106.37-39.04l85.08-26.93,6.3.22,126.72,40.36c6.85.19,12.47-4.08,12.27-11.28-.59-90.73.99-181.7-.79-272.28-2.68-4.98-6.72-5.76-11.48-7.52-41.8-15.42-87.23-25.71-129.38-40.7-44.72,12.11-88.4,28.06-132.92,41.01l-129.44-40.62c-1.42-.57-2.79-.45-4.27-.23Z" fill="#fff"/> <path d="M186.77,159.19c1.47-.21,2.84-.34,4.27.23l129.44,40.62c44.52-12.95,88.2-28.9,132.92-41.01,42.15,14.98,87.58,25.28,129.38,40.7,4.76,1.76,8.81,2.54,11.48,7.52,1.78,90.59.21,181.55.79,272.28.2,7.19-5.42,11.47-12.27,11.28l-126.72-40.36-6.3-.22-85.08,26.93c-18.4,44.39-63.03,61.8-106.37,39.04-2.28-1.2-3.54-4.11-6.58-3.06l-78.21,77.86c-9.93,6.31-21.24-5.17-14.51-15.51l77.85-78.14c-6.2-11.48-12.27-23.07-13.31-36.39-1.26-1.93-33.83-9.82-39.24-12.76-2.78-1.51-5.7-4.58-6.24-7.76l-.08-271.96c.19-4.29,4.52-8.67,8.79-9.29ZM309,219l-110-34v246l25.37,6.93c1.66-.56,3.06-8.4,4.15-10.91,13.95-32.21,45.38-49.91,80.48-44.02v-164ZM441,185l-109.9,34.1.06,172.74c22.8,11.36,35.5,36.28,36.84,61.16l72.99-22v-246ZM574,465v-244.5l-111-35.5v244.5l111,35.5ZM292.81,403.29c-67.1,3.45-60.94,106.95,6.67,101.69s59.22-105.08-6.67-101.69Z" fill="#fff"/></svg>');
     background-position: right 1px;
     background-repeat: no-repeat;
     background-size: 30px;
-    background-color: #fff;
 }
 
 .open-user-map .box-wrap .map-wrap .leaflet-map .leaflet-control-geosearch.leaflet-geosearch-bar form .results {
@@ -904,7 +906,8 @@
 }
 
 .open-user-map .box-wrap .map-wrap #oum_search_marker .leaflet-control-search .search-button {
-    background: url(images/ico_search_marker.png) 0 0 no-repeat #fff;
+    background: rgba(0, 0, 0, 0.3);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M415.86,330.86c-.57.57-12.96,2.91-15.64,3.86-77.13,27.18-110.28,115.25-69.41,186.61l-48.31,89.65c-40.44-72.79-81.51-147.78-112.96-225.02-27.85-68.39-50.28-131.6,3.5-195.43,90.79-107.75,269.61-29.91,250.68,107.68-.51,3.69-6.68,31.44-7.86,32.64ZM271.8,197.3c-106.83,11-95.49,178.87,17.68,170.68,111.16-8.05,100.51-182.85-17.68-170.68Z" fill="#fff"/> <path d="M435.81,352.31c86.82-7.08,143.87,85.25,100.35,160.04l72.07,66.92c13.53,20.45-9.95,42.56-29.56,28.56l-71.16-64.58c-77.49,54.54-181.77-9.87-166.05-104.28,7.63-45.86,48.08-82.88,94.34-86.66ZM434.78,383.28c-85.21,9.83-83.99,141.06,1.69,148.75,112.03,10.05,109.29-161.55-1.69-148.75Z" fill="#fff"/></svg>');
     background-size: contain;
 }
 
@@ -945,11 +948,11 @@
     font-size: 12px;
     line-height: 1;
     padding: 0.4rem 1rem;
-    background-image: url(images/ico_search_marker.png);
+    background: rgba(0, 0, 0, 0.3);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M415.86,330.86c-.57.57-12.96,2.91-15.64,3.86-77.13,27.18-110.28,115.25-69.41,186.61l-48.31,89.65c-40.44-72.79-81.51-147.78-112.96-225.02-27.85-68.39-50.28-131.6,3.5-195.43,90.79-107.75,269.61-29.91,250.68,107.68-.51,3.69-6.68,31.44-7.86,32.64ZM271.8,197.3c-106.83,11-95.49,178.87,17.68,170.68,111.16-8.05,100.51-182.85-17.68-170.68Z" fill="#fff"/> <path d="M435.81,352.31c86.82-7.08,143.87,85.25,100.35,160.04l72.07,66.92c13.53,20.45-9.95,42.56-29.56,28.56l-71.16-64.58c-77.49,54.54-181.77-9.87-166.05-104.28,7.63-45.86,48.08-82.88,94.34-86.66ZM434.78,383.28c-85.21,9.83-83.99,141.06,1.69,148.75,112.03,10.05,109.29-161.55-1.69-148.75Z" fill="#fff"/></svg>');
     background-position: right 1px;
     background-repeat: no-repeat;
     background-size: 30px;
-    background-color: #fff;
 }
 
 .open-user-map .box-wrap .map-wrap .oum-filter-controls {
@@ -962,7 +965,7 @@
 .open-user-map .box-wrap .map-wrap .oum-filter-controls .oum-filter-toggle {
     display: block;
     background-color: rgba(255, 255, 255, 0.9);
-    background-image: url("images/ico_marker_categories.png");
+    background-image: url("images/ico_marker_categories.webp");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 60%;
@@ -1361,11 +1364,11 @@
 }
 
 .open-user-map .add-location .location-overlay-content #oum_add_location .map-wrap #mapGetLocation .leaflet-control-geosearch.leaflet-geosearch-bar form {
-    background-image: url(images/ico_search_address_2.png);
+    background: rgba(0, 0, 0, 0.3);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M752,0v752H0V0h752ZM186.77,159.19c-4.27.62-8.6,4.99-8.79,9.29l.08,271.96c.53,3.18,3.46,6.25,6.24,7.76,5.41,2.94,37.98,10.83,39.24,12.76,1.04,13.32,7.11,24.91,13.31,36.39l-77.85,78.14c-6.73,10.33,4.59,21.81,14.51,15.51l78.21-77.86c3.04-1.05,4.3,1.86,6.58,3.06,43.34,22.76,87.96,5.36,106.37-39.04l85.08-26.93,6.3.22,126.72,40.36c6.85.19,12.47-4.08,12.27-11.28-.59-90.73.99-181.7-.79-272.28-2.68-4.98-6.72-5.76-11.48-7.52-41.8-15.42-87.23-25.71-129.38-40.7-44.72,12.11-88.4,28.06-132.92,41.01l-129.44-40.62c-1.42-.57-2.79-.45-4.27-.23Z" fill="#fff"/> <path d="M186.77,159.19c1.47-.21,2.84-.34,4.27.23l129.44,40.62c44.52-12.95,88.2-28.9,132.92-41.01,42.15,14.98,87.58,25.28,129.38,40.7,4.76,1.76,8.81,2.54,11.48,7.52,1.78,90.59.21,181.55.79,272.28.2,7.19-5.42,11.47-12.27,11.28l-126.72-40.36-6.3-.22-85.08,26.93c-18.4,44.39-63.03,61.8-106.37,39.04-2.28-1.2-3.54-4.11-6.58-3.06l-78.21,77.86c-9.93,6.31-21.24-5.17-14.51-15.51l77.85-78.14c-6.2-11.48-12.27-23.07-13.31-36.39-1.26-1.93-33.83-9.82-39.24-12.76-2.78-1.51-5.7-4.58-6.24-7.76l-.08-271.96c.19-4.29,4.52-8.67,8.79-9.29ZM309,219l-110-34v246l25.37,6.93c1.66-.56,3.06-8.4,4.15-10.91,13.95-32.21,45.38-49.91,80.48-44.02v-164ZM441,185l-109.9,34.1.06,172.74c22.8,11.36,35.5,36.28,36.84,61.16l72.99-22v-246ZM574,465v-244.5l-111-35.5v244.5l111,35.5ZM292.81,403.29c-67.1,3.45-60.94,106.95,6.67,101.69s59.22-105.08-6.67-101.69Z" fill="#fff"/></svg>');
     background-position: right 1px;
     background-repeat: no-repeat;
     background-size: 30px;
-    background-color: #fff;
 }
 
 .open-user-map .add-location .location-overlay-content #oum_add_location .map-wrap #mapGetLocation .leaflet-control-geosearch.leaflet-geosearch-bar form input[type=text] {
@@ -1746,7 +1749,7 @@
 
 .open-user-map .add-location .location-overlay-content #oum_add_location input[type=submit].oum-loading {
     text-indent: -9999px;
-    background-image: url(images/loading.gif);
+    background-image: url(images/loading.webp);
     background-repeat: no-repeat;
     background-position: center center;
     width: 100px;
@@ -1876,11 +1879,12 @@
 }
 
 .open-user-map .add-user-location .map-wrap #mapGetLocation .leaflet-control-geosearch.leaflet-geosearch-bar form {
-    background-image: url(images/ico_search_address_2.png);
+    background: rgba(0, 0, 0, 0.3);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M752,0v752H0V0h752ZM186.77,159.19c-4.27.62-8.6,4.99-8.79,9.29l.08,271.96c.53,3.18,3.46,6.25,6.24,7.76,5.41,2.94,37.98,10.83,39.24,12.76,1.04,13.32,7.11,24.91,13.31,36.39l-77.85,78.14c-6.73,10.33,4.59,21.81,14.51,15.51l78.21-77.86c3.04-1.05,4.3,1.86,6.58,3.06,43.34,22.76,87.96,5.36,106.37-39.04l85.08-26.93,6.3.22,126.72,40.36c6.85.19,12.47-4.08,12.27-11.28-.59-90.73.99-181.7-.79-272.28-2.68-4.98-6.72-5.76-11.48-7.52-41.8-15.42-87.23-25.71-129.38-40.7-44.72,12.11-88.4,28.06-132.92,41.01l-129.44-40.62c-1.42-.57-2.79-.45-4.27-.23Z" fill="#fff"/> <path d="M186.77,159.19c1.47-.21,2.84-.34,4.27.23l129.44,40.62c44.52-12.95,88.2-28.9,132.92-41.01,42.15,14.98,87.58,25.28,129.38,40.7,4.76,1.76,8.81,2.54,11.48,7.52,1.78,90.59.21,181.55.79,272.28.2,7.19-5.42,11.47-12.27,11.28l-126.72-40.36-6.3-.22-85.08,26.93c-18.4,44.39-63.03,61.8-106.37,39.04-2.28-1.2-3.54-4.11-6.58-3.06l-78.21,77.86c-9.93,6.31-21.24-5.17-14.51-15.51l77.85-78.14c-6.2-11.48-12.27-23.07-13.31-36.39-1.26-1.93-33.83-9.82-39.24-12.76-2.78-1.51-5.7-4.58-6.24-7.76l-.08-271.96c.19-4.29,4.52-8.67,8.79-9.29ZM309,219l-110-34v246l25.37,6.93c1.66-.56,3.06-8.4,4.15-10.91,13.95-32.21,45.38-49.91,80.48-44.02v-164ZM441,185l-109.9,34.1.06,172.74c22.8,11.36,35.5,36.28,36.84,61.16l72.99-22v-246ZM574,465v-244.5l-111-35.5v244.5l111,35.5ZM292.81,403.29c-67.1,3.45-60.94,106.95,6.67,101.69s59.22-105.08-6.67-101.69Z" fill="#fff"/></svg>');
     background-position: right 1px;
     background-repeat: no-repeat;
     background-size: 30px;
-    background-color: #fff;
+
 }
 
 .open-user-map .add-user-location .map-wrap #mapGetLocation .leaflet-control-geosearch.leaflet-geosearch-bar form input[type=text] {
@@ -2171,7 +2175,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_facebook_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_facebook_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
 }
@@ -2182,7 +2186,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_instagram_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_instagram_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
     margin: 6px 0;
@@ -2194,7 +2198,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_linkedin_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_linkedin_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
     margin: 6px 0;
@@ -2206,7 +2210,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_twitter_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_twitter_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
 }
@@ -2217,7 +2221,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_youtube_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_youtube_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
     margin: 6px 0;
@@ -2229,7 +2233,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_soundcloud_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_soundcloud_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
     margin: 6px 0;
@@ -2258,7 +2262,8 @@
 }
 
 .open-user-map.oum-container-for-fullscreen #location-fullscreen-container .edit-location-button {
-    background: url(images/ico_pen.png) no-repeat 62% 29% #fff;
+    background: rgba(0, 0, 0, 0.3);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M117,258v648h648v-328.5c0-5.76,7.04-16.7,11.53-20.47,20.53-17.24,50.86-4.55,54.36,21.58l.15,361.92c-1.16,16.79-14.26,30.81-31.49,31.51H82.46c-18.42-1.58-30.64-15.27-31.5-33.5V225.45c.52-14.94,9.66-27.65,24.01-31.99,122.51-3.31,245.67-.67,368.41-1.33,25.74,2.63,39.8,31.36,24.04,52.78-3.33,4.53-14.44,13.09-19.91,13.09H117Z" fill="%23fff"/><path d="M831.76,52.26c9.24-1.31,18.47.99,25.71,6.76l108.5,108.5c10.73,14.26,8.59,31.02-3.01,43.94l-454.49,453.51c-61.85,29.5-126.03,54.62-188.93,82.07-22.82,7.56-45.53-10.6-43.52-34.53,26.19-66.56,54.21-133.48,85-197.99L814.48,60.98c4.79-3.97,11-7.82,17.28-8.71Z" fill="%23fff"/></svg>');
     background-size: 66%;
     border-radius: 99px;
     height: 24px;
@@ -2692,7 +2697,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_facebook_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_facebook_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
     margin: 6px 0;
@@ -2704,7 +2709,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_instagram_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_instagram_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
     margin: 6px 0;
@@ -2716,7 +2721,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_linkedin_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_linkedin_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
     margin: 6px 0;
@@ -2728,7 +2733,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_twitter_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_twitter_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
     margin: 6px 0;
@@ -2741,7 +2746,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_youtube_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_youtube_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
 }
@@ -2752,7 +2757,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: url(images/ico_soundcloud_50x50.png) no-repeat center center transparent;
+    background: url(images/ico_soundcloud_50x50.webp) no-repeat center center transparent;
     background-size: contain;
     text-indent: -9999px;
     margin: 6px 0;

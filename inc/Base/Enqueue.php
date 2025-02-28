@@ -32,13 +32,12 @@ class Enqueue extends BaseController
         wp_enqueue_style('oum_style', $this->plugin_url . 'assets/style.css', array(), $this->plugin_version);
         wp_enqueue_style('wp-color-picker');
 
-        // Enqueue lokale wpColorPicker Alpha
-        wp_enqueue_script(
+        // Enqueue wpColorPickerAlpha
+        wp_enqueue_style('wp-color-picker');
+        wp_register_script('wp-color-picker-alpha', $this->plugin_url . 'src/js/wp-color-picker-alpha.js', array('wp-color-picker'), $current_version, $in_footer);
+        wp_add_inline_script(
             'wp-color-picker-alpha',
-            $this->plugin_url . 'src/js/wp-color-picker-alpha.js',
-            array('wp-color-picker'),
-            $this->plugin_version,
-            true
+            'jQuery( function() { jQuery( ".color-picker" ).wpColorPicker(); } );'
         );
 
         // add media API (media uploader)

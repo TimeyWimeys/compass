@@ -26,10 +26,10 @@
             <?php if($marker_icon == 'user1' && $marker_user_icon): ?>
             var marker_icon_url = `<?php echo esc_url($marker_user_icon); ?>`;
             <?php else: ?>
-            var marker_icon_url = `<?php echo esc_url($this->plugin_url); ?>src/leaflet/images/marker-icon_<?php echo esc_attr($marker_icon); ?>-2x.png`;
+            var marker_icon_url = `<?php echo esc_url($this->plugin_url); ?>src/leaflet/images/marker-icon_<?php echo esc_attr($marker_icon); ?>-2x.webp`;
             <?php endif; ?>
 
-            var marker_shadow_url = `<?php echo esc_url($this->plugin_url); ?>src/leaflet/images/marker-shadow.png`;
+            var marker_shadow_url = `<?php echo esc_url($this->plugin_url); ?>src/leaflet/images/marker-shadow.webp`;
             var mapStyle = `<?php echo esc_attr($map_style); ?>`;
             var oum_tile_provider_mapbox_key = `<?php echo esc_attr($oum_tile_provider_mapbox_key); ?>`;
             var oum_searchaddress_label = `<?php echo esc_attr($oum_searchaddress_label); ?>`;

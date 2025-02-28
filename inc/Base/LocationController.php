@@ -758,8 +758,8 @@ class LocationController extends BaseController
             $zoom = '13';
             $marker_icon = get_option('oum_marker_icon') ? get_option('oum_marker_icon') : 'default';
             $marker_user_icon = get_option('oum_marker_user_icon');
-            $marker_icon_url = ($marker_icon == 'user1' && $marker_user_icon) ? esc_url($marker_user_icon) : esc_url($plugin_url) . 'src/leaflet/images/marker-icon_' . esc_attr($marker_icon) . '-2x.png';
-            $marker_shadow_url = esc_url($plugin_url) . 'src/leaflet/images/marker-shadow.png';
+            $marker_icon_url = ($marker_icon == 'user1' && $marker_user_icon) ? esc_url($marker_user_icon) : esc_url($plugin_url) . 'src/leaflet/images/marker-icon_' . esc_attr($marker_icon) . '-2x.webp';
+            $marker_shadow_url = esc_url($plugin_url) . 'src/leaflet/images/marker-shadow.webp';
 
             $value = '<div id="mapRenderLocation" data-lat="' . $lat . '" data-lng="' . $lng . '" data-zoom="' . $zoom . '" data-mapstyle="' . $map_style . '" data-tile_provider_mapbox_key="' . $oum_tile_provider_mapbox_key . '" data-marker_icon_url="' . $marker_icon_url . '" data-marker_shadow_url="' . $marker_shadow_url . '" class="open-user-map-location-map leaflet-map map-style_' . $map_style . '"></div>';
 

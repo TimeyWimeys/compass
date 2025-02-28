@@ -50,10 +50,25 @@ window.addEventListener('load', function (e) {
         }
     });
 
-    //Color Picker
-    if (jQuery.isFunction(jQuery.fn.wpColorPicker)) {
-        jQuery('input.oum_colorpicker').wpColorPicker();
-    }
+    // Color Picker
+    jQuery(document).ready(function ($) {
+        // Alleen als de wpColorPicker functie beschikbaar is
+        if (jQuery.isFunction(jQuery.fn.wpColorPicker)) {
+            // Kleurkiezer activeren met alpha (transparantie)
+            $('input.oum_colorpicker').wpColorPicker({
+                defaultColor: 'rgba(40, 127, 214, 1)',  // Standaardkleur met volledige opaciteit
+                palettes: false,  // Verwijder de standaard kleurenset
+                change: function (event, ui) {
+                    let color = ui.color.toString();  // Haal de RGBA-waarde op
+                    $('.rgba-preview').css('background-color', color);  // Update de preview
+                },
+                clear: function () {
+                    $('.rgba-preview').css('background-color', 'transparent');  // Transparante achtergrond bij "clear"
+                },
+                alpha: true  // Zet transparantie (alpha) aan
+            });
+        }
+    });
 
     // map style selector
     jQuery('.map_styles input[type=radio]').on('change', function (e) {
@@ -95,24 +110,24 @@ window.addEventListener('load', function (e) {
     // Set map style
     if (mapStyle == 'Custom1') {
 
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png').addTo(map);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.webp').addTo(map);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.webp', {
             tileSize: 512,
             zoomOffset: -1
         }).addTo(map);
 
     } else if (mapStyle == 'Custom2') {
 
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png').addTo(map);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.webp').addTo(map);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.webp', {
             tileSize: 512,
             zoomOffset: -1
         }).addTo(map);
 
     } else if (mapStyle == 'Custom3') {
 
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png').addTo(map);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.webp').addTo(map);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.webp', {
             tileSize: 512,
             zoomOffset: -1
         }).addTo(map);

@@ -53,10 +53,10 @@
                     <?php
                     $marker_icon_url = ($marker_icon == 'user1' && $marker_user_icon)
                         ? esc_url($marker_user_icon)
-                        : esc_url($this->plugin_url) . "src/leaflet/images/marker-icon_" . esc_attr($marker_icon) . "-2x.png";
+                        : esc_url($this->plugin_url) . "src/leaflet/images/marker-icon_" . esc_attr($marker_icon) . "-2x.webp";
                     ?>
                     const marker_icon_url = `<?php echo $marker_icon_url; ?>`;
-                    const marker_shadow_url = '<?php echo esc_url($this->plugin_url); ?>src/leaflet/images/marker-shadow.png';
+                    const marker_shadow_url = '<?php echo esc_url($this->plugin_url); ?>src/leaflet/images/marker-shadow.webp';
                 </script>
 
                 <?php

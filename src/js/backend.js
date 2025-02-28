@@ -200,3 +200,17 @@ function oumRemoveAudioUpload() {
     document.getElementById('oum_location_audio_preview').classList.remove('has-audio');
     document.getElementById('oum_location_audio_preview').textContent = '';
 }
+
+jQuery(document).ready(function ($) {
+    $('.oum_colorpicker').wpColorPicker({
+        defaultColor: 'rgba(40, 127, 214, 1)', // Standaardkleur
+        change: function (event, ui) {
+            let color = ui.color.toString(); // Haal de RGBA-waarde op
+            $('.rgba-preview').css('background-color', color); // Update de preview
+        },
+        clear: function () {
+            $('.rgba-preview').css('background-color', 'transparent');
+        },
+        alpha: true // Zet de transparantie-optie aan
+    });
+});

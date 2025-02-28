@@ -467,10 +467,10 @@ const OUMMap = (function () {
 
         if (mapStyle == "Custom1") {
             tileLayer = L.tileLayer(
-                "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png"
+                "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.webp"
             ).addTo(map);
             L.tileLayer(
-                "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
+                "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.webp",
                 {
                     tileSize: 512,
                     zoomOffset: -1,
@@ -478,10 +478,10 @@ const OUMMap = (function () {
             ).addTo(map);
         } else if (mapStyle == "Custom2") {
             tileLayer = L.tileLayer(
-                "https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png"
+                "https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.webp"
             ).addTo(map);
             L.tileLayer(
-                "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
+                "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.webp",
                 {
                     tileSize: 512,
                     zoomOffset: -1,
@@ -489,10 +489,10 @@ const OUMMap = (function () {
             ).addTo(map);
         } else if (mapStyle == "Custom3") {
             tileLayer = L.tileLayer(
-                "https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png"
+                "https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.webp"
             ).addTo(map);
             L.tileLayer(
-                "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
+                "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.webp",
                 {
                     tileSize: 512,
                     zoomOffset: -1,
@@ -1112,20 +1112,20 @@ const OUMFormMap = (function () {
         const mapStyle = window.mapStyle || 'OpenStreetMap.Mapnik';
 
         if (mapStyle === "Custom1") {
-            L.tileLayer("https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png").addTo(formMap);
-            L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png", {
+            L.tileLayer("https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.webp").addTo(formMap);
+            L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.webp", {
                 tileSize: 512,
                 zoomOffset: -1,
             }).addTo(formMap);
         } else if (mapStyle === "Custom2") {
-            L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png").addTo(formMap);
-            L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png", {
+            L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.webp").addTo(formMap);
+            L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.webp", {
                 tileSize: 512,
                 zoomOffset: -1,
             }).addTo(formMap);
         } else if (mapStyle === "Custom3") {
-            L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png").addTo(formMap);
-            L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png", {
+            L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.webp").addTo(formMap);
+            L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.webp", {
                 tileSize: 512,
                 zoomOffset: -1,
             }).addTo(formMap);
